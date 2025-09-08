@@ -1,0 +1,16 @@
+:root {
+    --main-100: #E6F7EC;
+    --main-200: #B3EAC7;
+    --main-300: #80DDA3;
+    --main-400: #4DD07F;
+    --main-500: #21BF48; /* 메인 */
+    --main-600: #1CA843;
+    --main-700: #178F3A;
+    --main-800: #127530;
+    --main-900: #0D5C26;
+    --gray-300: #C4C4C4;
+    --gray-500:#e0e0e0;
+    --gray-700:#767676;
+    --text-color:#000000;
+    --color-red:#EB5757;
+}
