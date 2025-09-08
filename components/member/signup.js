@@ -169,6 +169,10 @@ const buyer = new Members({
         alert('비밀번호를 입력해 주세요.')
         return
     }
+    if(!isValidPass(password)) {
+        alert('비밀번호는 8자 이상,영소문자를 포함해야합니다.')
+        return
+    }
     if(!isRequired(name)) {
         alert('이름을 입력해 주세요.')
         return
