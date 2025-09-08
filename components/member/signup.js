@@ -1,7 +1,11 @@
 import {Members} from './Member.js';
+import{ isRequired,isValidPass,isValidName,isUniqueId } from './validation.js'
+
 const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성 위해 유틸함수 생성
 
 const tab = $('.tab-list')
+const targetInput = $('input[name="user-type-field"]')
+
 tab.addEventListener('click',(e)=>{ //event 위임
     e.preventDefault();
     const li = document.querySelectorAll('li');
@@ -9,7 +13,6 @@ tab.addEventListener('click',(e)=>{ //event 위임
     const targetdata = targetli.dataset.target;
     //console.log(li.dataset.target) // target or purchase
     const targetContainer = $(`.${targetdata}-box`);
-    const isTargetOn = targetContainer.classList.contains('on')
     const Container = document.querySelectorAll('.container');
 
     li.forEach((ele)=>{
@@ -25,6 +28,8 @@ tab.addEventListener('click',(e)=>{ //event 위임
         }
     })
     targetContainer.classList.add('on')
+
+    targetInput.value=targetdata
 })
 
 
@@ -143,3 +148,38 @@ const buyer = new Members({
         maxlength:null
     }
  })
+
+
+
+ $('.join-btn').addEventListener('click',(e)=>{
+    e.preventDefault();
+
+    const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
+
+    const id = document.querySelector(`input[name="${userType}-user-id"]`).value;
+    const password = document.querySelector(`input[name="${userType}-user-pass"]`).value;
+    const phoneMiddle = document.querySelector(`input[name="${userType}-user-phone-m"]`).value;
+    const phoneLast = document.querySelector(`input[name="${userType}-user-phone-last"]`).value;
+    const name = document.querySelector(`input[name="${userType}-user-name"]`).value;
+
+    if(!isRequired(id)) {
+        alert('아이디를 입력해 주세요.')
+        return
+    }
+    if(!isRequired(password)) {
+        alert('비밀번호를 입력해 주세요.')
+        return
+    }
+    if(!isRequired(phoneMiddle)) {
+        alert('휴대폰 번호를 입력해 주세요.')
+        return
+    }
+    if(!isRequired(phoneLast)) {
+        alert('휴대폰 번호를 입력해 주세요.')
+        return
+    }
+    if(!isRequired(name)) {
+        alert('이름을 입력해 주세요.')
+        return
+    }
+})

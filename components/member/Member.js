@@ -31,7 +31,7 @@ export class Members {
     }
 
     field(divName,tagName,inputType,inputName,maxlength){
-        const form = document.querySelector(`.${this.infor.classname}-box .form`);
+        const form = document.querySelector(`.${this.infor.classname}-box form`);
         const WholeContainer = document.createElement('div');
         WholeContainer.classList.add(divName); //ex.id-container
         const inputTag = document.createElement('p');
@@ -65,7 +65,7 @@ export class Members {
         //</div>
     }
     phonefield(divName,tagName,inputType,inputName){
-        const form = document.querySelector(`.${this.infor.classname}-box .form`);
+        const form = document.querySelector(`.${this.infor.classname}-box form`);
         const WholeContainer = document.createElement('div');
         WholeContainer.classList.add(divName);
 
@@ -90,34 +90,27 @@ export class Members {
         //중간,마지막 번호 필드
         const phone1 = document.createElement('input');
         phone1.setAttribute('type',inputType)
-        phone1.setAttribute('name','user-phone1')
+        phone1.setAttribute('name',`${inputName}-m`)
         const phone2 = document.createElement('input');
         phone2.setAttribute('type',`${inputType}2`)
-        phone2.setAttribute('name','user-phone2')
+        phone2.setAttribute('name',`${inputName}-last`)
 
-        inputBox.append(select);
+        //hidden
+        const resPhone = document.createElement('input');
+        resPhone.setAttribute('type','text')
+        resPhone.setAttribute('name',`${inputName}-res`)
+
+        inputBox.append(select)
         inputBox.append(phone1)
         inputBox.append(phone2)
+        inputBox.append(resPhone)
 
         WholeContainer.append(inputTag)
         WholeContainer.append(inputBox)
 
         form.append(WholeContainer)
 
-        //html 구조입니다
-        //<div class="phone-container">
-        // <p>휴대폰 번호</p>
-        // <div>
-        // <select name="user-phone">
-        //  <option value="010">010</option>
-        //  <option value="011">011</option>
-        //  <option value="019">019</option>
-        //  <option value="016">016</option>
-        // </select>
-        // <input type="number" name="user-phone1">
-        // <input type="number" name="user-phone2">
-        //  </div>
-        // </div>
+        this.phoneNumberJoin(select,phone1,phone2,resPhone)
     }
 
     valueCheckBtn(className,textContent,inputBox){
@@ -125,5 +118,25 @@ export class Members {
         ChkButton.classList.add(className)
         ChkButton.textContent=textContent
         inputBox.append(ChkButton)
+    }
+
+    phoneNumberJoin(select,phone1,phone2,resPhone){
+        const phoneArr = ['010']
+        select.addEventListener('change',(e)=>{
+            phoneArr[0] = e.currentTarget.value;
+            const phoneNumber = phoneArr.join('')
+            resPhone.value = phoneNumber
+        })
+        phone1.addEventListener('input',(e)=>{
+            phoneArr[1] = e.currentTarget.value;
+            const phoneNumber = phoneArr.join('')
+            resPhone.value = phoneNumber
+        })
+        phone2.addEventListener('input',(e)=>{
+            phoneArr[2] = e.currentTarget.value;
+            const phoneNumber = phoneArr.join('')
+            resPhone.value = phoneNumber
+        })
+
     }
 }
