@@ -149,23 +149,32 @@ const buyer = new Members({
     }
  })
 
+ //password 유효성 일치 할 경우 체크 아이콘 컬러 변경
+$('input[name="buyer-user-pass"]').addEventListener('input',(e)=>{
+    if(isValidPass(e.currentTarget.value)) {
+        e.currentTarget.closest('div').classList.add('ischecked')
+    } else {
+        e.currentTarget.closest('div').classList.remove('ischecked')
+    }
+})
+
  $('.join-btn').addEventListener('click',(e)=>{
     e.preventDefault();
 
     const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
 
-    const id = $(`input[name="${userType}-user-id"]`).value;
+    const username = $(`input[name="${userType}-user-id"]`).value;
     const password = $(`input[name="${userType}-user-pass"]`).value;
     const phoneMiddle = $(`input[name="${userType}-user-phone-m"]`).value;
     const phoneLast = $(`input[name="${userType}-user-phone-last"]`).value;
-    const phoneResult = $(`input[name="${userType}-user-phone-res"]`).value;
+    const phone_number = $(`input[name="${userType}-user-phone-res"]`).value;
     const name = $(`input[name="${userType}-user-name"]`).value;
 
-    if(!isRequired(id)) {
+    if(!isRequired(username)) {
         alert('아이디를 입력해 주세요.')
         return
     }
-    if(!isValidId(id)) {
+    if(!isValidId(username)) {
         alert('아이디는 20자 이하의 아이디는 영문 대,소문자와 숫자만 가능합니다.')
         return
     }
@@ -185,7 +194,7 @@ const buyer = new Members({
         alert('휴대폰 번호를 입력해 주세요.')
         return
     }
-    if(phoneResult.length < 10) {
+    if(phone_number.length < 10) {
         alert('휴대폰 번호를 정확히 입력해 주세요.')
         return
     }
@@ -193,4 +202,11 @@ const buyer = new Members({
         alert('휴대폰 번호를 입력해 주세요.')
         return
     }
+
+    // const requestBody = {
+    //     username, //id
+    //     password,
+    //     name,
+    //     phone_number //phoneResult
+    // };
 })

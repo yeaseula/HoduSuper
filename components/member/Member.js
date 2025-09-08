@@ -56,13 +56,6 @@ export class Members {
 
         form.append(WholeContainer)
 
-        //html 구조입니다
-        //<div class="id-container">
-        // <p>아이디</p>
-        // <div>
-        //      <input type="text" name="user-id" maxlength="10">
-        // </div>
-        //</div>
     }
     phonefield(divName,tagName,inputType,inputName){
         const form = document.querySelector(`.${this.infor.classname}-box form`);
