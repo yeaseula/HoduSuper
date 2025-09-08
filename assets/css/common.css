@@ -14,3 +14,16 @@
     --text-color:#000000;
     --color-red:#EB5757;
 }
+
+.wide-container {
+    max-width: 1310px;
+    width: 100%;
+    padding: 0 15px;
+}
+
+html {
+    font-size: 10px;
+}
+body {
+    font-size: 1.6rem;
+}
