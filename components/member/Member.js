@@ -100,7 +100,7 @@ export class Members {
 
         //hidden
         const resPhone = document.createElement('input')
-        resPhone.setAttribute('type','text')
+        resPhone.setAttribute('type','hidden')
         resPhone.setAttribute('name',`${inputName}-res`)
 
         inputBox.append(select)

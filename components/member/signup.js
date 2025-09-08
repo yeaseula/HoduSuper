@@ -154,11 +154,12 @@ const buyer = new Members({
 
     const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
 
-    const id = document.querySelector(`input[name="${userType}-user-id"]`).value;
-    const password = document.querySelector(`input[name="${userType}-user-pass"]`).value;
-    const phoneMiddle = document.querySelector(`input[name="${userType}-user-phone-m"]`).value;
-    const phoneLast = document.querySelector(`input[name="${userType}-user-phone-last"]`).value;
-    const name = document.querySelector(`input[name="${userType}-user-name"]`).value;
+    const id = $(`input[name="${userType}-user-id"]`).value;
+    const password = $(`input[name="${userType}-user-pass"]`).value;
+    const phoneMiddle = $(`input[name="${userType}-user-phone-m"]`).value;
+    const phoneLast = $(`input[name="${userType}-user-phone-last"]`).value;
+    const phoneResult = $(`input[name="${userType}-user-phone-res"]`).value;
+    const name = $(`input[name="${userType}-user-name"]`).value;
 
     if(!isRequired(id)) {
         alert('아이디를 입력해 주세요.')
@@ -168,16 +169,20 @@ const buyer = new Members({
         alert('비밀번호를 입력해 주세요.')
         return
     }
+    if(!isRequired(name)) {
+        alert('이름을 입력해 주세요.')
+        return
+    }
     if(!isRequired(phoneMiddle)) {
         alert('휴대폰 번호를 입력해 주세요.')
         return
     }
-    if(!isRequired(phoneLast)) {
-        alert('휴대폰 번호를 입력해 주세요.')
+    if(phoneResult.length < 10) {
+        alert('휴대폰 번호를 정확히 입력해 주세요.')
         return
     }
-    if(!isRequired(name)) {
-        alert('이름을 입력해 주세요.')
+    if(!isRequired(phoneLast)) {
+        alert('휴대폰 번호를 입력해 주세요.')
         return
     }
 })
