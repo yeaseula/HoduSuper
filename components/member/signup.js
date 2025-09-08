@@ -1,5 +1,5 @@
 import {Members} from './Member.js';
-import{ isRequired,isValidPass,isValidName,isUniqueId } from './validation.js'
+import{ isRequired,isValidPass,isValidId } from './validation.js'
 
 const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성 위해 유틸함수 생성
 
@@ -163,6 +163,10 @@ const buyer = new Members({
 
     if(!isRequired(id)) {
         alert('아이디를 입력해 주세요.')
+        return
+    }
+    if(!isValidId(id)) {
+        alert('아이디는 20자 이하의 아이디는 영문 대,소문자와 숫자만 가능합니다.')
         return
     }
     if(!isRequired(password)) {
