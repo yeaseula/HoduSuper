@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>헤더 메인 페이지</title>
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/fonts.css" />
+    <link rel="stylesheet" href="./assets/css/common.css" />
+    <link rel="stylesheet" href="./assets/css/header.css" />
+  </head>
+  <body>
+    <header>
+      <section class="header__content">
+        <h1 class="sr-only">호두 슈퍼</h1>
+        <a href="./header.html" class="header__logo">
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcset="./assets/images/logo-s.png"
+            />
+            <source
+              media="(min-width: 768px)"
+              srcset="./assets/images/logo-m.png"
+            />
+            <source
+              media="(min-width: 1200px)"
+              srcset="./assets/images/logo-l.png"
+            />
+            <img src="./assets/images/logo-m.png" alt="호두슈퍼 로고" />
+          </picture>
+        </a>
+
+        <form action="" method="get" class="header__search">
+          <label for="search" class="sr-only">상품 검색</label>
+          <input
+            type="search"
+            name="q"
+            id="search"
+            placeholder="상품을 검색해보세요!"
+          />
+          <button type="submit" class="header__search-btn" aria-label="검색">
+            <span class="sr-only">검색</span>
+          </button>
+        </form>
+      </section>
+      <nav class="header__user-menu" aria-label="사용자 메뉴">
+        <ul class="header__actions">
+          <li class="header__actions-item">
+            <a href="/cart" id="user__cart">장바구니</a>
+          </li>
+          <li class="header__actions-item">
+            <a href="/login" id="user__login">로그인</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="main__slider" aria-label="메인 프로모션 배너">
+        <h2 class="sr-only">메임 프로모션 배너</h2>
+      </section>
+      <section class="main__products" aria-labelledby="main-products-title">
+        <h2 id="main-products-title" class="sr-only">주요 상품</h2>
+        <div class="products__grid">
+          <article class="product-card">
+            <p>우당탕탕 라이캣의 실험실</p>
+            <h3>Hack Your Life 개발자 노트북 파우치</h3>
+            <span>29,000</span>
+            <span>원</span>
+          </article>
+          <article class="product-card" itemscope itemtype="">
+            <img src="" alt="상품 이미지" />
+            <p>우당탕탕 라이캣의 실험실</p>
+            <h3 itemprop="name">Hack Your Life 개발자 노트북 파우치</h3>
+            <div itemprop="price">
+              <span>29,000</span>
+              <span>원</span>
+            </div>
+          </article>
+          <article class="product-card" itemscope itemtype="">
+            <img src="" alt="상품 이미지" />
+            <p>우당탕탕 라이캣의 실험실</p>
+            <h3 itemprop="name">Hack Your Life 개발자 노트북 파우치</h3>
+            <div itemprop="price">
+              <span>29,000</span>
+              <span>원</span>
+            </div>
+          </article>
+          <article class="product-card" itemscope itemtype="">
+            <img src="" alt="상품 이미지" />
+            <p>우당탕탕 라이캣의 실험실</p>
+            <h3 itemprop="name">Hack Your Life 개발자 노트북 파우치</h3>
+            <div itemprop="price">
+              <span>29,000</span>
+              <span>원</span>
+            </div>
+          </article>
+          <article class="product-card" itemscope itemtype="">
+            <img src="" alt="상품 이미지" />
+            <p>우당탕탕 라이캣의 실험실</p>
+            <h3 itemprop="name">Hack Your Life 개발자 노트북 파우치</h3>
+            <div itemprop="price">
+              <span>29,000</span>
+              <span>원</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

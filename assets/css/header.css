@@ -1,0 +1,30 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+header {
+  padding: 2rem clamp(8rem, 17vw, 32rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__content {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.header__user-menu {
+  display: flex;
+  gap: 2.6rem;
+  align-items: center;
+}
