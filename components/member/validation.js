@@ -3,7 +3,7 @@ export function isRequired(value) {
 }
 
 export function isValidPass(value) {
-    return /^(?=.*[a-z]).{8,}$/.test(value);
+    return /^(?=.*[a-z])(?=.*\d).{8,}$/.test(value);
 }
 
 
