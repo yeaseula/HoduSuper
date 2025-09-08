@@ -88,15 +88,18 @@ export class Members {
             select.appendChild(option);
         });
         //중간,마지막 번호 필드
-        const phone1 = document.createElement('input');
+        const phone1 = document.createElement('input')
         phone1.setAttribute('type',inputType)
         phone1.setAttribute('name',`${inputName}-m`)
-        const phone2 = document.createElement('input');
+        const phone2 = document.createElement('input')
         phone2.setAttribute('type',`${inputType}2`)
         phone2.setAttribute('name',`${inputName}-last`)
 
+        phone1.addEventListener('input',this.limitLength)
+        phone2.addEventListener('input',this.limitLength)
+
         //hidden
-        const resPhone = document.createElement('input');
+        const resPhone = document.createElement('input')
         resPhone.setAttribute('type','text')
         resPhone.setAttribute('name',`${inputName}-res`)
 
@@ -138,5 +141,11 @@ export class Members {
             resPhone.value = phoneNumber
         })
 
+    }
+
+    limitLength(e){
+        if(e.target.value.length > 4) {
+            e.target.value = e.target.value.slice(0, 4);
+        }
     }
 }

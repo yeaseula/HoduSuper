@@ -149,8 +149,6 @@ const buyer = new Members({
     }
  })
 
-
-
  $('.join-btn').addEventListener('click',(e)=>{
     e.preventDefault();
 
