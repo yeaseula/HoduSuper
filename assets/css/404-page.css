@@ -1,0 +1,181 @@
+/* ===== 404 페이지 스타일 ===== */
+
+/* 전체 페이지 레이아웃 */
+.wide-container {
+  margin: 0 auto;
+}
+
+/* 전체 영역 */
+.error-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 메인 컨테이너 (이미지 + 텍스트 영역) */
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem; /* 이미지와 텍스트 간격 */
+  max-width: 120rem;
+  width: 100%;
+}
+
+/* 404 이미지 영역 */
+.error-illustration {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 404 이미지 스타일 */
+.error-image {
+  max-width: 27.6rem;
+  height: auto;
+  width: 100%;
+  /* 부드러운 떠다니기 효과 */
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 텍스트 및 버튼 영역 */
+.error-content {
+  flex: 1;
+  max-width: 41.4rem;
+}
+
+/* 404 제목(페이지를 찾을 수 없습니다.) */
+.error-title {
+  font-size: 3.6rem;
+  font-family: "SpoqaHanSansNeo-Bold";
+  color: #000;
+  margin-bottom: 2rem;
+}
+
+/* 404 설명 텍스트(페이지가 존재하지 않거나 사용할 수 없는 페이지입니다. 웹 주소가 올바른지 확인해 주세요.) */
+.error-description {
+  font-size: 1.6rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin-bottom: 4rem;
+}
+
+/* 버튼 컨테이너(메인으로, 이전 페이지) */
+.error-buttons {
+  display: flex;
+  gap: 1.4rem;
+  width: 100%;
+}
+
+/* 메인으로 버튼 (초록색, common-btn 스타일 상속) */
+.error-buttons .common-btn {
+  width: 20rem;
+  min-width: 20rem;
+  font-size: 1.8rem;
+  font-family: "SpoqaHanSansNeo-Bold";
+  font-weight: 700;
+  border-radius: 0.5rem;
+}
+
+/* 이전 페이지 버튼 (흰색 배경) */
+.common-btn.btn-back {
+  background: #ffffff !important;
+  color: var(--gray-700) !important;
+  border: 0.1rem solid var(--gray-300) !important;
+}
+
+/* 이전 페이지 버튼 호버 효과 */
+.common-btn.btn-back:hover {
+  background: #f9fafb !important;
+}
+
+/* 이전 페이지 버튼 화살표 아이콘 색상 변경 */
+.common-btn.btn-back::before {
+  background-color: rgba(107, 114, 128, 0.2) !important;
+}
+
+/* 이미지 떠다니기 애니메이션 */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-1rem);
+  }
+}
+
+/* 태블릿 반응형 (768px 이하) */
+@media (max-width: 768px) {
+  /* 세로 배치로 변경 */
+  .error-container {
+    flex-direction: column;
+    gap: 4rem;
+    text-align: center;
+  }
+
+  /* 이미지 크기 조정 */
+  .error-image {
+    width: 22rem;
+  }
+
+  /* 제목 크기 조정 */
+  .error-title {
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+  }
+
+  /* 버튼 중앙 정렬 */
+  .error-buttons {
+    justify-content: center;
+  }
+
+  /* 버튼 크기 조정 */
+  .error-buttons .common-btn {
+    width: 16rem;
+    min-width: 16rem;
+  }
+}
+
+/* 모바일 반응형 (480px 이하) */
+@media (max-width: 480px) {
+  /* 페이지 패딩 */
+  .error-page {
+    padding: 1.6rem;
+  }
+
+  /* 이미지 크기 조정 */
+  .error-image {
+    width: 20rem;
+  }
+
+  /* 제목 크기 조정 */
+  .error-title {
+    font-size: 2.4rem;
+  }
+
+  /* 설명 텍스트 크기 조정 */
+  .error-description {
+    font-size: 1.4rem;
+  }
+
+  /* 버튼 크기 및 간격 조정 */
+  .error-buttons {
+    flex-direction: column; /* 세로 배치 */
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .error-buttons .common-btn {
+    width: 100%;
+    max-width: 20rem;
+    min-width: auto;
+    padding: 1.2rem 2rem;
+    font-size: 1.4rem;
+  }
+}
