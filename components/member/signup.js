@@ -37,6 +37,15 @@ tab.addEventListener('click',(e)=>{ //event 위임
     validationAll(targetVal) //id,pass관련 함수
     bindJoinBtnActiveEvents(userType);
     isJoinBtnActive();
+
+    //tab 전환 시 모든 필드 데이터 초기화
+    const allInput = document.querySelectorAll('input')
+    allInput.forEach((input)=>{
+        input.value = ''
+    })
+    //경고 message, field 디자인 초기화
+    $('.id-warning')?.remove();
+    removeClasses('.ischecked', ['ischecked']);
 })
 
 const buyer = new Members({
@@ -154,6 +163,12 @@ const seller = new Members({
         maxlength:null
     }
 })
+
+function removeClasses(selectors, classes) {
+    document.querySelectorAll(selectors).forEach(el => {
+        el.classList.remove(...classes);
+    });
+}
 
 function validationAll(targetVal){
     //id중복확인
