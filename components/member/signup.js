@@ -199,11 +199,11 @@ const buyer = new Members({
         if(passwordValue == reCheckValue) {
             e.currentTarget.closest('div').classList.add('ischecked')
             e.currentTarget.classList.remove('warning')
-            $('.id-warning').remove()
+            $('.pass-warning').remove()
         } else {
-            if(!$('.id-warning')){ //한 번만 생성합니다
+            if(!$('.pass-warning')){ //한 번만 생성합니다
                 const p = document.createElement('p')
-                p.classList.add('warning-text','id-warning')
+                p.classList.add('warning-text','pass-warning')
                 p.textContent='비밀번호가 일치하지 않습니다'
                 e.currentTarget.closest('div').append(p)
             }
