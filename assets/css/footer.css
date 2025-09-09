@@ -1,0 +1,191 @@
+/* ========== CSS 변수 정의 ========== */
+:root {
+  --font-400: "SpoqaHanSansNeo-Regular";
+  --font-500: "SpoqaHanSansNeo-Medium";
+  --font-700: "SpoqaHanSansNeo-Bold";
+  --color-bg-light: #f2f2f2;
+  --color-white: #fff;
+  --gap-sm: 0.5rem;
+  --gap-md: 1rem;
+  --gap-lg: 2rem;
+  --gap-xl: 3rem;
+  --breakpoint-mobile: 767px;
+  --border-radius-sm: 0.5rem;
+  --border-radius-full: 5rem;
+}
+
+/* ========== 푸터 영역 ========== */
+/* 푸터 전체 컨테이너 - 회색 배경의 사이트 정보 영역 */
+footer {
+  font-family: var(--font-400);
+  background-color: var(--color-bg-light);
+  padding: 6rem;
+  padding-inline: clamp(5rem, 17vw, 32rem);
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+/* ========== 푸터 링크 섹션 ========== */
+/* 푸터 상단 링크 영역 - 메뉴와 SNS를 양쪽에 배치 */
+.footer__link {
+  display: flex;
+  justify-content: space-between; /* 메뉴는 좌측, SNS는 우측 */
+  border-bottom: 1px solid var(--gray-300);
+  padding-bottom: 3rem; /* 하단 여백 */
+}
+
+/* ========== 푸터 모바일 반응형 ========== */
+/* 모바일에서는 푸터 요소들을 세로 배열로 변경 */
+@media screen and (max-width: 767px) {
+  /* 푸터 링크 영역 - 세로 배열로 변경 */
+  .footer__link {
+    flex-direction: column; /* 메뉴와 SNS를 세로 배열 */
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 푸터 메뉴 - 세로 배열로 변경 */
+  .footer__menu ul {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem; /* 모바일에서 줄 간격 조정 */
+  }
+
+  /* 모바일에서 메뉴 구분선 제거 */
+  .footer__menu li::after {
+    display: none;
+  }
+}
+
+/* 태블릿 사이즈 대응 (768px ~ 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .footer__menu ul {
+    flex-wrap: wrap; /* 화면이 좁으면 줄바꿈 허용 */
+    justify-content: center;
+    gap: 2rem 3.2rem; /* 세로/가로 간격 조정 */
+  }
+
+  .footer__menu a {
+    font-size: 1.3rem; /* 태블릿에서 폰트 크기 약간 줄임 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  }
+}
+
+/* ========== 푸터 메뉴 스타일 ========== */
+/* 푸터 메뉴 컨테이너 */
+.footer__menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 푸터 메뉴 리스트 - 가로 배열 */
+.footer__menu ul {
+  display: flex;
+  gap: 3.2rem; /* 메뉴 아이템 간격 */
+  align-items: center;
+}
+
+/* 푸터 메뉴 아이템 - 구분선 표시를 위한 relative 포지션 */
+.footer__menu li {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.footer__menu a {
+  color: var(--text-color);
+  font-size: 1.4rem;
+}
+
+/* 메뉴 아이템 사이 구분선(|) - 가상 요소로 구현 */
+.footer__menu li::after {
+  content: "|"; /* 수직선 구분자 */
+  color: var(--text-color);
+  margin-left: 3.2rem;
+  position: absolute;
+  right: -1.6rem; /* 아이템 우측에 배치 */
+  font-size: 1.4rem;
+}
+
+/* 마지막 메뉴 아이템에는 구분선 숨김 */
+.footer__menu li:last-child::after {
+  display: none;
+}
+
+/* ========== 푸터 SNS 링크 ========== */
+/* SNS 링크 리스트 - 가로 배열 */
+.footer__sns ul {
+  display: flex;
+  gap: 1.4rem; /* SNS 아이콘 간격 */
+}
+
+/* SNS 링크 공통 스타일 - 아이콘과 텍스트 세로 배열 */
+.insta,
+.facebook,
+.youtube {
+  display: flex;
+  flex-direction: column; /* 아이콘 위, 텍스트 아래 */
+  align-items: center;
+  gap: 0.5rem; /* 아이콘과 텍스트 사이 간격 */
+}
+
+/* SNS 아이콘 공통 스타일 - 가상 요소로 아이콘 표시 */
+.insta::before,
+.facebook::before,
+.youtube::before {
+  content: "";
+  display: block;
+  width: 3.2rem;
+  height: 3.2rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex: none;
+}
+
+/* 각 SNS별 아이콘 이미지 */
+.insta::before {
+  background-image: url(../images/insta.svg); /* 인스타그램 아이콘 */
+}
+
+.facebook::before {
+  background-image: url(../images/facebook.svg); /* 페이스북 아이콘 */
+}
+
+.youtube::before {
+  background-image: url(../images/youtube.svg); /* 유튜브 아이콘 */
+}
+
+/* ========== 푸터 사업자 정보 ========== */
+/* 푸터 하단 사업자 정보 영역 */
+.footer__info {
+  padding: var(--gap-xl);
+  color: var(--gray-700);
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+/* 사업자 정보 텍스트 배열 - 가로 배열하되 줄바꿈 허용 */
+.footer__info-business {
+  display: flex;
+  gap: 0.5rem; /* 각 정보 간격 */
+  flex-wrap: wrap; /* 화면이 좁으면 줄바꿈 */
+}
+
+/* ========== 푸터 정보 모바일 반응형 ========== */
+@media screen and (max-width: 767px) {
+  .footer__info {
+    padding: 0;
+    text-align: center; /* 텍스트 중앙 정렬 */
+  }
+
+  /* 모바일 사업자 정보 - 중앙 정렬 */
+  .footer__info-business {
+    align-items: center;
+    justify-content: center; /* 가로 중앙 정렬 */
+  }
+}
