@@ -37,11 +37,16 @@ tab.addEventListener('click',(e)=>{ //event 위임
     validationAll(targetVal) //id,pass관련 함수
     bindJoinBtnActiveEvents(userType);
     isJoinBtnActive();
+    phoneNumberJoin();
 
     //tab 전환 시 모든 필드 데이터 초기화
     const allInput = document.querySelectorAll('input')
     allInput.forEach((input)=>{
         input.value = ''
+    })
+    const allSelect = document.querySelectorAll('select')
+    allSelect.forEach((select)=>{
+        select.value = '010'
     })
     //경고 message, field 디자인 초기화
     $('.id-warning')?.remove();
@@ -164,6 +169,28 @@ const seller = new Members({
     }
 })
 
+//휴대폰번호 필드 조립 함수
+function phoneNumberJoin (){
+    const phoneArr = ['010'];
+    const resultPhone = $(`input[name="${userType}-user-phone-res"]`)
+    $(`select[name="${userType}-user-phone"]`).addEventListener('change',(e)=>{
+        phoneArr[0] = e.currentTarget.value;
+        const phoneNumber = phoneArr.join('')
+        resultPhone.value = phoneNumber
+    })
+    $(`input[name="${userType}-user-phone-m"]`).addEventListener('input',(e)=>{
+        phoneArr[1] = e.currentTarget.value;
+        const phoneNumber = phoneArr.join('')
+        resultPhone.value = phoneNumber
+    })
+    $(`input[name="${userType}-user-phone-last"]`).addEventListener('input',(e)=>{
+        phoneArr[2] = e.currentTarget.value;
+        const phoneNumber = phoneArr.join('')
+        resultPhone.value = phoneNumber
+    })
+}
+phoneNumberJoin()
+
 function removeClasses(selectors, classes) {
     document.querySelectorAll(selectors).forEach(el => {
         el.classList.remove(...classes);
@@ -228,7 +255,6 @@ function validationAll(targetVal){
         }
     })
 }
-
 validationAll(targetVal)
 
 $('.join-btn').setAttribute('disabled',true)
@@ -261,6 +287,7 @@ function bindJoinBtnActiveEvents(userType) {
         input.removeEventListener('input', isJoinBtnActive); // 중복 방지
         input.addEventListener('input', isJoinBtnActive);
     });
+
     //약관 동의
     const agreement = $(`input[name="agreement"]`);
     agreement?.removeEventListener('change', isJoinBtnActive);
@@ -280,7 +307,7 @@ isJoinBtnActive();
 });
 
 $('.join-btn').addEventListener('click',(e)=>{
-    e.preventDefault();
+    e.preventDefault(); //만일을 위한 필수입력 필터 함수를 추가합니다
     const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
     const username = $(`input[name="${userType}-user-id"]`).value;
     const password = $(`input[name="${userType}-user-pass"]`).value;

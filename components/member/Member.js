@@ -114,8 +114,6 @@ export class Members {
         WholeContainer.append(inputBox)
 
         form.append(WholeContainer)
-
-        this.phoneNumberJoin(select,phone1,phone2,resPhone)
     }
 
     valueCheckBtn(className,textContent,inputBox){
@@ -124,26 +122,6 @@ export class Members {
         ChkButton.classList.add(className,'common-btn')
         ChkButton.textContent=textContent
         inputBox.append(ChkButton)
-    }
-
-    phoneNumberJoin(select,phone1,phone2,resPhone){
-        const phoneArr = ['010']
-        select.addEventListener('change',(e)=>{
-            phoneArr[0] = e.currentTarget.value;
-            const phoneNumber = phoneArr.join('')
-            resPhone.value = phoneNumber
-        })
-        phone1.addEventListener('input',(e)=>{
-            phoneArr[1] = e.currentTarget.value;
-            const phoneNumber = phoneArr.join('')
-            resPhone.value = phoneNumber
-        })
-        phone2.addEventListener('input',(e)=>{
-            phoneArr[2] = e.currentTarget.value;
-            const phoneNumber = phoneArr.join('')
-            resPhone.value = phoneNumber
-        })
-
     }
 
     limitLength(e){
