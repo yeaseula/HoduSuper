@@ -11,13 +11,13 @@
   </head>
   <body>
     <!-- ===== 헤더 영역 ===== -->
-    <header>
+    <header class="header wide-container">
       <!-- 헤더 상단: 로고, 검색 창 -->
-      <section class="header__content">
+      <section class="header-content">
         <h1 class="sr-only">호두 슈퍼</h1>
 
         <!-- 반응형 로고: 화면 크기에 따라 다른 로고 표시 -->
-        <a href="./header.html" class="header__logo">
+        <a href="./header.html" class="header-logo">
           <picture>
             <!-- 모바일용 작은 로고 -->
             <source
@@ -29,7 +29,7 @@
               media="(min-width: 768px)"
               srcset="./assets/images/logo-m.png"
             />
-            <!-- 데스크탑용 큰 로고 -->
+            <!-- 1200px 이상 데스크톱: 큰 로고 -->
             <source
               media="(min-width: 1200px)"
               srcset="./assets/images/logo-l.png"
@@ -38,35 +38,41 @@
           </picture>
         </a>
 
-        <!-- 상품 검색 기능 - TODO: 검색 API 연동 필요 -->
-        <form action="#" method="get" class="header__search">
+        <!-- 상품 검색 기능 - 반응형 디자인 적용 (모바일에서는 토글형태) -->
+        <form action="#" method="get" class="header-search">
           <label for="search" class="sr-only">상품 검색</label>
+          <!-- 검색 입력창 - 모바일에서는 JavaScript로 토글 -->
           <input
             type="search"
             name="q"
             id="search"
             placeholder="상품을 검색해보세요!"
           />
-          <button type="submit" class="header__search-btn" aria-label="검색">
+          <!-- 검색 실행 버튼 - SVG 아이콘 사용 -->
+          <button type="submit" class="header-search-btn" aria-label="검색">
             <span class="sr-only">검색</span>
           </button>
         </form>
       </section>
 
       <!-- 사용자 메뉴 네비게이션 -->
-      <nav class="header__user-menu" aria-label="사용자 메뉴">
-        <ul class="header__user-list">
-          <!-- 장바구니 - TODO: 장바구니 개수 표시 기능 -->
-          <li class="header__buyer-cart">
-            <a href="/cart" id="user__cart">장바구니</a>
+      <nav class="header-user-menu" aria-label="사용자 메뉴">
+        <ul class="header-user-list">
+          <!-- 장바구니 - 쇼핑카트 아이콘과 텍스트로 구성 -->
+          <li class="header-buyer-cart">
+            <a href="/cart" id="user-cart"><span>장바구니</span></a>
           </li>
-          <!-- 로그인/로그아웃 상태에 따른 동적 메뉴 - TODO: 로그인 상태 체크 -->
-          <li class="header__login">
-            <a href="/login" id="user__login">로그인</a>
+          <!-- 로그인 메뉴 - 사용자 아이콘 표시 -->
+          <li class="header-login">
+            <a href="/login" id="user-login"><span>로그인</span></a>
           </li>
-          <li class="header__mypage"><a href="/mypage">마이페이지</a></li>
-          <li class="header__seller-center">
-            <a href="/seller-center"> 판매자 센터</a>
+          <!-- 마이페이지 - 로그인 상태에서만 표시 (기본 숨김 처리) -->
+          <li class="header-mypage">
+            <a href="/mypage"><span>마이페이지</span></a>
+          </li>
+          <!-- 판매자센터 - 초록색 CTA 버튼 형태로 디자인 -->
+          <li class="header-seller-center">
+            <a href="/seller-center"> <span>판매자 센터</span></a>
           </li>
         </ul>
       </nav>
