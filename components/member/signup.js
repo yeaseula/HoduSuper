@@ -1,5 +1,5 @@
 import {Members} from './Member.js';
-import{ isRequired,isValidPass,isValidId } from './validation.js'
+import{ isRequired,isValidPass,isValidId,validateUsername } from './validation.js'
 
 const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성 위해 유틸함수 생성
 
@@ -149,10 +149,28 @@ const buyer = new Members({
     }
  })
 
+//id 중복확인
+//id 유효할 경우 인증버튼 활성화
+$('.id-value-check').setAttribute('disabled',true)
+$(`input[name="buyer-user-id"]`).addEventListener('input',(e)=>{
+    if(isValidId(e.currentTarget.value)) {
+        $('.id-value-check').removeAttribute('disabled')
+    } else {
+        $('.id-value-check').setAttribute('disabled',true)
+    }
+})
+
+$('.id-value-check').addEventListener('click',(e)=>{
+    e.preventDefault();
+    const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
+    const username = $(`input[name="${userType}-user-id"]`).value;
+    validateUsername(username,userType)
+})
+
+
  //초기 비밀번호 재확인-disabled
  //password 유효성 일치 할 경우 체크 아이콘 컬러 변경
  //password 양식에 맞을 경우 비밀번호 재확인 필드 on
-
 
 $('input[name="buyer-user-pass2"]').setAttribute('disabled',true)
 

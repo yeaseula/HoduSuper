@@ -1,3 +1,5 @@
+import {validateUsername} from './validation.js'
+
 const $ = (node) => document.querySelector(node)
 
 export class Members {
