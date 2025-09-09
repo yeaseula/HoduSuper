@@ -2,38 +2,12 @@
 import { Members } from './Member.js';
 import { isRequired, isValidPass, isValidId, validateUsername, ispassid } from './validation.js';
 
-const $ = (node) => document.querySelector(node);
-const tab = $('.tab-list');
-const targetInput = $('input[name="user-type-field"]');
+const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성 위해 유틸함수 생성
 
-// 상태관리 객체 (userType별로 관리)
-const joinState = {
-    userType: targetInput.value || 'buyer',
-    isIdChecked: false,
-    isPassMatch: false,
-    isAllField: false,
-    isAgree: false,
-    isSellerNumber: false,
-};
-
-// 모든 필드의 값을 가져오는 함수
-function getFormFields(userType) {
-    const box = $(`.${userType}-box`);
-    return {
-        form: box.querySelector('form'),
-        id: $(`input[name="${userType}-user-id"]`),
-        pass: $(`input[name="${userType}-user-pass"]`),
-        pass2: $(`input[name="${userType}-user-pass2"]`),
-        name: $(`input[name="${userType}-user-name"]`),
-        phoneM: $(`input[name="${userType}-user-phone-m"]`),
-        phoneL: $(`input[name="${userType}-user-phone-last"]`),
-        phoneRes: $(`input[name="${userType}-user-phone-res"]`),
-        agreement: $(`input[name="agreement"]`),
-        idValueChk: box.querySelector('.id-value-check'),
-        sellerNum: $(`input[name="sellernumber"]`),
-        sellerValueChk: $('.seller-value-check'),
-    };
-}
+const tab = $('.tab-list')
+const targetInput = $('input[name="user-type-field"]')
+let targetVal = targetInput.value
+let userType = targetVal == 'buyer' ? 'buyer' : 'seller';
 
 tab.addEventListener('click', (e) => {
     e.preventDefault();
