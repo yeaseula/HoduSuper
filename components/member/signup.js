@@ -155,8 +155,7 @@ const buyer = new Members({
  })
 
 
- function validationAll(targetVal){
-
+function validationAll(targetVal){
     //id중복확인
     //id 유효 - 인증버튼 활성화
     const targetBox = $(`.${targetVal}-box`) //buyer-box or seller-box
@@ -211,14 +210,12 @@ const buyer = new Members({
             e.currentTarget.classList.add('warning')
         }
     })
+}
+
+validationAll(targetVal)
 
 
- }
-
-  validationAll(targetVal)
-
-
- $('.join-btn').addEventListener('click',(e)=>{
+$('.join-btn').addEventListener('click',(e)=>{
     e.preventDefault();
 
     const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
