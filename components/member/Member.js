@@ -85,7 +85,7 @@ export class Members {
         phone1.setAttribute('type',inputType)
         phone1.setAttribute('name',`${inputName}-m`)
         const phone2 = document.createElement('input')
-        phone2.setAttribute('type',`${inputType}2`)
+        phone2.setAttribute('type',`${inputType}`)
         phone2.setAttribute('name',`${inputName}-last`)
 
         phone1.addEventListener('input',this.limitLength)
