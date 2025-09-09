@@ -198,6 +198,7 @@ $('input[name="buyer-user-pass2"]').addEventListener('input',(e)=>{
     const phoneLast = $(`input[name="${userType}-user-phone-last"]`).value;
     const phone_number = $(`input[name="${userType}-user-phone-res"]`).value;
     const name = $(`input[name="${userType}-user-name"]`).value;
+    const agreement = $(`input[name="agreement"]:checked`);
 
     if(!isRequired(username)) {
         alert('아이디를 입력해 주세요.')
@@ -230,6 +231,10 @@ $('input[name="buyer-user-pass2"]').addEventListener('input',(e)=>{
     }
     if(!isRequired(phoneLast)) {
         alert('휴대폰 번호를 입력해 주세요.')
+        return
+    }
+    if(!agreement) {
+        alert('이용약관 및 개인정보처리방침에 체크해 주세요.')
         return
     }
 
