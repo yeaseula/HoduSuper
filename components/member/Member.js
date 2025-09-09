@@ -1,6 +1,4 @@
-import {validateUsername} from './validation.js'
-
-const $ = (node) => document.querySelector(node)
+const $ = (node) => document.querySelector(node);
 
 export class Members {
     constructor (infor) {
@@ -22,17 +20,17 @@ export class Members {
 
             if(ele !== this.infor.phone) {
                 if(istrue) {
-                    this.field(containerClass,tag,fieldType,fieldName,maxlength)
+                    this.field(requeire,containerClass,tag,fieldType,fieldName,maxlength)
                 }
             } else {
                 if(istrue) {
-                    this.phonefield(containerClass,tag,fieldType,fieldName,maxlength)
+                    this.phonefield(requeire,containerClass,tag,fieldType,fieldName,maxlength)
                 }
             }
         })
     }
 
-    field(divName,tagName,inputType,inputName,maxlength){
+    field(requeire,divName,tagName,inputType,inputName,maxlength){
         const form = document.querySelector(`.${this.infor.classname}-box form`);
         const WholeContainer = document.createElement('div');
         WholeContainer.classList.add(divName); //ex.id-container
@@ -44,6 +42,9 @@ export class Members {
         const input = document.createElement('input')
         input.setAttribute('type',inputType)
         input.setAttribute('name',inputName)
+        if(requeire) {
+            input.setAttribute('required',true)
+        }
         input.setAttribute('maxlength',maxlength)
 
         WholeContainer.append(inputTag)
@@ -59,7 +60,7 @@ export class Members {
         form.append(WholeContainer)
 
     }
-    phonefield(divName,tagName,inputType,inputName){
+    phonefield(requeire,divName,tagName,inputType,inputName){
         const form = document.querySelector(`.${this.infor.classname}-box form`);
         const WholeContainer = document.createElement('div');
         WholeContainer.classList.add(divName);
@@ -86,9 +87,15 @@ export class Members {
         const phone1 = document.createElement('input')
         phone1.setAttribute('type',inputType)
         phone1.setAttribute('name',`${inputName}-m`)
+        if(requeire) {
+            phone1.setAttribute('required',true)
+        }
         const phone2 = document.createElement('input')
         phone2.setAttribute('type',`${inputType}`)
         phone2.setAttribute('name',`${inputName}-last`)
+        if(requeire) {
+            phone2.setAttribute('required',true)
+        }
 
         phone1.addEventListener('input',this.limitLength)
         phone2.addEventListener('input',this.limitLength)

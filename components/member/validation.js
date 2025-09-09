@@ -24,10 +24,13 @@ export async function isUniqueId(value) {
   return data.isUnique; // 서버에서 true/false 반환
 }
 
+export const ispassid = {
+    ispass : false
+}
+
 //id 중복확인
 export function validateUsername(username,userType) {
     const usernameField = $(`.${userType}-id-container`);
-    let isPass
     fetch("https://api.wenivops.co.kr/services/open-market/accounts/validate-username/", {
         method: "POST",
         headers: {
@@ -37,31 +40,24 @@ export function validateUsername(username,userType) {
     })
     .then(res => res.json().then(data => ({ status: res.status, body: data })))
     .then(({ status, body }) => {
+        const p = document.createElement('p')
+        p.classList.add('warning-text','id-warning')
+        $('.id-warning')?.remove();
         if (status === 200) {
             console.log("✅", body.message);
-            $('.id-warning').remove()
-            isPass = true
+            p.classList.add('good')
+            p.textContent = '멋진 아이디네요 :)'
+            ispassid.ispass = true
         } else if (status === 400) {
             console.warn("⚠️", body.error);
-            $('.id-warning').remove()
-            isPass = false
+            p.textContent = '이미 사용중인 아이디입니다';
+            ispassid.ispass = false
         } else {
             console.error("❌ 예상치 못한 응답:", body);
-            const warnings = document.querySelectorAll('.id-warning');
-            warnings.forEach(el => el.remove());
-            isPass = false
+            p.textContent = '이미 사용중인 아이디입니다';
+            ispassid.ispass = false
         }
-        if(isPass) {
-            const p = document.createElement('p')
-            p.classList.add('warning-text','id-warning','good')
-            p.textContent='멋진 아이디네요 :)'
-            usernameField.append(p)
-        } else {
-            const p = document.createElement('p')
-            p.classList.add('warning-text','id-warning')
-            p.textContent='이미 사용중인 아이디입니다'
-            usernameField.append(p)
-        }
+        usernameField.append(p);
     })
     .catch(err => console.error("에러:", err));
 }

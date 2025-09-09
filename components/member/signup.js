@@ -1,5 +1,5 @@
 import {Members} from './Member.js';
-import{ isRequired,isValidPass,isValidId,validateUsername } from './validation.js'
+import{ isRequired,isValidPass,isValidId,validateUsername,ispassid } from './validation.js'
 
 const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성 위해 유틸함수 생성
 
@@ -34,9 +34,10 @@ tab.addEventListener('click',(e)=>{ //event 위임
     targetInput.value=targetdata
     targetVal = targetInput.value
     userType = targetVal == 'buyer' ? 'buyer' : 'seller';
-    validationAll(targetVal)
+    validationAll(targetVal) //id,pass관련 함수
+    bindJoinBtnActiveEvents(userType);
+    isJoinBtnActive();
 })
-
 
 const buyer = new Members({
     classname: 'buyer',
@@ -85,9 +86,9 @@ const buyer = new Members({
         fieldName:'buyer-user-phone',
         maxlength:null
     }
- })
+})
 
- const seller = new Members({
+const seller = new Members({
     classname: 'seller',
     id:{
         istrue:true, //필드 사용 여부
@@ -152,8 +153,7 @@ const buyer = new Members({
         fieldName:'sellername',
         maxlength:null
     }
- })
-
+})
 
 function validationAll(targetVal){
     //id중복확인
@@ -174,7 +174,9 @@ function validationAll(targetVal){
         e.preventDefault();
         const username = $(`input[name="${userType}-user-id"]`).value;
         validateUsername(username,userType)
-        console.log(username)
+        setTimeout(()=>{
+            isJoinBtnActive();
+        },900)
     })
 
     //password
@@ -214,12 +216,57 @@ function validationAll(targetVal){
 
 validationAll(targetVal)
 
+$('.join-btn').setAttribute('disabled',true)
+
+function isJoinBtnActive() {
+    const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
+    const formName = $(`.${userType}-box`).querySelector('form');
+    const requiredField = formName.querySelectorAll('input[required]');
+    const allField = Array.from(requiredField).every(input => input.value.trim() !== "");
+
+    //password 재확인
+    const password = $(`input[name="${userType}-user-pass"]`).value;
+    const password2 = $(`input[name="${userType}-user-pass2"]`).value;
+    const isPassMatch = password && password2 && (password === password2);
+
+    //아이디 인증 통과 여부
+    const isIdPassed = ispassid.ispass;
+
+    //약관 동의
+    const agreement = $(`input[name="agreement"]:checked`);
+
+    const canJoin = allField && isPassMatch && isIdPassed && agreement;
+    $('.join-btn').disabled = !canJoin;
+}
+
+function bindJoinBtnActiveEvents(userType) {
+    const formName = $(`.${userType}-box`).querySelector('form');
+    const requiredField = formName.querySelectorAll('input[required]');
+    requiredField.forEach(input => {
+        input.removeEventListener('input', isJoinBtnActive); // 중복 방지
+        input.addEventListener('input', isJoinBtnActive);
+    });
+    //약관 동의
+    const agreement = $(`input[name="agreement"]`);
+    agreement?.removeEventListener('change', isJoinBtnActive);
+    agreement?.addEventListener('change', isJoinBtnActive);
+
+    //password 재확인
+    $(`input[name="${userType}-user-pass2"]`)?.removeEventListener('input', isJoinBtnActive);
+    $(`input[name="${userType}-user-pass2"]`)?.addEventListener('input', isJoinBtnActive);
+}
+bindJoinBtnActiveEvents(userType);
+isJoinBtnActive();
+
+['click', 'input', 'change', 'keyup'].forEach(evt => {
+  document.addEventListener(evt, () => {
+    isJoinBtnActive();
+  });
+});
 
 $('.join-btn').addEventListener('click',(e)=>{
     e.preventDefault();
-
     const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
-
     const username = $(`input[name="${userType}-user-id"]`).value;
     const password = $(`input[name="${userType}-user-pass"]`).value;
     const phoneMiddle = $(`input[name="${userType}-user-phone-m"]`).value;
