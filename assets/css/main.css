@@ -1,156 +1,102 @@
-/* ========== CSS 변수 정의 ========== */
-:root {
-  --font-400: "SpoqaHanSansNeo-Regular";
-  --font-500: "SpoqaHanSansNeo-Medium";
-  --font-700: "SpoqaHanSansNeo-Bold";
-  --color-bg-light: #f2f2f2;
-  --color-white: #fff;
-  --gap-sm: 0.5rem;
-  --gap-md: 1rem;
-  --gap-lg: 2rem;
-  --gap-xl: 3rem;
-  --breakpoint-mobile: 767px;
-  --border-radius-sm: 0.5rem;
-  --border-radius-full: 5rem;
-}
-
 /* ========== 메인 콘텐츠 영역 ========== */
+/* 메인 콘텐츠 전체 컨테이너 - 슬라이더와 상품 목록 영역 포함 */
 .main {
-  font-family: var(--font-400);
+  font-family: "SpoqaHanSansNeo-Regular", sans-serif;
 }
 
 /* ========== 메인 슬라이더 섹션 ========== */
-/* 메인 배너/슬라이더 영역 - 이미지 캐러셀을 위한 공간 */
-.main__slider {
-  height: 50rem; /* 고정 높이 설정 */
-  background: var(--color-bg-light);
-  position: relative;
+/* Swiper 라이브러리를 활용한 메인 프로모션 이미지 슬라이더 */
+.mySwiper {
+  --swiper-navigation-size: 1.6rem; /* 내비게이션 화살표 크기 */
+  --swiper-theme-color: #000; /* 슬라이더 컨트롤 색상 (검정색) */
+  color: #000;
 }
 
-.prev-btn {
-  width: 0.8rem;
-  height: 1.6rem;
-  border: none;
-  background-image: url(../images/icon-swiper-left.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  position: absolute;
-  top: 50%;
-  left: var(--gap-xl);
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.prev-btn:hover {
-  opacity: 0.8;
-}
-
-.next-btn {
-  width: 0.8rem;
-  height: 1.6rem;
-  border: none;
-  background-image: url(../images/icon-swiper-right.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  position: absolute;
-  top: 50%;
-  right: var(--gap-xl);
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.next-btn:hover {
-  opacity: 0.8;
-}
-
-/* 페이지네이션 (점) */
-.pagination {
-  position: absolute;
-  bottom: 10px;
+/* 슬라이더 컨테이너 - 전체 너비/높이 사용 */
+.swiper {
   width: 100%;
-  text-align: center;
+  height: 100%;
 }
 
-.dot {
-  display: inline-block;
-  width: 0.6rem;
-  height: 0.6rem;
-  background-color: var(--color-white);
-  border-radius: 50%;
-  cursor: pointer;
-  margin: 0 0.5rem;
+/* 개별 슬라이드 - 이미지 중앙 정렬 및 비율 유지 */
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
 }
 
-.dot.active {
-  background-color: #333;
+/* 슬라이드 내부 이미지 - 전체 너비로 확장 */
+.swiper-slide img {
+  display: block;
+  width: 100%;
 }
 
 /* ========== 상품 목록 섹션 ========== */
 /* 상품 목록 컨테이너 - 상하 여백과 좌우 반응형 패딩 */
-.main__products {
+.main-products {
   margin: 8rem 0 18rem 0; /* 위아래 여백 */
   padding-inline: clamp(5rem, 17vw, 32rem); /* 반응형 좌우 패딩 */
 }
 
 /* 상품 그리드 레이아웃 - 반응형 그리드 시스템 */
-.products__grid {
+/* 상품 그리드 - 반응형 자동 카드 배치 시스템 */
+.products-grid {
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
     minmax(28rem, 1fr)
-  ); /* 최소 28rem 너비로 자동 배치 */
-  gap: 7rem; /* 상품 카드 간격 */
+  ); /* 카드 최소 너비 28rem, 화면 크기에 따라 자동 개수 조정 */
+  gap: 7rem; /* 상품 카드 간 여백 */
 }
 
 /* ========== 상품 카드 스타일 ========== */
 /* 개별 상품 카드 - 이미지와 정보를 세로 배열 */
-.product__card {
+.product-card {
   display: flex;
   flex-direction: column; /* 이미지 위, 정보 아래 */
   gap: 1.6rem; /* 이미지와 텍스트 사이 간격 */
 }
 
-/* 상품 이미지 스타일 */
-.product__card img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: var(--border-radius-sm);
+/* 상품 이미지 - 1:1 비율의 정사각형 형태로 통일 */
+.product-card img {
+  width: 100%; /* 카드 너비에 맞춰 전체 사용 */
+  aspect-ratio: 1; /* 1:1 비율로 고정 (정사각형) */
+  object-fit: cover; /* 이미지 비율 유지하며 자르기 */
+  border-radius: var(--border-radius-sm); /* 모서리 둥글게 처리 */
 }
 
 /* 상품 텍스트 정보 영역 - 제목, 가격 등 */
-.product__card-text {
+.product-card-text {
   display: flex;
   flex-direction: column;
   gap: 1rem; /* 각 텍스트 요소 간격 */
 }
 
 /* 상품 브랜드 이름 */
-.product__card-text p {
+.product-card-text p {
   color: #767676;
   font-size: 1.6rem;
 }
 
 /* 상품 제목 */
-.product__card-text h3 {
+.product-card-text h3 {
   font-size: 1.8rem;
   font-weight: 400;
   line-height: 2.2;
 }
 
-/* 상품 가격 */
-.product__card-text div[itemprop="price"] {
+/* 상품 가격 영역 - 강조를 위한 큰 글씨 */
+.product-card-text div[itemprop="price"] {
   font-size: 2.4rem;
   font-weight: 700;
 }
 
-.product__card-text div[itemprop="price"] span:first-child {
-  font-family: var(--font-700);
+/* 가격 숫자 - 굵은 폰트로 강조 */
+.product-card-text div[itemprop="price"] span:first-child {
+  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
   font-size: 2.4rem;
 }
 
-.product__card-text div[itemprop="price"] span:last-child {
+/* "원" 단위 텍스트 - 상대적으로 작은 글씨 */
+.product-card-text div[itemprop="price"] span:last-child {
   font-size: 1.6rem;
 }

@@ -13,12 +13,23 @@
     <!-- ===== 푸터 영역 ===== -->
     <footer>
       <!-- 푸터 링크 섹션 -->
-      <section class="footer__link">
-        <!-- 푸터 메뉴 네비게이션 -->
-        <nav class="footer__menu">
+      <section class="footer-link">
+        <!-- 반응형 메뉴 토글 버튼 - 작은 화면에서 메뉴 접기/펼치기 -->
+        <button
+          class="footer-menu-toggle"
+          aria-expanded="false"
+          aria-controls="footerMenu"
+          aria-label="푸터 메뉴 열기/닫기"
+        >
+          약관 및 정책
+          <span class="arrow" aria-hidden="true">⬇️</span>
+        </button>
+        <!-- 푸터 메뉴 네비게이션 - 회사 정책 및 서비스 링크 -->
+        <nav class="footer-menu" id="footerMenu" hidden>
           <ul>
             <li><a href="#">호두샵 소개</a></li>
             <li><a href="#">이용약관</a></li>
+            <!-- 중요한 개인정보 정책은 strong 클래스로 강조 -->
             <li><a href="#" class="strong">개인정보처리방침</a></li>
             <li><a href="#">전자금융거래약관</a></li>
             <li><a href="#">청소년보호정책</a></li>
@@ -26,33 +37,56 @@
           </ul>
         </nav>
 
-        <!-- SNS 링크 네비게이션 - TODO: 실제 SNS 링크 연결 -->
-        <nav class="footer__sns">
+        <!-- SNS 링크 네비게이션 - 인스타그램, 페이스북, 유튜브 링크 -->
+        <nav class="footer-sns">
           <ul>
+            <!-- 인스타그램 링크 - SVG 아이콘으로 표시 -->
             <li><a href="#" class="insta"></a></li>
+            <!-- 페이스북 링크 - SVG 아이콘으로 표시 -->
             <li><a href="#" class="facebook"></a></li>
+            <!-- 유튜브 링크 - SVG 아이콘으로 표시 -->
             <li><a href="#" class="youtube"></a></li>
           </ul>
         </nav>
       </section>
 
-      <!-- 회사 정보 섹션 -->
-      <section class="footer__info">
+      <!-- 회사 정보 섹션 - 사업자 등록 정보 및 연락처 -->
+      <section class="footer-info">
         <dl>
+          <!-- 회사명 - strong 클래스로 강조 -->
           <dt class="strong">(주)HODU SHOP</dt>
+          <!-- 회사 주소 -->
           <dd>제주특별자치도 제주시 동광고 137 제주코딩베이스캠프</dd>
 
-          <!-- 사업자 정보 -->
-          <div class="footer__info-business">
+          <!-- 사업자 등록번호 및 업종 정보 -->
+          <div class="footer-info-business">
             <dt>사업자 번호:</dt>
             <dd>000-0000-0000 | 통신판매업</dd>
           </div>
-          <div class="footer__info-business">
+          <!-- 대표자 정보 -->
+          <div class="footer-info-business">
             <dt>대표:</dt>
             <dd>김호두</dd>
           </div>
         </dl>
       </section>
     </footer>
+    <script>
+      // 푸터 반응형 메뉴 토글 기능 - 작은 화면에서 메뉴 접기/펼치기
+      const toggleBtn = document.querySelector(".footer-menu-toggle");
+      const footerMenu = document.querySelector(".footer-menu");
+
+      if (toggleBtn && footerMenu) {
+        // 토글 버튼 클릭 이벤트
+        toggleBtn.addEventListener("click", () => {
+          // 현재 메뉴 상태 확인
+          const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+          
+          // 접근성 속성 업데이트
+          toggleBtn.setAttribute("aria-expanded", !expanded);
+          footerMenu.hidden = expanded;
+        });
+      }
+    </script>
   </body>
 </html>

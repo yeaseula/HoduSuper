@@ -1,8 +1,6 @@
-/* ========== CSS 변수 정의 ========== */
+/* ========== 헤더 CSS 변수 정의 ========== */
+/* 메인 홈페이지에서만 사용하는 색상과 크기 변수들 */
 :root {
-  --font-400: "SpoqaHanSansNeo-Regular";
-  --font-500: "SpoqaHanSansNeo-Medium";
-  --font-700: "SpoqaHanSansNeo-Bold";
   --color-bg-light: #f2f2f2;
   --color-white: #fff;
   --gap-sm: 0.5rem;
@@ -15,49 +13,49 @@
 }
 
 /* ========== 헤더 전체 레이아웃 ========== */
-/* 헤더 전체 컨테이너 - flexbox 레이아웃으로 로고와 유저메뉴 배치 */
-header {
-  padding: 2rem clamp(5rem, 17vw, 32rem); /* 반응형 좌우 여백 적용 */
+/* 헤더 전체 컨테이너 - flexbox로 좌측 로고+검색, 우측 유저메뉴 배치 */
+.header {
+  padding: 2rem clamp(5rem, 17vw, 32rem); /* 화면 크기에 따른 반응형 좌우 여백 */
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 로고와 유저메뉴를 양쪽 끝에 배치 */
-  font-family: var(--font-400);
+  justify-content: space-between; /* 좌측 콘텐츠와 우측 유저메뉴 양쪽 배치 */
+  font-family: "SpoqaHanSansNeo-Regular", sans-serif;
 }
 
 /* 헤더 좌측 콘텐츠 영역 (로고 + 검색폼) */
-.header__content {
+.header-content {
   display: flex;
   gap: 3rem; /* 로고와 검색폼 사이 간격 */
   align-items: center;
 }
 
 /* ========== 헤더 유저 메뉴 영역 ========== */
-/* 헤더 우측 유저 메뉴 컨테이너 (장바구니, 로그인, 마이페이지, 판매자센터) */
-.header__user-menu {
+/* 헤더 우측 유저 메뉴 네비게이션 */
+.header-user-menu {
   display: flex;
-  gap: 2.6rem; /* 각 메뉴 아이템 간격 */
+  gap: 2.6rem;
   align-items: center;
 }
 
 /* ========== 헤더 검색 기능 ========== */
 /* 검색 폼 컨테이너 - 검색창과 버튼을 포함 */
-.header__search {
+.header-search {
   display: flex;
   align-items: center;
   position: relative; /* 검색 버튼의 절대 위치 기준점 */
 }
 
-/* 검색 입력창 - 초록색 테두리의 둥근 모양 */
+/* 검색 입력창 - 메인 컬러 테두리의 둥근 모양 */
 #search {
-  width: clamp(20rem, 20vw, 40rem); /* 데스크톱 기본 너비 */
+  width: clamp(20rem, 20vw, 40rem); /* 화면 크기에 따른 반응형 너비 (최소 20rem, 최대 40rem) */
   padding: 1.3rem 2rem;
-  border: 2px solid var(--main-500);
-  border-radius: var(--border-radius-full);
+  border: 2px solid var(--main-500); /* 브랜드 메인 컬러 테두리 */
+  border-radius: var(--border-radius-full); /* 완전 둥근 모양 */
   font-size: 1.6rem;
 }
 
 /* 검색 버튼 - 검색창 내부 우측에 위치 */
-.header__search-btn {
+.header-search-btn {
   width: 2.8rem;
   height: 2.8rem;
   background: url(../images/search.svg); /* 검색 아이콘 SVG */
@@ -67,14 +65,14 @@ header {
   border: none;
   cursor: pointer;
   position: absolute;
-  right: 2rem; /* 검색창 우측 내부에 위치 */
+  right: 1.5rem; /* 검색창 우측 내부에 위치 */
 }
 
 /* ========== 모바일 검색창 반응형 디자인 ========== */
 /* 모바일에서는 검색창을 숨기고 버튼 클릭 시 애니메이션으로 나타남 */
 @media screen and (max-width: 767px) {
   /* 모바일 검색 컨테이너 - 우측 정렬 */
-  .header__search {
+  .header-search {
     position: relative;
     width: 100%;
     justify-content: flex-end; /* 검색 버튼을 우측에 배치 */
@@ -85,51 +83,58 @@ header {
     width: 0; /* 너비 0으로 숨김 */
     padding: 0;
     border: none;
-    transition: all 0.3s ease-in-out; /* 부드러운 애니메이션 */
+
     opacity: 0; /* 투명하게 숨김 */
     position: absolute;
     right: 0;
     top: 50%;
-    transform: translateY(-50%); /* 수직 중앙 정렬 */
   }
 
   /* 모바일 검색 버튼 - 정적 위치로 변경 */
-  .header__search-btn {
+  .header-search-btn {
     position: static;
   }
 
-  /* 검색창 활성화 상태 - JavaScript로 .active 클래스 토글 */
-  .header__search.active #search {
-    width: calc(100% - 7rem); /* 버튼 공간 제외한 전체 너비 */
+  /* 모바일 검색창 활성화 상태 - JavaScript로 .active 클래스 토글하여 애니메이션 구현 */
+  .header-search.active #search {
+    width: calc(100% - 7rem); /* 검색버튼 영역 제외한 나머지 전체 너비 */
     padding: 1.3rem 2rem;
     border: 2px solid var(--main-500);
-    opacity: 1; /* 완전히 보임 */
-    z-index: 100; /* 다른 요소 위에 표시 */
+    opacity: 1; /* 완전히 표시 */
+    z-index: 100; /* 다른 헤더 요소들 위에 표시 */
   }
 }
 
 /* ========== 헤더 유저 메뉴 리스트 ========== */
 /* 유저 메뉴 아이템들의 가로 배열 */
-.header__user-list {
+.header-user-list {
   display: flex;
   gap: 3rem; /* 각 메뉴 아이템 간격 */
   font-size: 1.2rem;
 }
 
 /* 모든 유저 메뉴 링크의 공통 스타일 - 아이콘과 텍스트 세로 배열 */
-.header__buyer-cart a,
-.header__login a,
-.header__mypage a,
-.header__seller-center a {
+.header-buyer-cart a,
+.header-login a,
+.header-mypage a,
+.header-seller-center a {
   display: flex;
   flex-direction: column; /* 아이콘 위, 텍스트 아래 */
   align-items: center;
   gap: 0.5rem; /* 아이콘과 텍스트 사이 간격 */
+  transition: transform 0.2s ease-in-out;
+}
+
+.header-buyer-cart a:hover,
+.header-login a:hover,
+.header-mypage a:hover,
+.header-seller-center a:hover {
+  transform: scale(1.2);
 }
 
 /* ========== 유저 메뉴 아이콘 스타일 ========== */
 /* 장바구니 아이콘 - 쇼핑카트 SVG 이미지 */
-.header__buyer-cart a::before {
+.header-buyer-cart a::before {
   content: "";
   display: block;
   width: 3.2rem;
@@ -142,8 +147,8 @@ header {
 }
 
 /* 로그인/마이페이지 공통 아이콘 - 사용자 SVG 이미지 */
-.header__login a::before,
-.header__mypage a::before {
+.header-login a::before,
+.header-mypage a::before {
   content: "";
   display: block;
   width: 3.2rem;
@@ -157,10 +162,10 @@ header {
 
 /* ========== 판매자센터 버튼 스타일 ========== */
 /* 판매자센터 버튼 - 초록색 배경의 CTA 버튼 형태 */
-.header__seller-center a {
+.header-seller-center a {
   width: 16.8rem;
   height: 5.4rem;
-  font-family: var(--font-500);
+  font-family: "SpoqaHanSansNeo-Medium", sans-serif;
   background-color: var(--main-500);
   border-radius: var(--border-radius-sm);
   display: flex;
@@ -173,7 +178,7 @@ header {
 }
 
 /* 판매자센터 아이콘 - 흰색 판매자 아이콘 */
-.header__seller-center a::before {
+.header-seller-center a::before {
   content: "";
   display: block;
   width: 2.4rem;
@@ -186,8 +191,16 @@ header {
 }
 
 /* ========== 로그인 상태에 따른 메뉴 표시 제어 ========== */
-/* 기본적으로 마이페이지와 판매자센터는 숨김 (로그인 후 JavaScript로 표시) */
-.header__mypage,
-.header__seller-center {
+/* 기본값: 로그아웃 상태에서는 마이페이지 숨김 (로그인 완료 후 JavaScript로 동적 표시) */
+.header-mypage {
   display: none;
+}
+
+/* 판매자센터는 일반 사용자에게도 표시 (회원가입 유도용) - 위에서 이미 flex 스타일 적용됨 */
+
+/* ========== 모바일 유저 메뉴 리스트 반응형 디자인 ========== */
+@media screen and (max-width: 767px) {
+  .header-user-list li a span {
+    display: none;
+  }
 }
