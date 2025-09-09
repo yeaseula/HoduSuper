@@ -61,19 +61,26 @@ input,select {
     border-radius: 6px;
     border: 1px solid #e0e0e0;
 }
+
 input[name*="user-id"],
 input[name*="sellernumber"] {
   width: calc(100% - 134px);
+}
+input.warning {
+    border: 1px solid var(--color-red);
+}
+input.warning:focus {
+    outline: none;
+    border: 1px solid var(--color-red);
 }
 div[class*="pass"]> div {
     position: relative;
 }
 div[class*="pass"] > div::after {
     position: absolute;
-    top: 50%;
+    top: 13px;
     right: 16px;
     z-index: 10;
-    transform: translateY(-50%);
     content: '';
     display: inline-block;
     width: 28px;
@@ -102,6 +109,10 @@ div[class*="pass"] > div.ischecked::after {
 button:disabled {
     background-color: #e0e0e0;
     border: 1px solid #e0e0e0;
+}
+.warning-text {
+    margin-top: 10px;
+    color: var(--color-red);
 }
 .join-btn {
     display: block;

@@ -153,17 +153,15 @@ const buyer = new Members({
  //password 유효성 일치 할 경우 체크 아이콘 컬러 변경
  //password 양식에 맞을 경우 비밀번호 재확인 필드 on
 
- let isAbled = false;
- $('input[name="buyer-user-pass2"]').setAttribute('disabled',true)
+
+$('input[name="buyer-user-pass2"]').setAttribute('disabled',true)
 
 $('input[name="buyer-user-pass"]').addEventListener('input',(e)=>{
     if(isValidPass(e.currentTarget.value)) {
         e.currentTarget.closest('div').classList.add('ischecked')
-        isAbled = true
         $('input[name="buyer-user-pass2"]').removeAttribute('disabled')
     } else {
         e.currentTarget.closest('div').classList.remove('ischecked')
-        isAbled = false
         $('input[name="buyer-user-pass2"]').setAttribute('disabled',true)
     }
 })
@@ -172,11 +170,20 @@ $('input[name="buyer-user-pass"]').addEventListener('input',(e)=>{
 $('input[name="buyer-user-pass2"]').addEventListener('input',(e)=>{
     const passwordValue = $('input[name="buyer-user-pass"]').value;
     const targetValue = e.currentTarget.value
-
     if(passwordValue == targetValue) {
         e.currentTarget.closest('div').classList.add('ischecked')
+        e.currentTarget.classList.remove('warning')
+        $('.warning-text').remove()
     } else {
+        if(!$('.warning-text')){ //한 번만 생성합니다
+            const p = document.createElement('p')
+            p.classList.add('warning-text')
+            p.textContent='비밀번호가 일치하지 않습니다'
+            e.currentTarget.closest('div').append(p)
+        }
+
         e.currentTarget.closest('div').classList.remove('ischecked')
+        e.currentTarget.classList.add('warning')
     }
 })
 
