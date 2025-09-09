@@ -60,7 +60,7 @@ export class Members {
         form.append(WholeContainer)
 
     }
-    phonefield(requeire,divName,tagName,inputType,inputName){
+    phonefield(requeire,divName,tagName,inputType,inputName,maxlength){
         const form = document.querySelector(`.${this.infor.classname}-box form`);
         const WholeContainer = document.createElement('div');
         WholeContainer.classList.add(divName);
@@ -87,12 +87,14 @@ export class Members {
         const phone1 = document.createElement('input')
         phone1.setAttribute('type',inputType)
         phone1.setAttribute('name',`${inputName}-m`)
+        phone1.setAttribute('maxlength',maxlength)
         if(requeire) {
             phone1.setAttribute('required',true)
         }
         const phone2 = document.createElement('input')
         phone2.setAttribute('type',`${inputType}`)
         phone2.setAttribute('name',`${inputName}-last`)
+        phone2.setAttribute('maxlength',maxlength)
         if(requeire) {
             phone2.setAttribute('required',true)
         }
@@ -122,11 +124,5 @@ export class Members {
         ChkButton.classList.add(className,'common-btn')
         ChkButton.textContent=textContent
         inputBox.append(ChkButton)
-    }
-
-    limitLength(e){
-        if(e.target.value.length > 4) {
-            e.target.value = e.target.value.slice(0, 4);
-        }
     }
 }
