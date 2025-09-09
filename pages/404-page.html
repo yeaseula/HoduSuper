@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - 페이지를 찾을 수 없습니다</title>
+    <meta
+      name="description"
+      content="요청하신 페이지를 찾을 수 없습니다. 홈으로 돌아가서 다른 페이지를 탐색해보세요."
+    />
+    <meta
+      name="keywords"
+      content="404, 페이지 없음, 에러, 페이지 찾을 수 없음"
+    />
+    <meta name="author" content="러닝메이트" />
+    <!-- 404 페이지는 검색엔진에 노출되지 않도록 설정 -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <meta property="og:title" content="404 - 페이지를 찾을 수 없습니다" />
+    <meta
+      property="og:description"
+      content="요청하신 페이지를 찾을 수 없습니다. 홈으로 돌아가서 다른 페이지를 탐색해보세요."
+    />
+    <meta property="og:type" content="website" />
+    <!--대표이미지 나중에 만듭시다, 배포 후 주소 넣읍시다-->
+    <!-- <meta property="og:image" content="assets/img/og-image.png"> -->
+    <!-- <meta property="og:url" content="https://프로젝트주소"> -->
+
+    <!-- favicon 나중에 만듭시다 -->
+    <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
+
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/404-page.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    />
+  </head>
+  <body>
+    <main class="error-page wide-container" role="main">
+      <div class="error-container">
+        <!-- 404 일러스트 영역 -->
+        <div class="error-illustration">
+          <img
+            src="../assets/img/icon-404.png"
+            alt="404 웹 페이지 오류"
+            class="error-image"
+          />
+        </div>
+
+        <!-- 텍스트 및 버튼 영역 -->
+        <div class="error-content">
+          <h1 class="error-title">페이지를 찾을 수 없습니다.</h1>
+          <p class="error-description">
+            페이지가 존재하지 않거나 사용할 수 없는 페이지입니다.<br />
+            웹 주소가 올바른지 확인해 주세요.
+          </p>
+
+          <div class="error-buttons">
+            <button
+              type="button"
+              class="common-btn btn-home"
+              onclick="location.href='../index.html'"
+            >
+              메인으로
+            </button>
+            <button
+              type="button"
+              class="common-btn btn-back"
+              onclick="history.back()"
+            >
+              이전 페이지
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
