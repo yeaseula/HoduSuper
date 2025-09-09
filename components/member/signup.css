@@ -140,8 +140,7 @@ button:disabled {
     margin-top: 10px;
     color: var(--color-red);
 }
-.allow-text {
-    margin-top: 10px;
+.warning-text.good {
     color: var(--main-500);
 }
 .signup-agreement {

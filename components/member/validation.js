@@ -27,6 +27,10 @@ export async function isUniqueId(value) {
 //id 중복확인
 export function validateUsername(username,userType) {
     const usernameField = $(`.${userType}-id-container`);
+
+    if($('.warning-text')) {
+        $('.warning-text').remove()
+    }
     fetch("https://api.wenivops.co.kr/services/open-market/accounts/validate-username/", {
         method: "POST",
         headers: {
@@ -38,22 +42,19 @@ export function validateUsername(username,userType) {
     .then(({ status, body }) => {
         if (status === 200) {
             console.log("✅", body.message);
-            if(!$('.allow-text')){
-                const p = document.createElement('p')
-                p.classList.add('allow-text')
-                p.textContent='멋진 아이디네요 :)'
-                usernameField.append(p)
-            }
+            const p = document.createElement('p')
+            p.classList.add('warning-text','good')
+            p.textContent='멋진 아이디네요 :)'
+            usernameField.append(p)
         } else if (status === 400) {
             console.warn("⚠️", body.error);
-            if(!$('.warning-text')){
-                const p = document.createElement('p')
-                p.classList.add('warning-text')
-                p.textContent='이미 사용중인 아이디 입니다'
-                usernameField.append(p)
-            }
+
         } else {
             console.error("❌ 예상치 못한 응답:", body);
+            const p = document.createElement('p')
+            p.classList.add('warning-text')
+            p.textContent='이미 사용중인 아이디 입니다'
+            usernameField.append(p)
         }
     })
     .catch(err => console.error("에러:", err));

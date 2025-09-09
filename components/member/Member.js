@@ -113,6 +113,7 @@ export class Members {
 
     valueCheckBtn(className,textContent,inputBox){
         let ChkButton = document.createElement('button')
+        ChkButton.setAttribute('type','button')
         ChkButton.classList.add(className)
         ChkButton.textContent=textContent
         inputBox.append(ChkButton)

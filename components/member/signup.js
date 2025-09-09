@@ -5,6 +5,8 @@ const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성
 
 const tab = $('.tab-list')
 const targetInput = $('input[name="user-type-field"]')
+let targetVal = targetInput.value
+let userType = targetVal == 'buyer' ? 'buyer' : 'seller';
 
 tab.addEventListener('click',(e)=>{ //event 위임
     e.preventDefault();
@@ -30,6 +32,9 @@ tab.addEventListener('click',(e)=>{ //event 위임
     targetContainer.classList.add('on')
 
     targetInput.value=targetdata
+    targetVal = targetInput.value
+    userType = targetVal == 'buyer' ? 'buyer' : 'seller';
+    validationAll(targetVal)
 })
 
 
@@ -149,61 +154,69 @@ const buyer = new Members({
     }
  })
 
-//id 중복확인
-//id 유효할 경우 인증버튼 활성화
-$('.id-value-check').setAttribute('disabled',true)
-$(`input[name="buyer-user-id"]`).addEventListener('input',(e)=>{
-    if(isValidId(e.currentTarget.value)) {
-        $('.id-value-check').removeAttribute('disabled')
-    } else {
-        $('.id-value-check').setAttribute('disabled',true)
-    }
-})
 
-$('.id-value-check').addEventListener('click',(e)=>{
-    e.preventDefault();
-    const userType = targetInput.value == 'buyer' ? 'buyer' : 'seller';
-    const username = $(`input[name="${userType}-user-id"]`).value;
-    validateUsername(username,userType)
-})
+ function validationAll(targetVal){
 
+    //id중복확인
+    //id 유효 - 인증버튼 활성화
+    const targetBox = $(`.${targetVal}-box`) //buyer-box or seller-box
+    const idValueChk = targetBox.querySelector('.id-value-check')
+    idValueChk.setAttribute('disabled',true)
 
- //초기 비밀번호 재확인-disabled
- //password 유효성 일치 할 경우 체크 아이콘 컬러 변경
- //password 양식에 맞을 경우 비밀번호 재확인 필드 on
-
-$('input[name="buyer-user-pass2"]').setAttribute('disabled',true)
-
-$('input[name="buyer-user-pass"]').addEventListener('input',(e)=>{
-    if(isValidPass(e.currentTarget.value)) {
-        e.currentTarget.closest('div').classList.add('ischecked')
-        $('input[name="buyer-user-pass2"]').removeAttribute('disabled')
-    } else {
-        e.currentTarget.closest('div').classList.remove('ischecked')
-        $('input[name="buyer-user-pass2"]').setAttribute('disabled',true)
-    }
-})
-
-
-$('input[name="buyer-user-pass2"]').addEventListener('input',(e)=>{
-    const passwordValue = $('input[name="buyer-user-pass"]').value;
-    const targetValue = e.currentTarget.value
-    if(passwordValue == targetValue) {
-        e.currentTarget.closest('div').classList.add('ischecked')
-        e.currentTarget.classList.remove('warning')
-        $('.warning-text').remove()
-    } else {
-        if(!$('.warning-text')){ //한 번만 생성합니다
-            const p = document.createElement('p')
-            p.classList.add('warning-text')
-            p.textContent='비밀번호가 일치하지 않습니다'
-            e.currentTarget.closest('div').append(p)
+    $(`input[name="${targetVal}-user-id"]`).addEventListener('input',(e)=>{
+        if(isValidId(e.currentTarget.value)) {
+            idValueChk.removeAttribute('disabled')
+        } else {
+            idValueChk.setAttribute('disabled',true)
         }
+    })
 
-        e.currentTarget.closest('div').classList.remove('ischecked')
-        e.currentTarget.classList.add('warning')
-    }
-})
+    idValueChk.addEventListener('click',(e)=>{
+        e.preventDefault();
+        const username = $(`input[name="${userType}-user-id"]`).value;
+        validateUsername(username,userType)
+        console.log(username)
+    })
+
+    //password
+    //비밀번호 재확인 필드 비활성화
+    $(`input[name="${targetVal}-user-pass2"]`).setAttribute('disabled',true);
+
+    //password 유효성 일치 할 경우 체크 아이콘 컬러 변경
+    $(`input[name="${targetVal}-user-pass"]`).addEventListener('input',(e)=>{
+        if(isValidPass(e.currentTarget.value)) {
+            e.currentTarget.closest('div').classList.add('ischecked')
+            $(`input[name="${targetVal}-user-pass2"]`).removeAttribute('disabled')
+        } else {
+            e.currentTarget.closest('div').classList.remove('ischecked')
+            $(`input[name="${targetVal}-user-pass2"]`).setAttribute('disabled',true)
+        }
+    })
+    //password 양식에 맞을 경우 비밀번호 재확인 필드 on
+    $(`input[name="${targetVal}-user-pass2"]`).addEventListener('input',(e)=>{
+        const passwordValue = $(`input[name="${targetVal}-user-pass"]`).value;
+        const reCheckValue = e.currentTarget.value
+        if(passwordValue == reCheckValue) {
+            e.currentTarget.closest('div').classList.add('ischecked')
+            e.currentTarget.classList.remove('warning')
+            $('.id-warning').remove()
+        } else {
+            if(!$('.id-warning')){ //한 번만 생성합니다
+                const p = document.createElement('p')
+                p.classList.add('warning-text','id-warning')
+                p.textContent='비밀번호가 일치하지 않습니다'
+                e.currentTarget.closest('div').append(p)
+            }
+            e.currentTarget.closest('div').classList.remove('ischecked')
+            e.currentTarget.classList.add('warning')
+        }
+    })
+
+
+ }
+
+  validationAll(targetVal)
+
 
  $('.join-btn').addEventListener('click',(e)=>{
     e.preventDefault();
