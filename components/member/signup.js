@@ -1,6 +1,6 @@
 
 import { Members } from './Member.js';
-import { isRequired, isValidPass, isValidId, validateUsername, ispassid } from './validation.js';
+import { isRequired, isValidPass, isValidId, validateUsername, validateSellerNumber, ispassid, ispassUserNum } from './validation.js';
 
 const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성 위해 유틸함수 생성
 const tab = $('.tab-list');
@@ -192,8 +192,8 @@ $('.seller-value-check').setAttribute('disabled',true)//사업자등록번호버
 
 // 버튼 활성화 함수 (상태 기반)
 function updateJoinBtnState() {
-    const { isIdChecked, isPassMatch, isAllField, isAgree } = joinState;
-    const canJoin = isIdChecked && isPassMatch && isAllField && isAgree;
+    const { isIdChecked, isPassMatch, isAllField, isAgree, isSellerNumber } = joinState;
+    const canJoin = isIdChecked && isPassMatch && isAllField && isAgree && isSellerNumber;
     $('.join-btn').disabled = !canJoin;
 }
 
@@ -300,6 +300,16 @@ function validationAll(userType) {
         } else {
             $('.seller-value-check').setAttribute('disabled',true)
         }
+    })
+    // 사업자 등록번호 인증
+    fields.sellerValueChk.addEventListener('click',(e) => {
+        e.preventDefault();
+        const sellerNumber = fields.sellerNum.value;
+        validateSellerNumber(sellerNumber);
+        setTimeout(() => {
+            joinState.isSellerNumber = ispassUserNum.ispass;
+            updateJoinBtnState();
+        }, 900);
     })
 
     // 필수 입력값 모두 채워졌는지 검사
