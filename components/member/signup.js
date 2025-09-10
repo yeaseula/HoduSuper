@@ -193,7 +193,7 @@ $('.seller-value-check').setAttribute('disabled',true)//사업자등록번호버
 // 버튼 활성화 함수 (상태 기반)
 function updateJoinBtnState() {
     const { isIdChecked, isPassMatch, isAllField, isAgree, isSellerNumber } = joinState;
-    const canJoin = isIdChecked && isPassMatch && isAllField && isAgree && isSellerNumber;
+    const canJoin = isIdChecked && isPassMatch && isAllField && isAgree;
     $('.join-btn').disabled = !canJoin;
 }
 
@@ -239,25 +239,31 @@ function removeClasses(selectors, classes) {
 // 유효성 검사 및 이벤트 바인딩 통합
 function validationAll(userType) {
     const fields = getFormFields(userType);
-    // 아이디 입력 시 유효성 검사 및 인증버튼 활성화
-    fields.id.addEventListener('input', (e) => {
-        if (isValidId(e.currentTarget.value)) {
-            fields.idValueChk.removeAttribute('disabled');
-        } else {
-            fields.idValueChk.setAttribute('disabled', true);
-        }
-        joinState.isIdChecked = false;
-        updateJoinBtnState();
-    });
     // 아이디 인증 버튼 클릭
     fields.idValueChk.addEventListener('click', (e) => {
         e.preventDefault();
         const username = fields.id.value;
-        validateUsername(username, userType);
-        setTimeout(() => {
-            joinState.isIdChecked = ispassid.ispass;
+        if(!isValidId(username)) {
+            const usernameField = $(`.${userType}-id-container`);
+            $('.id-warning')?.remove();
+            const p = document.createElement('p')
+            p.classList.add('warning-text','id-warning')
+            p.textContent = '20자 이내의 영문 소문자,대문자,숫자만 사용 가능합니다.';
+            usernameField.append(p);
+            fields.id.classList.add('warning')
             updateJoinBtnState();
-        }, 900);
+        } else {
+            validateUsername(username, userType);
+            setTimeout(() => {
+                joinState.isIdChecked = ispassid.ispass;
+                if(joinState.isIdChecked) {
+                    removeClasses(`input[name="${userType}-user-id"]`,['warning'])
+                } else {
+                    fields.id.classList.add('warning')
+                }
+                updateJoinBtnState();
+            }, 500);
+        }
     });
     // 비밀번호 입력 시 유효성 검사
     fields.pass.addEventListener('input', (e) => {
