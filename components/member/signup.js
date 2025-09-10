@@ -294,6 +294,14 @@ function validationAll(userType) {
             e.currentTarget.classList.add('warning'); //필드 border
             fields.pass2.setAttribute('disabled', true);
         }
+        //비밀번호 입력 후 재수정 시
+        if(fields.pass2.value !== '') {
+            fields.pass2.value = ''; // 재확인 필드는 비우고
+            // 재확인 체크는 해제하고
+            document.querySelector(`input[name="${userType}-user-pass2"]`).closest('div').classList.remove('ischecked');
+            // 재확인 필드 경고 보더를 해제
+            $(`input[name="${userType}-user-pass2"]`).classList.remove('warning')
+        }
         joinState.isPassMatch = false;
         updateJoinBtnState();
     });
