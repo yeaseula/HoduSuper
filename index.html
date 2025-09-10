@@ -34,13 +34,25 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+    <style>
+      @media(max-width:992px) {
+        .main-banner  {
+          height: 260px; /* 고정 */
+        }
+        .swiper-slide img {
+          height: 100%;
+          object-fit: cover;
+          object-position: right center;
+        }
+      }
+    </style>
+    <script src="assets/js/common.js" defer></script>
   </head>
   <body>
-    
     <!-- ===== 메인 콘텐츠 영역 ===== -->
     <main>
       <!-- 메인 슬라이더 섹션 -->
-      <section aria-label="메인 프로모션 배너">
+      <section class="main-banner" aria-label="메인 프로모션 배너">
         <h2 class="sr-only">메인 프로모션 배너</h2>
 
         <!-- 슬라이더 이미지 컨테이너 - Swiper.js를 사용한 이미지 캐러셀 -->
@@ -81,115 +93,118 @@
       </section>
 
       <!-- 상품 목록 섹션 -->
-      <section class="main-products" aria-labelledby="main-products-title">
-        <h2 id="main-products-title" class="sr-only">주요 상품</h2>
+      <div class="wide-container">
+        <section class="main-products" aria-labelledby="main-products-title">
+          <h2 id="main-products-title" class="sr-only">주요 상품</h2>
 
-        <!-- 상품 그리드 컨테이너 -->
-        <div class="products-grid">
-          <!-- 상품 카드 1 - 추후 상품 상세페이지 링크 연결 예정 -->
-          <article
-            class="product-card"
-            itemscope
-            itemtype="https://schema.org/Product"
-          >
-            <img
-              src="./assets/images/item1-m.png"
-              alt="Hack Your Life 개발자 노트북 파우치 이미지"
-            />
-            <div class="product-card-text">
-              <p>우당탕탕 라이캣의 실험실</p>
-              <h3 itemprop="name">Hack Your Life 개발자 노트북 파우치</h3>
-              <div itemprop="price">
-                <span>29,000</span>
-                <span>원</span>
+          <!-- 상품 그리드 컨테이너 -->
+          <div class="products-grid">
+            <!-- 상품 카드 1 - 추후 상품 상세페이지 링크 연결 예정 -->
+            <article
+              class="product-card"
+              itemscope
+              itemtype="https://schema.org/Product"
+            >
+              <img
+                src="./assets/images/item1-m.png"
+                alt="Hack Your Life 개발자 노트북 파우치 이미지"
+              />
+              <div class="product-card-text">
+                <p>우당탕탕 라이캣의 실험실</p>
+                <h3 itemprop="name">Hack Your Life 개발자 노트북 파우치</h3>
+                <div itemprop="price">
+                  <span>29,000</span>
+                  <span>원</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <!-- 상품 카드 2 - 구조화된 데이터 적용 -->
-          <article
-            class="product-card"
-            itemscope
-            itemtype="https://schema.org/Product"
-          >
-            <img
-              src="./assets/images/item2-m.png"
-              alt="네 개발잡니다 개발자키링 금속키링 이미지"
-            />
-            <div class="product-card-text">
-              <p>제주코딩베이스캠프</p>
-              <h3 itemprop="name">네 개발잡니다 개발자키링 금속키링</h3>
-              <div itemprop="price">
-                <span>29,000</span>
-                <span>원</span>
+            <!-- 상품 카드 2 - 구조화된 데이터 적용 -->
+            <article
+              class="product-card"
+              itemscope
+              itemtype="https://schema.org/Product"
+            >
+              <img
+                src="./assets/images/item2-m.png"
+                alt="네 개발잡니다 개발자키링 금속키링 이미지"
+              />
+              <div class="product-card-text">
+                <p>제주코딩베이스캠프</p>
+                <h3 itemprop="name">네 개발잡니다 개발자키링 금속키링</h3>
+                <div itemprop="price">
+                  <span>29,000</span>
+                  <span>원</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <!-- 상품 카드 3 -->
-          <article
-            class="product-card"
-            itemscope
-            itemtype="https://schema.org/Product"
-          >
-            <img
-              src="./assets/images/item3-m.png"
-              alt="딥러닝 개발자 무릉 담요 이미지"
-            />
-            <div class="product-card-text">
-              <p>백엔드글로벌</p>
-              <h3 itemprop="name">딥러닝 개발자 무릎 담요</h3>
-              <div itemprop="price">
-                <span>29,000</span>
-                <span>원</span>
+            <!-- 상품 카드 3 -->
+            <article
+              class="product-card"
+              itemscope
+              itemtype="https://schema.org/Product"
+            >
+              <img
+                src="./assets/images/item3-m.png"
+                alt="딥러닝 개발자 무릉 담요 이미지"
+              />
+              <div class="product-card-text">
+                <p>백엔드글로벌</p>
+                <h3 itemprop="name">딥러닝 개발자 무릎 담요</h3>
+                <div itemprop="price">
+                  <span>29,000</span>
+                  <span>원</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <!-- 상품 카드 4 -->
-          <article
-            class="product-card"
-            itemscope
-            itemtype="https://schema.org/Product"
-          >
-            <img
-              src="./assets/images/item4-m.png"
-              alt="우당탕탕 라이캐의 실험실 스티커 팩 이미지"
-            />
-            <div class="product-card-text">
-              <p>코딩앤유</p>
-              <h3 itemprop="name">우당탕탕 라이캣의 실험실 스티커 팩</h3>
-              <div itemprop="price">
-                <span>29,000</span>
-                <span>원</span>
+            <!-- 상품 카드 4 -->
+            <article
+              class="product-card"
+              itemscope
+              itemtype="https://schema.org/Product"
+            >
+              <img
+                src="./assets/images/item4-m.png"
+                alt="우당탕탕 라이캐의 실험실 스티커 팩 이미지"
+              />
+              <div class="product-card-text">
+                <p>코딩앤유</p>
+                <h3 itemprop="name">우당탕탕 라이캣의 실험실 스티커 팩</h3>
+                <div itemprop="price">
+                  <span>29,000</span>
+                  <span>원</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <!-- 상품 카드 5 -->
-          <article
-            class="product-card"
-            itemscope
-            itemtype="https://schema.org/Product"
-          >
-            <img
-              src="./assets/images/item5-m.png"
-              alt="버그를 Java라 버그잡는 개리씨 키링 이미지"
-            />
-            <div class="product-card-text">
-              <p>파이썬스쿨</p>
-              <h3 itemprop="name">
-                버그를 Java라 버그잡는 개리씨 키링 개발자키링...
-              </h3>
-              <div itemprop="price">
-                <span>29,000</span>
-                <span>원</span>
+            <!-- 상품 카드 5 -->
+            <article
+              class="product-card"
+              itemscope
+              itemtype="https://schema.org/Product"
+            >
+              <img
+                src="./assets/images/item5-m.png"
+                alt="버그를 Java라 버그잡는 개리씨 키링 이미지"
+              />
+              <div class="product-card-text">
+                <p>파이썬스쿨</p>
+                <h3 itemprop="name">
+                  버그를 Java라 버그잡는 개리씨 키링 개발자키링...
+                </h3>
+                <div itemprop="price">
+                  <span>29,000</span>
+                  <span>원</span>
+                </div>
               </div>
-            </div>
-          </article>
-        </div>
-      </section>
+            </article>
+          </div>
+        </section>
+      </div>
     </main>
+    <div class="footer"></div>
     <!-- Swiper.js 라이브러리 로드 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -201,8 +216,8 @@
         loop: true, // 마지막 슬라이드에서 처음으로 무한 루프
         // 자동 슬라이드 설정
         autoplay: {
-          delay: 2000, // 2초마다 자동 넘어감
-          disableOnInteraction: false, // 사용자가 만지더라도 자동재생 계속
+           delay: 2000, // 2초마다 자동 넘어감
+           disableOnInteraction: false, // 사용자가 만지더라도 자동재생 계속
         },
         // 좌우 화살표 버튼 설정
         navigation: {

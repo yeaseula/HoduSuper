@@ -295,7 +295,7 @@
 /* 모바일 768px 이하에서만 세로 레이아웃 적용 */
 @media (max-width: 768px) {
   .main {
-    padding-inline: clamp(2rem, 6vw, 6rem);
+    /* padding-inline: clamp(2rem, 6vw, 6rem); 💫wide-container 패딩이랑 겹침*/
   }
 
   .product-detail {

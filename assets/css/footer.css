@@ -3,8 +3,9 @@
 footer {
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
   background-color: var(--color-bg-light);
-  padding: 6rem;
-  padding-inline: clamp(5rem, 17vw, 32rem);
+  /* padding: 6rem;
+  padding-inline: clamp(5rem, 17vw, 32rem); */
+  padding: 60px 0; /*💫*/
   display: flex;
   flex-direction: column;
   gap: 6rem;
@@ -80,7 +81,8 @@ footer {
   }
 }
 /* ========== 태블릿 이하 화면에서 메뉴 토글 버튼 활성화 ========== */
-@media screen and (max-width: 1200px) {
+/* 💫1200은 아직 한참 데스크톱이라 max-width 값을 낮춤 */
+@media screen and (max-width: 860px) {
   .footer-menu-toggle {
     display: flex; /* 토글 버튼 표시 */
     margin-bottom: 10px;
@@ -186,7 +188,8 @@ footer {
 /* ========== 푸터 사업자 정보 ========== */
 /* 푸터 하단 사업자 정보 영역 */
 .footer-info {
-  padding: var(--gap-xl);
+  margin-top: 3rem;
+  /* padding: var(--gap-xl); 💫*/
   color: var(--gray-700);
   font-size: 1.4rem;
   line-height: 1.8;
