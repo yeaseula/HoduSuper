@@ -65,7 +65,7 @@ tab.addEventListener('click', (e) => {
     $('.id-warning')?.remove();
     $('.empty-warning')?.remove();
     removeClasses('.ischecked', ['ischecked']);
-
+    removeClasses('.warning', ['warning']);
     // 이벤트 재바인딩 및 유효성 검사
     validationAll(targetdata);
     bindJoinBtnActiveEvents(targetdata);
