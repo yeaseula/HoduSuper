@@ -207,7 +207,7 @@ function getFormFieldsArray(userType) {
                     const parantDiv = allArray[i].closest('div');
                     const target = parantDiv.querySelector('.empty-warning');
                     if(!target) {
-                        const message = allArray[i].name == `${userType}-user-phoneM` ? '앞번호를 입력해주세요.' : '필수정보입니다.'
+                        const message = allArray[i].name == `${userType}-user-phoneM` ? '번호를 입력해주세요.' : '필수정보입니다.'
                         warningMessage(parantDiv,message)
                     }
                 } else {
