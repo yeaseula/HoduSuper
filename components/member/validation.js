@@ -81,7 +81,7 @@ export function validateSellerNumber(company_registration_number) {
             ispassUserNum.ispass = false
         } else {
             console.error("❌ 예상치 못한 응답:", body);
-            p.textContent = '이미 사용중인 아이디입니다';
+            p.textContent = '사업자 번호 10자리를 정확히 입력해주세요';
             ispassUserNum.ispass = false
         }
         sellerNumberField.append(p);

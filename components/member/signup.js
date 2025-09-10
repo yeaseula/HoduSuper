@@ -188,15 +188,18 @@ const seller = new Members({
     }
 })
 
-$(`input[name="${joinState.userType}-user-pass2"]`).setAttribute('disabled',true)//id인증버튼
 $('.join-btn').setAttribute('disabled',true)//회원가입버튼
-$('.seller-value-check').setAttribute('disabled',true)//사업자등록번호버튼
 
 // 버튼 활성화 함수 (상태 기반)
 function updateJoinBtnState() {
-    const { isIdChecked, isPassMatch, isAllField, isAgree, isSellerNumber } = joinState;
-    const canJoin = isIdChecked && isPassMatch && isAllField && isAgree;
-    $('.join-btn').disabled = !canJoin;
+    const { userType, isIdChecked, isPassMatch, isAllField, isAgree, isSellerNumber } = joinState;
+    if(userType == 'buyer') {
+        const canJoin = isIdChecked && isPassMatch && isAllField && isAgree;
+        $('.join-btn').disabled = !canJoin;
+    } else {
+        const canJoin = isIdChecked && isPassMatch && isAllField && isAgree && isSellerNumber;
+        $('.join-btn').disabled = !canJoin;
+    }
 }
 
 //input[type="number"] maxlangth
@@ -329,11 +332,9 @@ function validationAll(userType) {
     });
     // 사업자 등록번호 인증 버튼 활성화
     fields.sellerNum.addEventListener('input', (e) => {
-        if(e.currentTarget.value.length == 10) {
-            $('.seller-value-check').removeAttribute('disabled')
-        } else {
-            $('.seller-value-check').setAttribute('disabled',true)
-        }
+        $('.seller-number-warning')?.remove();
+        joinState.isSellerNumber = false;
+        updateJoinBtnState();
     })
     // 사업자 등록번호 인증
     fields.sellerValueChk.addEventListener('click',(e) => {
