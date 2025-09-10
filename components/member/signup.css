@@ -56,6 +56,8 @@ h3 {
 .container form > div[class*="sellernumber"] > div {
     display: flex;
     gap: 12px;
+    row-gap: 0;
+    flex-wrap: wrap;
     align-items: center;
 }
 /* 기본 필드 속성입니다 */
@@ -100,7 +102,7 @@ select {
 }
 
 input[name*="user-id"],
-input[name*="sellernumber"] {
+input[name*="sellerNum"] {
   width: calc(100% - 134px);
 }
 input.warning {
@@ -140,7 +142,7 @@ div[class*="pass"] > div.ischecked::after {
 
 .container form > div[class*="phone-container"] > div select,
 .container form > div[class*="phone-container"] > div input {
-    flex: 1;
+    flex-basis: calc(33.33% - 10px);
 }
 
 button:disabled {

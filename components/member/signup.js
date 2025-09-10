@@ -25,14 +25,14 @@ function getFormFields(userType) {
         pass: $(`input[name="${userType}-user-pass"]`),
         pass2: $(`input[name="${userType}-user-pass2"]`),
         name: $(`input[name="${userType}-user-name"]`),
-        phoneM: $(`input[name="${userType}-user-phone-m"]`),
-        phoneL: $(`input[name="${userType}-user-phone-last"]`),
-        phoneRes: $(`input[name="${userType}-user-phone-res"]`),
+        phoneM: $(`input[name="${userType}-user-phoneM"]`),
+        phoneL: $(`input[name="${userType}-user-phoneL"]`),
+        phoneRes: $(`input[name="${userType}-user-phoneRes"]`),
         agreement: $(`input[name="agreement"]`),
         idValueChk: box.querySelector('.id-value-check'),
-        sellerNum: $(`input[name="sellernumber"]`),
-        sellerName: $(`input[name="sellername"]`),
-        sellerValueChk: $('.seller-value-check'),
+        sellerNum: $(`input[name="${userType}-user-sellerNum"]`),
+        sellerName: $(`input[name="${userType}-user-sellerName"]`),
+        sellerValueChk: $('.seller-value-check')
     };
 }
 
@@ -63,6 +63,7 @@ tab.addEventListener('click', (e) => {
     document.querySelectorAll('input[type="checkbox"]').forEach((input) => (input.checked = false))
     document.querySelectorAll('select').forEach((select) => (select.value = '010'));
     $('.id-warning')?.remove();
+    $('.empty-warning')?.remove();
     removeClasses('.ischecked', ['ischecked']);
 
     // 이벤트 재바인딩 및 유효성 검사
@@ -70,6 +71,7 @@ tab.addEventListener('click', (e) => {
     bindJoinBtnActiveEvents(targetdata);
     isJoinBtnActive();
     phoneNumberJoin();
+    getFormFieldsArray(targetdata);
 });
 
 const buyer = new Members({
@@ -174,7 +176,7 @@ const seller = new Members({
         containerClass:'sellernumber-container',
         tag:'사업자 등록번호',
         fieldType:'number',
-        fieldName:'sellernumber',
+        fieldName:'seller-user-sellerNum',
         maxlength:10
     },
     sellerName: {
@@ -183,10 +185,61 @@ const seller = new Members({
         containerClass:'sellername-container',
         tag:'스토어 이름',
         fieldType:'text',
-        fieldName:'sellername',
+        fieldName:'seller-user-sellerName',
         maxlength:null
     }
 })
+
+function getFormFieldsArray(userType) {
+    const fields = getFormFields(userType);
+    const defaultKey = ['id','pass','pass2','name','phoneM','phoneL'];
+    const sellerKey = ['sellerNum', 'sellerName'];
+    const key = userType == 'seller' ? [...defaultKey, ...sellerKey] : defaultKey;
+    console.log(key)
+    const allArray = key.map((ele)=>($(`input[name="${userType}-user-${ele}"]`)))
+    allArray.forEach((field,idx)=>{
+        console.log(field) //console 찍어보기
+        field.addEventListener("focus",(e)=>{
+            allArray.forEach((ele)=>{warningClear()});
+            const index = allArray.indexOf(e.target);
+            for(let i=0; i<index; i++) {
+                if(allArray[i].value.trim() === '') {
+                    const parantDiv = allArray[i].closest('div');
+                    const target = parantDiv.querySelector('.empty-warning');
+                    if(!target) {
+                        const message = allArray[i].name == `${userType}-user-phoneM` ? '앞번호를 입력해주세요.' : '필수정보입니다.'
+                        warningMessage(parantDiv,message)
+                    }
+                } else {
+                    $('.empty-warning')?.remove()
+                }
+            }
+        })
+        field.addEventListener('input',()=>{
+            const parantDiv = field.closest('div');
+            const target = parantDiv.querySelector('.empty-warning');
+            if(target) {
+                target.remove();
+            }
+        })
+    })
+}
+
+//경고메시지
+function warningMessage(parantDiv,message){
+    const p = document.createElement('p')
+    p.classList.add('warning-text','empty-warning');
+    p.textContent=message;
+    parantDiv.append(p)
+}
+function warningClear(){
+    const target = document.querySelectorAll('.empty-warning')
+    target.forEach((ele)=>{
+        ele.remove()
+    })
+}
+
+getFormFieldsArray(joinState.userType)
 
 $('.join-btn').setAttribute('disabled',true)//회원가입버튼
 
@@ -220,16 +273,16 @@ function limitLength(e){
 function phoneNumberJoin() {
     const userType = joinState.userType;
     const phoneArr = ['010', '', ''];
-    const resultPhone = $(`input[name="${userType}-user-phone-res"]`);
+    const resultPhone = $(`input[name="${userType}-user-phoneRes"]`);
     $(`select[name="${userType}-user-phone"]`).onchange = (e) => {
         phoneArr[0] = e.currentTarget.value;
         resultPhone.value = phoneArr.join('');
     };
-    $(`input[name="${userType}-user-phone-m"]`).oninput = (e) => {
+    $(`input[name="${userType}-user-phoneM"]`).oninput = (e) => {
         phoneArr[1] = e.currentTarget.value;
         resultPhone.value = phoneArr.join('');
     };
-    $(`input[name="${userType}-user-phone-last"]`).oninput = (e) => {
+    $(`input[name="${userType}-user-phoneL"]`).oninput = (e) => {
         phoneArr[2] = e.currentTarget.value;
         resultPhone.value = phoneArr.join('');
     };
@@ -260,6 +313,7 @@ function validationAll(userType) {
     fields.id.addEventListener('blur',(e)=>{
         const username = fields.id.value;
         const usernameField = $(`.${userType}-id-container`);
+        if(username == '') return; //포커스를 잃었지만 value가 없으면 경고문이 없어도 됨
         if(!isValidId(username)) {
             $('.id-warning')?.remove();
             const p = document.createElement('p')
@@ -301,6 +355,8 @@ function validationAll(userType) {
     });
     // 비밀번호 입력 시 유효성 검사
     fields.pass.addEventListener('blur', (e) => {
+        const password = fields.pass.value;
+        if(password == '') return;
         if (isValidPass(e.currentTarget.value)) {
             e.currentTarget.closest('div').classList.add('ischecked');
             $('.pass-warning')?.remove();
@@ -347,22 +403,24 @@ function validationAll(userType) {
         }
         updateJoinBtnState();
     });
-    // 사업자 등록번호 인증 버튼 활성화
-    fields.sellerNum.addEventListener('input', (e) => {
-        $('.seller-number-warning')?.remove();
-        joinState.isSellerNumber = false;
-        updateJoinBtnState();
-    })
-    // 사업자 등록번호 인증
-    fields.sellerValueChk.addEventListener('click',(e) => {
-        e.preventDefault();
-        const sellerNumber = fields.sellerNum.value;
-        validateSellerNumber(sellerNumber);
-        setTimeout(() => {
-            joinState.isSellerNumber = ispassUserNum.ispass;
+    if(userType == 'seller') {
+        // 사업자 등록번호 인증 입력 시 (재입력 포함)
+        fields.sellerNum.addEventListener('input', (e) => {
+            $('.seller-number-warning')?.remove();
+            joinState.isSellerNumber = false;
             updateJoinBtnState();
-        }, 900);
-    })
+        })
+        // 사업자 등록번호 인증
+        fields.sellerValueChk.addEventListener('click',(e) => {
+            e.preventDefault();
+            const sellerNumber = fields.sellerNum.value;
+            validateSellerNumber(sellerNumber);
+            setTimeout(() => {
+                joinState.isSellerNumber = ispassUserNum.ispass;
+                updateJoinBtnState();
+            }, 900);
+        })
+    }
 
     // 필수 입력값 모두 채워졌는지 검사
     fields.form.querySelectorAll('input[required]').forEach((input) => {

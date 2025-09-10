@@ -86,14 +86,14 @@ export class Members {
         //중간,마지막 번호 필드
         const phone1 = document.createElement('input')
         phone1.setAttribute('type',inputType)
-        phone1.setAttribute('name',`${inputName}-m`)
+        phone1.setAttribute('name',`${inputName}M`)
         phone1.setAttribute('maxlength',maxlength)
         if(requeire) {
             phone1.setAttribute('required',true)
         }
         const phone2 = document.createElement('input')
         phone2.setAttribute('type',`${inputType}`)
-        phone2.setAttribute('name',`${inputName}-last`)
+        phone2.setAttribute('name',`${inputName}L`)
         phone2.setAttribute('maxlength',maxlength)
         if(requeire) {
             phone2.setAttribute('required',true)
@@ -105,7 +105,7 @@ export class Members {
         //hidden
         const resPhone = document.createElement('input')
         resPhone.setAttribute('type','hidden')
-        resPhone.setAttribute('name',`${inputName}-res`)
+        resPhone.setAttribute('name',`${inputName}Res`)
 
         inputBox.append(select)
         inputBox.append(phone1)
