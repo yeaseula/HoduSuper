@@ -248,6 +248,7 @@ function validationAll(userType) {
         //인증 후 id를 바꿀 경우 인증버튼 재활성화 및 idCheck상태 false 반환
         fields.idValueChk.removeAttribute('disabled');
         joinState.isIdChecked = false;
+        updateJoinBtnState();
     })
     // 아이디 인증 버튼 클릭
     fields.idValueChk.addEventListener('click', (e) => {
