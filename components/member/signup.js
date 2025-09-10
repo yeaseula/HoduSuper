@@ -300,7 +300,7 @@ function validationAll(userType) {
         }
     });
     // 비밀번호 입력 시 유효성 검사
-    fields.pass.addEventListener('input', (e) => {
+    fields.pass.addEventListener('blur', (e) => {
         if (isValidPass(e.currentTarget.value)) {
             e.currentTarget.closest('div').classList.add('ischecked');
             $('.pass-warning')?.remove();
