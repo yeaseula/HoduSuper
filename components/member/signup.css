@@ -1,7 +1,11 @@
 * {box-sizing: border-box; padding: 0; margin: 0;}
-section {
+.signup-section {
     width: 550px;
-    margin: 50px auto 0;
+    margin: 100px auto 110px;
+}
+.member-logo {
+    display: block;
+    margin: 0 auto 70px;
 }
 ul {
     display: flex;
@@ -19,6 +23,7 @@ li {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     list-style: none;
+    cursor: pointer;
 }
 li.active {
     background-color: #21BF48;
@@ -66,7 +71,7 @@ input[type="checkbox"] {
 }
 input[type="checkbox"]::after {
     position: relative;
-    top: 1.5px;
+    top: 3.5px;
     content: '';
     display: inline-block;
     width: 16px;
@@ -158,6 +163,9 @@ button:disabled {
     display: flex;
     gap: 10px;
 }
+.signup-agreement label p {
+    line-height: 1.45;
+}
 .join-btn {
     display: block;
     width: calc(100% - 70px);
@@ -170,4 +178,23 @@ button:disabled {
     font-size: 1.8rem;
     font-family: 'SpoqaHanSansNeo-Bold';
     cursor: pointer;
+}
+
+@media (max-width: 580px) {
+    .signup-section {
+        width: 100%;
+        margin: 50px auto;
+    }
+    .member-logo {
+        margin: 0 auto 40px;
+    }
+    .tab-container {
+        padding: 35px 15px;
+    }
+    .signup-agreement {
+        width: 100%;
+    }
+    .join-btn {
+        width: 100%;
+    }
 }
