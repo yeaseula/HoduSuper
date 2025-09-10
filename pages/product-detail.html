@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HODU 오픈마켓에서 딥러닝 개발자 무릎 담요를 만나보세요. 편안하고 실용적인 개발자 필수템입니다."
+    />
+    <meta
+      name="keywords"
+      content="개발자, 무릎담요, HODU, 오픈마켓, 프로그래머 용품"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    />
+
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/product-detail.css" />
+
+    <title>딥러닝 개발자 무릎 담요</title>
+  </head>
+  <body>
+    <!-- 헤더 공간 -->
+
+    <!-- 메인 컨텐츠 -->
+    <main id="main-content" class="wide-container main" role="main">
+      <!-- 상품 상세 정보 -->
+      <section class="product-detail" aria-label="상품 상세 정보">
+        <div class="product-image">
+          <img
+            src="../assets/images/branket.png"
+            alt="딥러닝 개발자 무릎 담요 - 파란색 바탕에 위니브 캐릭터들이 그려진 담요"
+          />
+        </div>
+        
+        <div class="product-info">
+          <p class="product-seller" aria-label="판매업체">백엔드글로벌</p>
+          <h2 class="product-title">딥러닝 개발자 무릎 담요</h2>
+          <div
+            class="product-price"
+            role="text"
+            aria-label="상품 가격 17,500원"
+          >
+            <span class="price-number">17,500</span>
+            <span class="price-unit">원</span>
+          </div>
+
+          <div class="delivery-info" role="text" aria-label="배송 정보">
+            <span class="delivery-label">택배배송 / 무료배송</span>
+          </div>
+          <div class="quantity-line">
+            <div
+              class="quantity-container"
+              role="group"
+              aria-label="상품 수량 선택"
+            >
+              <button
+                class="quantity-btn decrease"
+                type="button"
+                aria-label="수량 감소"
+                data-action="decrease"
+              >
+                <img
+                  src="../assets/images/icon-minus-line.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+              <input
+                type="number"
+                id="quantity-display"
+                class="quantity-display"
+                aria-label="현재 수량"
+                value="1"
+                min="1"
+                max="99"
+              />
+              <!-- aria-live: 수량 변경 안내 / polite: 읽던 내용 다 읽고 안내 -->
+              <div id="quantity-help" class="sr-only">
+                최소 1개, 최대 99개까지 선택 가능합니다
+              </div>
+              <button
+                class="quantity-btn increase"
+                type="button"
+                aria-label="수량 증가"
+                data-action="increase"
+              >
+                <img
+                  src="../assets/images/icon-plus-line.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="total-price"
+            role="text"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <span class="total-label">총 상품 금액</span>
+            <div class="total-amount">
+              <span class="total-quantity" id="total-quantity"
+                >총 수량 <span class="total-quantity-number"> 1</span class="total-quantity">개
+              </span>
+              <span class="total-quantity line">|</span>
+              <span
+                class="total-price-value"
+                id="total-price"
+                aria-label="총 금액"
+              >
+                17,500<span class="unit"> 원</span>
+              </span>
+            </div>
+          </div>
+
+          <div
+            class="action-buttons"
+            role="group"
+            aria-label="상품 주문 옵션"
+            data-layout-ratio="wider-first"
+          >
+            <button
+              class="common-btn buy-now-btn"
+              type="button"
+              aria-label="딥러닝 개발자 무릎 담요 바로 구매"
+            >
+              바로 구매
+            </button>
+            <button
+              class="common-btn add-cart-btn"
+              type="button"
+              aria-label="딥러닝 개발자 무릎 담요 장바구니에 담기"
+            >
+              장바구니
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 상품 정보 탭 -->
+      <section class="product-tabs" aria-label="상품 상세 정보">
+        <div class="tab-navigation" role="tablist" aria-label="상품 정보 탭">
+          <button
+            class="tab-btn active"
+            role="tab"
+            aria-selected="true"
+            id="tab-1"
+            type="button"
+          >
+            상품 정보
+          </button>
+          <button
+            class="tab-btn"
+            role="tab"
+            aria-selected="false"
+            id="tab-2"
+            type="button"
+          >
+            리뷰
+          </button>
+          <button
+            class="tab-btn"
+            role="tab"
+            aria-selected="false"
+            id="tab-3"
+            type="button"
+          >
+            Q&A
+          </button>
+          <button
+            class="tab-btn"
+            role="tab"
+            aria-selected="false"
+            id="tab-4"
+            type="button"
+          >
+            반품/교환정보
+          </button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,373 @@
+/* === 상품 상세 페이지 CSS === */
+
+.main {
+  padding-block: clamp(2rem, 3vw, 8rem);
+  padding-inline: clamp(1.2rem, 2vw, 32rem);
+}
+
+.wide-container {
+  margin: 0 auto;
+}
+
+/* ===== 제품 상세 상단: Flex 레이아웃 ===== */
+.product-detail {
+  display: flex;
+  gap: clamp(1.6rem, 3vw, 5rem);
+  margin-bottom: clamp(8rem, 12vw, 14rem);
+  align-items: stretch;
+}
+
+/* 이미지 영역(상품 이미지) */
+.product-image {
+  flex: 1;
+  min-width: 28rem;
+  max-width: 60rem;
+  display: flex;
+  align-items: stretch;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+/*  상품 정보(판매업체부터 버튼까지) */
+.product-info {
+  /* 상품 정보 영역이 이미지보다 약간 더 넓게(1.1)만큼 할당 */
+  flex: 1.1;
+  min-width: 30rem;
+  max-width: 63rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 판매자(백엔드 글로벌) */
+.product-seller {
+  color: var(--gray-700);
+  font-size: clamp(1.3rem, 1.4vw, 1.8rem);
+  margin-bottom: clamp(1rem, 1.5vw, 1.6rem);
+}
+
+/* 상품 제목(딥러닝 개발자 무릎 담요) */
+.product-title {
+  font-size: clamp(2rem, 3.2vw, 3.6rem);
+  font-weight: 400;
+  margin-bottom: clamp(1.2rem, 1.8vw, 2rem);
+  line-height: 1.2;
+}
+
+/* 상품 가격(17,500원) */
+.product-price {
+  margin-bottom: clamp(1rem, 5vw, 13.8rem);
+}
+
+/* 가격 숫자(17,500) */
+.price-number {
+  font-size: clamp(2.4rem, 3.2vw, 3.6rem);
+  font-family: "SpoqaHanSansNeo-Bold";
+}
+
+/* 원 표시 */
+.price-unit {
+  font-size: clamp(1.3rem, 1.6vw, 1.8rem);
+  margin-left: 0.2rem;
+}
+
+/* 택배배송 / 무료배송 감싼 곳*/
+.delivery-info {
+  margin-bottom: clamp(1.2rem, 2vw, 2rem);
+}
+
+/* 택배배송 / 무료배송 라벨 */
+.delivery-label {
+  color: var(--gray-700);
+  font-size: clamp(1.2rem, 1.4vw, 1.6rem);
+}
+
+/* 수량 버튼 상하 선 */
+.quantity-line {
+  border-block: 0.2rem solid var(--gray-500);
+  display: flex;
+  justify-content: flex-start;
+  padding-block: clamp(1.2rem, 2.5vw, 3rem);
+  margin-bottom: clamp(0.8rem, 1.2vw, 1rem);
+}
+.quantity-container {
+  display: flex;
+  width: clamp(12rem, 12vw, 15rem);
+  height: clamp(4.2rem, 4.5vw, 5rem);
+  border: 0.1rem solid var(--gray-500);
+  border-radius: 0.5rem;
+}
+.quantity-btn {
+  width: clamp(4rem, 4.5vw, 5rem);
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+.quantity-btn img {
+  width: clamp(1.6rem, 1.8vw, 2rem);
+  height: clamp(1.6rem, 1.8vw, 2rem);
+}
+.quantity-btn.decrease {
+  background-color: #fff;
+  border: none;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+.quantity-btn.increase {
+  background-color: #fff;
+  border: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* 수량 추가 감소 버튼 호버 효과 */
+.quantity-btn:hover {
+  background: #f2f2f2;
+}
+
+/* 수량 디스플레이(1) */
+.quantity-display {
+  flex: none;
+  width: clamp(4.2rem, 4.5vw, 5rem);
+  height: 100%;
+  border: none;
+  border-right: 0.1rem solid var(--gray-500);
+  border-left: 0.1rem solid var(--gray-500);
+  background: #fff;
+  text-align: center;
+  font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge에서 스피너(상하 버튼) 제거 */
+.quantity-display::-webkit-outer-spin-button,
+.quantity-display::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 합계 영역 */
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: clamp(1.8rem, 2.5vw, 2.2rem) 0;
+}
+
+.total-label {
+  font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+  font-family: "SpoqaHanSansNeo-Medium";
+}
+
+/* 총 금액 오른쪽 영역 - 수량+구분선+가격을 하나의 그룹으로 중간정렬 */
+.total-amount {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.total-quantity {
+  color: var(--gray-700);
+  font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+}
+
+.line {
+  font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+}
+/* 총 수량 개수(1) */
+.total-quantity-number {
+  color: var(--main-500);
+  font-family: "SpoqaHanSansNeo-Bold";
+}
+
+/* 총 금액 값(17,500) */
+.total-price-value {
+  font-size: clamp(2.6rem, 3.4vw, 3.6rem);
+  font-family: "SpoqaHanSansNeo-Bold";
+  color: var(--main-500);
+}
+
+/* 원 표시*/
+.total-price-value .unit {
+  font-size: clamp(1.4rem, 1.8vw, 1.8rem);
+  font-family: "SpoqaHanSansNeo-Regular";
+}
+
+/* ===== 액션 버튼: Grid 1.6 : 1 비율 ===== */
+.action-buttons {
+  display: flex;
+  gap: clamp(1rem, 1.4vw, 1.4rem);
+  margin-top: clamp(1.5rem, 2vw, 2.8rem);
+}
+
+.buy-now-btn,
+.add-cart-btn {
+  height: clamp(4.8rem, 5.5vw, 6rem);
+  font-size: clamp(1.4rem, 1.6vw, 1.8rem);
+  font-family: "SpoqaHanSansNeo-Bold";
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0 clamp(1.5rem, 2vw, 2rem);
+  white-space: nowrap;
+}
+
+/* 바로 구매 버튼 - 더 넓게 (416 비율) */
+.buy-now-btn {
+  flex: 416;
+  background: var(--main-500);
+  color: #fff;
+}
+
+/* 장바구니 버튼 - 더 좁게 (200 비율) */
+.add-cart-btn {
+  flex: 200;
+  background: var(--gray-700);
+  color: #fff;
+}
+.add-cart-btn:hover {
+  background: #5a5a5a;
+}
+
+/* ===== 탭(tab) 영역 ===== */
+.product-tabs {
+  margin-top: clamp(4.8rem, 10vw, 12rem);
+}
+
+/* tab 4개 묶음 */
+.tab-navigation {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.tab-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: clamp(4.8rem, 5.5vw, 6rem);
+  display: grid;
+  place-items: center;
+  font-family: "SpoqaHanSansNeo-Medium";
+  font-size: clamp(1.4rem, 1.6vw, 1.8rem);
+  color: var(--gray-700);
+  background: #fff;
+  border: none;
+  border-bottom: 0.6rem solid var(--gray-500);
+  transition: all 0.2s ease;
+}
+.tab-btn:hover:not(.active) {
+  background: #f8f9fa;
+}
+
+/* 탭 버튼 활성화(active) */
+.tab-btn.active {
+  color: var(--main-500);
+  font-family: "SpoqaHanSansNeo-Bold";
+  border-bottom-color: var(--main-500);
+}
+
+/* 탭 컨텐츠(현재 사용 x - 추후 JS 기능 작업 시, 사용 예정) */
+.tab-content {
+  min-height: 200px;
+  padding: 40px 0;
+}
+.tab-panel {
+  padding: 20px;
+  border: 1px solid var(--gray-500);
+  border-top: none;
+  background: #fff;
+}
+.tab-panel[hidden] {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
+
+/* ===== 반응형 ===== */
+
+/* 모바일 768px 이하에서만 세로 레이아웃 적용 */
+@media (max-width: 768px) {
+  .main {
+    padding-inline: clamp(2rem, 6vw, 6rem);
+  }
+
+  .product-detail {
+    flex-direction: column;
+    gap: clamp(2rem, 5vw, 3rem);
+    align-items: center;
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+  }
+
+  .product-image {
+    flex: none;
+    width: 100%;
+    max-width: min(75vw, 50rem);
+    display: block;
+    align-items: flex-start;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .product-info {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    text-align: center;
+    display: block;
+  }
+
+  .product-price {
+    margin-top: 3rem;
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .product-info-middle {
+    display: block;
+  }
+
+  .quantity-line {
+    justify-content: center;
+    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    gap: clamp(1rem, 3vw, 1.4rem);
+    justify-content: center;
+    max-width: 100%;
+    margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+  }
+
+  .buy-now-btn,
+  .add-cart-btn {
+    flex: 1;
+    min-width: 12rem;
+  }
+
+  .tab-navigation {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.1rem;
+  }
+}
+
+/* 접근성: 사용자 선호 모션 줄이기(사용자가 애니메이션 줄이기를 원할 경우, 사용) */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    transform: none !important;
+  }
+}
