@@ -13,6 +13,16 @@
   --gray-700: #767676;
   --text-color: #000000;
   --color-red: #eb5757;
+  /* 메인 홈페이지에서만 사용하는 색상과 크기 변수들 */
+  --color-bg-light: #f2f2f2;
+  --color-white: #fff;
+  --gap-sm: 0.5rem;
+  --gap-md: 1rem;
+  --gap-lg: 2rem;
+  --gap-xl: 3rem;
+  --breakpoint-mobile: 767px;
+  --border-radius-sm: 0.5rem;
+  --border-radius-full: 5rem;
 }
 
 .wide-container {
@@ -110,4 +120,15 @@ body {
 
 .common-btn:disabled::before {
   display: none;
+}
+
+/* 메인, 푸터 강조 텍스트 */
+.strong {
+  font-family: "SpoqaHanSansNeo-Bold";
+}
+
+/* 헤더 검색창 기본 claer 버튼 삭제 */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
