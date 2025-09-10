@@ -31,6 +31,7 @@ function getFormFields(userType) {
         agreement: $(`input[name="agreement"]`),
         idValueChk: box.querySelector('.id-value-check'),
         sellerNum: $(`input[name="sellernumber"]`),
+        sellerName: $(`input[name="sellername"]`),
         sellerValueChk: $('.seller-value-check'),
     };
 }
@@ -231,6 +232,8 @@ function phoneNumberJoin() {
     };
 }
 
+phoneNumberJoin()
+
 function removeClasses(selectors, classes) {
     document.querySelectorAll(selectors).forEach(el => {
         el.classList.remove(...classes);
@@ -374,8 +377,10 @@ $('.join-btn').addEventListener('click', (e) => {
     const password = fields.pass.value;
     const phoneMiddle = fields.phoneM.value;
     const phoneLast = fields.phoneL.value;
-    const phone_number = fields.phoneRes.value;
+    const phoneRes = fields.phoneRes.value;
     const name = fields.name.value;
+    const sellerNumber = fields.sellerNum.value;
+    const sellerName = fields.sellerName.value;
     const agreement = fields.agreement.checked;
 
     if (!isRequired(username)) {
@@ -403,7 +408,7 @@ $('.join-btn').addEventListener('click', (e) => {
         alert('휴대폰 번호를 입력해 주세요.');
         return;
     }
-    if (phone_number.length < 10) {
+    if (phoneRes.length < 10) {
         alert('휴대폰 번호를 정확히 입력해 주세요.');
         return;
     }
@@ -416,10 +421,55 @@ $('.join-btn').addEventListener('click', (e) => {
         return;
     }
 
-    // const requestBody = {
-    //   username,
-    //   password,
-    //   name,
-    //   phone_number,
-    // };
+    if(userType == 'buyer') {
+        buyerSignup(username,password,name,phoneRes)
+    } else {
+        sellerSignup(username,password,name,phoneRes,sellerNumber,sellerName)
+    }
 });
+
+async function buyerSignup (username,password,name,phoneRes) {
+    try {
+        const res = await fetch("https://api.wenivops.co.kr/services/open-market/accounts/buyer/signup/",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                name: name,
+                phone_number: phoneRes
+            })
+        })
+        const data = await res.json();
+        console.log("구매회원 회원가입 성공!💚:", data)
+        alert('회원가입에 성공했습니다!') //minialert으로 교체예정
+    } catch (err) {
+        console.error("구매회원 회원가입 에러 발생🥲",err)
+    }
+}
+
+async function sellerSignup (username,password,name,phoneRes,sellerNumber,sellerName) {
+    try {
+        const res = await fetch("https://api.wenivops.co.kr/services/open-market/accounts/seller/signup/",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                name: name,
+                phone_number: phoneRes,
+                company_registration_number: sellerNumber,
+                store_name: sellerName
+            })
+        })
+        const data = await res.json();
+        console.log("판매회원 회원가입 성공!💚:", data)
+        alert('회원가입에 성공했습니다! 판매하러 갈까요?') //minialert으로 교체예정
+    } catch (err) {
+        console.error("판매회원 회원가입 에러 발생🥲",err)
+    }
+}
