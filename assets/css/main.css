@@ -49,14 +49,12 @@
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(20rem, 1fr)
-  ); /* 카드 최소 너비 28rem, 화면 크기에 따라 자동 개수 조정
-  💫minmax값 이 정도로 줄여도 괜찮을것같아요
-  */
+    minmax(28rem, 1fr)
+  ); /* 카드 최소 너비 28rem, 화면 크기에 따라 자동 개수 조정*/
   gap: 7rem; /* 상품 카드 간 여백 */
 }
 
-@media(max-width:992px) {
+@media(max-width:1170px) {
   .products-grid { /* 💫중간에 여백 너무 뜸 */
     gap: 1.5rem;
     row-gap: 5rem;
