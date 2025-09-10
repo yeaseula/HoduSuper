@@ -27,7 +27,7 @@ function displayProducts(products) {
 
   const sortedProducts = products.sort((a, b) => a.id - b.id);
   // 각 상품 카드 생성 및 추가
-  products.forEach((product) => {
+  sortedProducts.forEach((product) => {
     const productCard = createProductCard(product);
     productsGrid.appendChild(productCard);
   });
@@ -44,7 +44,8 @@ function createProductCard(product) {
   article.style.cursor = "pointer";
   article.addEventListener(
     "click",
-    () => (window.location.href = `product-detail.html?id=${product.id}`)
+    () =>
+      (window.location.href = `../pages/product-detail.html?id=${product.id}`)
   );
   article.innerHTML = `
             <img
