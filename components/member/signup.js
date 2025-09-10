@@ -286,7 +286,6 @@ function validationAll(userType) {
             e.currentTarget.closest('div').classList.add('ischecked');
             $('.pass-warning')?.remove();
             e.currentTarget.classList.remove('warning');
-            fields.pass2.removeAttribute('disabled');
         } else {
             e.currentTarget.closest('div').classList.remove('ischecked');
             $('.pass-warning')?.remove()
@@ -295,7 +294,6 @@ function validationAll(userType) {
             p.textContent = '8자 이상,영문 대 소문자,숫자,특수문자를 사용하세요.';
             e.currentTarget.closest('div').append(p);
             e.currentTarget.classList.add('warning'); //필드 border
-            fields.pass2.setAttribute('disabled', true);
         }
         //비밀번호 입력 후 재수정 시
         if(fields.pass2.value !== '') {
