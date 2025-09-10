@@ -202,7 +202,6 @@
 .action-buttons {
   display: flex;
   gap: clamp(1rem, 1.4vw, 1.4rem);
-  margin-top: clamp(1.5rem, 2vw, 2.8rem);
 }
 
 .buy-now-btn,
