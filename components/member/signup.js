@@ -243,18 +243,24 @@ function removeClasses(selectors, classes) {
 // 유효성 검사 및 이벤트 바인딩 통합
 function validationAll(userType) {
     const fields = getFormFields(userType);
+    // id 입력 시
+    fields.id.addEventListener('input',(e)=>{
+        //인증 후 id를 바꿀 경우 인증버튼 재활성화 및 idCheck상태 false 반환
+        fields.idValueChk.removeAttribute('disabled');
+        joinState.isIdChecked = false;
+    })
     // 아이디 인증 버튼 클릭
     fields.idValueChk.addEventListener('click', (e) => {
         e.preventDefault();
         const username = fields.id.value;
-        if(!isValidId(username)) {
+        if(!isValidId(username)) { //유효성검사 실패했을 시 경고문구 삽입
             const usernameField = $(`.${userType}-id-container`);
             $('.id-warning')?.remove();
             const p = document.createElement('p')
             p.classList.add('warning-text','id-warning')
             p.textContent = '20자 이내의 영문 소문자,대문자,숫자만 사용 가능합니다.';
             usernameField.append(p);
-            e.currentTarget.classList.add('warning')
+            usernameField.querySelector('input').classList.add('warning')
             updateJoinBtnState();
         } else {
             validateUsername(username, userType);
@@ -262,6 +268,7 @@ function validationAll(userType) {
                 joinState.isIdChecked = ispassid.ispass;
                 if(joinState.isIdChecked) {
                     removeClasses(`input[name="${userType}-user-id"]`,['warning'])
+                    fields.idValueChk.setAttribute('disabled',true) // 인증 성공 후 버튼 비활성화
                 } else {
                     fields.id.classList.add('warning')
                 }
