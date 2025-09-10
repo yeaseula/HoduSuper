@@ -59,6 +59,7 @@ tab.addEventListener('click', (e) => {
 
     // 모든 input/select 초기화
     document.querySelectorAll('input').forEach((input) => (input.value = ''));
+    document.querySelectorAll('input[type="checkbox"]').forEach((input) => (input.checked = false))
     document.querySelectorAll('select').forEach((select) => (select.value = '010'));
     $('.id-warning')?.remove();
     removeClasses('.ischecked', ['ischecked']);
