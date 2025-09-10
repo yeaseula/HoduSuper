@@ -248,10 +248,29 @@ function validationAll(userType) {
     const fields = getFormFields(userType);
     // id 입력 시
     fields.id.addEventListener('input',(e)=>{
+        const usernameField = $(`.${userType}-id-container`);
+        $('.id-warning')?.remove(); //경고메시지 있을경우 삭제
+        usernameField.querySelector('input').classList.remove('warning')
         //인증 후 id를 바꿀 경우 인증버튼 재활성화 및 idCheck상태 false 반환
         fields.idValueChk.removeAttribute('disabled');
         joinState.isIdChecked = false;
         updateJoinBtnState();
+    })
+    // id focus 를 잃었을 때 유효성검사 실시
+    fields.id.addEventListener('blur',(e)=>{
+        const username = fields.id.value;
+        const usernameField = $(`.${userType}-id-container`);
+        if(!isValidId(username)) {
+            $('.id-warning')?.remove();
+            const p = document.createElement('p')
+            p.classList.add('warning-text','id-warning')
+            p.textContent = '20자 이내의 영문 소문자,대문자,숫자만 사용 가능합니다.';
+            usernameField.append(p);
+            usernameField.querySelector('input').classList.add('warning')
+        } else {
+            $('.id-warning')?.remove();
+            usernameField.querySelector('input').classList.remove('warning');
+        }
     })
     // 아이디 인증 버튼 클릭
     fields.idValueChk.addEventListener('click', (e) => {
