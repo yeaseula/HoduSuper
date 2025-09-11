@@ -1,0 +1,89 @@
+.login-section {
+    width: 550px;
+    margin: 100px auto 110px;
+}
+.member-logo {
+    display: block;
+    margin: 0 auto 70px;
+}
+ul {
+    display: flex;
+    width: 100%;
+    gap: 0;
+}
+li {
+    flex: 1;
+    display: inline-block;
+    background-color: #fafafa;
+    color: #212121;
+    padding: 20px 12px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    list-style: none;
+    cursor: pointer;
+}
+li.active {
+    background-color: #fff;
+    color: var(--text-color);
+    border-bottom: unset;
+}
+.tab-container {
+    padding: 35px;
+    border: 1px solid #e0e0e0;
+    border-top: unset;
+}
+.container {
+    display: none;
+}
+.container.on {
+    display: block;
+}
+.container form label {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid var(--gray-300);
+}
+.container form > div:not(:last-of-type) {
+    margin-bottom: 6px;
+}
+input[type="text"],input[type="password"] {
+    width: 100%;
+    height: 54px;
+    border: unset;
+    font-size: 1.6rem;
+}
+input[type="text"]:focus,input[type="password"]:focus {
+    outline: none;
+    border-bottom: 1px solid var(--main-500);
+}
+.login-btn {
+    width: 100%;
+    margin-top: 35px;
+}
+.signup-link-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.signup-link-container span {
+    font-size: 1.6rem;
+    color: rgba(51, 51, 51, 1);
+    transition: all 0.2s;
+}
+.signup-link-container span:hover {
+    font-weight: bold;
+}
+.signup-link-container .bar {
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+    background-color: rgba(51, 51, 51, 1);
+}
+.warning-text {
+    margin-top: 10px;
+    color: var(--color-red);
+}
