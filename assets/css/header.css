@@ -58,40 +58,119 @@
   right: 1.5rem; /* 검색창 우측 내부에 위치 */
 }
 
+/* 모바일 검색 트리거 버튼 - 기본적으로 숨김 (모바일에서만 표시) */
+.mobile-search-trigger {
+  display: none;
+}
+
 /* ========== 모바일 검색창 반응형 디자인 ========== */
-/* 모바일에서는 검색창을 숨기고 버튼 클릭 시 애니메이션으로 나타남 */
+/* 전체 화면 오버레이 - 모바일 검색창 활성화 시 배경을 어둡게 처리 */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* 오버레이 활성화 상태 */
+.search-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 모바일 검색 컨테이너 - 화면 상단에서 슬라이드 다운 */
+.mobile-search-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  padding: 1rem;
+  background: var(--color-white); /* 흰색 배경 추가 */
+  transform: translateY(-100%); /* 기본적으로 화면 위로 숨김 */
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 모바일 검색 컨테이너 활성화 상태 - 화면에 표시 */
+.mobile-search-container.active {
+  transform: translateY(0);
+}
+
+/* 모바일 검색창 헤더 영역 - 닫기 버튼 포함 */
+
+/* 모바일 검색창 닫기 버튼 */
+.mobile-search-close {
+  width: 3.6rem;
+  height: 3.6rem;
+  background: url("../images/close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* 모바일 검색 폼 - 입력창과 검색 버튼 */
+.mobile-search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 모바일 검색 입력창 */
+.mobile-search-input {
+  flex: 1;
+  padding: 1.2rem 2rem;
+  border: 2px solid var(--main-500);
+  border-radius: var(--border-radius-full);
+  font-size: 1.6rem;
+}
+
+/* 모바일 검색 실행 버튼 */
+.mobile-search-btn {
+  width: 3.6rem;
+  height: 3.6rem;
+  background: url("../images/search.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ========== 모바일 반응형 스타일 (767px 이하) ========== */
 @media screen and (max-width: 767px) {
-  /* 모바일 검색 컨테이너 - 우측 정렬 */
+  /* 데스크톱 검색창 완전히 숨김 */
   .header-search {
-    position: relative;
-    width: 100%;
-    justify-content: flex-end; /* 검색 버튼을 우측에 배치 */
+    display: none;
   }
 
-  /* 모바일 검색창 기본 상태 - 완전히 숨김 */
-  #search {
-    width: 0; /* 너비 0으로 숨김 */
-    padding: 0;
+  /* 모바일 검색 트리거 버튼 표시 */
+  .mobile-search-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    background: url(../images/search.svg);
+    background-repeat: no-repeat;
+    background-position: center;
     border: none;
-
-    opacity: 0; /* 투명하게 숨김 */
-    position: absolute;
-    right: 0;
-    top: 50%;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 1rem;
   }
 
-  /* 모바일 검색 버튼 - 정적 위치로 변경 */
-  .header-search-btn {
-    position: static;
-  }
-
-  /* 모바일 검색창 활성화 상태 - JavaScript로 .active 클래스 토글하여 애니메이션 구현 */
-  .header-search.active #search {
-    width: calc(100% - 7rem); /* 검색버튼 영역 제외한 나머지 전체 너비 */
-    padding: 1.3rem 2rem;
-    border: 2px solid var(--main-500);
-    opacity: 1; /* 완전히 표시 */
-    z-index: 100; /* 다른 헤더 요소들 위에 표시 */
+  /* 모바일에서 판매자센터 버튼 숨김 */
+  .header-seller-center {
+    display: none;
   }
 }
 
@@ -113,9 +192,6 @@
   align-items: center;
   gap: 0.5rem; /* 아이콘과 텍스트 사이 간격 */
   transition: transform 0.2s ease-in-out;
-}
-.header-seller-center {
-  display: none;
 }
 
 .header-buyer-cart a:hover,
@@ -156,12 +232,12 @@
 /* ========== 판매자센터 버튼 스타일 ========== */
 /* 판매자센터 버튼 - 초록색 배경의 CTA 버튼 형태 */
 .header-seller-center a {
+  display: none;
   width: 16.8rem;
   height: 5.4rem;
   font-family: "SpoqaHanSansNeo-Medium", sans-serif;
   background-color: var(--main-500);
   border-radius: var(--border-radius-sm);
-  display: flex;
   flex-direction: row; /* 아이콘과 텍스트를 가로로 배열 */
   align-items: center;
   justify-content: center;
@@ -189,10 +265,11 @@
   display: none;
 }
 
-/* 판매자센터는 일반 사용자에게도 표시 (회원가입 유도용) - 위에서 이미 flex 스타일 적용됨 */
+/* 판매자센터는 데스크톱에서 일반 사용자에게도 표시 (회원가입 유도) */
 
-/* ========== 모바일 유저 메뉴 리스트 반응형 디자인 ========== */
+/* ========== 모바일 유저 메뉴 반응형 디자인 ========== */
 @media screen and (max-width: 767px) {
+  /* 모바일에서 유저 메뉴 텍스트 숨김 (아이콘만 표시) */
   .header-user-list li a span {
     display: none;
   }
