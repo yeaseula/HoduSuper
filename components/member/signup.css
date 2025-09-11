@@ -40,9 +40,6 @@ li.active {
 .container.on {
     display: block;
 }
-h3 {
-    margin-bottom: 30px;
-}
 .container form > div:not(:last-of-type) {
     margin-bottom: 20px;
 }
