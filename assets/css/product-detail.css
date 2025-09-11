@@ -11,6 +11,7 @@
 
 /* ===== 제품 상세 상단: Flex 레이아웃 ===== */
 .product-detail {
+  padding-top: 80px;
   display: flex;
   gap: clamp(1.6rem, 3vw, 5rem);
   margin-bottom: clamp(8rem, 12vw, 14rem);
@@ -238,6 +239,7 @@
 /* ===== 탭(tab) 영역 ===== */
 .product-tabs {
   margin-top: clamp(4.8rem, 10vw, 12rem);
+  padding-bottom: 120px;
 }
 
 /* tab 4개 묶음 */
@@ -294,11 +296,8 @@
 
 /* 모바일 768px 이하에서만 세로 레이아웃 적용 */
 @media (max-width: 768px) {
-  .main {
-    /* padding-inline: clamp(2rem, 6vw, 6rem); 💫wide-container 패딩이랑 겹침*/
-  }
-
   .product-detail {
+    padding-top: 50px;
     flex-direction: column;
     gap: clamp(2rem, 5vw, 3rem);
     align-items: center;
@@ -361,6 +360,9 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.1rem;
+  }
+  .product-tabs {
+    padding-bottom: 80px;
   }
 }
 

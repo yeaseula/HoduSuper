@@ -1,4 +1,9 @@
 /* ========== 헤더 전체 레이아웃 ========== */
+
+header {
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
 /* 헤더 전체 컨테이너 - flexbox로 좌측 로고+검색, 우측 유저메뉴 배치 */
 .header-container {
   padding: 22px 0;
