@@ -496,7 +496,15 @@ async function buyerSignup (username,password,name,phoneRes) {
         })
         const data = await res.json();
         console.log("구매회원 회원가입 성공!💚:", data);
-        alert('회원가입에 성공했습니다!') //minialert으로 교체예정
+        const alert = new MiniAlert({
+            title:'title',
+            message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
+            buttons : [],
+            link:['예'],
+            linkHerf:['/pages/login.html'],
+            closeBackdrop : true,
+            customContent : null,
+        })
     } catch (err) {
         console.error("구매회원 회원가입 에러 발생🥲",err)
     }
@@ -520,16 +528,16 @@ async function sellerSignup (username,password,name,phoneRes,sellerNumber,seller
         })
         const data = await res.json();
         console.log("판매회원 회원가입 성공!💚:", data)
-        alert('회원가입에 성공했습니다! 판매하러 갈까요?') //minialert으로 교체예정
+        const alert = new MiniAlert({
+            title:'title',
+            message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
+            buttons : [],
+            link:['예'],
+            linkHerf:['/pages/login.html'],
+            closeBackdrop : true,
+            customContent : null,
+        })
     } catch (err) {
         console.error("판매회원 회원가입 에러 발생🥲",err)
     }
 }
-
-const alert = new MiniAlert({
-    title:'title',
-    message:'messat',
-    buttons : ['dd','dd'],
-    closeBackdrop : true,
-    customContent : null,
-})

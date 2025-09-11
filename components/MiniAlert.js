@@ -5,6 +5,8 @@ export default class MiniAlert {
     title,
     message,
     buttons = [],
+    link = [],
+    linkHerf = [],
     closeBackdrop = true,
     customContent,
   }) {
@@ -46,20 +48,39 @@ export default class MiniAlert {
     }
 
     // 버튼들 동적 생성 및 이벤트 바인딩
-    buttons.forEach((btnInfo) => {
-      const btn = document.createElement("button");
-      btn.textContent = btnInfo.text;
-      btn.classList.add("common-btn", btnInfo.className || "alert-btn");
+    if(buttons.length !== 0) {
+      buttons.forEach((btnInfo) => {
+        const btn = document.createElement("button");
+        btn.textContent = btnInfo;
+        btn.classList.add("common-btn", btnInfo.className || "alert-btn");
 
-      btn.addEventListener("click", () => {
-        // 버튼별 개별 콜백 함수 실행
-        if (btnInfo.onClick) btnInfo.onClick(customContainer);
+        btn.addEventListener("click", () => {
+          // 버튼별 개별 콜백 함수 실행
+          if (btnInfo.onClick) btnInfo.onClick(customContainer);
 
-        // 버튼 클릭 시 모달 닫기
-        this.close();
+          // 버튼 클릭 시 모달 닫기
+          this.close();
+        });
+        actionsContainer.append(btn);
       });
-      actionsContainer.append(btn);
-    });
+    }
+    if(link.length !== 0) {
+      link.forEach((linkInfo,idx) => {
+        const btn = document.createElement("a");
+        const href = linkHerf.map((ele)=>(ele));
+        btn.textContent = linkInfo;
+        btn.classList.add("common-btn", linkInfo.className || "alert-btn");
+        btn.setAttribute('href',href[idx])
+        btn.addEventListener("click", () => {
+          // 버튼별 개별 콜백 함수 실행
+          if (linkInfo.onClick) linkInfo.onClick(customContainer);
+
+          // 버튼 클릭 시 모달 닫기
+          this.close();
+        });
+        actionsContainer.append(btn);
+      });
+    }
 
     // X 버튼 클릭 이벤트
     closeBtn.addEventListener("click", () => this.close());
