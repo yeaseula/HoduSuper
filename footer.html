@@ -1,77 +1,62 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>푸터 페이지</title>
-    <link rel="stylesheet" href="/assets/css/reset.css" />
-    <link rel="stylesheet" href="/assets/css/fonts.css" />
-    <link rel="stylesheet" href="/assets/css/common.css" />
-    <link rel="stylesheet" href="/assets/css/footer.css" />
-  </head>
-  <body>
-    <!-- ===== 푸터 영역 ===== -->
-    <footer>
-      <div class="wide-container">
-        <!-- 푸터 링크 섹션 -->
-        <section class="footer-link">
-          <!-- 반응형 메뉴 토글 버튼 - 작은 화면에서 메뉴 접기/펼치기 -->
-          <button
-            class="footer-menu-toggle"
-            aria-expanded="false"
-            aria-controls="footerMenu"
-            aria-label="푸터 메뉴 열기/닫기"
-          >
-            약관 및 정책
-            <span class="arrow" aria-hidden="true">⬇️</span>
-          </button>
-          <!-- 푸터 메뉴 네비게이션 - 회사 정책 및 서비스 링크 -->
-          <nav class="footer-menu" id="footerMenu" hidden>
-            <ul>
-              <li><a href="#">호두샵 소개</a></li>
-              <li><a href="#">이용약관</a></li>
-              <!-- 중요한 개인정보 정책은 strong 클래스로 강조 -->
-              <li><a href="#" class="strong">개인정보처리방침</a></li>
-              <li><a href="#">전자금융거래약관</a></li>
-              <li><a href="#">청소년보호정책</a></li>
-              <li><a href="#">제휴문의</a></li>
-            </ul>
-          </nav>
+<footer>
+  <div class="wide-container">
+    <!-- 푸터 링크 섹션 -->
+    <section class="footer-link">
+      <!-- 반응형 메뉴 토글 버튼 - 작은 화면에서 메뉴 접기/펼치기 -->
+      <button
+        class="footer-menu-toggle"
+        aria-expanded="false"
+        aria-controls="footerMenu"
+        aria-label="푸터 메뉴 열기/닫기"
+      >
+        약관 및 정책
+        <span class="arrow" aria-hidden="true">⬇️</span>
+      </button>
+      <!-- 푸터 메뉴 네비게이션 - 회사 정책 및 서비스 링크 -->
+      <nav class="footer-menu" id="footerMenu" hidden>
+        <ul>
+          <li><a href="#">호두샵 소개</a></li>
+          <li><a href="#">이용약관</a></li>
+          <!-- 중요한 개인정보 정책은 strong 클래스로 강조 -->
+          <li><a href="#" class="strong">개인정보처리방침</a></li>
+          <li><a href="#">전자금융거래약관</a></li>
+          <li><a href="#">청소년보호정책</a></li>
+          <li><a href="#">제휴문의</a></li>
+        </ul>
+      </nav>
 
-          <!-- SNS 링크 네비게이션 - 인스타그램, 페이스북, 유튜브 링크 -->
-          <nav class="footer-sns">
-            <ul>
-              <!-- 인스타그램 링크 - SVG 아이콘으로 표시 -->
-              <li><a href="#" class="insta"></a></li>
-              <!-- 페이스북 링크 - SVG 아이콘으로 표시 -->
-              <li><a href="#" class="facebook"></a></li>
-              <!-- 유튜브 링크 - SVG 아이콘으로 표시 -->
-              <li><a href="#" class="youtube"></a></li>
-            </ul>
-          </nav>
-        </section>
+      <!-- SNS 링크 네비게이션 - 인스타그램, 페이스북, 유튜브 링크 -->
+      <nav class="footer-sns">
+        <ul>
+          <!-- 인스타그램 링크 - SVG 아이콘으로 표시 -->
+          <li><a href="#" class="insta"></a></li>
+          <!-- 페이스북 링크 - SVG 아이콘으로 표시 -->
+          <li><a href="#" class="facebook"></a></li>
+          <!-- 유튜브 링크 - SVG 아이콘으로 표시 -->
+          <li><a href="#" class="youtube"></a></li>
+        </ul>
+      </nav>
+    </section>
 
-        <!-- 회사 정보 섹션 - 사업자 등록 정보 및 연락처 -->
-        <section class="footer-info">
-          <dl>
-            <!-- 회사명 - strong 클래스로 강조 -->
-            <dt class="strong">(주)HODU SHOP</dt>
-            <!-- 회사 주소 -->
-            <dd>제주특별자치도 제주시 동광고 137 제주코딩베이스캠프</dd>
+    <!-- 회사 정보 섹션 - 사업자 등록 정보 및 연락처 -->
+    <section class="footer-info">
+      <dl>
+        <!-- 회사명 - strong 클래스로 강조 -->
+        <dt class="strong">(주)HODU SHOP</dt>
+        <!-- 회사 주소 -->
+        <dd>제주특별자치도 제주시 동광고 137 제주코딩베이스캠프</dd>
 
-            <!-- 사업자 등록번호 및 업종 정보 -->
-            <div class="footer-info-business">
-              <dt>사업자 번호:</dt>
-              <dd>000-0000-0000 | 통신판매업</dd>
-            </div>
-            <!-- 대표자 정보 -->
-            <div class="footer-info-business">
-              <dt>대표:</dt>
-              <dd>김호두</dd>
-            </div>
-          </dl>
-        </section>
-      </div>
-    </footer>
-  </body>
-</html>
+        <!-- 사업자 등록번호 및 업종 정보 -->
+        <div class="footer-info-business">
+          <dt>사업자 번호:</dt>
+          <dd>000-0000-0000 | 통신판매업</dd>
+        </div>
+        <!-- 대표자 정보 -->
+        <div class="footer-info-business">
+          <dt>대표:</dt>
+          <dd>김호두</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+</footer>

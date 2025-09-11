@@ -1,111 +1,96 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>헤더 메인 페이지</title>
-    <link rel="stylesheet" href="/assets/css/reset.css" />
-    <link rel="stylesheet" href="/assets/css/fonts.css" />
-    <link rel="stylesheet" href="/assets/css/common.css" />
-    <link rel="stylesheet" href="/assets/css/header.css" />
-  </head>
-  <body>
-    <!-- ===== 헤더 영역 ===== -->
-    <header>
-      <div class="wide-container">
-        <div class="header-container">
-          <!-- 헤더 상단: 로고, 검색 창 -->
-          <section class="header-content">
-            <h1 class="sr-only">호두 슈퍼</h1>
-            <!-- 반응형 로고: 화면 크기에 따라 다른 로고 표시 -->
-            <a href="/header.html" class="header-logo">
-              <picture>
-                <!-- 모바일용 작은 로고 -->
-                <source
-                  media="(max-width: 767px)"
-                  srcset="/assets/images/logo-s.png"
-                />
-                <!-- 태블릿용 중간 로고 -->
-                <source
-                  media="(min-width: 768px)"
-                  srcset="/assets/images/logo-m.png"
-                />
-                <!-- 1200px 이상 데스크톱: 큰 로고 -->
-                <source
-                  media="(min-width: 1200px)"
-                  srcset="/assets/images/logo-l.png"
-                />
-                <img src="/assets/images/logo-m.png" alt="호두슈퍼 로고" />
-              </picture>
-            </a>
+<header>
+  <div class="wide-container">
+    <div class="header-container">
+      <!-- 헤더 상단: 로고, 검색 창 -->
+      <section class="header-content">
+        <h1 class="sr-only">호두 슈퍼</h1>
+        <!-- 반응형 로고: 화면 크기에 따라 다른 로고 표시 -->
+        <a href="/header.html" class="header-logo">
+          <picture>
+            <!-- 모바일용 작은 로고 -->
+            <source
+              media="(max-width: 767px)"
+              srcset="/assets/images/logo-s.png"
+            />
+            <!-- 태블릿용 중간 로고 -->
+            <source
+              media="(min-width: 768px)"
+              srcset="/assets/images/logo-m.png"
+            />
+            <!-- 1200px 이상 데스크톱: 큰 로고 -->
+            <source
+              media="(min-width: 1200px)"
+              srcset="/assets/images/logo-l.png"
+            />
+            <img src="/assets/images/logo-m.png" alt="호두슈퍼 로고" />
+          </picture>
+        </a>
 
-            <!-- 상품 검색 기능 - 반응형 디자인 적용 (모바일에서는 토글형태) -->
-            <form action="#" method="get" class="header-search">
-              <label for="search" class="sr-only">상품 검색</label>
-              <!-- 검색 입력창 - 모바일에서는 JavaScript로 토글 -->
-              <input
-                type="search"
-                name="q"
-                id="search"
-                placeholder="상품을 검색해보세요!"
-              />
-              <!-- 검색 실행 버튼 - SVG 아이콘 사용 -->
-              <button
-                type="submit"
-                class="header-search-btn"
-                aria-label="검색"
-              ></button>
-            </form>
-            <button class="mobile-search-trigger" aria-label="검색창 열기"></button>
-          </section>
+        <!-- 상품 검색 기능 - 반응형 디자인 적용 (모바일에서는 토글형태) -->
+        <form action="#" method="get" class="header-search">
+          <label for="search" class="sr-only">상품 검색</label>
+          <!-- 검색 입력창 - 모바일에서는 JavaScript로 토글 -->
+          <input
+            type="search"
+            name="q"
+            id="search"
+            placeholder="상품을 검색해보세요!"
+          />
+          <!-- 검색 실행 버튼 - SVG 아이콘 사용 -->
+          <button
+            type="submit"
+            class="header-search-btn"
+            aria-label="검색"
+          ></button>
+        </form>
+        <button class="mobile-search-trigger" aria-label="검색창 열기"></button>
+      </section>
 
-          <!-- 사용자 메뉴 네비게이션 -->
-          <nav class="header-user-menu" aria-label="사용자 메뉴">
-            <ul class="header-user-list">
-              <!-- 장바구니 - 쇼핑카트 아이콘과 텍스트로 구성 -->
-              <li class="header-buyer-cart">
-                <a href="/cart" id="user-cart"><span>장바구니</span></a>
-              </li>
-              <!-- 로그인 메뉴 - 사용자 아이콘 표시 -->
-              <li class="header-login">
-                <a href="/login" id="user-login"><span>로그인</span></a>
-              </li>
-              <!-- 마이페이지 - 로그인 상태에서만 표시 (기본 숨김 처리) -->
-              <li class="header-mypage">
-                <a href="/mypage"><span>마이페이지</span></a>
-              </li>
-              <!-- 판매자센터 - 초록색 CTA 버튼 형태로 디자인 -->
-              <li class="header-seller-center">
-                <a href="/seller-center"> <span>판매자 센터</span></a>
-              </li>
-            </ul>
-          </nav>
-          <!-- 모바일 검색 오버레이 -->
-          <div class="search-overlay"></div>
+      <!-- 사용자 메뉴 네비게이션 -->
+      <nav class="header-user-menu" aria-label="사용자 메뉴">
+        <ul class="header-user-list">
+          <!-- 장바구니 - 쇼핑카트 아이콘과 텍스트로 구성 -->
+          <li class="header-buyer-cart">
+            <a href="/cart" id="user-cart"><span>장바구니</span></a>
+          </li>
+          <!-- 로그인 메뉴 - 사용자 아이콘 표시 -->
+          <li class="header-login">
+            <a href="/login" id="user-login"><span>로그인</span></a>
+          </li>
+          <!-- 마이페이지 - 로그인 상태에서만 표시 (기본 숨김 처리) -->
+          <li class="header-mypage">
+            <a href="/mypage"><span>마이페이지</span></a>
+          </li>
+          <!-- 판매자센터 - 초록색 CTA 버튼 형태로 디자인 -->
+          <li class="header-seller-center">
+            <a href="/seller-center"> <span>판매자 센터</span></a>
+          </li>
+        </ul>
+      </nav>
+      <!-- 모바일 검색 오버레이 -->
+      <div class="search-overlay"></div>
 
-          <!-- 모바일 검색 컨테이너 -->
-          <div class="mobile-search-container">
-            <form class="mobile-search-form" action="#" method="get">
-              <button
-                type="button"
-                class="mobile-search-close"
-                aria-label="검색창 닫기"
-              ></button>
-              <input
-                type="search"
-                name="q"
-                class="mobile-search-input"
-                placeholder="상품을 검색해보세요!"
-              />
-              <button
-                type="submit"
-                class="mobile-search-btn"
-                aria-label="검색"
-              ></button>
-            </form>
-          </div>
-        </div>
+      <!-- 모바일 검색 컨테이너 -->
+      <div class="mobile-search-container">
+        <form class="mobile-search-form" action="#" method="get">
+          <button
+            type="button"
+            class="mobile-search-close"
+            aria-label="검색창 닫기"
+          ></button>
+          <input
+            type="search"
+            name="q"
+            class="mobile-search-input"
+            placeholder="상품을 검색해보세요!"
+          />
+          <button
+            type="submit"
+            class="mobile-search-btn"
+            aria-label="검색"
+          ></button>
+        </form>
       </div>
-    </header>
-  </body>
-</html>
+    </div>
+  </div>
+</header>
