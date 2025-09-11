@@ -54,7 +54,7 @@ input[type="text"],input[type="password"] {
     border: unset;
     font-size: 1.6rem;
 }
-input[type="text"],input[type="password"]:focus {
+input[type="text"]:focus,input[type="password"]:focus {
     outline: none;
     border-bottom: 1px solid var(--main-500);
 }
