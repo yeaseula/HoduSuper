@@ -19,13 +19,19 @@
 
     <!-- favicon 나중에 만듭시다 -->
     <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
-
-    <!-- Remix Icon CDN (화살표 아이콘 효과를 위해 필요) -->
-
+    <script>
+      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        document.write('<base href="/">'); // 로컬
+      } else {
+        document.write('<base href="/HoduSuper/">'); // GitHub Pages
+      }
+    </script>
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/common.css" />
     <link rel="stylesheet" href="./assets/css/fonts.css" />
     <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
@@ -34,7 +40,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
-    <script src="assets/js/common.js" defer></script>
+    <script src="./assets/js/common.js" defer></script>
   </head>
   <body>
     <div class="header"></div>

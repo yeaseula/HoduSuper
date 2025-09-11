@@ -19,22 +19,29 @@
 
     <!-- favicon 나중에 만듭시다 -->
     <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
+    <script>
+      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        document.write('<base href="/">'); // 로컬
+      } else {
+        document.write('<base href="/HoduSuper/">'); // GitHub Pages
+      }
+    </script>
+
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-    rel="stylesheet"
-/>
-    <link rel="stylesheet" href="/assets/css/reset.css">
-    <link rel="stylesheet" href="/assets/css/common.css">
-    <link rel="stylesheet" href="/assets/css/fonts.css">
-    <link rel="stylesheet" href="/components/MiniAlert.css">
-    <link rel="stylesheet" href="/components/member/login/login.css">
-    <script type="module" src="/components/member/login/login.js" defer></script>
+    rel="stylesheet"/>
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/fonts.css">
+    <link rel="stylesheet" href="./components/MiniAlert.css">
+    <link rel="stylesheet" href="./components/member/login/login.css">
+    <script type="module" src="./components/member/login/login.js" defer></script>
 </head>
 <body>
     <div class="wide-container">
     <section class="login-section">
         <h2 class="sr-only">로그인 페이지</h2>
-            <img src="/components/member/img/member-logo.svg" class="member-logo" alt="호두슈퍼 로고">
+            <img src="./components/member/img/member-logo.svg" class="member-logo" alt="호두슈퍼 로고">
             <div class="login-form-container">
                 <ul class="tab-list login">
                     <input type="hidden" name="user-type-field" value="buyer">
@@ -76,7 +83,7 @@
                 </div>
 
                 <div class="signup-link-container">
-                    <a href="/pages/sighup.html"><span>회원가입</span></a>
+                    <a href="./pages/sighup.html"><span>회원가입</span></a>
                     <span class="bar"></span>
                     <a href="#"><span>비밀번호 찾기</span></a>
                 </div>
