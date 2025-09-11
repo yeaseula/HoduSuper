@@ -33,6 +33,12 @@ const tabSwitch = (e)=>{
 
 tab.addEventListener('click', tabSwitch);
 
+//모든 요소를 돌며 해당 클래스를 삭제
+function removeClasses(selectors, classes) {
+    document.querySelectorAll(selectors).forEach(el => {
+        el.classList.remove(...classes);
+    });
+}
 // 모든 필드의 값을 가져오는 함수
 function getFormFields(userType) {
     const box = $(`.${userType}-box`);
@@ -43,7 +49,7 @@ function getFormFields(userType) {
         idValueChk: box.querySelector('.id-value-check')
     };
 }
-
+// 필드 입력 순서
 function getFormFieldsArray(userType) {
     const defaultKey = ['id','password'];
     const key = defaultKey;
@@ -75,8 +81,7 @@ function getFormFieldsArray(userType) {
         })
     })
 }
-
-//경고메시지
+// 경고메시지
 function warningMessage(parantDiv,message){
     const p = document.createElement('p')
     p.classList.add('warning-text','empty-warning');
@@ -89,31 +94,123 @@ function warningClear(){
         ele.remove()
     })
 }
-
 getFormFieldsArray(loginState.userType);
-
+// 로그인 버튼 활성화 함수
 function updateJoinBtnState() {
-    const { userType, isIdChecked, isPassChecked } = loginState;
+    const { isIdChecked, isPassChecked } = loginState;
     const canJoin = isIdChecked && isPassChecked;
     $('.login-btn').disabled = !canJoin;
 }
-
+// 필드값이 채워졌는지 확인
 function isDone(userType) {
-    const field = getFormFields(userType)
+    const field = getFormFields(userType);
+    field.id.addEventListener('input',(e)=>{
+        $('.warning-text')?.remove()
+    })
     field.id.addEventListener('blur',(e)=>{
         const isFill = e.currentTarget.value.trim() !== '';
-        if(isFill) {
-            loginState.isIdChecked = true;
-            updateJoinBtnState();
-        }
+        loginState.isIdChecked = isFill
+        updateJoinBtnState();
     })
-    field.password.addEventListener('blur',(e)=>{
+    field.password.addEventListener('input',(e)=>{
         const isFill = e.currentTarget.value.trim() !== '';
-        if(isFill) {
-            loginState.isPassChecked = true;
-            updateJoinBtnState();
-        }
+        loginState.isPassChecked = isFill;
+        updateJoinBtnState();
+        $('.warning-text')?.remove()
     })
 }
 
-isDone(loginState.userType)
+isDone(loginState.userType);
+
+//로그인요청
+async function loginAccess(userType) {
+    const field = getFormFields(userType);
+
+    const username = field.id.value;
+    const password = field.password.value;
+
+    try{
+        const res = await fetch("https://api.wenivops.co.kr/services/open-market/accounts/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        if(res.ok) {
+            const data = await res.json();
+
+            localStorage.setItem("access", data.access);
+            localStorage.setItem("refresh", data.refresh);
+
+            alert('환영합니다');
+            console.log("로그인성공",data.user);
+
+            fetchWithAuth();
+        } else {
+            const errorData = await res.json();
+            console.log(errorData.error)
+            const p = document.createElement('p');
+            p.classList.add('warning-text')
+            p.textContent = errorData.error;
+
+            const parantDiv = $(`.${userType}-box`)
+            parantDiv.append(p)
+        }
+    } catch(err) {
+        console.log(err);
+        alert('서버오류')
+    }
+}
+
+async function fetchWithAuth(url, options = {}) {
+    let accessToken = localStorage.getItem("access");
+    const refreshToken = localStorage.getItem("refresh");
+
+    if (!accessToken || !refreshToken) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
+
+  // 요청 시 Authorization 헤더 추가
+  options.headers = {
+    ...options.headers,
+    "Authorization": `Bearer ${accessToken}`,
+    "Content-Type": "application/json"
+  };
+
+  let res = await fetch(url, options);
+
+  // access 토큰 만료 시 refresh로 재발급
+  if (res.status === 401) {
+    const refreshRes = await fetch("https://api.wenivops.co.kr/services/open-market/accounts/token/refresh/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh: refreshToken })
+    });
+
+    if (refreshRes.ok) {
+      const refreshData = await refreshRes.json();
+      localStorage.setItem("access", refreshData.access); // 새로운 access 저장
+      accessToken = refreshData.access;
+
+      // 원래 요청 재시도
+      options.headers.Authorization = `Bearer ${accessToken}`;
+      res = await fetch(url, options);
+    } else {
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      localStorage.removeItem("access");
+      localStorage.removeItem("refresh");
+      return;
+    }
+  }
+
+  return res.json();
+}
+
+$('.login-btn').addEventListener('click',(e)=>{
+    e.preventDefault();
+    const userType = loginState.userType;
+    loginAccess(userType)
+})
