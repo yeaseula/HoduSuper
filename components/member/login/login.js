@@ -9,7 +9,6 @@ const loginState = {
     userType: targetInput.value || 'buyer',
     isIdChecked: false,
     isPassChecked: false,
-    isAllField: false,
 };
 
 const tabSwitch = (e)=>{
@@ -27,8 +26,14 @@ const tabSwitch = (e)=>{
     targetContainer.classList.add('on');
 
     targetInput.value = targetdata;
+    loginState.userType = targetdata;
+    loginState.isIdChecked = false;
+    loginState.isPassChecked = false;
 
     getFormFieldsArray(targetdata);
+    updateJoinBtnState();
+    isDone(targetdata);
+
 }
 
 tab.addEventListener('click', tabSwitch);
@@ -105,23 +110,27 @@ function updateJoinBtnState() {
 function isDone(userType) {
     const field = getFormFields(userType);
     field.id.addEventListener('input',(e)=>{
-        $('.warning-text')?.remove()
+        $(`.${userType}-box`).querySelector('.warning-text')?.remove();
     })
     field.id.addEventListener('blur',(e)=>{
         const isFill = e.currentTarget.value.trim() !== '';
         loginState.isIdChecked = isFill
         updateJoinBtnState();
+        if(field.password.value.trim() == '') {
+            const parantDiv = field.password.closest('div');
+            const message = '비밀번호를 입력해주세요.'
+            warningMessage(parantDiv,message)
+        }
     })
     field.password.addEventListener('input',(e)=>{
         const isFill = e.currentTarget.value.trim() !== '';
         loginState.isPassChecked = isFill;
         updateJoinBtnState();
-        $('.warning-text')?.remove()
+        e.currentTarget.closest('div').querySelector('.warning-text')?.remove();
+        $(`.${userType}-box`).querySelector('.warning-text')?.remove();
     })
 }
-
 isDone(loginState.userType);
-
 //로그인요청
 async function loginAccess(userType) {
     const field = getFormFields(userType);
@@ -212,5 +221,6 @@ async function fetchWithAuth(url, options = {}) {
 $('.login-btn').addEventListener('click',(e)=>{
     e.preventDefault();
     const userType = loginState.userType;
+    const fields = getFormFields(userType);
     loginAccess(userType)
 })
