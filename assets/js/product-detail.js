@@ -15,6 +15,8 @@ async function initProductDetail() {
   // 2-3) 상품 정보 화면에 표시
   const productInfo = displayProductInfo(productDetail);
 }
+// 스피너 요소들 선택
+const imageSpinner = document.querySelector("#image-spinner");
 
 // 3. 상품 정보 화면에 표시
 async function displayProductInfo(productDetail) {
@@ -31,6 +33,14 @@ async function displayProductInfo(productDetail) {
 
     productImage.src = productDetail.image;
     productImage.alt = `${productDetail.info} - 대표 이미지`;
+
+    // 스피너 표시 로직(이미지 로딩)
+    productImage.addEventListener("load", () => {
+      // 스피너 숨기기
+      imageSpinner.style.display = "none";
+      // 이미지 표시
+      productImage.style.display = "block";
+    });
 
     productSeller.textContent = productDetail.seller.store_name;
     productTitle.textContent = productDetail.info;

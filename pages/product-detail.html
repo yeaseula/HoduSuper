@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/assets/css/common.css" />
     <link rel="stylesheet" href="/assets/css/fonts.css" />
     <link rel="stylesheet" href="/assets/css/product-detail.css" />
+    <link rel="stylesheet" href="/components/MiniAlert.css" />  <!-- 이 줄 추가! -->
     
 
     <title></title>
@@ -33,9 +34,16 @@
       <!-- 상품 상세 정보 -->
       <section class="product-detail" aria-label="상품 상세 정보">
         <div class="product-image">
+          <!-- 스피너(이미지 로딩 중일 때 표시) -->
+           <div class="image-spinner" id="image-spinner">
+            <div class="spinner"></div>
+            <p class="sr-only">이미지 로딩 중</p>
+           </div>
           <img
             src=""
             alt=""
+            id="product-image"
+            style='display:none'
           />
         </div>
         
@@ -164,6 +172,7 @@
           </button>
           <button
             class="tab-btn"
+          
             role="tab"
             aria-selected="false"
             id="tab-2"
@@ -193,9 +202,11 @@
       </section>
     </main>
     
-    <!-- API 기능 로드 -->
+<!-- API 기능 로드 -->
 <script src="/assets/js/api.js"></script>
+<!-- MiniAlert 모듈 사용 -->
+<script type="module" src="/components/MiniAlert.js"></script>
 <!-- 상품 상세 기능 로드 -->
-<script src="/assets/js/product-detail.js"></script>
+<script type="module" src="/assets/js/product-detail.js"></script>
   </body>
 </html>
