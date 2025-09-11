@@ -167,7 +167,7 @@ button:disabled {
 }
 .join-btn {
     display: block;
-    width: calc(100% - 70px);
+    width: calc(100% - 70px) !important;
     margin: 35px auto 0;
     padding: 20px 0;
     background-color: #21BF48;
@@ -194,6 +194,6 @@ button:disabled {
         width: 100%;
     }
     .join-btn {
-        width: 100%;
+        width: 100% !important;
     }
 }

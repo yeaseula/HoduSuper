@@ -1,3 +1,5 @@
+import MiniAlert from '../../../components/MiniAlert.js'
+
 const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성 위해 유틸함수 생성
 const tab = $('.tab-list');
 const targetInput = $('input[name="user-type-field"]');
@@ -154,7 +156,15 @@ async function loginAccess(fields) {
             localStorage.setItem("access", data.access);
             localStorage.setItem("refresh", data.refresh);
 
-            alert('환영합니다');
+            const alert = new MiniAlert({
+                title:'title',
+                message:'로그인이 완료되었습니다!<br> 메인페이지로 이동합니다.',
+                buttons : [],
+                link:['예'],
+                linkHerf:['/index.html'],
+                closeBackdrop : true,
+                customContent : null,
+            })
             console.log("로그인성공",data.user);
 
             fetchWithAuth();
