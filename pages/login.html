@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO 기본 -->
+    <title>HODU SUPER</title>
+    <meta name="description" content="프로젝트 간단 설명">
+    <meta name="keywords" content="키워드1, 키워드2, 키워드3">
+    <meta name="author" content="러닝메이트">
+
+    <!-- Open Graph (SNS 공유용) -->
+    <meta property="og:title" content="프로젝트명">
+    <meta property="og:description" content="프로젝트 간단 설명">
+    <meta property="og:type" content="website">
+    <!--대표이미지 나중에 만듭시다, 배포 후 주소 넣읍시다-->
+    <!-- <meta property="og:image" content="assets/img/og-image.png"> -->
+    <!-- <meta property="og:url" content="https://프로젝트주소"> -->
+
+    <!-- favicon 나중에 만듭시다 -->
+    <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/common.css">
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    <link rel="stylesheet" href="/components/member/signup.css">
+    <link rel="stylesheet" href="/components/member/login/login.css">
+    <script src="/components/member/login/login.js" defer></script>
+</head>
+<body>
+    <div class="wide-container">
+    <section class="login-section">
+        <h2 class="sr-only">로그인 페이지</h2>
+            <img src="/components/member/img/member-logo.svg" class="member-logo" alt="호두슈퍼 로고">
+            <div class="login-form-container">
+                <ul class="tab-list">
+                    <input type="hidden" name="user-type-field" value="buyer">
+                    <li data-target="buyer" class="active"><span>구매회원 로그인</span></li>
+                    <li data-target="seller"><span>판매회원 로그인</span></li>
+                </ul>
+                <div class="tab-container">
+                    <div class="buyer-box container on">
+                        <h3 class="sr-only">구매회원 로그인 폼</h3>
+                        <form action="">
+                            <input type="text" name="byuer-login-id" class="buyer-login-id" placeholder="아이디">
+                            <input type="password" name="byuer-login-password" class="buyer-login-pass" placeholder="비밀번호">
+                        </form>
+                    </div>
+                    <div class="seller-box container">
+                        <h3 class="sr-only">판매회원 로그인 폼</h3>
+                        <form action=""></form>
+                    </div>
+                    <button type="submit" class="login-btn common-btn">로그인</button>
+                </div>
+
+                <div class="signup-link-container">
+                    <span>회원가입</span>
+                    <span class="bar"></span>
+                    <span>비밀번호 찾기</span>
+                </div>
+            </div>
+    </section>
+    </div>
+</body>
+</html>
