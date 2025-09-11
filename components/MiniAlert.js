@@ -1,6 +1,6 @@
 /* 얼럿 컴포넌트 */
 
-export default class Alert {
+export default class MiniAlert {
   constructor({
     title,
     message,
@@ -10,7 +10,7 @@ export default class Alert {
   }) {
     // 백드롭 클릭으로 모달 닫기 여부 설정
     this.closeBackdrop = closeBackdrop;
-    
+
     // 배경 어둡게 처리하는 백드롭 생성
     this.backdrop = document.createElement("div");
     this.backdrop.classList.add("alert-backdrop");
@@ -22,7 +22,7 @@ export default class Alert {
     // 모달 내부 구조 설정
     modal.innerHTML = `
       <div class="alert-content">
-         <button class="close-btn"></button>
+        <button class="close-btn"></button>
         <h2 class="alert-title sr-only">${title}</h2>
         <p class="alert-message">${message}</p>
         <div class="custom-content"></div>
@@ -123,7 +123,7 @@ function createQuantityInput(initial = 1) {
   decreaseBtn.addEventListener("click", () => {
     input.value = Math.max(parseInt(input.value) - 1, 1);
   });
-  
+
   // 증가 버튼 이벤트: 최대값 99까지만 증가
   increaseBtn.addEventListener("click", () => {
     input.value = Math.min(parseInt(input.value) + 1, 99);
@@ -148,7 +148,7 @@ export const alerts = {
       { text: "예", className: "btn-confirm" },
     ],
   },
-  
+
   // 상품 삭제
   delete: {
     title: "알림",
@@ -158,7 +158,7 @@ export const alerts = {
       { text: "확인", className: "btn-confirm" },
     ],
   },
-  
+
   // 장바구니 중복
   cart: {
     title: "알림",
@@ -168,7 +168,7 @@ export const alerts = {
       { text: "예", className: "btn-confirm" },
     ],
   },
-  
+
   // 재고 부족
   stock: {
     title: "알림",
@@ -177,7 +177,7 @@ export const alerts = {
       { text: "확인", className: "btn-confirm" },
     ],
   },
-  
+
   // 수량 조정
   quantity: {
     title: "수량 조정",
