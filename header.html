@@ -11,13 +11,13 @@
   </head>
   <body>
     <!-- ===== 헤더 영역 ===== -->
-    <header class="header">
+    <header class="header" >
       <!-- 헤더 상단: 로고, 검색 창 -->
       <section class="header-content">
         <h1 class="sr-only">호두 슈퍼</h1>
 
         <!-- 반응형 로고: 화면 크기에 따라 다른 로고 표시 -->
-        <a href="./index.html" class="header-logo">
+        <a href="./header.html" class="header-logo">
           <picture>
             <!-- 모바일용 작은 로고 -->
             <source
@@ -39,7 +39,7 @@
         </a>
 
         <!-- 상품 검색 기능 - 반응형 디자인 적용 (모바일에서는 토글형태) -->
-        <form action="product-detail.html" method="get" class="header-search">
+        <form action="#" method="get" class="header-search">
           <label for="search" class="sr-only">상품 검색</label>
           <!-- 검색 입력창 - 모바일에서는 JavaScript로 토글 -->
           <input
@@ -49,10 +49,13 @@
             placeholder="상품을 검색해보세요!"
           />
           <!-- 검색 실행 버튼 - SVG 아이콘 사용 -->
-          <button type="submit" class="header-search-btn" aria-label="검색">
-            <span class="sr-only">검색</span>
-          </button>
+          <button
+            type="submit"
+            class="header-search-btn"
+            aria-label="검색"
+          ></button>
         </form>
+        <button class="mobile-search-trigger" aria-label="검색창 열기"></button>
       </section>
 
       <!-- 사용자 메뉴 네비게이션 -->
@@ -76,11 +79,132 @@
           </li>
         </ul>
       </nav>
+      <!-- 모바일 검색 오버레이 -->
+      <div class="search-overlay"></div>
 
+      <!-- 모바일 검색 컨테이너 -->
+      <div class="mobile-search-container">
+        <form class="mobile-search-form" action="#" method="get">
+          <button
+            type="button"
+            class="mobile-search-close"
+            aria-label="검색창 닫기"
+          ></button>
+          <input
+            type="search"
+            name="q"
+            class="mobile-search-input"
+            placeholder="상품을 검색해보세요!"
+          />
+          <button
+            type="submit"
+            class="mobile-search-btn"
+            aria-label="검색"
+          ></button>
+        </form>
+      </div>
     </header>
-
     <script>
+      // ===== 검색 창 =====
+      // ===== 변수 선언 =====
+      const searchForm = document.querySelector(".header-search");
+      const search = document.querySelector("#search");
+      const searchBtn = document.querySelector(".header-search-btn");
+      const searchOverlay = document.querySelector(".search-overlay");
+      const searchContainer = document.querySelector(
+        ".mobile-search-container"
+      );
+      const mobileSearchForm = document.querySelector(".mobile-search-form");
+      const mobileSearch = document.querySelector(".mobile-search-input");
+      const mobileTrigger = document.querySelector(".mobile-search-trigger");
+      const closeBtn = document.querySelector(".mobile-search-close");
 
+      // ===== 모바일 검색 열기 =====
+      function openMobileSearch() {
+        searchOverlay.classList.add("active");
+        searchContainer.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+        // 스크롤 방지
+
+        setTimeout(() => mobileSearch.focus(), 300);
+      }
+
+      // ===== 모바일 검색 닫기 =====
+      function closeMobileSearch() {
+        searchOverlay.classList.remove("active");
+        searchContainer.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      // ===== ESC 키 닫기 =====
+      function handleKeydown(e) {
+        if (e.key === "Escape") closeMobileSearch();
+      }
+      // ===== 모바일 검색 제출 =====
+      function handleMobileSearch(e) {
+        e.preventDefault();
+
+        const keyword = mobileSearch.value.trim();
+        if (!keyword) {
+          alert("상품의 이름을 입력해주세요!");
+          return;
+        }
+        window.location.href = `product-detail.html?q=${encodeURIComponent(
+          keyword
+        )}`;
+        closeMobileSearch();
+      }
+
+      // ===== 데스크톱 검색 =====
+      function handleSearch(e) {
+        e.preventDefault();
+        const keyword = search.value.trim();
+        if (!keyword) {
+          alert("상품의 이름을 입력해주세요!");
+          return;
+        }
+        window.location.href = `product-detail.html?q=${encodeURIComponent(
+          keyword
+        )}`;
+      }
+
+      // ===== 이벤트 등록 =====
+      searchForm.addEventListener("submit", handleSearch);
+      mobileTrigger.addEventListener("click", openMobileSearch);
+      closeBtn.addEventListener("click", closeMobileSearch);
+      document.addEventListener("keydown", handleKeydown);
+      searchOverlay.addEventListener("click", closeMobileSearch);
+      mobileSearchForm.addEventListener("submit", handleMobileSearch);
+
+      // ===== 유저 메뉴 =====
+      // ===== 변수 선언 =====
+      const loginBtn = document.querySelector(".header-login");
+      const mypageBtn = document.querySelector(".header-mypage");
+      const cartBtn = document.querySelector(".header-buyer-cart");
+      const sellerCenterBtn = document.querySelector(".header-seller-center");
+
+      function updateHeader(user) {
+        if (!user || !user.isLoggedIn) {
+          // 로그아웃 상태
+          loginBtn.style.display = "flex";
+          cartBtn.style.display = "flex";
+          mypageBtn.style.display = "none";
+          sellerCenterBtn.style.display = "none";
+        } else if (user.role === "buyer") {
+          // 구매
+          loginBtn.style.display = "none";
+          cartBtn.style.display = "flex";
+          mypageBtn.style.display = "flex";
+          sellerCenterBtn.style.display = "none";
+        } else if (user.role === "seller") {
+          // 판매
+          loginBtn.style.display = "none";
+          cartBtn.style.display = "none";
+          mypageBtn.style.display = "flex";
+          sellerCenterBtn.style.display = "flex";
+        }
+      }
     </script>
   </body>
 </html>

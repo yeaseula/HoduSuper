@@ -1,0 +1,202 @@
+* {box-sizing: border-box; padding: 0; margin: 0;}
+.signup-section {
+    width: 550px;
+    margin: 100px auto 110px;
+}
+.member-logo {
+    display: block;
+    margin: 0 auto 70px;
+}
+ul {
+    display: flex;
+    width: 100%;
+    gap: 0;
+}
+li {
+    flex: 1;
+    display: inline-block;
+    background-color: #fafafa;
+    color: #212121;
+    padding: 20px 12px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    list-style: none;
+    cursor: pointer;
+}
+li.active {
+    background-color: #21BF48;
+    color: #fff;
+}
+.tab-container {
+    padding: 35px;
+    border: 1px solid #e0e0e0;
+    border-top: unset;
+}
+.container {
+    display: none;
+}
+.container.on {
+    display: block;
+}
+h3 {
+    margin-bottom: 30px;
+}
+.container form > div:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+.field-name {
+    font-size: 16px;
+    color: #767676;
+    margin-bottom: 10px;
+}
+.container form > div[class*="id-container"] > div,
+.container form > div[class*="phone-container"] > div,
+.container form > div[class*="sellernumber"] > div {
+    display: flex;
+    gap: 12px;
+    row-gap: 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+/* 기본 필드 속성입니다 */
+input[type="text"],input[type="password"],input[type="number"],select {
+    width: 100%;
+    height: 54px;
+    padding: 0 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+input[type="checkbox"] {
+    appearance: none;
+}
+input[type="checkbox"]::after {
+    position: relative;
+    top: 3.5px;
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--gray-300);
+}
+input[type="checkbox"]:checked:after {
+    background-image: url('./img/check-color.svg');
+    background-size: contain;
+    border: 1px solid var(--main-500);
+}
+select {
+    appearance: none;
+    background-image: url('./img/select-icon.svg');
+    background-position: 98% 14px;
+    background-repeat: no-repeat;
+}
+
+.signup-agreement p {
+    color: var(--gray-700);
+}
+.signup-agreement p a {
+    color: var(--gray-700);
+    font-family: 'SpoqaHanSansNeo-Bold';
+    text-decoration: underline;
+}
+
+input[name*="user-id"],
+input[name*="sellerNum"] {
+  width: calc(100% - 134px);
+}
+input.warning {
+    border: 1px solid var(--color-red);
+}
+input.warning:focus {
+    outline: none;
+    border: 1px solid var(--color-red);
+}
+div[class*="pass"]> div {
+    position: relative;
+}
+div[class*="pass"] > div::after {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+    z-index: 10;
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    background-color: #F2F2F2;
+    background-image: url('./img/check-icon.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+div[class*="pass"] > div.ischecked::after {
+    background-color: var(--main-500);
+}
+
+.id-value-check,.seller-value-check {
+    display: inline-block;
+    width: 122px;
+    height: 54px;
+}
+
+.container form > div[class*="phone-container"] > div select,
+.container form > div[class*="phone-container"] > div input {
+    flex-basis: calc(33.33% - 10px);
+}
+
+button:disabled {
+    background-color: #e0e0e0;
+    border: 1px solid #e0e0e0;
+}
+.warning-text {
+    margin-top: 10px;
+    color: var(--color-red);
+}
+.warning-text.good {
+    color: var(--main-500);
+}
+.signup-agreement {
+    display: block;
+    width: calc(100% - 70px);
+    margin: 35px auto 0;
+}
+.signup-agreement label {
+    display: flex;
+    gap: 10px;
+}
+.signup-agreement label p {
+    line-height: 1.45;
+}
+.join-btn {
+    display: block;
+    width: calc(100% - 70px);
+    margin: 35px auto 0;
+    padding: 20px 0;
+    background-color: #21BF48;
+    border-radius: 5px;
+    border: 1px solid #21BF48;
+    color: #fff;
+    font-size: 1.8rem;
+    font-family: 'SpoqaHanSansNeo-Bold';
+    cursor: pointer;
+}
+
+@media (max-width: 580px) {
+    .signup-section {
+        width: 100%;
+        margin: 50px auto;
+    }
+    .member-logo {
+        margin: 0 auto 40px;
+    }
+    .tab-container {
+        padding: 35px 15px;
+    }
+    .signup-agreement {
+        width: 100%;
+    }
+    .join-btn {
+        width: 100%;
+    }
+}
