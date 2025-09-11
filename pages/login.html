@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/common.css">
     <link rel="stylesheet" href="/assets/css/fonts.css">
-    <link rel="stylesheet" href="/components/member/signup.css">
     <link rel="stylesheet" href="/components/member/login/login.css">
     <script src="/components/member/login/login.js" defer></script>
 </head>
@@ -36,7 +35,7 @@
         <h2 class="sr-only">로그인 페이지</h2>
             <img src="/components/member/img/member-logo.svg" class="member-logo" alt="호두슈퍼 로고">
             <div class="login-form-container">
-                <ul class="tab-list">
+                <ul class="tab-list login">
                     <input type="hidden" name="user-type-field" value="buyer">
                     <li data-target="buyer" class="active"><span>구매회원 로그인</span></li>
                     <li data-target="seller"><span>판매회원 로그인</span></li>
@@ -45,21 +44,40 @@
                     <div class="buyer-box container on">
                         <h3 class="sr-only">구매회원 로그인 폼</h3>
                         <form action="">
-                            <input type="text" name="byuer-login-id" class="buyer-login-id" placeholder="아이디">
-                            <input type="password" name="byuer-login-password" class="buyer-login-pass" placeholder="비밀번호">
+                            <div class="login-login-field">
+                                <label>
+                                    <input type="text" name="buyer-login-id" class="buyer-login-id" placeholder="아이디">
+                                </label>
+                            </div>
+                            <div class="login-password-field">
+                                <label>
+                                    <input type="password" name="buyer-login-password" class="buyer-login-password" placeholder="비밀번호">
+                                </label>
+                            </div>
                         </form>
                     </div>
                     <div class="seller-box container">
                         <h3 class="sr-only">판매회원 로그인 폼</h3>
-                        <form action=""></form>
+                        <form action="">
+                            <div class="login-login-field">
+                                <label>
+                                    <input type="text" name="seller-login-id" class="seller-login-id" placeholder="아이디">
+                                </label>
+                            </div>
+                            <div class="login-password-field">
+                                <label>
+                                    <input type="password" name="seller-login-password" class="seller-login-password" placeholder="비밀번호">
+                                </label>
+                            </div>
+                        </form>
                     </div>
                     <button type="submit" class="login-btn common-btn">로그인</button>
                 </div>
 
                 <div class="signup-link-container">
-                    <span>회원가입</span>
+                    <a href="/pages/sighup.html"><span>회원가입</span></a>
                     <span class="bar"></span>
-                    <span>비밀번호 찾기</span>
+                    <a href="#"><span>비밀번호 찾기</span></a>
                 </div>
             </div>
     </section>
