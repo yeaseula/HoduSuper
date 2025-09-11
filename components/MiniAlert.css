@@ -1,23 +1,3 @@
-/* 알림 모달 스타일시트 */
-
-/* 기본 폰트 크기 설정 */
-html {
-  font-size: 10px;
-}
-
-/* 스크린 리더 전용 텍스트 (접근성) */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* 모달 백드롭: 전체 화면을 덮는 반투명 배경 */
 .alert-backdrop {
   position: fixed;
