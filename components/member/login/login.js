@@ -2,6 +2,16 @@ const $ = (node) => document.querySelector(node); // 작성 편의 및 가독성
 const tab = $('.tab-list');
 const targetInput = $('input[name="user-type-field"]');
 
+$('.login-btn').setAttribute('disabled',true)
+
+
+const loginState = {
+    userType: targetInput.value || 'buyer',
+    isIdChecked: false,
+    isPassChecked: false,
+    isAllField: false,
+};
+
 const tabSwitch = (e)=>{
     e.preventDefault();
     const li = document.querySelectorAll('li');
@@ -80,4 +90,30 @@ function warningClear(){
     })
 }
 
-getFormFieldsArray('buyer')
+getFormFieldsArray(loginState.userType);
+
+function updateJoinBtnState() {
+    const { userType, isIdChecked, isPassChecked } = loginState;
+    const canJoin = isIdChecked && isPassChecked;
+    $('.login-btn').disabled = !canJoin;
+}
+
+function isDone(userType) {
+    const field = getFormFields(userType)
+    field.id.addEventListener('blur',(e)=>{
+        const isFill = e.currentTarget.value.trim() !== '';
+        if(isFill) {
+            loginState.isIdChecked = true;
+            updateJoinBtnState();
+        }
+    })
+    field.password.addEventListener('blur',(e)=>{
+        const isFill = e.currentTarget.value.trim() !== '';
+        if(isFill) {
+            loginState.isPassChecked = true;
+            updateJoinBtnState();
+        }
+    })
+}
+
+isDone(loginState.userType)
