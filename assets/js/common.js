@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
 
-   fetch('/header.html') // 🪴경로 알맞게 수정
+   fetch('header.html') // 🪴경로 알맞게 수정
         .then(response => response.text())
         .then(data => {
             document.querySelector('.header').innerHTML = data;
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('파일 로딩 오류:', error);
         })
 
-    fetch('/footer.html') // 🪴경로 알맞게 수정
+    fetch('footer.html') // 🪴경로 알맞게 수정
         .then(response => response.text())
         .then(data => {
             document.querySelector('.footer').innerHTML = data;
