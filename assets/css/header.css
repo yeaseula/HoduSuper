@@ -1,10 +1,9 @@
 /* ========== 헤더 전체 레이아웃 ========== */
 /* 헤더 전체 컨테이너 - flexbox로 좌측 로고+검색, 우측 유저메뉴 배치 */
-.header {
-  padding: 2rem clamp(5rem, 17vw, 32rem); /* 화면 크기에 따른 반응형 좌우 여백 */
+.header-container {
+  padding: 22px 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between; /* 좌측 콘텐츠와 우측 유저메뉴 양쪽 배치 */
+  justify-content: space-between;
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
 }
 
@@ -33,11 +32,7 @@
 
 /* 검색 입력창 - 메인 컬러 테두리의 둥근 모양 */
 #search {
-  width: clamp(
-    20rem,
-    20vw,
-    40rem
-  ); /* 화면 크기에 따른 반응형 너비 (최소 20rem, 최대 40rem) */
+  width: 400px;
   padding: 1.3rem 2rem;
   border: 2px solid var(--main-500); /* 브랜드 메인 컬러 테두리 */
   border-radius: var(--border-radius-full); /* 완전 둥근 모양 */
@@ -150,6 +145,10 @@
   /* 데스크톱 검색창 완전히 숨김 */
   .header-search {
     display: none;
+  }
+
+  .header-container {
+    padding: 11px 0;
   }
 
   /* 모바일 검색 트리거 버튼 표시 */

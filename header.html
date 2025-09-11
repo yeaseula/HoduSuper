@@ -4,207 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>헤더 메인 페이지</title>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/fonts.css" />
-    <link rel="stylesheet" href="./assets/css/common.css" />
-    <link rel="stylesheet" href="./assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/reset.css" />
+    <link rel="stylesheet" href="/assets/css/fonts.css" />
+    <link rel="stylesheet" href="/assets/css/common.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
   </head>
   <body>
     <!-- ===== 헤더 영역 ===== -->
-    <header class="header">
-      <!-- 헤더 상단: 로고, 검색 창 -->
-      <section class="header-content">
-        <h1 class="sr-only">호두 슈퍼</h1>
+    <header>
+      <div class="wide-container">
+        <div class="header-container">
+          <!-- 헤더 상단: 로고, 검색 창 -->
+          <section class="header-content">
+            <h1 class="sr-only">호두 슈퍼</h1>
 
-        <!-- 반응형 로고: 화면 크기에 따라 다른 로고 표시 -->
-        <a href="./header.html" class="header-logo">
-          <picture>
-            <!-- 모바일용 작은 로고 -->
-            <source
-              media="(max-width: 767px)"
-              srcset="./assets/images/logo-s.png"
-            />
-            <!-- 태블릿용 중간 로고 -->
-            <source
-              media="(min-width: 768px)"
-              srcset="./assets/images/logo-m.png"
-            />
-            <!-- 1200px 이상 데스크톱: 큰 로고 -->
-            <source
-              media="(min-width: 1200px)"
-              srcset="./assets/images/logo-l.png"
-            />
-            <img src="./assets/images/logo-m.png" alt="호두슈퍼 로고" />
-          </picture>
-        </a>
+            <!-- 반응형 로고: 화면 크기에 따라 다른 로고 표시 -->
+            <a href="/header.html" class="header-logo">
+              <picture>
+                <!-- 모바일용 작은 로고 -->
+                <source
+                  media="(max-width: 767px)"
+                  srcset="/assets/images/logo-s.png"
+                />
+                <!-- 태블릿용 중간 로고 -->
+                <source
+                  media="(min-width: 768px)"
+                  srcset="/assets/images/logo-m.png"
+                />
+                <!-- 1200px 이상 데스크톱: 큰 로고 -->
+                <source
+                  media="(min-width: 1200px)"
+                  srcset="/assets/images/logo-l.png"
+                />
+                <img src="/assets/images/logo-m.png" alt="호두슈퍼 로고" />
+              </picture>
+            </a>
 
-        <!-- 상품 검색 기능 - 반응형 디자인 적용 (모바일에서는 토글형태) -->
-        <form action="#" method="get" class="header-search">
-          <label for="search" class="sr-only">상품 검색</label>
-          <!-- 검색 입력창 - 모바일에서는 JavaScript로 토글 -->
-          <input
-            type="search"
-            name="q"
-            id="search"
-            placeholder="상품을 검색해보세요!"
-          />
-          <!-- 검색 실행 버튼 - SVG 아이콘 사용 -->
-          <button
-            type="submit"
-            class="header-search-btn"
-            aria-label="검색"
-          ></button>
-        </form>
-        <button class="mobile-search-trigger" aria-label="검색창 열기"></button>
-      </section>
+            <!-- 상품 검색 기능 - 반응형 디자인 적용 (모바일에서는 토글형태) -->
+            <form action="#" method="get" class="header-search">
+              <label for="search" class="sr-only">상품 검색</label>
+              <!-- 검색 입력창 - 모바일에서는 JavaScript로 토글 -->
+              <input
+                type="search"
+                name="q"
+                id="search"
+                placeholder="상품을 검색해보세요!"
+              />
+              <!-- 검색 실행 버튼 - SVG 아이콘 사용 -->
+              <button
+                type="submit"
+                class="header-search-btn"
+                aria-label="검색"
+              ></button>
+            </form>
+            <button class="mobile-search-trigger" aria-label="검색창 열기"></button>
+          </section>
 
-      <!-- 사용자 메뉴 네비게이션 -->
-      <nav class="header-user-menu" aria-label="사용자 메뉴">
-        <ul class="header-user-list">
-          <!-- 장바구니 - 쇼핑카트 아이콘과 텍스트로 구성 -->
-          <li class="header-buyer-cart">
-            <a href="/cart" id="user-cart"><span>장바구니</span></a>
-          </li>
-          <!-- 로그인 메뉴 - 사용자 아이콘 표시 -->
-          <li class="header-login">
-            <a href="/login" id="user-login"><span>로그인</span></a>
-          </li>
-          <!-- 마이페이지 - 로그인 상태에서만 표시 (기본 숨김 처리) -->
-          <li class="header-mypage">
-            <a href="/mypage"><span>마이페이지</span></a>
-          </li>
-          <!-- 판매자센터 - 초록색 CTA 버튼 형태로 디자인 -->
-          <li class="header-seller-center">
-            <a href="/seller-center"> <span>판매자 센터</span></a>
-          </li>
-        </ul>
-      </nav>
-      <!-- 모바일 검색 오버레이 -->
-      <div class="search-overlay"></div>
+          <!-- 사용자 메뉴 네비게이션 -->
+          <nav class="header-user-menu" aria-label="사용자 메뉴">
+            <ul class="header-user-list">
+              <!-- 장바구니 - 쇼핑카트 아이콘과 텍스트로 구성 -->
+              <li class="header-buyer-cart">
+                <a href="/cart" id="user-cart"><span>장바구니</span></a>
+              </li>
+              <!-- 로그인 메뉴 - 사용자 아이콘 표시 -->
+              <li class="header-login">
+                <a href="/login" id="user-login"><span>로그인</span></a>
+              </li>
+              <!-- 마이페이지 - 로그인 상태에서만 표시 (기본 숨김 처리) -->
+              <li class="header-mypage">
+                <a href="/mypage"><span>마이페이지</span></a>
+              </li>
+              <!-- 판매자센터 - 초록색 CTA 버튼 형태로 디자인 -->
+              <li class="header-seller-center">
+                <a href="/seller-center"> <span>판매자 센터</span></a>
+              </li>
+            </ul>
+          </nav>
+          <!-- 모바일 검색 오버레이 -->
+          <div class="search-overlay"></div>
 
-      <!-- 모바일 검색 컨테이너 -->
-      <div class="mobile-search-container">
-        <form class="mobile-search-form" action="#" method="get">
-          <button
-            type="button"
-            class="mobile-search-close"
-            aria-label="검색창 닫기"
-          ></button>
-          <input
-            type="search"
-            name="q"
-            class="mobile-search-input"
-            placeholder="상품을 검색해보세요!"
-          />
-          <button
-            type="submit"
-            class="mobile-search-btn"
-            aria-label="검색"
-          ></button>
-        </form>
+          <!-- 모바일 검색 컨테이너 -->
+          <div class="mobile-search-container">
+            <form class="mobile-search-form" action="#" method="get">
+              <button
+                type="button"
+                class="mobile-search-close"
+                aria-label="검색창 닫기"
+              ></button>
+              <input
+                type="search"
+                name="q"
+                class="mobile-search-input"
+                placeholder="상품을 검색해보세요!"
+              />
+              <button
+                type="submit"
+                class="mobile-search-btn"
+                aria-label="검색"
+              ></button>
+            </form>
+          </div>
+        </div>
       </div>
     </header>
-    <script>
-      // ===== 검색 창 =====
-      // ===== 변수 선언 =====
-      const searchForm = document.querySelector(".header-search");
-      const search = document.querySelector("#search");
-      const searchBtn = document.querySelector(".header-search-btn");
-      const searchOverlay = document.querySelector(".search-overlay");
-      const searchContainer = document.querySelector(
-        ".mobile-search-container"
-      );
-      const mobileSearchForm = document.querySelector(".mobile-search-form");
-      const mobileSearch = document.querySelector(".mobile-search-input");
-      const mobileTrigger = document.querySelector(".mobile-search-trigger");
-      const closeBtn = document.querySelector(".mobile-search-close");
-
-      // ===== 모바일 검색 열기 =====
-      function openMobileSearch() {
-        searchOverlay.classList.add("active");
-        searchContainer.classList.add("active");
-
-        document.body.style.overflow = "hidden";
-        // 스크롤 방지
-
-        setTimeout(() => mobileSearch.focus(), 300);
-      }
-
-      // ===== 모바일 검색 닫기 =====
-      function closeMobileSearch() {
-        searchOverlay.classList.remove("active");
-        searchContainer.classList.remove("active");
-        document.body.style.overflow = "";
-      }
-
-      // ===== ESC 키 닫기 =====
-      function handleKeydown(e) {
-        if (e.key === "Escape") closeMobileSearch();
-      }
-      // ===== 모바일 검색 제출 =====
-      function handleMobileSearch(e) {
-        e.preventDefault();
-
-        const keyword = mobileSearch.value.trim();
-        if (!keyword) {
-          alert("상품의 이름을 입력해주세요!");
-          return;
-        }
-        window.location.href = `product-detail.html?q=${encodeURIComponent(
-          keyword
-        )}`;
-        closeMobileSearch();
-      }
-
-      // ===== 데스크톱 검색 =====
-      function handleSearch(e) {
-        e.preventDefault();
-        const keyword = search.value.trim();
-        if (!keyword) {
-          alert("상품의 이름을 입력해주세요!");
-          return;
-        }
-        window.location.href = `product-detail.html?q=${encodeURIComponent(
-          keyword
-        )}`;
-      }
-
-      // ===== 이벤트 등록 =====
-      searchForm.addEventListener("submit", handleSearch);
-      mobileTrigger.addEventListener("click", openMobileSearch);
-      closeBtn.addEventListener("click", closeMobileSearch);
-      document.addEventListener("keydown", handleKeydown);
-      searchOverlay.addEventListener("click", closeMobileSearch);
-      mobileSearchForm.addEventListener("submit", handleMobileSearch);
-
-      // ===== 유저 메뉴 =====
-      // ===== 변수 선언 =====
-      const loginBtn = document.querySelector(".header-login");
-      const mypageBtn = document.querySelector(".header-mypage");
-      const cartBtn = document.querySelector(".header-buyer-cart");
-      const sellerCenterBtn = document.querySelector(".header-seller-center");
-
-      function updateHeader(user) {
-        if (!user || !user.isLoggedIn) {
-          // 로그아웃 상태
-          loginBtn.style.display = "flex";
-          cartBtn.style.display = "flex";
-          mypageBtn.style.display = "none";
-          sellerCenterBtn.style.display = "none";
-        } else if (user.role === "buyer") {
-          // 구매
-          loginBtn.style.display = "none";
-          cartBtn.style.display = "flex";
-          mypageBtn.style.display = "flex";
-          sellerCenterBtn.style.display = "none";
-        } else if (user.role === "seller") {
-          // 판매
-          loginBtn.style.display = "none";
-          cartBtn.style.display = "none";
-          mypageBtn.style.display = "flex";
-          sellerCenterBtn.style.display = "flex";
-        }
-      }
-    </script>
   </body>
 </html>

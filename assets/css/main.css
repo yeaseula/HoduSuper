@@ -29,6 +29,16 @@
   display: block;
   width: 100%;
 }
+@media(max-width:992px) {
+  .main-banner  {
+    height: 260px;
+  }
+  .swiper-slide img {
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+  }
+}
 
 /* ========== 상품 목록 섹션 ========== */
 /* 상품 목록 컨테이너 - 상하 여백과 좌우 반응형 패딩 */

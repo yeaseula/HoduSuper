@@ -3,9 +3,7 @@
 footer {
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
   background-color: var(--color-bg-light);
-  /* padding: 6rem;
-  padding-inline: clamp(5rem, 17vw, 32rem); */
-  padding: 60px 0; /*💫*/
+  padding: 60px 0;
   display: flex;
   flex-direction: column;
   gap: 6rem;
@@ -81,7 +79,6 @@ footer {
   }
 }
 /* ========== 태블릿 이하 화면에서 메뉴 토글 버튼 활성화 ========== */
-/* 💫1200은 아직 한참 데스크톱이라 max-width 값을 낮춤 */
 @media screen and (max-width: 860px) {
   .footer-menu-toggle {
     display: flex; /* 토글 버튼 표시 */
