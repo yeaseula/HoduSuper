@@ -131,8 +131,13 @@
   background: #f2f2f2;
 }
 
+/* 수량 버튼 비활성화 스타일 */
 .quantity-btn:disabled {
   cursor: not-allowed;
+}
+
+.quantity-btn:disabled img {
+  opacity: 0.6;
 }
 
 /* 수량 디스플레이(1) */

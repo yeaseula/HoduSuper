@@ -1,4 +1,5 @@
 // ===== 상품 상세 페이지 전용 JavaScript =====
+import MiniAlert from "/components/MiniAlert.js";
 
 // 1. 페이지 로드 시 실행되는 함수
 document.addEventListener("DOMContentLoaded", async () => {
@@ -24,7 +25,7 @@ async function displayProductInfo(productDetail) {
   const productDelivery = document.querySelector(".delivery-way"); // 택배배송
   const productDeliveryFee = document.querySelector(".delivery-fee"); // 무료배송
 
-  // 실제 데이터 업데이트 로직 추가
+  // 3-1) 실제 데이터 업데이트 로직 추가
   if (productDetail) {
     document.title = `${productDetail.info}`;
 
@@ -37,11 +38,11 @@ async function displayProductInfo(productDetail) {
     productDelivery.textContent = productDetail.shipping_method;
     productDeliveryFee.textContent = formatPrice(productDetail.shipping_fee);
 
-    // 메터 설명도 동적 업데이트 처리
+    // 3-2)메타 설명도 동적 업데이트 처리(SEO를 위해)
     const metaDescription = document.querySelector('meta[name="description"]');
     metaDescription.content = `HODU 오픈마켓에서 ${productDetail.info}를(을) 만나보세요. 개발자 필수템입니다.`;
 
-    // 재고 0인 경우 처리
+    // 3-3) 재고 0인 경우 처리(품절 상품)
     if (productDetail.stock === 0) {
       showOutOfStock(productDetail);
     } else {
@@ -58,15 +59,17 @@ function setupQuantityControls(productDetail) {
   const productTotalQuantity = document.querySelector("#total-quantity-number"); //1
   const productTotalPrice = document.querySelector("#total-price"); // 17,500(총 금액)
 
+  // 4-1) 초기 총 가격 설정(1개 기준)
   productTotalPrice.textContent = formatPrice(productDetail.price);
 
-  // 초기 버튼 상태 설정 추가(재고가 0개인 경우 대응)
+  // 4-2)초기 버튼 상태 설정 추가(재고가 0개인 경우 대응)
   const initialQuantity = parseInt(productInput.value);
-
   updateButtonState(productDetail, initialQuantity);
 
+  // 4-3) 수량 감소 버튼 클릭 이벤트
   decreaseBtn.addEventListener("click", () => {
     let productStock = parseInt(productInput.value);
+    // 수량이 1개 이상인 경우에만 수량 감소 가능
     if (productStock > 1) {
       productStock--;
       productInput.value = productStock;
@@ -79,21 +82,24 @@ function setupQuantityControls(productDetail) {
     }
   });
 
+  // 4-4) 수량 증가 버튼 클릭 이벤트
   increaseBtn.addEventListener("click", () => {
     let productStock = parseInt(productInput.value);
-    if (productStock < productDetail.stock) {
-      productStock++;
-      productInput.value = productStock;
-      updateQuantityAndPrice(
-        productDetail,
-        productInput,
-        productTotalQuantity,
-        productTotalPrice
-      );
-    }
+
+    // 항상 수량 증가 (재고 체크는 updateQuantityAndPrice에서)
+    productStock++;
+    productInput.value = productStock;
+
+    // updateQuantityAndPrice에서 재고 체크 및 알림창 표시
+    updateQuantityAndPrice(
+      productDetail,
+      productInput,
+      productTotalQuantity,
+      productTotalPrice
+    );
   });
 
-  // Enter 키 누르면 수량과 가격을 업데이트
+  // 4-5)Enter 키 누르면 수량과 가격을 업데이트
   productInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       updateQuantityAndPrice(
@@ -105,7 +111,7 @@ function setupQuantityControls(productDetail) {
     }
   });
 
-  // blur: input과 다르게 타이핑할 때마다 실행 X, 다른 곳으로 클릭할 때 실행
+  // 4-6) blur: input과 다르게 타이핑할 때마다 실행 X, 다른 곳으로 클릭할 때 실행
   productInput.addEventListener("blur", () => {
     updateQuantityAndPrice(
       productDetail,
@@ -116,9 +122,7 @@ function setupQuantityControls(productDetail) {
   });
 }
 
-// === 공통 함수: 사용자가 입력한 수량에 따라 총 수량과 가격을 업데이트 ===
-// 5. 공통함수
-
+// 5. 사용자가 입력한 수량에 따라 총 수량과 가격을 업데이트
 function updateQuantityAndPrice(
   productDetail, // API에서 받아온 상품 객체
   productInput, // 수량 입력하는 input 요소
@@ -134,13 +138,23 @@ function updateQuantityAndPrice(
     currentQuantity = 1;
   }
   // 5-2-2) 수량이 상품 재고보다 크면 수량을 상품 재고로 설정
-  else if (currentQuantity > productDetail.stock) {
-    // 추후 얼럿창 붙이기
+  else if (currentQuantity >= productDetail.stock) {
+    // 이미 알림창이 표시되어 있는지 확인(이 로직 없으면 알림창이 계속 쌓임)
+    const existingAlert = document.querySelector(".alert");
+    if (!existingAlert) {
+      const customAlert = {
+        title: "알림",
+        message: "재고 수량이 초과되었습니다.",
+        buttons: ["확인"],
+      };
 
-    // 임시 코드
-    console.log("최대 수량을 초과했습니다.");
-    currentQuantity = productDetail.stock;
+      new MiniAlert(customAlert);
+
+      // 수량을 재고 최대 수량으로 업데이트
+      currentQuantity = productDetail.stock;
+    }
   }
+
   // 5-3) 화면 업데이트
   // 5-3-1) 수량 입력하는 input 요소에 유효성 검사 적용된 수량 업데이트
   productInput.value = currentQuantity;
@@ -159,6 +173,7 @@ function updateButtonState(productDetail, currentQuantity) {
   const decreaseBtn = document.querySelector("[data-action='decrease']");
   const increaseBtn = document.querySelector("[data-action='increase']");
 
+  // 6-1) 버튼 상태만 관리
   decreaseBtn.disabled = currentQuantity <= 1;
   increaseBtn.disabled = currentQuantity >= productDetail.stock;
 }
@@ -172,15 +187,15 @@ function showOutOfStock(productDetail) {
   const decreaseBtn = document.querySelector("[data-action='decrease']");
   const increaseBtn = document.querySelector("[data-action='increase']");
 
-  // 수량 입력 필드 비활성화
+  // 7-1) 수량 입력 필드 비활성화
   productInput.disabled = true;
   productInput.value = "0";
 
-  // 버튼들 비활성화
+  // 7-2) 버튼들 비활성화
   decreaseBtn.disabled = true;
   increaseBtn.disabled = true;
 
-  // 총 수량과 가격을 "이 상품은 현재 구매할 수 없는 상품입니다." 메시지로 변경(네이버 참고)
+  // 7-3) 총 수량과 가격을 "이 상품은 현재 구매할 수 없는 상품입니다." 메시지로 변경(네이버 참고)
   totalQuantityText.textContent = "";
   totalQuantityLine.style.display = "none";
   productTotalPrice.innerHTML = `<span style="color: var(--gray-700); font-size: 1.6rem; display: inline-block; vertical-align: middle; line-height: 1;">이 상품은 현재 구매할 수 없는 상품입니다.</span>`;
