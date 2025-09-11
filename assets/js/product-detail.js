@@ -26,12 +26,20 @@ async function displayProductInfo(productDetail) {
 
   // 실제 데이터 업데이트 로직 추가
   if (productDetail) {
+    document.title = `${productDetail.info}`;
+
     productImage.src = productDetail.image;
+    productImage.alt = `${productDetail.info} - 대표 이미지`;
+
     productSeller.textContent = productDetail.seller.store_name;
     productTitle.textContent = productDetail.info;
     productPrice.textContent = formatPrice(productDetail.price);
     productDelivery.textContent = productDetail.shipping_method;
     productDeliveryFee.textContent = formatPrice(productDetail.shipping_fee);
+
+    // 메터 설명도 동적 업데이트 처리
+    const metaDescription = document.querySelector('meta[name="description"]');
+    metaDescription.content = `HODU 오픈마켓에서 ${productDetail.info}를(을) 만나보세요. 개발자 필수템입니다.`;
 
     // 재고 0인 경우 처리
     if (productDetail.stock === 0) {
