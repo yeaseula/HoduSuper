@@ -110,6 +110,7 @@
   display: grid;
   place-items: center;
 }
+
 .quantity-btn img {
   width: clamp(1.6rem, 1.8vw, 2rem);
   height: clamp(1.6rem, 1.8vw, 2rem);
@@ -128,6 +129,10 @@
 /* 수량 추가 감소 버튼 호버 효과 */
 .quantity-btn:hover {
   background: #f2f2f2;
+}
+
+.quantity-btn:disabled {
+  cursor: not-allowed;
 }
 
 /* 수량 디스플레이(1) */
