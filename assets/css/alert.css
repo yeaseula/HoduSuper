@@ -1,0 +1,198 @@
+/* 알림 모달 스타일시트 */
+
+/* 기본 폰트 크기 설정 */
+html {
+  font-size: 10px;
+}
+
+/* 스크린 리더 전용 텍스트 (접근성) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 모달 백드롭: 전체 화면을 덮는 반투명 배경 */
+.alert-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 창 메인 컨테이너 */
+.alert {
+  box-sizing: border-box;
+  width: 36rem;
+  height: 20rem;
+  padding: 4.2rem 7.5rem;
+  background-color: var(--color-white);
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15);
+}
+
+/* 모달 내용 컨테이너: 요소들 간 적절한 간격 유지 */
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.6rem;
+}
+
+/* X 닫기 버튼: 우상단 고정 위치 */
+.close-btn {
+  display: inline;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: url(../images/close-btn.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  position: absolute;
+  top: 1.8rem;
+  right: 1.8rem;
+  cursor: pointer;
+}
+
+/* 알림 메시지 텍스트 스타일 */
+.alert-message {
+  font-size: 1.6rem;
+}
+
+/* 버튼들을 가로로 배치하는 액션 컨테이너 */
+.alert-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* 공통 버튼 스타일 */
+.common-btn {
+  width: 10rem;
+  height: 4rem;
+  border: none;
+  box-shadow: inset 0 0 0 1px var(--gray-300);
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+/* 취소 버튼: 흰색 배경에 회색 텍스트 */
+.btn-cancel {
+  background-color: var(--color-white);
+  color: var(--gray-700);
+}
+
+/* 확인 버튼: 브랜드 컬러 배경에 흰색 텍스트 */
+.btn-confirm {
+  background-color: var(--main-500);
+  color: var(--color-white);
+}
+
+/* 버튼 호버 효과: 텍스트 들여쓰기로 인터랙션 표현 */
+.common-btn:hover {
+  text-indent: 1rem;
+}
+
+.common-btn:hover::before {
+  transform: scale(1, 1);
+}
+
+/* 비활성화된 버튼 스타일 */
+.common-btn:disabled {
+  background-color: var(--gray-300);
+  color: var(--color-white);
+  cursor: not-allowed; /* 클릭 불가 커서 */
+}
+
+/* 비활성화된 버튼은 호버 효과 제거 */
+.common-btn:disabled:hover {
+  text-indent: 0;
+  background-color: var(--gray-300);
+  font-weight: 700;
+}
+
+/* 수량 조절 컴포넌트 전체 컨테이너 */
+.quantity-container {
+  display: flex;
+  width: 15rem;
+  height: 5rem;
+  border: 0.1rem solid var(--gray-300);
+  border-radius: 0.5rem;
+}
+
+/* 수량 증감 버튼 공통 스타일 */
+.quantity-btn {
+  width: 5rem;
+  height: 100%;
+  display: grid;
+  place-items: center; /* 아이콘 중앙 정렬 */
+  cursor: pointer;
+}
+
+/* 버튼 내 아이콘 크기 */
+.quantity-btn img {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* 감소 버튼: 왼쪽 둥근 모서리 */
+.quantity-btn.decrease {
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+/* 증가 버튼: 오른쪽 둥근 모서리 */
+.quantity-btn.increase {
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* 수량 버튼 호버 효과: 연한 회색 배경으로 변경 */
+.quantity-btn:hover {
+  background: #f2f2f2;
+}
+
+/* 수량 입력 필드: 중앙의 숫자 입력 영역 */
+.quantity-input {
+  width: 5rem;
+  height: auto;
+  border: none;
+  border-left: 1px solid var(--gray-300);
+  border-right: 1px solid var(--gray-300);
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+  appearance: textfield; /* 표준 속성: 기본 스핀 버튼 제거 */
+  -moz-appearance: textfield; /* Firefox 호환성 */
+}
+
+/* 웹킷 브라우저 스핀 버튼 제거 (Chrome, Safari, Edge, Opera) */
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

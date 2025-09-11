@@ -1,6 +1,6 @@
 /* ========== 푸터 영역 ========== */
 /* 푸터 전체 컨테이너 - 회색 배경의 사이트 정보 영역 */
-footer {
+.footer {
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
   background-color: var(--color-bg-light);
   padding: 60px 0;

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO 기본 -->
+    <title>HODU SUPER</title>
+    <meta name="description" content="프로젝트 간단 설명">
+    <meta name="keywords" content="키워드1, 키워드2, 키워드3">
+    <meta name="author" content="러닝메이트">
+
+    <!-- Open Graph (SNS 공유용) -->
+    <meta property="og:title" content="프로젝트명">
+    <meta property="og:description" content="프로젝트 간단 설명">
+    <meta property="og:type" content="website">
+    <!--대표이미지 나중에 만듭시다, 배포 후 주소 넣읍시다-->
+    <!-- <meta property="og:image" content="assets/img/og-image.png"> -->
+    <!-- <meta property="og:url" content="https://프로젝트주소"> -->
+
+    <!-- favicon 나중에 만듭시다 -->
+    <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/fonts.css">
+    <link rel="stylesheet" href="../components/member/signup.css">
+
+    <script type="module" src="../components/member/signup.js"></script>
+</head>
+<body>
+    <div class="wide-container">
+    <section class="signup-section">
+        <h2 class="sr-only">회원가입 페이지</h2>
+            <img src="/components/member/img/member-logo.svg" class="member-logo" alt="호두슈퍼 로고">
+            <div class="signup-form-container">
+                <ul class="tab-list">
+                    <input type="hidden" name="user-type-field" value="buyer">
+                    <li data-target="buyer" class="active"><span>구매회원가입</span></li>
+                    <li data-target="seller"><span>판매회원가입</span></li>
+                </ul>
+                <div class="tab-container">
+                    <div class="buyer-box container on">
+                        <h3 class="sr-only">구매회원가입박스</h3>
+                        <form action=""></form>
+                    </div>
+                    <div class="seller-box container">
+                        <h3 class="sr-only">판매회원가입박스</h3>
+                        <form action=""></form>
+                    </div>
+                </div>
+                <div class="signup-agreement">
+                    <label for="agreement">
+                        <input type="checkbox" name="agreement" id="agreement" />
+                        <p>
+                            호두샵의 <a href="#">이용약관</a> 및 <a href="#">개인정보처리방침</a>에 대한 내용을 확인하였고 동의합니다.
+                        </p>
+                    </label>
+                </div>
+                <button type="submit" class="join-btn common-btn">가입하기</button>
+            </div>
+    </section>
+    </div>
+</body>
+</html>
