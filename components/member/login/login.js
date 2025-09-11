@@ -25,6 +25,8 @@ const tabSwitch = (e)=>{
     Container.forEach((ele) => ele.classList.remove('on'));
     targetContainer.classList.add('on');
 
+    document.querySelectorAll('input').forEach((input) => (input.value = ''));
+
     targetInput.value = targetdata;
     loginState.userType = targetdata;
     loginState.isIdChecked = false;
@@ -132,11 +134,10 @@ function isDone(userType) {
 }
 isDone(loginState.userType);
 //로그인요청
-async function loginAccess(userType) {
-    const field = getFormFields(userType);
-
-    const username = field.id.value;
-    const password = field.password.value;
+async function loginAccess(fields) {
+    const userType = loginState.userType;
+    const username = fields.id.value;
+    const password = fields.password.value;
 
     try{
         const res = await fetch("https://api.wenivops.co.kr/services/open-market/accounts/login/", {
@@ -169,7 +170,6 @@ async function loginAccess(userType) {
         }
     } catch(err) {
         console.log(err);
-        alert('서버오류')
     }
 }
 
@@ -222,5 +222,6 @@ $('.login-btn').addEventListener('click',(e)=>{
     e.preventDefault();
     const userType = loginState.userType;
     const fields = getFormFields(userType);
-    loginAccess(userType)
+    console.log(fields)
+    loginAccess(fields)
 })
