@@ -44,7 +44,7 @@
   display: inline;
   width: 2.2rem;
   height: 2.2rem;
-  background: url('assets/images/close-btn.svg');
+  background: url('./assets/images/close-btn.svg');
   background-position: center;
   background-repeat: no-repeat;
   border: none;
