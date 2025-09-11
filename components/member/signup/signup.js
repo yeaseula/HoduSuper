@@ -467,55 +467,14 @@ $('.join-btn').addEventListener('click', (e) => {
     const fields = getFormFields(userType);
     const username = fields.id.value;
     const password = fields.pass.value;
-    const phoneMiddle = fields.phoneM.value;
-    const phoneLast = fields.phoneL.value;
     const phoneRes = fields.phoneRes.value;
     const name = fields.name.value;
-    const sellerNumber = fields.sellerNum.value;
-    const sellerName = fields.sellerName.value;
-    const agreement = fields.agreement.checked;
-
-    if (!isRequired(username)) {
-        alert('아이디를 입력해 주세요.');
-        fields.id.focus();
-        return;
-    }
-    if (!isValidId(username)) {
-        alert('아이디는 20자 이하의 아이디는 영문 대,소문자와 숫자만 가능합니다.');
-        return;
-    }
-    if (!isRequired(password)) {
-        alert('비밀번호를 입력해 주세요.');
-        return;
-    }
-    if (!isValidPass(password)) {
-        alert('비밀번호는 8자 이상,영소문자를 포함해야합니다.');
-        return;
-    }
-    if (!isRequired(name)) {
-        alert('이름을 입력해 주세요.');
-        return;
-    }
-    if (!isRequired(phoneMiddle)) {
-        alert('휴대폰 번호를 입력해 주세요.');
-        return;
-    }
-    if (phoneRes.length < 10) {
-        alert('휴대폰 번호를 정확히 입력해 주세요.');
-        return;
-    }
-    if (!isRequired(phoneLast)) {
-        alert('휴대폰 번호를 입력해 주세요.');
-        return;
-    }
-    if (!agreement) {
-        alert('이용약관 및 개인정보처리방침에 체크해 주세요.');
-        return;
-    }
 
     if(userType == 'buyer') {
         buyerSignup(username,password,name,phoneRes)
     } else {
+        const sellerNumber = fields.sellerNum.value;
+        const sellerName = fields.sellerName.value;
         sellerSignup(username,password,name,phoneRes,sellerNumber,sellerName)
     }
 });
