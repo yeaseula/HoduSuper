@@ -38,32 +38,6 @@
   transform: rotate(180deg);
 }
 /* ========== 푸터 모바일 반응형 ========== */
-/* 모바일에서는 푸터 요소들을 세로 배열로 변경 */
-@media screen and (max-width: 767px) {
-  /* 푸터 링크 영역 - 세로 배열로 변경 */
-  .footer-link {
-    flex-direction: column; /* 메뉴와 SNS를 세로 배열 */
-    gap: 5rem;
-    justify-content: center;
-    align-items: center;
-  }
-  /* 푸터 메뉴 - 세로 배열로 변경 */
-  .footer-menu ul {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem; /* 모바일에서 줄 간격 조정 */
-  }
-
-  /* 모바일에서 메뉴 구분선 제거 */
-  .footer-menu li::after {
-    display: none;
-  }
-  /* 모바일에서 토글 버튼 중앙 정렬 */
-  .footer-menu-toggle {
-    justify-content: center;
-  }
-}
 
 /* ========== 태블릿 반응형 디자인 (768px ~ 1023px) ========== */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -92,7 +66,11 @@
 
   /* 토글 버튼 내부 화살표 표시 */
   .footer-menu-toggle .arrow {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 1px;
   }
 }
 
@@ -201,6 +179,36 @@
 
 /* ========== 푸터 정보 모바일 반응형 ========== */
 @media screen and (max-width: 767px) {
+  .footer {
+    padding: 30px 0;
+  }
+  /* 푸터 링크 영역 - 세로 배열로 변경 */
+  .footer-link {
+    flex-direction: column; /* 메뉴와 SNS를 세로 배열 */
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  /* 푸터 메뉴 - 세로 배열로 변경 */
+  .footer-menu ul {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem; /* 모바일에서 줄 간격 조정 */
+  }
+
+  /* 모바일에서 메뉴 구분선 제거 */
+  .footer-menu li::after {
+    display: none;
+  }
+  /* 모바일에서 토글 버튼 중앙 정렬 */
+  .footer-menu-toggle {
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .footer-sns {
+    margin-top: 15px;
+  }
   .footer-info {
     padding: 0;
     text-align: center; /* 텍스트 중앙 정렬 */
