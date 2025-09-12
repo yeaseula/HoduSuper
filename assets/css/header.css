@@ -116,7 +116,6 @@ header {
 /* ========== 판매자센터 버튼 스타일 ========== */
 /* 판매자센터 버튼 - 초록색 배경의 CTA 버튼 형태 */
 .header-seller-center a {
-  display: none;
   width: 16.8rem;
   height: 5.4rem;
   font-family: "SpoqaHanSansNeo-Medium", sans-serif;
@@ -148,11 +147,14 @@ header {
 .header-mypage {
   display: none;
 }
+.header-seller-center {
+  display: none;
+}
 
 /* 판매자센터는 데스크톱에서 일반 사용자에게도 표시 (회원가입 유도) */
 
 /* ========== 모바일 유저 메뉴 반응형 디자인 ========== */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 850px) {
   /* 모바일에서 유저 메뉴 텍스트 숨김 (아이콘만 표시) */
   .header-user-list li a span {
     display: none;
@@ -245,8 +247,25 @@ header {
   flex-shrink: 0;
 }
 
+@media screen and (max-width:850px) {
+  .header-mypage {
+    align-items: center;
+  }
+  .header-seller-center a {
+    width: 96px;
+    font-size: 1.4rem;
+    height: 35px;
+  }
+  .header-seller-center a::before {
+    display: none;
+  }
+  .header-seller-center a span {
+    display: inline-block !important;
+  }
+}
+
 /* ========== 모바일 반응형 스타일 (767px 이하) ========== */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 850px) {
   .header {
     background: #fff;
     z-index: 80;
@@ -287,6 +306,7 @@ header {
     gap: 1.5rem;
   }
   .header-buyer-cart a::before,
+  .header-login a::before,
   .header-mypage a::before {
     width: 2.1rem;
     height: 2.1rem;
