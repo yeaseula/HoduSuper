@@ -5,7 +5,7 @@ import {
   deleteCartItem,
   formatPrice,
 } from "./cart-api.js";
-import MiniAlert from "../components//MiniAlert.js";
+import MiniAlert from "../../components/MiniAlert.js";
 import { alerts } from "./calculate.js";
 
 // ===== 전역 상태 및 상수 정의 =====
@@ -123,9 +123,9 @@ const createQuantityControls = (item) => `
     <button class="quantity-btn decrease">
       <img src="${CONSTANTS.IMAGES.MINUS}" alt="감소">
     </button>
-    <input type="number" class="quantity-input" 
-           value="${item.quantity}" 
-           min="${CONSTANTS.MIN_QTY}" 
+    <input type="number" class="quantity-input"
+           value="${item.quantity}"
+           min="${CONSTANTS.MIN_QTY}"
            max="${CONSTANTS.MAX_QTY}">
     <button class="quantity-btn increase">
       <img src="${CONSTANTS.IMAGES.PLUS}" alt="증가">
