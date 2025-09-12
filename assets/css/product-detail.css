@@ -25,6 +25,9 @@
   max-width: 60rem;
   display: flex;
   align-items: stretch;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
 }
 
 .product-image img {
@@ -33,6 +36,7 @@
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
+  background-color: white;
 }
 
 /*  상품 정보(판매업체부터 버튼까지) */
@@ -110,6 +114,7 @@
   display: grid;
   place-items: center;
 }
+
 .quantity-btn img {
   width: clamp(1.6rem, 1.8vw, 2rem);
   height: clamp(1.6rem, 1.8vw, 2rem);
@@ -128,6 +133,15 @@
 /* 수량 추가 감소 버튼 호버 효과 */
 .quantity-btn:hover {
   background: #f2f2f2;
+}
+
+/* 수량 버튼 비활성화 스타일 */
+.quantity-btn:disabled {
+  cursor: not-allowed;
+}
+
+.quantity-btn:disabled img {
+  opacity: 0.6;
 }
 
 /* 수량 디스플레이(1) */
@@ -290,6 +304,24 @@
 }
 .tab-panel.active {
   display: block;
+}
+
+/* 스피너(spinner) - 이미지 로딩 중일 때 표시 */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(47, 79, 79, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--main-500);
+  animation: rotate 1.2s infinite ease-in-out alternate;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ===== 반응형 ===== */
