@@ -63,10 +63,10 @@ body {
  */
 
 /* ========== Font Family(폰트) ========== */
-.fm-m {
+.fw-m {
   font-family: "SpoqaHanSansNeo-Medium", sans-serif;
 }
-.fm-b {
+.fw-b {
   font-family: "SpoqaHanSansNeo-Bold", sans-serif;
 }
 
@@ -227,13 +227,16 @@ body {
   color: var(--color-white);
 }
 
-/* 추가 */
+/* ========== Text Align ========== */
 .text-center {
   text-align: center;
 }
+
+/* ========== Border ========== */
 .border-none {
   border: none;
 }
+
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
 /* ===== 공통 CSS 스타일 ===== */
