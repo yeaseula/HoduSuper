@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.text())
         .then(data => {
             document.querySelector('.header').innerHTML = data;
-
             // ===== 검색 창 =====
             // ===== 변수 선언 =====
             const searchForm = document.querySelector(".header-search");
@@ -26,10 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
             function openMobileSearch() {
                 searchOverlay.classList.add("active");
                 searchContainer.classList.add("active");
-
                 document.body.style.overflow = "hidden";
                 // 스크롤 방지
-
                 setTimeout(() => mobileSearch.focus(), 300);
             }
 
@@ -39,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchContainer.classList.remove("active");
                 document.body.style.overflow = "";
             }
-
             // ===== ESC 키 닫기 =====
             function handleKeydown(e) {
                 if (e.key === "Escape") closeMobileSearch();
@@ -64,11 +60,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 const keyword = search.value.trim();
                 if (!keyword) {
-                alert("상품의 이름을 입력해주세요!");
-                return;
+                    alert("상품의 이름을 입력해주세요!");
+                    return;
                 }
-                window.location.href = `product-detail.html?q=${encodeURIComponent(
-                keyword
+                    window.location.href = `product-detail.html?q=${encodeURIComponent(keyword
                 )}`;
             }
 
@@ -79,36 +74,40 @@ document.addEventListener('DOMContentLoaded', function () {
             document.addEventListener("keydown", handleKeydown);
             searchOverlay.addEventListener("click", closeMobileSearch);
             mobileSearchForm.addEventListener("submit", handleMobileSearch);
-
+        })
+        .then(()=>{
             // ===== 유저 메뉴 =====
             // ===== 변수 선언 =====
             const loginBtn = document.querySelector(".header-login");
             const mypageBtn = document.querySelector(".header-mypage");
             const cartBtn = document.querySelector(".header-buyer-cart");
             const sellerCenterBtn = document.querySelector(".header-seller-center");
-
+            // ==== login user 정보 확인 ====
+            const user = JSON.parse(localStorage.getItem("user"));
+            updateHeader(user)
             function updateHeader(user) {
-                if (!user || !user.isLoggedIn) {
-                // 로그아웃 상태
-                loginBtn.style.display = "flex";
-                cartBtn.style.display = "flex";
-                mypageBtn.style.display = "none";
-                sellerCenterBtn.style.display = "none";
-                } else if (user.role === "buyer") {
+                console.log(user.user_type)
+                if (!user) {
+                    // 로그아웃 상태
+                    loginBtn.style.display = "flex";
+                    cartBtn.style.display = "flex";
+                    mypageBtn.style.display = "none";
+                    sellerCenterBtn.style.display = "none";
+                } else if (user.user_type == "BUYER") {
+                    console.log('ddd')
                 // 구매
-                loginBtn.style.display = "none";
-                cartBtn.style.display = "flex";
-                mypageBtn.style.display = "flex";
-                sellerCenterBtn.style.display = "none";
-                } else if (user.role === "seller") {
+                    loginBtn.style.display = "none";
+                    cartBtn.style.display = "flex";
+                    mypageBtn.style.display = "flex";
+                    sellerCenterBtn.style.display = "none";
+                } else if (user.user_type === "SELLER") {
                 // 판매
-                loginBtn.style.display = "none";
-                cartBtn.style.display = "none";
-                mypageBtn.style.display = "flex";
-                sellerCenterBtn.style.display = "flex";
+                    loginBtn.style.display = "none";
+                    cartBtn.style.display = "none";
+                    mypageBtn.style.display = "flex";
+                    sellerCenterBtn.style.display = "flex";
                 }
             }
-
         })
         .catch(error => {
             console.error('파일 로딩 오류:', error);
@@ -131,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 toggleBtn.addEventListener("click", () => {
                 // 현재 메뉴 상태 확인
                 const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
-
                 // 접근성 속성 업데이트
                 toggleBtn.setAttribute("aria-expanded", !expanded);
                 footerMenu.hidden = expanded;
