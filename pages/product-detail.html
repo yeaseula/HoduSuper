@@ -7,94 +7,98 @@
       name="description"
       content="HODU 오픈마켓에서 개발자 필수템을 만나보세요."
     />
-    <meta
-      name="keywords"
-      content="개발자, HODU, 오픈마켓, 프로그래머 용품"
-    />
+    <meta name="keywords" content="개발자, HODU, 오픈마켓, 프로그래머 용품" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
     />
 
     <script>
-      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+      if (
+        location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1"
+      ) {
         document.write('<base href="/">'); // 로컬
       } else {
         document.write('<base href="/HoduSuper/">'); // GitHub Pages
       }
     </script>
 
-
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/common.css" />
-    <link rel="stylesheet" href="./assets/css/fonts.css" />
-    <link rel="stylesheet" href="./assets/css/product-detail.css" />
-
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/product-detail.css" />
 
     <title></title>
 
-    <link rel="stylesheet" href="./assets/css/header.css">
-    <link rel="stylesheet" href="./assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/header.css" />
+    <link rel="stylesheet" href="../assets/css/footer.css" />
 
     <title>딥러닝 개발자 무릎 담요</title>
-    <script src="./assets/js/common.js" defer></script>
-
+    <script src="../assets/js/common.js" defer></script>
   </head>
   <body>
     <!-- 헤더 공간 -->
-    
+
     <!-- 메인 컨텐츠 -->
     <main id="main-content" class="wide-container main" role="main">
       <!-- 상품 상세 정보 -->
-      <section class="product-detail" aria-label="상품 상세 정보">
-        <div class="product-image">
+      <section
+        class="product-detail items-stretch ds-f"
+        aria-label="상품 상세 정보"
+      >
+        <div class="product-image items-stretch flex-center flex-1">
           <!-- 스피너(이미지 로딩 중일 때 표시) -->
-           <div class="image-spinner" id="image-spinner">
-            <div class="spinner"></div>
+          <div class="image-spinner" id="image-spinner">
+            <div class="spinner w-5 h-5"></div>
             <p class="sr-only">이미지 로딩 중</p>
-           </div>
+          </div>
           <img
             src=""
             alt=""
             id="product-image"
-            style='display:none'
-
+            style="display: none"
+            class="w-full h-full aspect-1 of-cover ds-b"
           />
         </div>
-        
-        <div class="product-info">
-          <p class="product-seller" aria-label="판매업체"></p>
+
+        <div class="product-info flex-col">
+          <p class="product-seller text-gray" aria-label="판매업체"></p>
           <h2 class="product-title"></h2>
           <div
             class="product-price"
             role="text"
             aria-label="상품 가격 17,500원"
           >
-            <span class="price-number"></span>
+            <span class="price-number fm-b"></span>
             <span class="price-unit">원</span>
           </div>
 
-          <div class="delivery-info delivery-label" role="text" aria-label="배송 정보">
+          <div
+            class="delivery-info delivery-label text-gray"
+            role="text"
+            aria-label="배송 정보"
+          >
             <span class="delivery-way"></span>
-              <span> / </span>
-              <i class="ri-truck-line"></i>
-              <span class="delivery-fee"></span>
-              <span>원</span>
+            <span> / </span>
+            <i class="ri-truck-line"></i>
+            <span class="delivery-fee"></span>
+            <span>원</span>
           </div>
-          <div class="quantity-line">
+          <div class="quantity-line flex-start">
             <div
-              class="quantity-container"
+              class="quantity-container ds-f"
               role="group"
               aria-label="상품 수량 선택"
             >
               <button
-                class="quantity-btn decrease"
+                class="quantity-btn decrease h-full ds-g bg-white border-none"
                 type="button"
                 aria-label="수량 감소"
                 data-action="decrease"
               >
                 <img
-                  src="./assets/images/icon-minus-line.svg"
+                  src="../assets/images/icon-minus-line.svg"
                   alt=""
                   aria-hidden="true"
                 />
@@ -102,24 +106,24 @@
               <input
                 type="number"
                 id="quantity-display"
-                class="quantity-display"
+                class="quantity-display h-full bg-white text-center border-none"
                 aria-label="현재 수량"
                 value="1"
                 min="1"
-                max="99"
+                max="150"
               />
               <!-- aria-live: 수량 변경 안내 / polite: 읽던 내용 다 읽고 안내 -->
               <div id="quantity-help" class="sr-only">
                 최소 1개, 최대 99개까지 선택 가능합니다
               </div>
               <button
-                class="quantity-btn increase"
+                class="quantity-btn increase h-full ds-g bg-white border-none"
                 type="button"
                 aria-label="수량 증가"
                 data-action="increase"
               >
                 <img
-                  src="./assets/images/icon-plus-line.svg"
+                  src="../assets/images/icon-plus-line.svg"
                   alt=""
                   aria-hidden="true"
                 />
@@ -128,42 +132,47 @@
           </div>
 
           <div
-            class="total-price"
+            class="total-price flex-between"
             role="text"
             aria-live="polite"
             aria-atomic="true"
           >
-            <span class="total-label">총 상품 금액</span>
-            <div class="total-amount">
-              <span class="total-quantity" id="total-quantity"
-                >총 수량 <span class="total-quantity-number" id="total-quantity-number"> 1</span class="total-quantity">개
+            <span class="total-label fm-m">총 상품 금액</span>
+            <div class="total-amount flex-center">
+              <span class="total-quantity text-gray" id="total-quantity"
+                >총 수량
+                <span
+                  class="total-quantity-number text-green fm-b"
+                  id="total-quantity-number"
+                >
+                  1</span
+                >개
               </span>
               <span class="total-quantity line">|</span>
               <span
-                class="total-price-value"
+                class="total-price-value text-green fm-b"
                 id="total-price"
                 aria-label="총 금액"
               >
-                17,500<span class="unit"> 원</span>
               </span>
             </div>
           </div>
 
           <div
-            class="action-buttons"
+            class="action-buttons ds-f text-white"
             role="group"
             aria-label="상품 주문 옵션"
             data-layout-ratio="wider-first"
           >
             <button
-              class="common-btn buy-now-btn"
+              class="common-btn buy-now-btn fm-b cur-p"
               type="button"
               aria-label="딥러닝 개발자 무릎 담요 바로 구매"
             >
               바로 구매
             </button>
             <button
-              class="common-btn add-cart-btn"
+              class="common-btn add-cart-btn fm-b cur-p"
               type="button"
               aria-label="딥러닝 개발자 무릎 담요 장바구니에 담기"
             >
@@ -175,7 +184,11 @@
 
       <!-- 상품 정보 탭 -->
       <section class="product-tabs" aria-label="상품 상세 정보">
-        <div class="tab-navigation" role="tablist" aria-label="상품 정보 탭">
+        <div
+          class="tab-navigation ds-f items-stretch"
+          role="tablist"
+          aria-label="상품 정보 탭"
+        >
           <button
             class="tab-btn active"
             role="tab"
@@ -187,7 +200,6 @@
           </button>
           <button
             class="tab-btn"
-          
             role="tab"
             aria-selected="false"
             id="tab-2"
@@ -216,12 +228,12 @@
         </div>
       </section>
     </main>
-    
-<!-- API 기능 로드 -->
-<script src="/assets/js/api.js"></script>
-<!-- MiniAlert 모듈 사용 -->
-<script type="module" src="/components/MiniAlert.js"></script>
-<!-- 상품 상세 기능 로드 -->
-<script type="module" src="/assets/js/product-detail.js"></script>
+
+    <!-- API 기능 로드 -->
+    <script src="../assets/js/api.js"></script>
+    <!-- MiniAlert 모듈 사용 -->
+    <script type="module" src="../components/MiniAlert.js"></script>
+    <!-- 상품 상세 기능 로드 -->
+    <script type="module" src="../assets/js/product-detail.js"></script>
   </body>
 </html>

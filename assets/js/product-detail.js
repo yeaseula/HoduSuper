@@ -70,7 +70,9 @@ function setupQuantityControls(productDetail) {
   const productTotalPrice = document.querySelector("#total-price"); // 17,500(총 금액)
 
   // 4-1) 초기 총 가격 설정(1개 기준)
-  productTotalPrice.textContent = formatPrice(productDetail.price);
+  productTotalPrice.innerHTML = `${formatPrice(
+    productDetail.price
+  )}<span class="unit">원</span>`;
 
   // 4-2)초기 버튼 상태 설정 추가(재고가 0개인 경우 대응)
   const initialQuantity = parseInt(productInput.value);
@@ -171,9 +173,9 @@ function updateQuantityAndPrice(
   // 5-3-2) 총 수량을 표시
   productTotalQuantity.textContent = currentQuantity;
   // 5-3-3) 총 가격을 표시
-  productTotalPrice.textContent = formatPrice(
+  productTotalPrice.innerHTML = `${formatPrice(
     currentQuantity * productDetail.price
-  );
+  )}<span class="unit">원</span>`;
 
   updateButtonState(productDetail, currentQuantity);
 }
