@@ -3,22 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니</title>
     <script>
-      if (
-        location.hostname === "localhost" ||
-        location.hostname === "127.0.0.1"
-      ) {
+      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
         document.write('<base href="/">'); // 로컬
       } else {
         document.write('<base href="/HoduSuper/">'); // GitHub Pages
       }
     </script>
-    <title>장바구니</title>
-    <link rel="stylesheet" href="../assets/css/reset.css" />
-    <link rel="stylesheet" href="../assets/css/common.css" />
-    <link rel="stylesheet" href="../assets/css/fonts.css" />
-    <link rel="stylesheet" href="../assets/css/cart.css" />
-    <link rel="stylesheet" href="../assets/css/alert.css" />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/common.css" />
+    <link rel="stylesheet" href="./assets/css/fonts.css" />
+    <link rel="stylesheet" href="./assets/css/cart.css" />
+    <link rel="stylesheet" href="./assets/css/alert.css" />
   </head>
   <body>
     <!-- 장바구니 메인 컨테이너 -->
@@ -60,6 +57,6 @@
       <button class="total-order-btn common-btn">주문하기</button>
     </section>
 
-    <script type="module" src="../assets/js/cart.js"></script>
+    <script type="module" src="./assets/js/cart.js"></script>
   </body>
 </html>
