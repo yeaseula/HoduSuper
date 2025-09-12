@@ -155,7 +155,7 @@ async function loginAccess(fields) {
 
             localStorage.setItem("access", data.access);
             localStorage.setItem("refresh", data.refresh);
-
+            localStorage.setItem("user", JSON.stringify(data.user));
             const alert = new MiniAlert({
                 title:'title',
                 message:'로그인이 완료되었습니다!<br> 메인페이지로 이동합니다.',
@@ -192,40 +192,39 @@ async function fetchWithAuth(url, options = {}) {
         return;
     }
 
-  // 요청 시 Authorization 헤더 추가
-  options.headers = {
-    ...options.headers,
-    "Authorization": `Bearer ${accessToken}`,
-    "Content-Type": "application/json"
-  };
+    // 요청 시 Authorization 헤더 추가
+    options.headers = {
+        ...options.headers,
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+    };
 
-  let res = await fetch(url, options);
+    let res = await fetch(url, options);
 
-  // access 토큰 만료 시 refresh로 재발급
-  if (res.status === 401) {
-    const refreshRes = await fetch("https://api.wenivops.co.kr/services/open-market/accounts/token/refresh/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refresh: refreshToken })
-    });
+    // access 토큰 만료 시 refresh로 재발급
+    if (res.status === 401) {
+            const refreshRes = await fetch("https://api.wenivops.co.kr/services/open-market/accounts/token/refresh/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refresh: refreshToken })
+        });
 
-    if (refreshRes.ok) {
-      const refreshData = await refreshRes.json();
-      localStorage.setItem("access", refreshData.access); // 새로운 access 저장
-      accessToken = refreshData.access;
-
-      // 원래 요청 재시도
-      options.headers.Authorization = `Bearer ${accessToken}`;
-      res = await fetch(url, options);
-    } else {
-      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
-      localStorage.removeItem("access");
-      localStorage.removeItem("refresh");
-      return;
+        if (refreshRes.ok) {
+            const refreshData = await refreshRes.json();
+            localStorage.setItem("access", refreshData.access); // 새로운 access 저장
+            accessToken = refreshData.access;
+        // 원래 요청 재시도
+            options.headers.Authorization = `Bearer ${accessToken}`;
+            res = await fetch(url, options);
+        } else {
+            alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+            localStorage.removeItem("access");
+            localStorage.removeItem("refresh");
+            return;
+        }
     }
-  }
 
-  return res.json();
+    return res.json();
 }
 
 $('.login-btn').addEventListener('click',(e)=>{
