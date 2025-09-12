@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const sellerCenterBtn = document.querySelector(".header-seller-center");
             // ==== login user 정보 확인 ====
             const user = JSON.parse(localStorage.getItem("user"));
+            if(!user) return;
             updateHeader(user)
             function updateHeader(user) {
-                console.log(user.user_type)
                 if (!user) {
                     // 로그아웃 상태
                     loginBtn.style.display = "flex";
@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     mypageBtn.style.display = "none";
                     sellerCenterBtn.style.display = "none";
                 } else if (user.user_type == "BUYER") {
-                    console.log('ddd')
                 // 구매
                     loginBtn.style.display = "none";
                     cartBtn.style.display = "flex";
