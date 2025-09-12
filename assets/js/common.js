@@ -85,14 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // ==== login user 정보 확인 ====
             const user = JSON.parse(localStorage.getItem("user"));
             updateHeader(user)
-            if (user.user_type === "SELLER") {
-                console.log("판매회원");
-
-            } else {
-                console.log("일반회원");
-
-            }
-
             function updateHeader(user) {
                 console.log(user.user_type)
                 if (!user) {
