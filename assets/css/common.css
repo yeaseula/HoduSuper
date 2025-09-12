@@ -40,8 +40,187 @@ body {
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
 }
 
-/* ===== (0909) 채현 업데이트 내용 - 공통 CSS 스타일 ===== */
+/* >>>>>>>>>>>> CSS 리팩토리용 유틸리티 클래스 >>>>>>>>>>>>> */
 
+/* 
+ * 약어 네이밍의 유틸리티 클래스 모음
+ * 
+ * 사용법:
+ * - HTML에서 클래스명을 조합하여 사용
+ * - 예: <div class="ds-f items-c justify-c">
+ * 
+ * 네이밍 규칙:
+ * - 약어 사용: display -> ds, font-weight -> fw
+ * - 예: .ds-b, .ds-f, .fw-b, .pos-r
+ * 
+ * 분류:
+ * - Display: .ds-b, .ds-f, .ds-g, .ds-n
+ * - Flexbox: .flex-col, .items-stretch, .justify-c
+ * - Position: .pos-r, .pos-a, .pos-f
+ * - Spacing: .mb-4, .mt-8, .p-4
+ * - Colors: .text-gray, .bg-white
+ * - Sizing: .w-full, .h-full, .aspect-1
+ */
+
+/* ========== Font Family(폰트) ========== */
+.fm-m {
+  font-family: "SpoqaHanSansNeo-Medium", sans-serif;
+}
+.fm-b {
+  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
+}
+
+/* ========== Width & Height(너비, 높이) ========== */
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+
+/* ========== Object Fit ========== */
+.of-cover {
+  object-fit: cover;
+}
+
+/* ========== Flexbox ========== */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-center-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========== Aspect Ratio ========== */
+.aspect-1 {
+  aspect-ratio: 1;
+}
+
+/* ========== Flexbox Align Items ========== */
+.items-stretch {
+  align-items: stretch;
+}
+
+/* ========== Flexbox 조합 ========== */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-center-y {
+  /* 세로만 중앙 (가로는 왼쪽) */
+  display: flex;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ========== Grid ========== */
+.grid-center {
+  display: grid;
+  place-items: center;
+}
+
+/* ========== Flex ========== */
+.flex-1 {
+  flex: 1;
+}
+
+/* ========== Display ========== */
+.ds-b {
+  display: block;
+}
+.ds-n {
+  display: none;
+}
+.ds-ib {
+  display: inline-block;
+}
+.ds-f {
+  display: flex;
+}
+.ds-g {
+  display: grid;
+}
+
+/* ========== Position ========== */
+.pos-r {
+  position: relative;
+}
+.pos-a {
+  position: absolute;
+}
+.pos-f {
+  position: fixed;
+}
+.pos-sticky {
+  position: sticky;
+}
+
+/* ========== Background ========== */
+.bg-cover-center {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.bg-n {
+  background: none;
+}
+
+/* ========== Margin ========== */
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 2rem;
+}
+.mb-3 {
+  margin-bottom: 3rem;
+}
+.mb-4 {
+  margin-bottom: 4rem;
+}
+
+/* ========== Cursor ========== */
+.cur-p {
+  cursor: pointer;
+}
+.cur-n {
+  cursor: not-allowed;
+}
+
+/* ========== Text Color ========== */
+.text-black {
+  color: var(--text-color); /* 검정색 */
+}
+
+.text-gray {
+  color: var(--gray-700);
+}
+
+.text-light-gray {
+  color: var(--main-500);
+}
+
+.text-white {
+  color: var(--color-white);
+}
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+/* ===== 공통 CSS 스타일 ===== */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -128,7 +307,7 @@ body {
   font-family: "SpoqaHanSansNeo-Bold";
 }
 
-/* 헤더 검색창 기본 claer 버튼 삭제 */
+/* 헤더 검색창 기본 clear 버튼 삭제 */
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
