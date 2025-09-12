@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if (
+        location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1"
+      ) {
+        document.write('<base href="/">'); // 로컬
+      } else {
+        document.write('<base href="/HoduSuper/">'); // GitHub Pages
+      }
+    </script>
+    <title>장바구니</title>
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/cart.css" />
+    <link rel="stylesheet" href="../assets/css/alert.css" />
+  </head>
+  <body>
+    <!-- 장바구니 메인 컨테이너 -->
+    <section class="cart-container wide-container">
+      <h2 class="cart-title">장바구니</h2>
+
+      <!-- 장바구니 테이블 헤더 -->
+      <ul class="cart-list">
+        <li><button class="check-box"></button></li>
+        <li>상품정보</li>
+        <li>수량</li>
+        <li>상품금액</li>
+      </ul>
+
+      <!-- 동적으로 생성되는 장바구니 상품 목록 -->
+      <div class="cart-products-content"></div>
+
+      <!-- 주문 금액 계산 및 표시 영역 -->
+      <div class="cart-order-content">
+        <div class="price-product">
+          <h4>총 상품 금액</h4>
+          <p class="total-price"><span class="order-price">0</span>원</p>
+        </div>
+        <div class="price-product">
+          <h4>상품 할인</h4>
+          <p class="discount-price"><span class="order-price">0</span>원</p>
+        </div>
+        <div class="price-product">
+          <h4>배송비</h4>
+          <p class="ship-price"><span class="order-price">0</span>원</p>
+        </div>
+        <div class="price-product final-product">
+          <h4>결제 예정 금액</h4>
+          <p class="final-price total"><span class="order-price">0</span>원</p>
+        </div>
+      </div>
+
+      <!-- 선택된 상품들 전체 주문 버튼 -->
+      <button class="total-order-btn common-btn">주문하기</button>
+    </section>
+
+    <script type="module" src="../assets/js/cart.js"></script>
+  </body>
+</html>
