@@ -501,7 +501,7 @@ async function buyerSignup (username,password,name,phoneRes) {
             message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
             buttons : [],
             link:['예'],
-            linkHerf:['./pages/login.html'],
+            linkHref:['./pages/login.html'],
             closeBackdrop : true,
             customContent : null,
         })
@@ -533,7 +533,7 @@ async function sellerSignup (username,password,name,phoneRes,sellerNumber,seller
             message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
             buttons : [],
             link:['예'],
-            linkHerf:['./pages/login.html'],
+            linkHref:['./pages/login.html'],
             closeBackdrop : true,
             customContent : null,
         })
