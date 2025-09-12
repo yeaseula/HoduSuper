@@ -37,8 +37,12 @@ function displayProducts(products) {
 function createProductCard(product) {
   const article = document.createElement("article");
   article.classList.add("product-card");
+
   article.setAttribute("itemscope", "");
   article.setAttribute("itemtype", "https://schema.org/Product");
+
+  // 품절 체크 로직
+  const soldOutClass = product.stock === 0 ? "sold-out" : "";
 
   // 클릭 시 상세 페이지로 이동
   article.style.cursor = "pointer";
@@ -48,18 +52,22 @@ function createProductCard(product) {
       (window.location.href = `../pages/product-detail.html?id=${product.id}`)
   );
   article.innerHTML = `
+  <div class="image-wrapper ${soldOutClass}">
             <img
               src="${product.image}"
               alt="${product.name} 상품 이미지"
               onerror="handleImageError(this)"
             />
+  </div>
     <div class="product-card-text">
       <p>${product.seller.store_name}</p>
       <h3 itemprop="name">${product.info}</h3>
       <div itemprop="price">
-        <span>${formatPrice(product.price)}</span>
-        <span>원</span>
-      </div>
+        <span class="price-number ${soldOutClass}">${formatPrice(
+    product.price
+  )}</span>
+        <span class="price-unit ${soldOutClass}">원</span>
+      </div> 
     </div>
   `;
 
