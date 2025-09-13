@@ -79,6 +79,18 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(()=>{
             const user = JSON.parse(localStorage.getItem("user"));
 
+            // const headerContent = document.querySelector('.header-content');
+            // function userWellcome(user) {
+            //     if(!user) return;
+
+            //     const span = document.createElement('span');
+            //     span.classList.add('user-message');
+            //     span.innerHTML = `${user.name}님, 환영합니다!`
+
+            //     headerContent.append(span)
+            // }
+            // userWellcome(user)
+
             function createMenu(user) {
                 const menulist = {
                     cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
