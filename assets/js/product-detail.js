@@ -64,7 +64,7 @@ async function displayProductInfo(productDetail) {
     }
     setupTabControls();
 
-    // 3-4) 상품 정보 탭 내용 생성
+    // 3-4) 상품 정보 탭 내용 생성 -> 9번 코드 참고
     const productInfoContent = document.getElementById("product-info-content");
     if (productInfoContent) {
       productInfoContent.innerHTML = createProductInfoContent(productId);
@@ -72,7 +72,7 @@ async function displayProductInfo(productDetail) {
       productInfoContent.innerHTML = `<p>상품 정보를 불러올 수 없습니다.</p>`;
     }
 
-    // 3-5) 리뷰 탭 내용 생성
+    // 3-5) 리뷰 탭 내용 생성 -> 10번 코드 참고
     const reviewContent = document.getElementById("review-content");
     if (reviewContent) {
       reviewContent.innerHTML = createReviewContent(productId);
@@ -80,7 +80,7 @@ async function displayProductInfo(productDetail) {
       reviewContent.innerHTML = `<p>리뷰 정보를 불러올 수 없습니다.</p>`;
     }
 
-    // 3-6) Q&A 탭 내용 생성 (공통 데이터)
+    // 3-6) Q&A 탭 내용 생성 (공통 데이터) -> 11번 코드 참고
     const qaContent = document.getElementById("qa-content");
     if (qaContent) {
       qaContent.innerHTML = createQAContent();
@@ -88,7 +88,7 @@ async function displayProductInfo(productDetail) {
       qaContent.innerHTML = `<p>Q&A 정보를 불러올 수 없습니다.</p>`;
     }
 
-    // 3-7) 반품/교환정보 탭 내용 생성 (공통 데이터)
+    // 3-7) 반품/교환정보 탭 내용 생성 (공통 데이터) -> 12번 코드 참고
     const returnExchangeContent = document.getElementById(
       "return-exchange-content"
     );
@@ -264,13 +264,17 @@ function setupTabControls() {
     if (!targetli) return;
 
     const targetdata = targetli.dataset.target;
-    const targetContainer = $(`.${targetdata}-box`);
-    const Container = document.querySelectorAll(".container");
 
+    // 모든 탭 버튼에서 active 클래스 제거
     li.forEach((ele) => ele.classList.remove("active"));
+    // 클릭한 탭 버튼에 active 추가
     targetli.classList.add("active");
-    Container.forEach((ele) => ele.classList.remove("on"));
-    targetContainer.classList.add("on");
+
+    const targetContent = document.querySelector(`#${targetdata}-content`);
+    if (targetContent) {
+      // 탭 컨텐츠로 스크롤 이동(부드러운 스크롤, 상단에 맞춤)
+      targetContent.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
   tab.addEventListener("click", tabSwitch);
 }
@@ -282,8 +286,12 @@ function createProductInfoContent(productId) {
   if (!product) return "<p>상품 정보를 찾을 수 없습니다.</p>";
 
   return `
-    <h3 class="content-title">${product.productName} 상세 정보</h3>
+    <h3 class="content-title">상품 정보</h3>
     <div class="product-specs">
+      <div class="spec-item">
+        <span class="spec-label">상품명</span>
+        <span class="spec-value">&nbsp; ${product.productName}</span>
+      </div>
       <div class="spec-item">
         <span class="spec-label">재질</span>
         <span class="spec-value">&nbsp; ${product.specs.material}</span>
@@ -332,7 +340,7 @@ function createReviewContent(productId) {
     .join("");
 
   return `
-    <h3 class="review-title">${product.productName} 리뷰</h3>
+    <h3 class="review-title">리뷰</h3>
     <div class="review-summary">
       <div class="rating-summary">
         <div class="rating-score">${product.rating}</div>
@@ -349,11 +357,7 @@ function createReviewContent(productId) {
 // 11. Q&A 탭 내용 생성 (공통 데이터 - 모든 상품에 동일 내용 노출)
 function createQAContent() {
   return `
-    <h3 class="content-title">상품 Q&A</h3>
-    <div class="qa-summary">
-      <p class="qa-count">총 2개의 문의가 있습니다.</p>
-    </div>
-    
+    <h3 class="content-title">Q&A</h3>    
       <div class="qa-item">
         <div class="qa-question">
           <span class="question-text">배송은 얼마나 걸리나요?</span>
@@ -383,13 +387,13 @@ function createQAContent() {
 
 function createReturnExchangeContent() {
   return `
-    <h3 class="content-title">반품/교환 안내</h3>
+    <h3 class="content-title">반품/교환정보</h3>
     
     <div class="return-info">
       <h4 class="info-title">반품/교환 가능 기간</h4>
       <ul class="info-list">
         <li>• 구매자 단순 변심은 상품 수령 후 7일 이내(구매자 반품배송비 부담)</li>
-        <li>• 표시/광고와 상이, 계약 내용과 다르게 이행된 경우 상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내/li>
+        <li>• 표시/광고와 상이, 계약 내용과 다르게 이행된 경우 상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내</li>
       </ul>
     </div>
     
