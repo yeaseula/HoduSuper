@@ -266,16 +266,22 @@ function showOutOfStock(productDetail) {
   const productTotalPrice = document.querySelector("#total-price");
   const decreaseBtn = document.querySelector("[data-action='decrease']");
   const increaseBtn = document.querySelector("[data-action='increase']");
+  const buyNowBtn = document.querySelector(".buy-now-btn");
+  const addCartBtn = document.querySelector(".add-cart-btn");
 
   // 7-1) 수량 입력 필드 비활성화
   productInput.disabled = true;
   productInput.value = "0";
 
-  // 7-2) 버튼들 비활성화
+  // 7-2) 수량 조절 버튼들 비활성화
   decreaseBtn.disabled = true;
   increaseBtn.disabled = true;
 
-  // 7-3) 총 수량과 가격을 "이 상품은 현재 구매할 수 없는 상품입니다." 메시지로 변경(네이버 참고)
+  // 7-3) 구매 버튼과 장바구니 버튼 비활성화
+  buyNowBtn.disabled = true;
+  addCartBtn.disabled = true;
+
+  // 7-4) 총 수량과 가격을 "이 상품은 현재 구매할 수 없는 상품입니다." 메시지로 변경(네이버 참고)
   totalQuantityText.textContent = "";
   totalQuantityLine.style.display = "none";
   productTotalPrice.innerHTML = `<span style="color: var(--gray-700); font-size: 1.6rem; display: inline-block; vertical-align: middle; line-height: 1;">이 상품은 현재 구매할 수 없는 상품입니다.</span>`;
