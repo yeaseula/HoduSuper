@@ -1,172 +1,143 @@
-/* ========== 헤더 전체 레이아웃 ========== */
-
 header {
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
 }
-
-/* 헤더 전체 컨테이너 - flexbox로 좌측 로고+검색, 우측 유저메뉴 배치 */
 .header-container {
   padding: 22px 0;
   display: flex;
   justify-content: space-between;
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
 }
-
-/* 헤더 좌측 콘텐츠 영역 (로고 + 검색폼) */
 .header-content {
   display: flex;
-  gap: 3rem; /* 로고와 검색폼 사이 간격 */
+  gap: 3rem;
   align-items: center;
 }
-
-/* ========== 헤더 유저 메뉴 영역 ========== */
-/* 헤더 우측 유저 메뉴 네비게이션 */
 .header-user-menu {
   display: flex;
   gap: 2.6rem;
   align-items: center;
 }
-
-/* ========== 헤더 검색 기능 ========== */
-/* 검색 폼 컨테이너 - 검색창과 버튼을 포함 */
 .header-search {
   display: flex;
   align-items: center;
-  position: relative; /* 검색 버튼의 절대 위치 기준점 */
+  position: relative;
 }
-
-/* 검색 입력창 - 메인 컬러 테두리의 둥근 모양 */
 #search {
   width: 400px;
   padding: 1.3rem 2rem;
-  border: 2px solid var(--main-500); /* 브랜드 메인 컬러 테두리 */
-  border-radius: var(--border-radius-full); /* 완전 둥근 모양 */
+  border: 2px solid var(--main-500);
+  border-radius: var(--border-radius-full);
   font-size: 1.6rem;
 }
-
-/* 검색 버튼 - 검색창 내부 우측에 위치 */
 .header-search-btn {
   width: 2.8rem;
   height: 2.8rem;
-  background: url(../images/search.svg); /* 검색 아이콘 SVG */
+  background: url(../images/search.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   border: none;
   cursor: pointer;
   position: absolute;
-  right: 1.5rem; /* 검색창 우측 내부에 위치 */
+  right: 1.5rem;
 }
-
-/* ========== 헤더 유저 메뉴 리스트 ========== */
-/* 유저 메뉴 아이템들의 가로 배열 */
 .header-user-list {
   display: flex;
-  gap: 3rem; /* 각 메뉴 아이템 간격 */
+  gap: 3rem;
   font-size: 1.2rem;
 }
-
-/* 모든 유저 메뉴 링크의 공통 스타일 - 아이콘과 텍스트 세로 배열 */
-.header-buyer-cart a,
-.header-login a,
-.header-mypage a,
-.header-seller-center a {
+.header-user-list li {
   display: flex;
-  flex-direction: column; /* 아이콘 위, 텍스트 아래 */
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem; /* 아이콘과 텍스트 사이 간격 */
+  gap: 4px;
+}
+.header-user-list a,
+.header-user-list button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: unset;
   transition: transform 0.2s ease-in-out;
 }
-
-.header-buyer-cart a:hover,
-.header-login a:hover,
-.header-mypage a:hover,
-.header-seller-center a:hover {
-  transform: scale(1.2);
-}
-
-/* ========== 유저 메뉴 아이콘 스타일 ========== */
-/* 장바구니 아이콘 - 쇼핑카트 SVG 이미지 */
-.header-buyer-cart a::before {
-  content: "";
-  display: block;
-  width: 3.2rem;
-  height: 3.2rem;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  flex: none;
-  background-image: url(../images/shopping-cart.svg);
-}
-
-/* 로그인/마이페이지 공통 아이콘 - 사용자 SVG 이미지 */
-.header-login a::before,
-.header-mypage a::before {
-  content: "";
-  display: block;
-  width: 3.2rem;
-  height: 3.2rem;
-  background-image: url(../images/user.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  flex: none;
-}
-
-/* ========== 판매자센터 버튼 스타일 ========== */
-/* 판매자센터 버튼 - 초록색 배경의 CTA 버튼 형태 */
-.header-seller-center a {
-  width: 16.8rem;
-  height: 5.4rem;
-  font-family: "SpoqaHanSansNeo-Medium", sans-serif;
+.header-user-list .seller-center {
+  flex-direction: row;
   background-color: var(--main-500);
-  border-radius: var(--border-radius-sm);
-  flex-direction: row; /* 아이콘과 텍스트를 가로로 배열 */
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem; /* 아이콘과 텍스트 사이 간격 */
-  color: var(--color-white);
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  padding: 0 2.2rem;
+  min-width: 12.2rem;
+  min-height: 5.4rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s linear 0s;
+}
+.header-user-list .seller-center span {
   font-size: 1.8rem;
+  color: #fff;
 }
-
-/* 판매자센터 아이콘 - 흰색 판매자 아이콘 */
-.header-seller-center a::before {
-  content: "";
-  display: block;
-  width: 2.4rem;
-  height: 2.4rem;
-  background-image: url("../images/seller-center.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  flex: none;
+.header-user-list .seller-center:hover {
+  box-shadow: 4px 8px 10px rgb(33, 191, 72, 0.15);
 }
-
-/* ========== 로그인 상태에 따른 메뉴 표시 제어 ========== */
-/* 기본값: 로그아웃 상태에서는 마이페이지 숨김 (로그인 완료 후 JavaScript로 동적 표시) */
-.header-mypage {
+.header-user-list .seller-center:hover::before {
   display: none;
 }
-.header-seller-center {
-  display: none;
+.header-user-list span {
+  font-size: 1.2rem;
+  color: rgba(118, 118, 118, 1);
+}
+.user-mypage {
+  position: relative;
+}
+.menu-dropdown {
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 54%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+.menu-dropdown-inner {
+  position: relative;
+}
+.menu-dropdown ul {
+  position: absolute;
+  top: 17px;
+  width: 140px;
+  height: 105px;
+  padding: 10px;
+  padding-left: 13px;
+}
+.menu-dropdown ul li {
+  padding: 9px;
+  border: 1px solid transparent;
+}
+.menu-dropdown ul li:hover {
+  border: 1px solid #424242;
+  border-radius: 5px;
+}
+.menu-dropdown ul li:hover a,
+.menu-dropdown ul li:hover button {
+  color: var(--text-color);
+}
+.menu-dropdown ul li a,
+.menu-dropdown ul li button {
+  font-size: 1.6rem;
+  color: var(--gray-700);
 }
 
-/* 판매자센터는 데스크톱에서 일반 사용자에게도 표시 (회원가입 유도) */
 
-/* ========== 모바일 유저 메뉴 반응형 디자인 ========== */
-@media screen and (max-width: 850px) {
-  /* 모바일에서 유저 메뉴 텍스트 숨김 (아이콘만 표시) */
-  .header-user-list li a span {
-    display: none;
-  }
-}
 /* 모바일 검색 트리거 버튼 - 기본적으로 숨김 (모바일에서만 표시) */
 .mobile-search-trigger {
   display: none;
 }
 
 /* ========== 모바일 검색창 반응형 디자인 ========== */
-/* 전체 화면 오버레이 - 모바일 검색창 활성화 시 배경을 어둡게 처리 */
 .search-overlay {
   position: fixed;
   top: 0;
@@ -179,13 +150,11 @@ header {
   visibility: hidden;
   transition: all 0.3s ease;
 }
-
 /* 오버레이 활성화 상태 */
 .search-overlay.active {
   opacity: 1;
   visibility: visible;
 }
-
 /* 모바일 검색 컨테이너 - 화면 상단에서 슬라이드 다운 */
 .mobile-search-container {
   position: fixed;
@@ -194,8 +163,8 @@ header {
   right: 0;
   z-index: 10000;
   padding: 1rem;
-  background: var(--color-white); /* 흰색 배경 추가 */
-  transform: translateY(-100%); /* 기본적으로 화면 위로 숨김 */
+  background: var(--color-white);
+  transform: translateY(-100%);
   transition: transform 0.3s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -204,10 +173,6 @@ header {
 .mobile-search-container.active {
   transform: translateY(0);
 }
-
-/* 모바일 검색창 헤더 영역 - 닫기 버튼 포함 */
-
-/* 모바일 검색창 닫기 버튼 */
 .mobile-search-close {
   width: 3.6rem;
   height: 3.6rem;
@@ -218,15 +183,11 @@ header {
   cursor: pointer;
   flex-shrink: 0;
 }
-
-/* 모바일 검색 폼 - 입력창과 검색 버튼 */
 .mobile-search-form {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
-/* 모바일 검색 입력창 */
 .mobile-search-input {
   flex: 1;
   padding: 1.2rem 2rem;
@@ -234,8 +195,6 @@ header {
   border-radius: var(--border-radius-full);
   font-size: 1.6rem;
 }
-
-/* 모바일 검색 실행 버튼 */
 .mobile-search-btn {
   width: 3.6rem;
   height: 3.6rem;
@@ -247,24 +206,6 @@ header {
   flex-shrink: 0;
 }
 
-@media screen and (max-width:850px) {
-  .header-mypage {
-    align-items: center;
-  }
-  .header-seller-center a {
-    width: 96px;
-    font-size: 1.4rem;
-    height: 35px;
-  }
-  .header-seller-center a::before {
-    display: none;
-  }
-  .header-seller-center a span {
-    display: inline-block !important;
-  }
-}
-
-/* ========== 모바일 반응형 스타일 (767px 이하) ========== */
 @media screen and (max-width: 850px) {
   .header {
     background: #fff;
@@ -276,7 +217,6 @@ header {
   .header-search {
     display: none;
   }
-
   .header-container {
     padding: 11px 0;
   }
@@ -303,17 +243,29 @@ header {
     margin-right: 1rem;
   }
   .header-user-list {
+    align-items: center;
     gap: 1.5rem;
   }
-  .header-buyer-cart a::before,
-  .header-login a::before,
-  .header-mypage a::before {
-    width: 2.1rem;
-    height: 2.1rem;
-    background-size: contain;
+  .header-mypage {
+    align-items: center;
   }
-  /* 모바일에서 판매자센터 버튼 숨김 */
-  .header-seller-center {
+  .header-user-list .seller-center {
+    min-height: auto;
+    padding: 0.8rem 2rem;
+  }
+  .header-user-list .seller-center span {
+    display: inline-block !important;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  .header-user-list li button span,
+  .header-user-list li a span {
     display: none;
   }
+  .header-user-list li button > img,
+  .header-user-list li a > img {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
 }
