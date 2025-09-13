@@ -97,6 +97,35 @@ async function displayProductInfo(productDetail) {
     } else {
       returnExchangeContent.innerHTML = `<p>반품/교환 정보를 불러올 수 없습니다.</p>`;
     }
+
+    // 3-8) 스크롤 위치 감지 -> 13번 코드 참고
+    // 현재 활성화된 탭 번호를 저장하는 변수
+    let currentTab = 0;
+
+    // 페이지 스크롤할 때마다 실행되는 이벤트 리스너
+    window.addEventListener("scroll", (e) => {
+      // 모든 탭 패널 찾기 (상품정보, 리뷰, Q&A, 반품/교환)
+      const tabPanels = document.querySelectorAll(".tab-panel");
+      let newTab = 0;
+
+      // panel: 현재 확인하는 탭 패널(상품정보, 리뷰, Q&A, 반품/교환 중 하나)
+      // index: 현재 확인하는 탭 패널의 인덱스(0, 1, 2, 3)
+      tabPanels.forEach((panel, index) => {
+        // 각 패널의 화면상 위치 정보
+        // getBoundingClientRect(): 패널의 화면상 위치 정보를 가져오는 메서드
+        // 현재 확인하는 탭 패널이 화면에서 어디에 있는지, 얼마나 큰지 정보를 가져와서 rect 변숭 ㅔ저장
+        const rect = panel.getBoundingClientRect();
+        // 화면 상단(100px)에서 가장 가까운 탭 찾기
+        // rect.top: 패널의 화면상 위치 정보(패널의 상단이 화면의 상단으로부터 얼마나 떨어져 있는지)
+        // 탭 패널의 상단이 화면 맨 위에서 100px 이내에 있으면 코드 실행
+        if (rect.top <= 100) newTab = index;
+      });
+      if (currentTab !== newTab) {
+        currentTab = newTab;
+        // 탭 활성화 함수 호출
+        activateTab(currentTab);
+      }
+    });
   }
 }
 
@@ -419,4 +448,20 @@ function createReturnExchangeContent() {
       </div>
     </div>
   `;
+}
+
+// 13. 스크롤 위치 감지 시 탭 활성화(active)
+function activateTab(currentTab) {
+  // 모든 탭에서 active 클래스 제거
+  document.querySelectorAll(".tab-btn").forEach((ele) => {
+    ele.classList.remove("active");
+  });
+
+  // 해당 탭 버튼에 active 클래스 추가
+  const targetBtn = document.querySelector(
+    `[data-target="tab-${currentTab + 1}"]`
+  );
+  if (targetBtn) {
+    targetBtn.classList.add("active");
+  }
 }
