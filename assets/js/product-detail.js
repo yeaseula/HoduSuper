@@ -219,7 +219,6 @@ function showOutOfStock(productDetail) {
 
 // 8. 탭 컨트롤(전환) 설정
 function setupTabControls() {
-  console.log("함수 실행됨!");
   const tab = document.querySelector(".tab-list");
 
   const tabSwitch = (e) => {
