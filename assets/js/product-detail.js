@@ -19,16 +19,16 @@ async function initProductDetail() {
   const productInfo = displayProductInfo(productDetail);
 }
 // 스피너 요소들 선택
-const imageSpinner = document.querySelector("#image-spinner");
+const imageSpinner = $("#image-spinner");
 
 // 3. 상품 정보 화면에 표시
 async function displayProductInfo(productDetail) {
-  const productImage = document.querySelector(".product-image img"); // 상품 이미지
-  const productSeller = document.querySelector(".product-seller"); // 판매자(백엔드글로벌)
-  const productTitle = document.querySelector(".product-title"); // 제품명(딥러닝 담요)
-  const productPrice = document.querySelector(".price-number"); // 17,500(단가)
-  const productDelivery = document.querySelector(".delivery-way"); // 택배배송
-  const productDeliveryFee = document.querySelector(".delivery-fee"); // 무료배송
+  const productImage = $(".product-image img"); // 상품 이미지
+  const productSeller = $(".product-seller"); // 판매자(백엔드글로벌)
+  const productTitle = $(".product-title"); // 제품명(딥러닝 담요)
+  const productPrice = $(".price-number"); // 17,500(단가)
+  const productDelivery = $(".delivery-way"); // 택배배송
+  const productDeliveryFee = $(".delivery-fee"); // 무료배송
   const productId = productDetail.id;
 
   // 3-1) 실제 데이터 업데이트 로직 추가
@@ -53,7 +53,7 @@ async function displayProductInfo(productDetail) {
     productDeliveryFee.textContent = formatPrice(productDetail.shipping_fee);
 
     // 3-2)메타 설명도 동적 업데이트 처리(SEO를 위해)
-    const metaDescription = document.querySelector('meta[name="description"]');
+    const metaDescription = $('meta[name="description"]');
     metaDescription.content = `HODU 오픈마켓에서 ${productDetail.info}를(을) 만나보세요. 개발자 필수템입니다.`;
 
     // 3-3) 재고 0인 경우 처리(품절 상품)
@@ -65,7 +65,7 @@ async function displayProductInfo(productDetail) {
     setupTabControls();
 
     // 3-4) 상품 정보 탭 내용 생성 -> 9번 코드 참고
-    const productInfoContent = document.getElementById("product-info-content");
+    const productInfoContent = $("#product-info-content");
     if (productInfoContent) {
       productInfoContent.innerHTML = createProductInfoContent(productId);
     } else {
@@ -73,7 +73,7 @@ async function displayProductInfo(productDetail) {
     }
 
     // 3-5) 리뷰 탭 내용 생성 -> 10번 코드 참고
-    const reviewContent = document.getElementById("review-content");
+    const reviewContent = $("#review-content");
     if (reviewContent) {
       reviewContent.innerHTML = createReviewContent(productId);
     } else {
@@ -81,7 +81,7 @@ async function displayProductInfo(productDetail) {
     }
 
     // 3-6) Q&A 탭 내용 생성 (공통 데이터) -> 11번 코드 참고
-    const qaContent = document.getElementById("qa-content");
+    const qaContent = $("#qa-content");
     if (qaContent) {
       qaContent.innerHTML = createQAContent();
     } else {
@@ -89,9 +89,7 @@ async function displayProductInfo(productDetail) {
     }
 
     // 3-7) 반품/교환정보 탭 내용 생성 (공통 데이터) -> 12번 코드 참고
-    const returnExchangeContent = document.getElementById(
-      "return-exchange-content"
-    );
+    const returnExchangeContent = $("#return-exchange-content");
     if (returnExchangeContent) {
       returnExchangeContent.innerHTML = createReturnExchangeContent();
     } else {
@@ -131,11 +129,11 @@ async function displayProductInfo(productDetail) {
 
 // 4. 수량 변경 버튼 클릭 이벤트 리스너
 function setupQuantityControls(productDetail) {
-  const decreaseBtn = document.querySelector("[data-action='decrease']");
-  const increaseBtn = document.querySelector("[data-action='increase']");
-  const productInput = document.querySelector("#quantity-display"); //1(버튼 숫자)
-  const productTotalQuantity = document.querySelector("#total-quantity-number"); //1
-  const productTotalPrice = document.querySelector("#total-price"); // 17,500(총 금액)
+  const decreaseBtn = $("[data-action='decrease']");
+  const increaseBtn = $("[data-action='increase']");
+  const productInput = $("#quantity-display"); //1(버튼 숫자)
+  const productTotalQuantity = $("#total-quantity-number"); //1
+  const productTotalPrice = $("#total-price"); // 17,500(총 금액)
 
   // 4-1) 초기 총 가격 설정(1개 기준)
   productTotalPrice.innerHTML = `${formatPrice(
@@ -250,8 +248,8 @@ function updateQuantityAndPrice(
 
 // 6. 버튼 비활성화 관리
 function updateButtonState(productDetail, currentQuantity) {
-  const decreaseBtn = document.querySelector("[data-action='decrease']");
-  const increaseBtn = document.querySelector("[data-action='increase']");
+  const decreaseBtn = $("[data-action='decrease']");
+  const increaseBtn = $("[data-action='increase']");
 
   // 6-1) 버튼 상태만 관리
   decreaseBtn.disabled = currentQuantity <= 1;
@@ -260,14 +258,14 @@ function updateButtonState(productDetail, currentQuantity) {
 
 // 7. 품절 처리 함수
 function showOutOfStock(productDetail) {
-  const totalQuantityText = document.querySelector(".total-quantity");
-  const totalQuantityLine = document.querySelector(".total-quantity.line");
-  const productInput = document.querySelector("#quantity-display");
-  const productTotalPrice = document.querySelector("#total-price");
-  const decreaseBtn = document.querySelector("[data-action='decrease']");
-  const increaseBtn = document.querySelector("[data-action='increase']");
-  const buyNowBtn = document.querySelector(".buy-now-btn");
-  const addCartBtn = document.querySelector(".add-cart-btn");
+  const totalQuantityText = $(".total-quantity");
+  const totalQuantityLine = $(".total-quantity.line");
+  const productInput = $("#quantity-display");
+  const productTotalPrice = $("#total-price");
+  const decreaseBtn = $("[data-action='decrease']");
+  const increaseBtn = $("[data-action='increase']");
+  const buyNowBtn = $(".buy-now-btn");
+  const addCartBtn = $(".add-cart-btn");
 
   // 7-1) 수량 입력 필드 비활성화
   productInput.disabled = true;
@@ -289,7 +287,7 @@ function showOutOfStock(productDetail) {
 
 // 8. 탭 컨트롤(전환) 설정
 function setupTabControls() {
-  const tab = document.querySelector(".tab-list");
+  const tab = $(".tab-list");
 
   const tabSwitch = (e) => {
     e.preventDefault();
@@ -305,7 +303,7 @@ function setupTabControls() {
     // 클릭한 탭 버튼에 active 추가
     targetli.classList.add("active");
 
-    const targetContent = document.querySelector(`#${targetdata}-content`);
+    const targetContent = $(`#${targetdata}-content`);
     if (targetContent) {
       // 탭 컨텐츠로 스크롤 이동(부드러운 스크롤, 상단에 맞춤)
       targetContent.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -464,9 +462,7 @@ function activateTab(currentTab) {
   });
 
   // 해당 탭 버튼에 active 클래스 추가
-  const targetBtn = document.querySelector(
-    `[data-target="tab-${currentTab + 1}"]`
-  );
+  const targetBtn = $(`[data-target="tab-${currentTab + 1}"]`);
   if (targetBtn) {
     targetBtn.classList.add("active");
   }
