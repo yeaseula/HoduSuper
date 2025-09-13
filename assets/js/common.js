@@ -1,5 +1,6 @@
 //common.js
 //모든 html 파일 상단에 common.js를 defer로 로드합니다
+import MiniAlert from '../../components/MiniAlert.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
@@ -84,29 +85,89 @@ document.addEventListener('DOMContentLoaded', function () {
             const sellerCenterBtn = document.querySelector(".header-seller-center");
             // ==== login user 정보 확인 ====
             const user = JSON.parse(localStorage.getItem("user"));
-            if(!user) return;
-            updateHeader(user)
-            function updateHeader(user) {
-                if (!user) {
-                    // 로그아웃 상태
-                    loginBtn.style.display = "flex";
-                    cartBtn.style.display = "flex";
-                    mypageBtn.style.display = "none";
-                    sellerCenterBtn.style.display = "none";
+
+            function createMenu(user) {
+                const menulist = {
+                    cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
+                    cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:'/pages/cart.html' },
+                    login: { element: 'a', className: 'user-login', descript: '로그인', link:'/pages/login.html' },
+                    mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지', link:'#' },
+                    sellerCenter: { element: 'button', className: 'seller-center', descript: '판매자 센터', link:'#' },
+                }
+
+                const { cart,cartLogin,login,mypage,sellerCenter } = menulist;
+
+                const noUser = [cart,login]
+                const buyer = [cartLogin,mypage]
+                const seller = [mypage,sellerCenter]
+                const ul = document.querySelector('.header-user-list');
+
+                const userState = {}
+
+                if(!user) {
+                    userState.state = noUser
                 } else if (user.user_type == "BUYER") {
-                // 구매
-                    loginBtn.style.display = "none";
-                    cartBtn.style.display = "flex";
-                    mypageBtn.style.display = "flex";
-                    sellerCenterBtn.style.display = "none";
-                } else if (user.user_type === "SELLER") {
-                // 판매
-                    loginBtn.style.display = "none";
-                    cartBtn.style.display = "none";
-                    mypageBtn.style.display = "flex";
-                    sellerCenterBtn.style.display = "flex";
+                    userState.state = buyer
+                } else if (user.user_type == "SELLER") {
+                    userState.state = seller
+                }
+
+                userState.state.forEach((ele)=>{
+                    const li = document.createElement('li')
+                    const container = document.createElement(ele.element);
+                    container.classList.add(ele.className);
+                    container.innerHTML = `
+                        <img src="../assets/images/${ele.className}-icon.svg">
+                        <span>${ele.descript}</span>
+                    `
+
+                    li.append(container);
+                    ul.append(li);
+
+                    if(!user || user.user_type == 'BUYER') {
+                        li.addEventListener('mouseenter',(e)=>{HoverEffect(e,ele)})
+                        li.addEventListener('mouseleave',(e)=>{HoverEffectEnd(e,ele)})
+                    }
+
+                    if(!user) {
+                        if(ele.className == 'user-cart') {
+                            li.addEventListener('click',()=>{ModalOpen()})
+                        }
+                        if(ele.className == 'user-login') {
+                            container.setAttribute('href',ele.link)
+                        }
+                    } else if(user.user_type == 'BUYER') {
+                        if(ele.className == 'user-cart') {
+                            container.setAttribute('href',ele.link)
+                        }
+                    }
+                })
+
+                function HoverEffect(e,ele) {
+                    const target = $(`.${ele.className}`).querySelector('img')
+                    target.setAttribute('src',`../assets/images/${ele.className}-color-icon.svg`)
+                    const span = $(`.${ele.className}`).closest('li').querySelector('span');
+                    span.style.color=`#21bf48`
+                }
+                function HoverEffectEnd(e,ele) {
+                    const target = $(`.${ele.className}`).querySelector('img')
+                    target.setAttribute('src',`../assets/images/${ele.className}-icon.svg`)
+                    const span = $(`.${ele.className}`).closest('li').querySelector('span');
+                    span.style.color=`rgba(118, 118, 118, 1)`
+                }
+                function ModalOpen() {
+                    const alert = new MiniAlert({
+                        title:'장바구니 이동 알림 모달',
+                        message:'로그인이 필요합니다.<br> 로그인 하러 갈까요?',
+                        buttons : [],
+                        link:['예'],
+                        linkHref:['pages/login.html'],
+                        closeBackdrop : true,
+                        customContent : null,
+                    })
                 }
             }
+            createMenu(user)
         })
         .catch(error => {
             console.error('파일 로딩 오류:', error);
