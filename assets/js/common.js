@@ -77,13 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileSearchForm.addEventListener("submit", handleMobileSearch);
         })
         .then(()=>{
-            // ===== 유저 메뉴 =====
-            // ===== 변수 선언 =====
-            const loginBtn = document.querySelector(".header-login");
-            const mypageBtn = document.querySelector(".header-mypage");
-            const cartBtn = document.querySelector(".header-buyer-cart");
-            const sellerCenterBtn = document.querySelector(".header-seller-center");
-            // ==== login user 정보 확인 ====
             const user = JSON.parse(localStorage.getItem("user"));
 
             function createMenu(user) {
@@ -91,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
                     cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:'/pages/cart.html' },
                     login: { element: 'a', className: 'user-login', descript: '로그인', link:'/pages/login.html' },
-                    mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지', link:'#' },
-                    sellerCenter: { element: 'button', className: 'seller-center', descript: '판매자 센터', link:'#' },
+                    mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
+                    sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
                 }
 
                 const { cart,cartLogin,login,mypage,sellerCenter } = menulist;
@@ -124,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     li.append(container);
                     ul.append(li);
 
-                    if(!user || user.user_type == 'BUYER') {
+                    if(ele.className !== 'seller-center') {
                         li.addEventListener('mouseenter',(e)=>{HoverEffect(e,ele)})
                         li.addEventListener('mouseleave',(e)=>{HoverEffectEnd(e,ele)})
                     }
@@ -140,16 +133,25 @@ document.addEventListener('DOMContentLoaded', function () {
                         if(ele.className == 'user-cart') {
                             container.setAttribute('href',ele.link)
                         }
+                        if(ele.className == 'user-mypage') {
+                            li.addEventListener('click',(e)=>{MenuToggle(e,ele)})
+                        }
+                    } else if(user.user_type == 'SELLER') {
+                        if(ele.className == 'user-mypage') {
+                            li.addEventListener('click',(e)=>{MenuToggle(e,ele)})
+                        }
                     }
                 })
 
                 function HoverEffect(e,ele) {
+                    e.preventDefault();
                     const target = $(`.${ele.className}`).querySelector('img')
                     target.setAttribute('src',`../assets/images/${ele.className}-color-icon.svg`)
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
                     span.style.color=`#21bf48`
                 }
                 function HoverEffectEnd(e,ele) {
+                    e.preventDefault();
                     const target = $(`.${ele.className}`).querySelector('img')
                     target.setAttribute('src',`../assets/images/${ele.className}-icon.svg`)
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
@@ -165,6 +167,28 @@ document.addEventListener('DOMContentLoaded', function () {
                         closeBackdrop : true,
                         customContent : null,
                     })
+                }
+                function MenuToggle(e,ele) {
+                    if (e.target.closest('.menu-dropdown')) return;
+                    const li = e.currentTarget;
+
+                    const existing = li.querySelector('.menu-dropdown');
+                    if (existing) {
+                        existing.remove();
+                        return;
+                    }
+                    const div = document.createElement('div');
+                    div.classList.add('menu-dropdown');
+                    div.innerHTML=`
+                        <div class="menu-dropdown-inner">
+                            <img src="../assets/images/menu-dropdown-flag.png">
+                            <ul>
+                                <li><a href="#">마이페이지</a></li>
+                                <li><button>로그아웃</button></li>
+                            </ul>
+                        </div>
+                    `
+                    $(`.${ele.className}`).append(div)
                 }
             }
             createMenu(user)
