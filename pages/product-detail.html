@@ -184,48 +184,12 @@
 
       <!-- 상품 정보 탭 -->
       <section class="product-tabs" aria-label="상품 상세 정보">
-        <div
-          class="tab-navigation ds-f items-stretch"
-          role="tablist"
-          aria-label="상품 정보 탭"
-        >
-          <button
-            class="tab-btn active"
-            role="tab"
-            aria-selected="true"
-            id="tab-1"
-            type="button"
-          >
-            상품 정보
-          </button>
-          <button
-            class="tab-btn"
-            role="tab"
-            aria-selected="false"
-            id="tab-2"
-            type="button"
-          >
-            리뷰
-          </button>
-          <button
-            class="tab-btn"
-            role="tab"
-            aria-selected="false"
-            id="tab-3"
-            type="button"
-          >
-            Q&A
-          </button>
-          <button
-            class="tab-btn"
-            role="tab"
-            aria-selected="false"
-            id="tab-4"
-            type="button"
-          >
-            반품/교환정보
-          </button>
-        </div>
+        <ul class="tab-list tab-navigation ds-f items-stretch">
+          <li class="tab-btn active" data-target="tab-1">상품 정보</li>
+          <li class="tab-btn" data-target="tab-2">리뷰</li>
+          <li class="tab-btn" data-target="tab-3">Q&A</li>
+          <li class="tab-btn" data-target="tab-4">반품/교환정보</li>
+        </ul>
       </section>
     </main>
 

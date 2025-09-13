@@ -1,6 +1,9 @@
 // ===== 상품 상세 페이지 전용 JavaScript =====
 import MiniAlert from "/components/MiniAlert.js";
 
+//js파일 최상단
+const $ = (node) => document.querySelector(node);
+
 // 1. 페이지 로드 시 실행되는 함수
 document.addEventListener("DOMContentLoaded", async () => {
   await initProductDetail();
@@ -58,6 +61,7 @@ async function displayProductInfo(productDetail) {
     } else {
       setupQuantityControls(productDetail);
     }
+    setupTabControls();
   }
 }
 
@@ -211,4 +215,28 @@ function showOutOfStock(productDetail) {
   totalQuantityText.textContent = "";
   totalQuantityLine.style.display = "none";
   productTotalPrice.innerHTML = `<span style="color: var(--gray-700); font-size: 1.6rem; display: inline-block; vertical-align: middle; line-height: 1;">이 상품은 현재 구매할 수 없는 상품입니다.</span>`;
+}
+
+// 8. 탭 컨트롤(전환) 설정
+function setupTabControls() {
+  console.log("함수 실행됨!");
+  const tab = document.querySelector(".tab-list");
+
+  const tabSwitch = (e) => {
+    e.preventDefault();
+
+    const li = document.querySelectorAll("li");
+    const targetli = e.target.closest("li");
+    if (!targetli) return;
+
+    const targetdata = targetli.dataset.target;
+    const targetContainer = $(`.${targetdata}-box`);
+    const Container = document.querySelectorAll(".container");
+
+    li.forEach((ele) => ele.classList.remove("active"));
+    targetli.classList.add("active");
+    Container.forEach((ele) => ele.classList.remove("on"));
+    targetContainer.classList.add("on");
+  };
+  tab.addEventListener("click", tabSwitch);
 }
