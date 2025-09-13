@@ -152,6 +152,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 function HoverEffectEnd(e,ele) {
                     e.preventDefault();
+                    const li = $(`.${ele.className}`).closest('li');
+                    if (li.classList.contains('active')) return;
+
                     const target = $(`.${ele.className}`).querySelector('img')
                     target.setAttribute('src',`../assets/images/${ele.className}-icon.svg`)
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
@@ -169,11 +172,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                 }
                 function MenuToggle(e,ele) {
-                    if (e.target.closest('.menu-dropdown')) return;
                     const li = e.currentTarget;
+                    li.classList.add('active');
+
+                    if (e.target.closest('.menu-dropdown')) return;
 
                     const existing = li.querySelector('.menu-dropdown');
                     if (existing) {
+                        li.classList.remove('active')
                         existing.remove();
                         return;
                     }
