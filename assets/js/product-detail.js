@@ -283,6 +283,7 @@ function showOutOfStock(productDetail) {
 }
 
 // 8. 탭 컨트롤(전환) 설정
+setupTabControls();
 function setupTabControls() {
   const tab = $(".tab-list");
 
