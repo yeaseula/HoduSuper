@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.header').innerHTML = data;
 
             // header 내부의 모든 source/img 태그의 src/srcset 경로 보정
-            document.querySelectorAll('.header source, .header img, .footer img').forEach(el => {
+            document.querySelectorAll('.header source, .header img').forEach(el => {
                 if (el.hasAttribute('srcset')) {
                     el.setAttribute('srcset', pathPrefix + el.getAttribute('srcset'));
                 }
@@ -228,6 +228,14 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.text())
         .then(data => {
             document.querySelector('.footer').innerHTML = data;
+            document.querySelectorAll('.footer img').forEach(el => {
+                if (el.hasAttribute('srcset')) {
+                    el.setAttribute('srcset', pathPrefix + el.getAttribute('srcset'));
+                }
+                if (el.hasAttribute('src')) {
+                    el.setAttribute('src', pathPrefix + el.getAttribute('src'));
+                }
+            });
             // 🪴선택자 알맞게 수정
 
             // 🪴toggle 관련 기능
