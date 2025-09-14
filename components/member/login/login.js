@@ -28,6 +28,7 @@ const tabSwitch = (e)=>{
     targetContainer.classList.add('on');
 
     document.querySelectorAll('input').forEach((input) => (input.value = ''));
+    $('.warning-text')?.remove();
 
     targetInput.value = targetdata;
     loginState.userType = targetdata;
@@ -64,7 +65,7 @@ function getFormFieldsArray(userType) {
     const key = defaultKey;
     const allArray = key.map((ele)=>($(`input[name="${userType}-login-${ele}"]`)))
     allArray.forEach((field,idx)=>{
-        console.log(field) //console 찍어보기
+        //console.log(field) //console 찍어보기
         field.addEventListener("focus",(e)=>{
             allArray.forEach((ele)=>{warningClear()});
             const index = allArray.indexOf(e.target);
@@ -161,7 +162,7 @@ async function loginAccess(fields) {
                 message:'로그인이 완료되었습니다!<br> 메인페이지로 이동합니다.',
                 buttons : [],
                 link:['예'],
-                linkHref:['./index.html'],
+                linkHref:['https://yeaseula.github.io/HoduSuper/'],
                 closeBackdrop : true,
                 customContent : null,
             })
@@ -231,6 +232,5 @@ $('.login-btn').addEventListener('click',(e)=>{
     e.preventDefault();
     const userType = loginState.userType;
     const fields = getFormFields(userType);
-    console.log(fields)
     loginAccess(fields)
 })

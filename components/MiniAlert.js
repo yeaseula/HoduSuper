@@ -1,5 +1,5 @@
 /* 얼럿 컴포넌트 */
-
+const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
 export default class MiniAlert {
     constructor({title, message, buttons, link, linkHref, closeBackdrop, customContent}) {
             this.title = title;
@@ -50,7 +50,7 @@ export default class MiniAlert {
                 modal
             } = domElements;
             //console.log(domElements)
-            closeBtn.innerHTML = `<img src="./assets/images/close-btn.svg">`
+            closeBtn.innerHTML = `<img src="${pathPrefix}assets/images/close-btn.svg">`
             alertTitle.innerHTML = this.title;
             alertMessage.innerHTML = this.message;
             customContentBox.innerHTML = this.customContent;

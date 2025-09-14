@@ -196,10 +196,10 @@ function getFormFieldsArray(userType) {
     const defaultKey = ['id','pass','pass2','name','phoneM','phoneL'];
     const sellerKey = ['sellerNum', 'sellerName'];
     const key = userType == 'seller' ? [...defaultKey, ...sellerKey] : defaultKey;
-    console.log(key)
+    //console.log(key)
     const allArray = key.map((ele)=>($(`input[name="${userType}-user-${ele}"]`)))
     allArray.forEach((field,idx)=>{
-        console.log(field) //console 찍어보기
+        //console.log(field) //console 찍어보기
         field.addEventListener("focus",(e)=>{
             allArray.forEach((ele)=>{warningClear()});
             const index = allArray.indexOf(e.target);
@@ -501,7 +501,7 @@ async function buyerSignup (username,password,name,phoneRes) {
             message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
             buttons : [],
             link:['예'],
-            linkHref:['./pages/login.html'],
+            linkHref:['./login.html'],
             closeBackdrop : true,
             customContent : null,
         })
@@ -533,7 +533,7 @@ async function sellerSignup (username,password,name,phoneRes,sellerNumber,seller
             message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
             buttons : [],
             link:['예'],
-            linkHref:['./pages/login.html'],
+            linkHref:['./login.html'],
             closeBackdrop : true,
             customContent : null,
         })

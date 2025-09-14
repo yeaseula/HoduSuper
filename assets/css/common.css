@@ -42,17 +42,17 @@ body {
 
 /* >>>>>>>>>>>> CSS 리팩토리용 유틸리티 클래스 >>>>>>>>>>>>> */
 
-/* 
+/*
  * 약어 네이밍의 유틸리티 클래스 모음
- * 
+ *
  * 사용법:
  * - HTML에서 클래스명을 조합하여 사용
  * - 예: <div class="ds-f items-c justify-c">
- * 
+ *
  * 네이밍 규칙:
  * - 약어 사용: display -> ds, font-weight -> fw
  * - 예: .ds-b, .ds-f, .fw-b, .pos-r
- * 
+ *
  * 분류:
  * - Display: .ds-b, .ds-f, .ds-g, .ds-n
  * - Flexbox: .flex-col, .items-stretch, .justify-c
@@ -63,16 +63,23 @@ body {
  */
 
 /* ========== Font Family(폰트) ========== */
-.fm-m {
+.fw-m {
   font-family: "SpoqaHanSansNeo-Medium", sans-serif;
 }
-.fm-b {
+.fw-b {
   font-family: "SpoqaHanSansNeo-Bold", sans-serif;
 }
 
 /* ========== Width & Height(너비, 높이) ========== */
+.w-5 {
+  width: 5rem;
+}
 .w-full {
   width: 100%;
+}
+
+.h-5 {
+  height: 5rem;
 }
 .h-full {
   height: 100%;
@@ -180,6 +187,10 @@ body {
   background: none;
 }
 
+.bg-white {
+  background-color: var(--color-white);
+}
+
 /* ========== Margin ========== */
 .mb-1 {
   margin-bottom: 1rem;
@@ -198,9 +209,6 @@ body {
 .cur-p {
   cursor: pointer;
 }
-.cur-n {
-  cursor: not-allowed;
-}
 
 /* ========== Text Color ========== */
 .text-black {
@@ -211,13 +219,24 @@ body {
   color: var(--gray-700);
 }
 
-.text-light-gray {
+.text-green {
   color: var(--main-500);
 }
 
 .text-white {
   color: var(--color-white);
 }
+
+/* ========== Text Align ========== */
+.text-center {
+  text-align: center;
+}
+
+/* ========== Border ========== */
+.border-none {
+  border: none;
+}
+
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
 /* ===== 공통 CSS 스타일 ===== */

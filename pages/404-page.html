@@ -28,53 +28,48 @@
 
     <!-- favicon 나중에 만듭시다 -->
     <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
-    <script>
-      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-        document.write('<base href="/">'); // 로컬
-      } else {
-        document.write('<base href="/HoduSuper/">'); // GitHub Pages
-      }
-    </script>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/common.css" />
-    <link rel="stylesheet" href="./assets/css/fonts.css" />
-    <link rel="stylesheet" href="./assets/css/404-page.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-    />
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/404-page.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"/>
+
   </head>
   <body>
-    <main class="error-page wide-container" role="main">
-      <div class="error-container">
+    <main
+      class="error-page wide-container flex-center w-full pos-r"
+      role="main"
+    >
+      <div class="error-container flex-center w-full">
         <!-- 404 일러스트 영역 -->
-        <div class="error-illustration">
+        <div class="error-illustration flex-center">
           <img
-            src="./assets/images/icon-404.png"
+            src="../assets/images/icon-404.png"
             alt="404 웹 페이지 오류"
-            class="error-image"
+            class="error-image w-full"
           />
         </div>
 
         <!-- 텍스트 및 버튼 영역 -->
-        <div class="error-content">
-          <h1 class="error-title">페이지를 찾을 수 없습니다.</h1>
-          <p class="error-description">
+        <div class="error-content flex-1">
+          <h1 class="error-title text-black fw-b mb-2">
+            페이지를 찾을 수 없습니다.
+          </h1>
+          <p class="error-description mb-4 text-gray">
             페이지가 존재하지 않거나 사용할 수 없는 페이지입니다.<br />
             웹 주소가 올바른지 확인해 주세요.
           </p>
 
-          <div class="error-buttons">
+          <div class="error-buttons w-full ds-f">
             <button
               type="button"
               class="common-btn btn-home"
-              onclick="location.href='index.html'"
-            >
+              onclick="location.href='/index.html'">
               메인으로
             </button>
             <button
               type="button"
-              class="common-btn btn-back"
+              class="common-btn btn-back fw-b text-gray"
               onclick="history.back()"
             >
               이전 페이지

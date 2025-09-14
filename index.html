@@ -19,112 +19,76 @@
 
     <!-- favicon 나중에 만듭시다 -->
     <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
-    <script>
-      if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-        document.write('<base href="/">'); // 로컬
-      } else {
-        document.write('<base href="/HoduSuper/">'); // GitHub Pages
-      }
-    </script>
+
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/common.css" />
     <link rel="stylesheet" href="./assets/css/fonts.css" />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="stylesheet" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/footer.css">
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-    <script src="./assets/js/common.js" defer></script>
+    <link rel="stylesheet" href="./components/MiniAlert.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script type="module" src="./assets/js/common.js"></script>
+    <script src="./assets/js/api.js" defer></script>
+    <script src="./assets/js/product-list.js" defer></script>
   </head>
   <body>
     <div class="header"></div>
     <!-- ===== 메인 콘텐츠 영역 ===== -->
     <main class="main">
-      <!-- 메인 슬라이더 섹션 -->
       <section class="main-banner" aria-label="메인 프로모션 배너">
         <h2 class="sr-only">메인 프로모션 배너</h2>
-
-        <!-- 슬라이더 이미지 컨테이너 - Swiper.js를 사용한 이미지 캐러셀 -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <!-- 슬라이드 1 - 메인 프로모션 배너 -->
             <div class="swiper-slide">
-              <img
-                src="./assets/images/slide1.jpg"
-                alt="메인 프로모션 배너 1"
-              />
+              <img src="./assets/images/slide1.jpg" alt="메인 프로모션 배너 1"/>
             </div>
-            <!-- 슬라이드 2 - 신상품 안내 배너 -->
             <div class="swiper-slide">
               <img src="./assets/images/slide2.jpg" alt="신상품 안내 배너" />
             </div>
-            <!-- 슬라이드 3 - 특가 상품 배너 -->
             <div class="swiper-slide">
               <img src="./assets/images/slide3.jpg" alt="특가 상품 배너" />
             </div>
-            <!-- 슬라이드 4 - 이벤트 배너 -->
             <div class="swiper-slide">
               <img src="./assets/images/slide4.jpg" alt="이벤트 배너" />
             </div>
-            <!-- 슬라이드 5 - 브랜드 소개 배너 -->
             <div class="swiper-slide">
               <img src="./assets/images/slide5.jpg" alt="브랜드 소개 배너" />
             </div>
           </div>
-          <!-- 다음/이전 버튼 -->
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
-          <!-- 페이지네이션 인디케이터 -->
           <div class="swiper-pagination"></div>
         </div>
       </section>
 
-      <!-- 상품 목록 섹션 -->
       <div class="wide-container">
         <section class="main-products" aria-labelledby="main-products-title">
           <h2 id="main-products-title" class="sr-only">주요 상품</h2>
-
-        <!-- 상품 그리드 컨테이너 -->
           <div class="products-grid"></div>
         </section>
       </div>
     </main>
-    <!-- API 기능 로드 -->
-    <script src="./assets/js/api.js"></script>
-    <!-- 상품 목록 기능 로드 -->
-    <script src="./assets/js/product-list.js"></script>
-
     <div class="footer"></div>
-
-    <!-- Swiper.js 라이브러리 로드 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-      // Swiper 라이브러리를 사용한 메인 슬라이더 초기화
       var swiper = new Swiper(".mySwiper", {
-        spaceBetween: 30, // 슬라이드 간격 30px
-        effect: "fade", // 부드러운 페이드 전환 효과
-        loop: true, // 마지막 슬라이드에서 처음으로 무한 루프
-        // 자동 슬라이드 설정
+        spaceBetween: 30,
+        effect: "fade",
+        loop: true,
         autoplay: {
-           delay: 2000, // 2초마다 자동 넘어감
-           disableOnInteraction: false, // 사용자가 만지더라도 자동재생 계속
+           delay: 2000,
+           disableOnInteraction: false,
         },
-        // 좌우 화살표 버튼 설정
         navigation: {
-          nextEl: ".swiper-button-next", // 우측 화살표 (다음 슬라이드)
-          prevEl: ".swiper-button-prev", // 좌측 화살표 (이전 슬라이드)
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         },
-        // 하단 도트 인디케이터 설정
         pagination: {
-          el: ".swiper-pagination", // 하단 도트 컨테이너
-          clickable: true, // 도트 클릭으로 해당 슬라이드 이동 가능
+          el: ".swiper-pagination",
+          clickable: true,
         },
       });
     </script>
