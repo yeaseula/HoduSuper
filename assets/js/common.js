@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const container = document.createElement(ele.element);
                     container.classList.add(ele.className);
                     container.innerHTML = `
-                        <img src="../assets/images/${ele.className}-icon.svg">
+                        <img src="assets/images/${ele.className}-icon.svg">
                         <span>${ele.descript}</span>
                     `
 
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 function HoverEffect(e,ele) {
                     e.preventDefault();
                     const target = $(`.${ele.className}`).querySelector('img')
-                    target.setAttribute('src',`../assets/images/${ele.className}-color-icon.svg`)
+                    target.setAttribute('src',`assets/images/${ele.className}-color-icon.svg`)
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
                     span.style.color=`#21bf48`
                 }
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (li.classList.contains('active')) return;
 
                     const target = $(`.${ele.className}`).querySelector('img')
-                    target.setAttribute('src',`../assets/images/${ele.className}-icon.svg`)
+                    target.setAttribute('src',`assets/images/${ele.className}-icon.svg`)
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
                     span.style.color=`rgba(118, 118, 118, 1)`
                 }
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     div.classList.add('menu-dropdown');
                     div.innerHTML=`
                         <div class="menu-dropdown-inner">
-                            <img src="../assets/images/menu-dropdown-flag.png">
+                            <img src="assets/images/menu-dropdown-flag.png">
                             <ul>
                                 <li><a href="#">마이페이지</a></li>
                                 <li><button>로그아웃</button></li>
