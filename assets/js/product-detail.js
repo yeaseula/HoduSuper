@@ -1,6 +1,3 @@
-// ===== 상품 상세 페이지 전용 JavaScript =====
-import MiniAlert from "/components/MiniAlert.js";
-
 //js파일 최상단
 const $ = (node) => document.querySelector(node);
 
@@ -369,7 +366,7 @@ function createReviewContent(productId) {
   const reviewsHtml = product.reviews
     .map(
       (review) => `
-  <div class="review-contents"> 
+  <div class="review-contents">
     <div class="review-header">
       <span class="reviewer-name">${review.name}</span>
       <span class="review-date">(${review.date})</span>
@@ -401,25 +398,25 @@ function createReviewContent(productId) {
 // 11. Q&A 탭 내용 생성 (공통 데이터 - 모든 상품에 동일 내용 노출)
 function createQAContent() {
   return `
-    <h3 class="content-title">Q&A</h3>    
+    <h3 class="content-title">Q&A</h3>
       <div class="qa-item">
         <div class="qa-question">
           <span class="question-text">배송은 얼마나 걸리나요?</span>
           <span class="qa-date">(2025.06.13)</span>
         </div>
         <div class="qa-answer">
-          <strong>답변:</strong> 주문 후 1-2일 내에 배송되며, 택배사 사정에 따라 
+          <strong>답변:</strong> 주문 후 1-2일 내에 배송되며, 택배사 사정에 따라
           지연될 수 있습니다. 배송 추적은 주문내역에서 확인 가능합니다.
         </div>
       </div>
-      
+
       <div class="qa-item">
         <div class="qa-question">
           <span class="question-text">교환/반품 가능한가요?</span>
           <span class="qa-date">(2025.06.13)</span>
         </div>
         <div class="qa-answer">
-          <strong>답변:</strong> 상품 수령 후 7일 이내에 교환/반품이 가능합니다. 
+          <strong>답변:</strong> 상품 수령 후 7일 이내에 교환/반품이 가능합니다.
           단, 상품이 손상되었거나 사용 흔적이 있는 경우는 제외됩니다.
         </div>
       </div>
@@ -432,7 +429,7 @@ function createQAContent() {
 function createReturnExchangeContent() {
   return `
     <h3 class="content-title">반품/교환정보</h3>
-    
+
     <div class="return-info">
       <h4 class="info-title">반품/교환 가능 기간</h4>
       <ul class="info-list">
@@ -440,7 +437,7 @@ function createReturnExchangeContent() {
         <li>• 표시/광고와 상이, 계약 내용과 다르게 이행된 경우 상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내</li>
       </ul>
     </div>
-    
+
     <div class="return-conditions">
       <h4 class="info-title">반품/교환 불가 사유</h4>
       <ul class="info-list">
@@ -453,7 +450,7 @@ function createReturnExchangeContent() {
         <li>7. 복제가 가능한 상품 등의 포장을 훼손한 경우</li>
       </ul>
     </div>
-    
+
     <div class="contact-info">
       <h4 class="info-title">문의처</h4>
       <div class="contact-details">
