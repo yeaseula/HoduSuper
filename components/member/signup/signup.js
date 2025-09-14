@@ -196,10 +196,10 @@ function getFormFieldsArray(userType) {
     const defaultKey = ['id','pass','pass2','name','phoneM','phoneL'];
     const sellerKey = ['sellerNum', 'sellerName'];
     const key = userType == 'seller' ? [...defaultKey, ...sellerKey] : defaultKey;
-    console.log(key)
+    //console.log(key)
     const allArray = key.map((ele)=>($(`input[name="${userType}-user-${ele}"]`)))
     allArray.forEach((field,idx)=>{
-        console.log(field) //console 찍어보기
+        //console.log(field) //console 찍어보기
         field.addEventListener("focus",(e)=>{
             allArray.forEach((ele)=>{warningClear()});
             const index = allArray.indexOf(e.target);
