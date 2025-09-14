@@ -11,7 +11,6 @@ import {
   formatPrice, // 가격 포맷팅
 } from "./cart-api.js";
 
-import MiniAlert from "../../components/MiniAlert.js";
 import { alerts } from "./calculate.js";
 
 
@@ -258,7 +257,7 @@ function createProductHTML(item) {
   return `
     <div class="cart-product-left">
       <button class="check-box" aria-label="상품 선택"></button>
-      
+
       <!-- 상품 기본 정보 영역 -->
       <div class="cart-product-title">
         <img src="${item.image}" alt="${item.name}">
@@ -271,25 +270,25 @@ function createProductHTML(item) {
         </div>
       </div>
     </div>
-    
+
     <div class="cart-product-right">
       <div class="quantity-container">
         <button class="quantity-btn decrease">
           <img src="${CONSTANTS.IMAGES.MINUS}" alt="감소">
         </button>
-        <input type="number" class="quantity-input" value="${item.quantity}" 
+        <input type="number" class="quantity-input" value="${item.quantity}"
                min="${CONSTANTS.MIN_QTY}" max="${CONSTANTS.MAX_QTY}">
         <button class="quantity-btn increase">
           <img src="${CONSTANTS.IMAGES.PLUS}" alt="증가">
         </button>
       </div>
-      
+
       <!-- 주문 정보 및 액션 -->
       <div class="cart-product-order">
         <p>${formatPrice(item.price * item.quantity)}원</p>
         <button class="individual-order-btn common-btn">주문하기</button>
       </div>
-      
+
       <!-- 상품 삭제 버튼 -->
       <button class="close-btn" aria-label="상품 삭제"></button>
     </div>
