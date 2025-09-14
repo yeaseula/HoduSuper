@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const { cart,cartLogin,login,mypage,sellerCenter } = menulist;
 
                 const noUser = [cart,login]
-                const buyer = [cartLogin,mypage]
+                const buyer = [mypage,cartLogin]
                 const seller = [mypage,sellerCenter]
                 const ul = document.querySelector('.header-user-list');
 
