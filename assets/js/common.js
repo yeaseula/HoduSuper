@@ -3,6 +3,7 @@ import MiniAlert from '../../components/MiniAlert.js';
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
     const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
+    const pathPrefixfile = this.location.pathname.includes('/pages/') ? '' : 'pages/';
    fetch(`${pathPrefix}components/header.html`) // 🪴경로 알맞게 수정
         .then(response => response.text())
         .then(data => {
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
             function createMenu(user) {
                 const menulist = {
                     cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
-                    cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:'cart.html' },
+                    cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:`${pathPrefixfile}cart.html` },
                     login: { element: 'a', className: 'user-login', descript: '로그인', link:'login.html' },
                     mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
                     sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
