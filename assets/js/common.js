@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         message:'로그인이 필요합니다.<br> 로그인 하러 갈까요?',
                         buttons : [],
                         link:['예'],
-                        linkHref:['login.html'],
+                        linkHref:[`${pathPrefixfile}login.html`],
                         closeBackdrop : true,
                         customContent : null,
                     })
