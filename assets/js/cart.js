@@ -11,6 +11,10 @@ import {
   formatPrice, // 가격 포맷팅
 } from "./cart-api.js";
 
+import MiniAlert from "../../components/MiniAlert.js";
+import { alerts } from "./calculate.js";
+
+
 // UI 컴포넌트 임포트
 import MiniAlert from "../../components/MiniAlert.js"; // 알림 메시지 표시
 import { alerts } from "./calculate.js"; // 미리 정의된 알림 메시지들
@@ -291,6 +295,7 @@ function createProductHTML(item) {
     </div>
   `;
 }
+
 
 /* 장바구니 상품 DOM 요소 생성 함수 */
 function createProductElement(item) {
