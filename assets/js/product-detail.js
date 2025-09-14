@@ -283,10 +283,8 @@ function showOutOfStock(productDetail) {
 }
 
 // 8. 탭 컨트롤(전환) 설정
-setupTabControls();
-function setupTabControls() {
-  const tab = $(".tab-list");
 
+  const tab = $(".tab-list");
   const tabSwitch = (e) => {
     e.preventDefault();
 
@@ -302,23 +300,23 @@ function setupTabControls() {
     targetli.classList.add("active");
     Container.forEach((ele) => ele.classList.remove("on"));
     targetContainer.classList.add("on");
+
+  // 모든 탭 버튼에서 active 클래스 제거
+    li.forEach((ele) => ele.classList.remove("active"));
+    // 클릭한 탭 버튼에 active 추가
+    targetli.classList.add("active");
+
+    const targetContent = $(`#${targetdata}-content`);
+    if (targetContent) {
+      // 탭 컨텐츠로 스크롤 이동(부드러운 스크롤, 상단에 맞춤)
+      targetContent.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
   tab.addEventListener("click", tabSwitch);
 
 
-  // 모든 탭 버튼에서 active 클래스 제거
-  li.forEach((ele) => ele.classList.remove("active"));
-  // 클릭한 탭 버튼에 active 추가
-  targetli.classList.add("active");
 
-  const targetContent = $(`#${targetdata}-content`);
-  if (targetContent) {
-    // 탭 컨텐츠로 스크롤 이동(부드러운 스크롤, 상단에 맞춤)
-    targetContent.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
 
-  tab.addEventListener("click", tabSwitch);
-}
 
 // 9. 상품 정보 탭 내용 생성
 function createProductInfoContent(productId) {

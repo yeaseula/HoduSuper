@@ -203,7 +203,6 @@
 /* ===== 탭(tab) 영역 ===== */
 .product-tabs {
   margin-top: clamp(4.8rem, 10vw, 12rem);
-  padding-bottom: 12rem;
 }
 
 /* tab 4개 묶음 */
@@ -541,9 +540,6 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.1rem;
-  }
-  .product-tabs {
-    padding-bottom: 8rem;
   }
 }
 
