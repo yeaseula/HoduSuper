@@ -65,7 +65,7 @@ function getFormFieldsArray(userType) {
     const key = defaultKey;
     const allArray = key.map((ele)=>($(`input[name="${userType}-login-${ele}"]`)))
     allArray.forEach((field,idx)=>{
-        console.log(field) //console 찍어보기
+        //console.log(field) //console 찍어보기
         field.addEventListener("focus",(e)=>{
             allArray.forEach((ele)=>{warningClear()});
             const index = allArray.indexOf(e.target);
@@ -232,6 +232,5 @@ $('.login-btn').addEventListener('click',(e)=>{
     e.preventDefault();
     const userType = loginState.userType;
     const fields = getFormFields(userType);
-    console.log(fields)
     loginAccess(fields)
 })
