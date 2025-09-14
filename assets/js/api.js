@@ -131,5 +131,8 @@ const handleImageError = (imgElement) => {
 
 // 404 페이지로 이동하는 함수
 const redirectTo404 = () => {
-  window.location.href = "../pages/404-page.html";
+  const repoBase = location.pathname.startsWith('/HoduSuper/')
+    ? '/HoduSuper/'
+    : '/';
+  window.location.href =`${repoBase}pages/404-page.html`;
 };
