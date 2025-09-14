@@ -87,3 +87,22 @@ input[type="text"]:focus,input[type="password"]:focus {
     margin-top: 10px;
     color: var(--color-red);
 }
+@media (max-width: 580px) {
+    .login-section {
+        width: 100%;
+        margin: 50px auto;
+    }
+    .member-logo {
+        width: 170px;
+        margin: 0 auto 40px;
+    }
+    .tab-container {
+        padding: 35px 15px;
+    }
+    .signup-agreement {
+        width: 100%;
+    }
+    .join-btn {
+        width: 100% !important;
+    }
+}

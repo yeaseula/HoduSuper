@@ -185,6 +185,7 @@ button:disabled {
         margin: 50px auto;
     }
     .member-logo {
+        width: 170px;
         margin: 0 auto 40px;
     }
     .tab-container {
