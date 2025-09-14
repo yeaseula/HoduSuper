@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const menulist = {
                     cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
                     cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:`${pathPrefixfile}cart.html` },
-                    login: { element: 'a', className: 'user-login', descript: '로그인', link:'login.html' },
+                    login: { element: 'a', className: 'user-login', descript: '로그인', link:`${pathPrefixfile}login.html` },
                     mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
                     sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
                 }
