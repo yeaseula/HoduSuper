@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.header').innerHTML = data;
 
             // header 내부의 모든 source/img 태그의 src/srcset 경로 보정
-            document.querySelectorAll('.header source, .header img').forEach(el => {
+            document.querySelectorAll('.header source, .header img, .footer img').forEach(el => {
                 if (el.hasAttribute('srcset')) {
                     el.setAttribute('srcset', pathPrefix + el.getAttribute('srcset'));
                 }
