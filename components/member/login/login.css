@@ -99,10 +99,10 @@ input[type="text"]:focus,input[type="password"]:focus {
     .tab-container {
         padding: 35px 15px;
     }
-    .signup-agreement {
-        width: 100%;
-    }
-    .join-btn {
+    .login-btn {
+        padding: 11px 0;
+        min-height: auto;
+        font-size: 1.6rem;
         width: 100% !important;
     }
 }
