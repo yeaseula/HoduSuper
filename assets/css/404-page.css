@@ -7,69 +7,48 @@
 
 /* 전체 영역 */
 .error-page {
-  position: relative;
-  width: 100%;
   min-height: 100vh;
   background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* 메인 컨테이너 (이미지 + 텍스트 영역) */
 .error-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 5rem; /* 이미지와 텍스트 간격 */
   max-width: 120rem;
-  width: 100%;
 }
 
 /* 404 이미지 영역 */
 .error-illustration {
   flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* 404 이미지 스타일 */
 .error-image {
   max-width: 27.6rem;
   height: auto;
-  width: 100%;
   /* 부드러운 떠다니기 효과 */
   animation: float 3s ease-in-out infinite;
 }
 
 /* 텍스트 및 버튼 영역 */
 .error-content {
-  flex: 1;
   max-width: 41.4rem;
 }
 
 /* 404 제목(페이지를 찾을 수 없습니다.) */
 .error-title {
   font-size: 3.6rem;
-  font-family: "SpoqaHanSansNeo-Bold";
-  color: #000;
-  margin-bottom: 2rem;
 }
 
 /* 404 설명 텍스트(페이지가 존재하지 않거나 사용할 수 없는 페이지입니다. 웹 주소가 올바른지 확인해 주세요.) */
 .error-description {
   font-size: 1.6rem;
-  color: var(--gray-700);
   line-height: 1.6;
-  margin-bottom: 4rem;
 }
 
 /* 버튼 컨테이너(메인으로, 이전 페이지) */
 .error-buttons {
-  display: flex;
   gap: 1.4rem;
-  width: 100%;
 }
 
 /* 메인으로 버튼 (초록색, common-btn 스타일 상속) */
@@ -77,8 +56,6 @@
   width: 20rem;
   min-width: 20rem;
   font-size: 1.8rem;
-  font-family: "SpoqaHanSansNeo-Bold";
-  font-weight: 700;
   border-radius: 0.5rem;
 }
 
