@@ -537,7 +537,11 @@
   }
 
   .tab-navigation {
+    width: 100vw;
+    margin-left: -15px;
+    top: 50px;
     display: grid;
+    border-top: 1px solid var(--gray-500);
     grid-template-columns: repeat(4, 1fr);
     gap: 0.1rem;
   }
