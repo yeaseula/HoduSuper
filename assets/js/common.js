@@ -103,8 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
             function createMenu(user) {
                 const menulist = {
                     cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
-                    cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:'HoduSuper/pages/cart.html' },
-                    login: { element: 'a', className: 'user-login', descript: '로그인', link:'HoduSuper/pages/login.html' },
+                    cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:'/cart.html' },
+                    login: { element: 'a', className: 'user-login', descript: '로그인', link:'/login.html' },
                     mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
                     sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
                 }
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         message:'로그인이 필요합니다.<br> 로그인 하러 갈까요?',
                         buttons : [],
                         link:['예'],
-                        linkHref:['HoduSuper/pages/login.html'],
+                        linkHref:['/login.html'],
                         closeBackdrop : true,
                         customContent : null,
                     })
