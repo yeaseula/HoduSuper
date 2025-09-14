@@ -4,7 +4,7 @@ import MiniAlert from '../../components/MiniAlert.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
-   fetch('./header.html') // 🪴경로 알맞게 수정
+   fetch('/components/header.html') // 🪴경로 알맞게 수정
         .then(response => response.text())
         .then(data => {
             document.querySelector('.header').innerHTML = data;
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const container = document.createElement(ele.element);
                     container.classList.add(ele.className);
                     container.innerHTML = `
-                        <img src="assets/images/${ele.className}-icon.svg">
+                        <img src="./assets/images/${ele.className}-icon.svg">
                         <span>${ele.descript}</span>
                     `
 
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('파일 로딩 오류:', error);
         })
-    fetch('./footer.html') // 🪴경로 알맞게 수정
+    fetch('/components/footer.html') // 🪴경로 알맞게 수정
         .then(response => response.text())
         .then(data => {
             document.querySelector('.footer').innerHTML = data;
