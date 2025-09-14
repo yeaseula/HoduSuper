@@ -28,6 +28,7 @@ const tabSwitch = (e)=>{
     targetContainer.classList.add('on');
 
     document.querySelectorAll('input').forEach((input) => (input.value = ''));
+    $('.warning-text')?.remove();
 
     targetInput.value = targetdata;
     loginState.userType = targetdata;

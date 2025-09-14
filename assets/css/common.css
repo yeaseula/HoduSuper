@@ -42,17 +42,17 @@ body {
 
 /* >>>>>>>>>>>> CSS 리팩토리용 유틸리티 클래스 >>>>>>>>>>>>> */
 
-/* 
+/*
  * 약어 네이밍의 유틸리티 클래스 모음
- * 
+ *
  * 사용법:
  * - HTML에서 클래스명을 조합하여 사용
  * - 예: <div class="ds-f items-c justify-c">
- * 
+ *
  * 네이밍 규칙:
  * - 약어 사용: display -> ds, font-weight -> fw
  * - 예: .ds-b, .ds-f, .fw-b, .pos-r
- * 
+ *
  * 분류:
  * - Display: .ds-b, .ds-f, .ds-g, .ds-n
  * - Flexbox: .flex-col, .items-stretch, .justify-c
