@@ -37,9 +37,9 @@ const API_CONFIG = {
   API_URL: API_URL,
 
   ENDPOINTS: {
-    PRODUCTS: "/products/",
-    PRODUCT_DETAIL: "/products/{id}",
-    PRODUCT_SEARCH: "/products/?search={query}", // 추후 검색 기능 작업 시 사용
+    PRODUCTS: "HoduSuper/pages/products/",
+    PRODUCT_DETAIL: "HoduSuper/pages/products/{id}",
+    PRODUCT_SEARCH: "HoduSuper/pages/products/?search={query}", // 추후 검색 기능 작업 시 사용
   },
 };
 
