@@ -381,7 +381,7 @@
   .cart-list {
     display: none;
   }
-
+  .cart-footer { display: none; }
   .cart-product {
     flex-direction: column;
     justify-content: center;
