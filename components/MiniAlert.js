@@ -1,6 +1,5 @@
 /* 얼럿 컴포넌트 */
 const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
-const pathPrefixfile = this.location.pathname.includes('/pages/') ? '' : 'pages/';
 export default class MiniAlert {
     constructor({title, message, buttons, link, linkHref, closeBackdrop, customContent}) {
             this.title = title;
