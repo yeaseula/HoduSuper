@@ -12,12 +12,6 @@ import {
 } from "./cart-api.js";
 
 import { alerts } from "./calculate.js";
-
-
-// UI 컴포넌트 임포트
-import MiniAlert from "../../components/MiniAlert.js"; // 알림 메시지 표시
-import { alerts } from "./calculate.js"; // 미리 정의된 알림 메시지들
-
 // ===== 상수 정의 =====
 const CONSTANTS = {
   // 수량 제한 설정
