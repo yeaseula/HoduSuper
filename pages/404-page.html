@@ -28,24 +28,12 @@
 
     <!-- favicon 나중에 만듭시다 -->
     <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
-    <script>
-      if (
-        location.hostname === "localhost" ||
-        location.hostname === "127.0.0.1"
-      ) {
-        document.write('<base href="/">'); // 로컬
-      } else {
-        document.write('<base href="/HoduSuper/">'); // GitHub Pages
-      }
-    </script>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/common.css" />
-    <link rel="stylesheet" href="./assets/css/fonts.css" />
-    <link rel="stylesheet" href="./assets/css/404-page.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-    />
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/common.css" />
+    <link rel="stylesheet" href="../assets/css/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/404-page.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"/>
+
   </head>
   <body>
     <main
@@ -56,7 +44,7 @@
         <!-- 404 일러스트 영역 -->
         <div class="error-illustration flex-center">
           <img
-            src="./assets/images/icon-404.png"
+            src="../assets/images/icon-404.png"
             alt="404 웹 페이지 오류"
             class="error-image w-full"
           />
@@ -75,9 +63,8 @@
           <div class="error-buttons w-full ds-f">
             <button
               type="button"
-              class="common-btn btn-home fw-b"
-              onclick="location.href='index.html'"
-            >
+              class="common-btn btn-home"
+              onclick="location.href='/index.html'">
               메인으로
             </button>
             <button
