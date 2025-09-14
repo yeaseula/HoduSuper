@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.text())
         .then(data => {
             document.querySelector('.header').innerHTML = data;
+
+            // header 내부의 모든 source/img 태그의 src/srcset 경로 보정
+            document.querySelectorAll('.header source, .header img').forEach(el => {
+                if (el.hasAttribute('srcset')) {
+                    el.setAttribute('srcset', pathPrefix + el.getAttribute('srcset'));
+                }
+                if (el.hasAttribute('src')) {
+                    el.setAttribute('src', pathPrefix + el.getAttribute('src'));
+                }
+            });
             // ===== 검색 창 =====
             // ===== 변수 선언 =====
             const searchForm = document.querySelector(".header-search");
