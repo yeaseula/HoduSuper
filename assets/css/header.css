@@ -191,6 +191,10 @@ header {
   border-radius: var(--border-radius-full);
   font-size: 1.6rem;
 }
+.mobile-search-input:focus {
+  outline: unset;
+  box-shadow: 0 4px 4px rgb(33, 191, 72, 0.25);
+}
 .mobile-search-btn {
   width: 3.6rem;
   height: 3.6rem;
