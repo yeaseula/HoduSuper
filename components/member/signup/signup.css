@@ -88,7 +88,6 @@ select {
     background-position: 98% 14px;
     background-repeat: no-repeat;
 }
-
 .signup-agreement p {
     color: var(--gray-700);
 }
@@ -185,15 +184,27 @@ button:disabled {
         margin: 50px auto;
     }
     .member-logo {
+        width: 170px;
         margin: 0 auto 40px;
     }
     .tab-container {
         padding: 35px 15px;
     }
+    input[type="text"],input[type="password"],input[type="number"],select {
+        height: 45px;
+    }
+    .id-value-check, .seller-value-check {
+        height: 45px;
+        padding: 11px 0;
+        min-height: auto;
+    }
     .signup-agreement {
         width: 100%;
     }
     .join-btn {
+        padding: 11px 0;
+        min-height: auto;
+        font-size: 1.6rem;
         width: 100% !important;
     }
 }

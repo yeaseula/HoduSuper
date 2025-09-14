@@ -29,8 +29,6 @@
     <link rel="stylesheet" href="../assets/css/fonts.css" />
     <link rel="stylesheet" href="../assets/css/product-detail.css" />
 
-    <title></title>
-
     <link rel="stylesheet" href="../assets/css/header.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
 
@@ -38,8 +36,7 @@
     <script src="../assets/js/common.js" defer></script>
   </head>
   <body>
-    <!-- 헤더 공간 -->
-
+    <div class="header"></div>
     <!-- 메인 컨텐츠 -->
     <main id="main-content" class="wide-container main" role="main">
       <!-- 상품 상세 정보 -->
@@ -195,6 +192,39 @@
 
     <!-- API 기능 로드 -->
     <script src="../assets/js/api.js"></script>
+
+        <!-- 탭 컨텐츠 영역 -->
+        <div class="tab-content">
+          <!-- 상품 정보 탭 -->
+          <div class="tab-panel tab-1-box active" id="tab-1-content">
+            <div class="product-info-content" id="product-info-content"></div>
+          </div>
+
+          <!-- 리뷰 탭 -->
+          <div class="tab-panel tab-2-box" id="tab-2-content">
+            <div class="review-content" id="review-content"></div>
+          </div>
+
+          <!-- Q&A 탭 -->
+          <div class="tab-panel tab-3-box" id="tab-3-content">
+            <div class="qa-content" id="qa-content"></div>
+          </div>
+
+          <!-- 반품/교환정보 탭 -->
+          <div class="tab-panel tab-4-box" id="tab-4-content">
+            <div
+              class="return-exchange-content"
+              id="return-exchange-content"
+            ></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="footer"></div>
+    <!-- API 기능 로드 -->
+    <script src="../assets/js/api.js"></script>
+    <!-- Tab Contents 객체 사용 -->
+    <script src="../assets/js/tab-contents.js"></script>
     <!-- MiniAlert 모듈 사용 -->
     <script type="module" src="../components/MiniAlert.js"></script>
     <!-- 상품 상세 기능 로드 -->

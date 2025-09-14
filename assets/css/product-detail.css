@@ -209,6 +209,11 @@
 /* tab 4개 묶음 */
 .tab-navigation {
   gap: 0;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 100;
+  border-bottom: 1px solid var(--gray-500);
 }
 
 .tab-btn {
@@ -236,16 +241,26 @@
   border-bottom-color: var(--main-500);
 }
 
-/* 탭 컨텐츠(현재 사용 x - 추후 JS 기능 작업 시, 사용 예정) */
+/* 탭 컨텐츠 */
 .tab-content {
-  min-height: 200px;
-  padding: 40px 0;
+  position: relative;
+  min-height: 20rem;
 }
+/* 탭 패널을 모두 보이게 설정 */
 .tab-panel {
-  padding: 20px;
-  border: 1px solid var(--gray-500);
-  border-top: none;
-  background: #fff;
+  display: block;
+  padding: 2rem 0;
+}
+
+/* 탭 제목 */
+.tab-panel h3 {
+  scroll-margin-top: clamp(4.8rem, 5.5vw, 6rem);
+  border-bottom: 2px solid var(--gray-500);
+  font-family: "SpoqaHanSansNeo-Bold";
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  /* 탭 버튼 높이만큼 상단 여백 추가(sticky 탭 네비게이션 높이) */
+  margin-top: clamp(4.8rem, 5.5vw, 6rem);
 }
 .tab-panel[hidden] {
   display: none;
@@ -254,8 +269,196 @@
   display: block;
 }
 
+/* ===== 탭 내용 스타일링(네이버, 인프런, 쿠팡 참고) ===== */
+
+/* 상품 정보 탭 스타일 - 2열 그리드 */
+.product-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.spec-item:last-child {
+  border-bottom: none;
+}
+
+.spec-label {
+  color: var(--gray-700);
+  min-width: 6rem;
+  font-size: 1.4rem;
+}
+
+.spec-value {
+  color: var(--text-color);
+  flex: 1;
+  font-size: 1.4rem;
+}
+/* 상품 설명 영역 컨테이너 */
+.product-description {
+  border-radius: 0.8rem;
+  padding: 2rem;
+  border: 1px solid var(--gray-500);
+}
+
+/* 상품 설명 영역 안의 제목 */
+.description-title {
+  font-size: 1.8rem;
+  font-family: "SpoqaHanSansNeo-Bold";
+  color: var(--main-500);
+  margin-bottom: 1rem;
+}
+
+/* 상품 설명 영역 안의 설명 */
+.description-text {
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* 리뷰 탭 스타일 */
+.review-summary {
+  background: #f8f9fa;
+  border-radius: 0.8rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.rating-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rating-score {
+  font-size: 3rem;
+  font-family: "SpoqaHanSansNeo-Bold";
+  color: var(--main-500);
+}
+
+.rating-stars {
+  font-size: 2rem;
+  color: rgb(250, 176, 5);
+}
+
+.rating-count {
+  color: var(--gray-700);
+  font-size: 1.4rem;
+}
+
+.review-contents {
+  border-radius: 0.8rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--gray-500);
+}
+
+.review-header {
+  margin-bottom: 1rem;
+}
+
+.reviewer-name {
+  color: var(--text-color);
+}
+
+.review-date {
+  color: var(--gray-700);
+  font-size: 1.2rem;
+}
+
+.review-rating {
+  color: rgb(250, 176, 5);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.review-text {
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* Q&A 탭 스타일*/
+.qa-item {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.qa-question {
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  color: var(--text-color);
+  font-size: 1.4rem;
+}
+
+.qa-date {
+  color: var(--gray-700);
+  font-size: 1.2rem;
+}
+
+.qa-answer {
+  padding: 1rem 0;
+  line-height: 1.5;
+  color: var(--gray-700);
+  font-size: 1.4rem;
+}
+
+/* 반품/교환정보 탭 스타일 */
+.return-info,
+.return-conditions,
+.contact-info {
+  margin-bottom: 3rem;
+}
+
+.info-title {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #f8f9fa;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.info-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 1.6;
+  color: var(--gray-700);
+  font-size: 1.4rem;
+}
+
+.contact-details {
+  margin-top: 1rem;
+}
+
+.contact-details p {
+  margin: 0.8rem 0;
+  color: var(--gray-700);
+  font-size: 1.4rem;
+}
+
 /* 스피너(spinner) - 이미지 로딩 중일 때 표시 */
 .spinner {
+  width: 5rem;
+  height: 5rem;
   border: 5px solid rgba(47, 79, 79, 0.3);
   border-radius: 50%;
   border-top-color: var(--main-500);
@@ -340,7 +543,7 @@
     gap: 0.1rem;
   }
   .product-tabs {
-    padding-bottom: 80px;
+    padding-bottom: 8rem;
   }
 }
 
