@@ -148,21 +148,36 @@ function updateQuantityAndPrice(
     currentQuantity = 1;
   }
   // 5-2-2) 수량이 상품 재고보다 크면 수량을 상품 재고로 설정
-  else if (currentQuantity >= productDetail.stock) {
+  else if (currentQuantity > productDetail.stock) {
     // 이미 알림창이 표시되어 있는지 확인(이 로직 없으면 알림창이 계속 쌓임)
     const existingAlert = document.querySelector(".alert");
     if (!existingAlert) {
       const customAlert = {
         title: "알림",
-        message: "재고 수량이 초과되었습니다.",
+        message: `재고 수량이 초과되었습니다.<br>최대 구매 수량: ${productDetail.stock}개`,
         buttons: ["확인"],
+        link: null,
+        linkHref: null,
+        closeBackdrop: true,
+        customContent: null,
       };
 
       new MiniAlert(customAlert);
 
-      // 수량을 재고 최대 수량으로 업데이트
-      currentQuantity = productDetail.stock;
+      // 확인 버튼에 클릭 이벤트 추가
+      setTimeout(() => {
+        const confirmBtn = document.querySelector(".alert-btn");
+        if (confirmBtn) {
+          confirmBtn.addEventListener("click", () => {
+            // alert-backdrop 요소가 있으면('?' 문법 - 옵셔널 체이닝) remove() 실행
+            document.querySelector(".alert-backdrop")?.remove();
+          });
+        }
+      }, 100);
     }
+
+    // 수량을 재고 최대 수량으로 업데이트 (알림창 표시 여부와 관계없이 항상 실행)
+    currentQuantity = productDetail.stock;
   }
 
   // 5-3) 화면 업데이트
