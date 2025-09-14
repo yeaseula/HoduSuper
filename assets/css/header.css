@@ -29,6 +29,10 @@ header {
   border-radius: var(--border-radius-full);
   font-size: 1.6rem;
 }
+#search:focus {
+  outline: unset;
+  box-shadow: 0 4px 4px rgb(33, 191, 72, 0.25);
+}
 .header-search-btn {
   width: 2.8rem;
   height: 2.8rem;
