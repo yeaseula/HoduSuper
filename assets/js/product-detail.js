@@ -287,6 +287,7 @@ function showOutOfStock(productDetail) {
 
 // 8. 탭 컨트롤(전환) 설정
 function setupTabControls() {
+  const tab = document.querySelector(".tab-list");
   const tab = $(".tab-list");
 
   const tabSwitch = (e) => {
@@ -297,6 +298,16 @@ function setupTabControls() {
     if (!targetli) return;
 
     const targetdata = targetli.dataset.target;
+    const targetContainer = $(`.${targetdata}-box`);
+    const Container = document.querySelectorAll(".container");
+
+    li.forEach((ele) => ele.classList.remove("active"));
+    targetli.classList.add("active");
+    Container.forEach((ele) => ele.classList.remove("on"));
+    targetContainer.classList.add("on");
+  };
+  tab.addEventListener("click", tabSwitch);
+}
 
     // 모든 탭 버튼에서 active 클래스 제거
     li.forEach((ele) => ele.classList.remove("active"));
