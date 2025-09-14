@@ -1,34 +1,105 @@
 /* ========== 메인 콘텐츠 영역 ========== */
-/* 메인 콘텐츠 전체 컨테이너 - 슬라이더와 상품 목록 영역 포함 */
 .main {
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
 }
 
 /* ========== 메인 슬라이더 섹션 ========== */
-/* Swiper 라이브러리를 활용한 메인 프로모션 이미지 슬라이더 */
 .mySwiper {
-  --swiper-navigation-size: 1.6rem; /* 내비게이션 화살표 크기 */
-  --swiper-theme-color: #000; /* 슬라이더 컨트롤 색상 (검정색) */
+  --swiper-navigation-size: 1.6rem;
+  --swiper-theme-color: #000;
   color: #000;
 }
-
-/* 슬라이더 컨테이너 - 전체 너비/높이 사용 */
 .swiper {
   width: 100%;
   height: 100%;
 }
-
-/* 개별 슬라이드 - 이미지 중앙 정렬 및 비율 유지 */
 .swiper-slide {
   background-position: center;
   background-size: cover;
 }
-
-/* 슬라이드 내부 이미지 - 전체 너비로 확장 */
 .swiper-slide img {
   display: block;
   width: 100%;
 }
+/* ========== 상품 목록 섹션 ========== */
+.main-products {
+  margin: 8rem 0 18rem 0;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(28rem, 1fr)
+  );
+  gap: 7rem;
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.product-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+}
+.product-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.product-card-text p {
+  color: #767676;
+  font-size: 1.6rem;
+}
+.product-card-text h3 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.product-card-text div[itemprop="price"] {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+.product-card-text div[itemprop="price"] span:first-child {
+  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
+  font-size: 2.4rem;
+}
+.product-card-text div[itemprop="price"] span:last-child {
+  font-size: 1.6rem;
+}
+.image-wrapper.sold-out {
+  position: relative;
+}
+.image-wrapper.sold-out::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  border-radius: var(--border-radius-sm);
+}
+.image-wrapper.sold-out::before {
+  content: "품절";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  padding: 0.8rem 1.6rem;
+  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
+  font-size: 2.2rem;
+  z-index: 100;
+}
+.price-number.sold-out,
+.price-unit.sold-out {
+  color: var(--gray-700);
+}
+
 @media (max-width: 992px) {
   .main-banner {
     height: 260px;
@@ -38,132 +109,33 @@
     object-fit: cover;
     object-position: right center;
   }
-}
-
-/* ========== 상품 목록 섹션 ========== */
-/* 상품 목록 컨테이너 - 상하 여백과 좌우 반응형 패딩 */
-.main-products {
-  margin: 8rem 0 18rem 0; /* 위아래 여백 */
-  /* padding-inline: clamp(5rem, 17vw, 32rem);  */
-  /* 반응형 좌우 패딩 */
-}
-@media (max-width: 992px) {
   .main-products {
     margin: 5rem 0;
   }
-}
-
-/* 상품 그리드 레이아웃 - 반응형 그리드 시스템 */
-/* 상품 그리드 - 반응형 자동 카드 배치 시스템 */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(28rem, 1fr)
-  ); /* 카드 최소 너비 28rem, 화면 크기에 따라 자동 개수 조정*/
-  gap: 7rem; /* 상품 카드 간 여백 */
-}
-
-@media (max-width: 1170px) {
   .products-grid {
-    /* 💫중간에 여백 너무 뜸 */
+    grid-template-columns: repeat(
+      3,
+      minmax(2rem, 1fr)
+    );
     gap: 1.5rem;
     row-gap: 5rem;
   }
 }
-
-/* ========== 상품 카드 스타일 ========== */
-/* 개별 상품 카드 - 이미지와 정보를 세로 배열 */
-.product-card {
-  display: flex;
-  flex-direction: column; /* 이미지 위, 정보 아래 */
-  gap: 1.6rem; /* 이미지와 텍스트 사이 간격 */
-}
-
-/* 상품 이미지 - 1:1 비율의 정사각형 형태로 통일 */
-.product-card img {
-  width: 100%; /* 카드 너비에 맞춰 전체 사용 */
-  aspect-ratio: 1; /* 1:1 비율로 고정 (정사각형) */
-  object-fit: cover; /* 이미지 비율 유지하며 자르기 */
-  border-radius: var(--border-radius-sm); /* 모서리 둥글게 처리 */
-}
-
-/* 상품 텍스트 정보 영역 - 제목, 가격 등 */
-.product-card-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* 각 텍스트 요소 간격 */
-}
-
-/* 상품 브랜드 이름 */
-.product-card-text p {
-  color: #767676;
-  font-size: 1.6rem;
-}
-
-/* 상품 제목 */
-.product-card-text h3 {
-  font-size: 1.8rem;
-  font-weight: 400;
-  /*
-  line-height: 2.2; /* 💫이건 너무 넓어요 보통 line-height 2 이상은 사용안합니다.. */
-  line-height: 1.5;
-}
-
-/* 상품 가격 영역 - 강조를 위한 큰 글씨 */
-.product-card-text div[itemprop="price"] {
-  font-size: 2.4rem;
-  font-weight: 700;
-}
-
-/* 가격 숫자 - 굵은 폰트로 강조 */
-.product-card-text div[itemprop="price"] span:first-child {
-  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
-  font-size: 2.4rem;
-}
-
-/* "원" 단위 텍스트 - 상대적으로 작은 글씨 */
-.product-card-text div[itemprop="price"] span:last-child {
-  font-size: 1.6rem;
-}
-
-/* ========== 품절 표시 CSS ========== */
-
-/* 품절 상품 이미지에 어두운 오버레이 적용 */
-.image-wrapper.sold-out {
-  position: relative;
-}
-
-/* 이미지 위에 어두운 오버레이 */
-.image-wrapper.sold-out::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  aspect-ratio: 1; /* 이미지와 같은 1:1 비율 */
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-  border-radius: var(--border-radius-sm);
-}
-
-/* 품절 텍스트 (이미지 오버레이 위에 표시) */
-.image-wrapper.sold-out::before {
-  content: "품절";
-  position: absolute;
-  /* 이미지 중앙에 위치 */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  padding: 0.8rem 1.6rem;
-  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
-  font-size: 2.2rem;
-  z-index: 100; /* 오버레이보다 위에 표시 */
-}
-
-/* 품절 상품 가격 텍스트 색상 변경(가격 + 원) */
-.price-number.sold-out,
-.price-unit.sold-out {
-  color: var(--gray-700);
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: repeat(
+      2,
+      minmax(2rem, 1fr)
+    );
+    row-gap: 3rem;
+  }
+  .product-card-text {
+    gap: 0.7rem;
+  }
+  .product-card-text h3 {
+    font-size: 1.6rem;
+  }
+  .product-card-text div[itemprop="price"] span:first-child {
+    font-size: 1.8rem;
+  }
 }
