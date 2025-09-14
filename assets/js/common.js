@@ -1,10 +1,9 @@
-//common.js
-//모든 html 파일 상단에 common.js를 defer로 로드합니다
 import MiniAlert from '../../components/MiniAlert.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
-   fetch('/components/header.html') // 🪴경로 알맞게 수정
+    const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
+   fetch(`${pathPrefix}components/header.html`) // 🪴경로 알맞게 수정
         .then(response => response.text())
         .then(data => {
             document.querySelector('.header').innerHTML = data;
@@ -122,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const container = document.createElement(ele.element);
                     container.classList.add(ele.className);
                     container.innerHTML = `
-                        <img src="./assets/images/${ele.className}-icon.svg">
+                        <img src="${pathPrefix}assets/images/${ele.className}-icon.svg">
                         <span>${ele.descript}</span>
                     `
 
@@ -158,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 function HoverEffect(e,ele) {
                     e.preventDefault();
                     const target = $(`.${ele.className}`).querySelector('img')
-                    target.setAttribute('src',`assets/images/${ele.className}-color-icon.svg`)
+                    target.setAttribute('src',`${pathPrefix}assets/images/${ele.className}-color-icon.svg`)
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
                     span.style.color=`#21bf48`
                 }
@@ -168,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (li.classList.contains('active')) return;
 
                     const target = $(`.${ele.className}`).querySelector('img')
-                    target.setAttribute('src',`assets/images/${ele.className}-icon.svg`)
+                    target.setAttribute('src',`${pathPrefix}assets/images/${ele.className}-icon.svg`)
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
                     span.style.color=`rgba(118, 118, 118, 1)`
                 }
@@ -199,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     div.classList.add('menu-dropdown');
                     div.innerHTML=`
                         <div class="menu-dropdown-inner">
-                            <img src="assets/images/menu-dropdown-flag.png">
+                            <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
                             <ul>
                                 <li><a href="#">마이페이지</a></li>
                                 <li><button>로그아웃</button></li>
@@ -214,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('파일 로딩 오류:', error);
         })
-    fetch('/components/footer.html') // 🪴경로 알맞게 수정
+    fetch(`${pathPrefix}components/footer.html`) // 🪴경로 알맞게 수정
         .then(response => response.text())
         .then(data => {
             document.querySelector('.footer').innerHTML = data;
