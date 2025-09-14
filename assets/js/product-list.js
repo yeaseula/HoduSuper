@@ -49,7 +49,7 @@ function createProductCard(product) {
   article.addEventListener(
     "click",
     () =>
-      (window.location.href = `../pages/product-detail.html?id=${product.id}`)
+      (window.location.href = `./pages/product-detail.html?id=${product.id}`)
   );
   article.innerHTML = `
   <div class="image-wrapper ${soldOutClass}">
@@ -67,7 +67,7 @@ function createProductCard(product) {
     product.price
   )}</span>
         <span class="price-unit ${soldOutClass}">원</span>
-      </div> 
+      </div>
     </div>
   `;
 
