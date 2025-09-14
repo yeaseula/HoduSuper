@@ -59,7 +59,7 @@ async function displayProductInfo(productDetail) {
     } else {
       setupQuantityControls(productDetail);
     }
-    setupTabControls();
+
 
     // 3-4) 상품 정보 탭 내용 생성 -> 9번 코드 참고
     const productInfoContent = $("#product-info-content");
@@ -283,7 +283,6 @@ function showOutOfStock(productDetail) {
 }
 
 // 8. 탭 컨트롤(전환) 설정
-function setupTabControls() {
   const tab = $(".tab-list");
 
   const tabSwitch = (e) => {
@@ -303,7 +302,6 @@ function setupTabControls() {
     targetContainer.classList.add("on");
   };
   tab.addEventListener("click", tabSwitch);
-}
 
     // 모든 탭 버튼에서 active 클래스 제거
     li.forEach((ele) => ele.classList.remove("active"));
