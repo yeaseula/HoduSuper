@@ -162,7 +162,7 @@ async function loginAccess(fields) {
                 message:'로그인이 완료되었습니다!<br> 메인페이지로 이동합니다.',
                 buttons : [],
                 link:['예'],
-                linkHref:['./index.html'],
+                linkHref:['https://yeaseula.github.io/HoduSuper/'],
                 closeBackdrop : true,
                 customContent : null,
             })
