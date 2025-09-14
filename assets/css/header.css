@@ -255,7 +255,7 @@ header {
   }
   .header-user-list .seller-center {
     min-height: auto;
-    padding: 0.8rem 2rem;
+    padding: 0.6rem 2rem;
   }
   .header-user-list .seller-center span {
     display: inline-block !important;
@@ -268,8 +268,8 @@ header {
   }
   .header-user-list li button > img,
   .header-user-list li a > img {
-    width: 2.1rem;
-    height: 2.1rem;
+    width: 1.8rem;
+    height: 1.8rem;
   }
   .menu-dropdown-inner > img {
     width: 120px;
