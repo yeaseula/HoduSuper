@@ -193,7 +193,6 @@
   border: 0.1rem solid var(--gray-300);
   border-radius: 0.5rem;
   overflow: hidden;
-
   display: flex;
 }
 
@@ -419,6 +418,14 @@
     position: fixed;
     bottom: 0;
     left: 0;
+    flex-direction: column;
+    height: auto;
+  }
+  .price-product {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
   }
   .price-product:nth-child(2)::before,
   .price-product:nth-child(3)::before {
