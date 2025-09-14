@@ -38,11 +38,20 @@
   flex-direction: column;
   gap: 1.6rem;
 }
+.product-card .image-wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.product-card:hover img {
+  transform: scale3d(1.1,1.1,1.1);
+}
 .product-card img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-m);
+  vertical-align: bottom;
+  transition: all 0.3s;
 }
 .product-card-text {
   display: flex;
