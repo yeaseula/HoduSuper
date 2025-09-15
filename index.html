@@ -106,8 +106,8 @@
               <img src="./assets/images/slide5.jpg" alt="브랜드 소개 배너" />
             </div>
           </div>
-          <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
           <div class="swiper-pagination"></div>
         </div>
       </section>
@@ -123,23 +123,59 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-      var swiper = new Swiper(".mySwiper", {
-        spaceBetween: 30,
-        effect: "fade",
-        loop: true,
-        autoplay: {
-           delay: 2000,
-           disableOnInteraction: false,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
+      document.addEventListener('DOMContentLoaded',function() {
+        var swiper = new Swiper(".mySwiper", {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          effect: "fade",
+          loop: true,
+          autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          a11y: {
+            enabled: true,
+            prevSlideMessage: "이전 슬라이드",
+            nextSlideMessage: "다음 슬라이드",
+            firstSlideMessage: "첫 번째 슬라이드입니다",
+            lastSlideMessage: "마지막 슬라이드입니다",
+            paginationBulletMessage: "슬라이드 {{index}}번 보기",
+          },
+        });
+
+        swiper.on('slideChangeTransitionEnd', function () {
+            const activeSlide = this.slides[this.activeIndex];
+            const firstFocusableElement = activeSlide.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusableElement) {
+                firstFocusableElement.focus();
+            }
+        });
+        function updateInertAttribute(swiper) {
+            swiper.slides.forEach((slide, index) => {
+                if (index === swiper.activeIndex) {
+                    slide.removeAttribute('inert');
+                } else {
+                    slide.setAttribute('inert', '');
+                }
+            });
+        }
+
+        swiper.on('slideChange', function () {
+            updateInertAttribute(this);
+        });
+
+        // 초기 로드 시에도 적용
+        updateInertAttribute(swiper);
+      })
+
     </script>
   </body>
 </html>

@@ -46,12 +46,8 @@ function createProductCard(product) {
 
   // 클릭 시 상세 페이지로 이동
   article.style.cursor = "pointer";
-  article.addEventListener(
-    "click",
-    () =>
-      (window.location.href = `./pages/product-detail.html?id=${product.id}`)
-  );
   article.innerHTML = `
+  <a href="./pages/product-detail.html?id=${product.id}"></a>
   <div class="image-wrapper ${soldOutClass}">
             <img
               src="${product.image}"

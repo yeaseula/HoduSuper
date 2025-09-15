@@ -497,7 +497,7 @@ async function buyerSignup (username,password,name,phoneRes) {
         const data = await res.json();
         console.log("구매회원 회원가입 성공!💚:", data);
         const alert = new MiniAlert({
-            title:'title',
+            title:'회원가입 완료 모달',
             message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
             buttons : [],
             link:['예'],
@@ -529,7 +529,7 @@ async function sellerSignup (username,password,name,phoneRes,sellerNumber,seller
         const data = await res.json();
         console.log("판매회원 회원가입 성공!💚:", data)
         const alert = new MiniAlert({
-            title:'title',
+            title:'회원가입 완료 모달',
             message:'회원가입이 완료되었습니다!<br> 로그인 하러 갈까요?',
             buttons : [],
             link:['예'],
