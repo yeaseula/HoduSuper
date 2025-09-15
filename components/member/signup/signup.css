@@ -89,6 +89,8 @@ input[type="checkbox"]:checked:after {
     border: 1px solid var(--main-500);
 }
 select {
+    -webkit-appearance: none; /* Safari, iOS */
+    -moz-appearance: none;    /* Firefox */
     appearance: none;
     background-image: url('../img/select-icon.svg');
     background-position: 98% 14px;
@@ -198,6 +200,9 @@ button:disabled {
     }
     input[type="text"],input[type="password"],input[type="number"],select {
         height: 45px;
+    }
+    div[class*="pass"] > div::after {
+        top: 9px;
     }
     .id-value-check, .seller-value-check {
         height: 45px;
