@@ -6,8 +6,7 @@
 /* ===== 장바구니 메인 컨테이너 ===== */
 .cart-container {
   text-align: center;
-  padding: 0 2rem;
-  margin-bottom: 16rem;
+  padding: 5rem 0 16rem;
   position: relative;
 }
 
@@ -355,8 +354,16 @@
   width: clamp(13rem, 12vw, 22rem);
   height: clamp(4rem, 4vw, 6.8rem);
 }
+.cart-product-title {
+  flex-grow: 1;
+}
 
-@media screen and (max-width: 1032px) {
+.quantity-container {
+  flex: 0 0 20%;
+}
+
+.cart-product-order {
+  width: 23%;
 }
 
 /* ===== 모바일 반응형 스타일 ===== */
@@ -372,14 +379,14 @@
     display: none;
   }
   .cart-products-content {
-    padding-bottom: 5rem;
+    padding: 5rem 0;
   }
   .cart-product {
     flex-wrap: wrap;
-    padding: 2rem 8rem;
+    padding: 2rem;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    gap: 3rem;
   }
   .cart-product-title {
     gap: 1rem;
@@ -411,6 +418,9 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  .hidden {
+    display: none;
+  }
   .price-product {
     flex-direction: row;
     width: 100%;
@@ -434,16 +444,19 @@
     top: 1rem;
     right: 1rem;
   }
-}
 
-.cart-product-title {
-  flex-grow: 1;
-}
-
-.quantity-container {
-  flex: 0 0 20%;
-}
-
-.cart-product-order {
-  width: 23%;
+  .quantity-container-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+  }
+  .quantity-container {
+    width: auto;
+    flex: unset;
+  }
+  .cart-product-order {
+    width: auto;
+  }
 }
