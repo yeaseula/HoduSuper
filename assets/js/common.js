@@ -1,18 +1,14 @@
 import MiniAlert from '../../components/MiniAlert.js';
 
 window.addEventListener("load", () => {
-    if (!sessionStorage.getItem("visited")) {
-        showLoadingScreen();
-        sessionStorage.setItem("visited", "true");
-    }
+    showLoadingScreen();
 });
 
 function showLoadingScreen() {
     const loading = document.querySelector(".loading");
-    loading.style.display = "flex";
     setTimeout(() => {
         loading.style.display = "none";
-    }, 1500);
+    }, 800);
 }
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
