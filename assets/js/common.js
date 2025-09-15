@@ -1,10 +1,24 @@
 import MiniAlert from '../../components/MiniAlert.js';
 
+window.addEventListener("load", () => {
+    if (!sessionStorage.getItem("visited")) {
+        showLoadingScreen();
+        sessionStorage.setItem("visited", "true");
+    }
+});
+
+function showLoadingScreen() {
+    const loading = document.querySelector(".loading");
+    loading.style.display = "flex";
+    setTimeout(() => {
+        loading.style.display = "none";
+    }, 1500);
+}
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
     const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
     const pathPrefixfile = this.location.pathname.includes('/pages/') ? '' : 'pages/';
-   fetch(`${pathPrefix}components/header.html`) // 🪴경로 알맞게 수정
+   fetch(`${pathPrefix}components/header.html`)
         .then(response => response.text())
         .then(data => {
             document.querySelector('.header').innerHTML = data;
@@ -89,25 +103,13 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(()=>{
             const user = JSON.parse(localStorage.getItem("user"));
 
-            // const headerContent = document.querySelector('.header-content');
-            // function userWellcome(user) {
-            //     if(!user) return;
-
-            //     const span = document.createElement('span');
-            //     span.classList.add('user-message');
-            //     span.innerHTML = `${user.name}님, 환영합니다!`
-
-            //     headerContent.append(span)
-            // }
-            // userWellcome(user)
-
             function createMenu(user) {
                 const menulist = {
                     cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
                     cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:`${pathPrefixfile}cart.html` },
                     login: { element: 'a', className: 'user-login', descript: '로그인', link:`${pathPrefixfile}login.html` },
                     mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
-                    sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
+                    sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터', link:`${pathPrefixfile}login.html` },
                 }
 
                 const { cart,cartLogin,login,mypage,sellerCenter } = menulist;
@@ -211,12 +213,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="menu-dropdown-inner">
                             <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
                             <ul>
-                                <li><a href="#">마이페이지</a></li>
-                                <li><button>로그아웃</button></li>
+                                <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
+                                <li><button class="logout-btn">로그아웃</button></li>
                             </ul>
                         </div>
                     `
-                    $(`.${ele.className}`).append(div)
+                    $(`.${ele.className}`).append(div);
+
+                    const buttons = document.querySelector('.logout-btn');
+                    buttons.addEventListener('click',logout)
+                }
+                function logout() {
+                    localStorage.removeItem("access");
+                    localStorage.removeItem("user");
+                    location.reload();
                 }
             }
             createMenu(user)
@@ -224,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('파일 로딩 오류:', error);
         })
-    fetch(`${pathPrefix}components/footer.html`) // 🪴경로 알맞게 수정
+    fetch(`${pathPrefix}components/footer.html`)
         .then(response => response.text())
         .then(data => {
             document.querySelector('.footer').innerHTML = data;
