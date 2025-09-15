@@ -12,6 +12,7 @@ import {
 } from "./cart-api.js";
 
 import { alerts } from "./calculate.js";
+import MiniAlert from "../../components/MiniAlert.js";
 // ===== 상수 정의 =====
 const CONSTANTS = {
   // 수량 제한 설정
@@ -856,6 +857,7 @@ async function loadCartData() {
       shipping_method: i.product.shipping_method, // 배송 방법
       shipping_fee: i.product.shipping_fee || 0, // 배송비
       quantity: i.quantity, // 서버에 저장된 수량
+      stock: i.product.stock, // 상품 재고 수량
       isChecked: true, // 기본적으로 모든 아이템 체크 상태
     }));
 
