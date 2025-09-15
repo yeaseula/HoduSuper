@@ -29,6 +29,11 @@ li.active {
     color: var(--text-color);
     border-bottom: unset;
 }
+li button {
+    background-color: unset;
+    border: unset;
+    font-size: 1.8rem;
+}
 .tab-container {
     padding: 35px;
     border: 1px solid #e0e0e0;

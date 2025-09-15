@@ -1,10 +1,24 @@
 import MiniAlert from '../../components/MiniAlert.js';
 
+window.addEventListener("load", () => {
+    if (!sessionStorage.getItem("visited")) {
+        showLoadingScreen();
+        sessionStorage.setItem("visited", "true");
+    }
+});
+
+function showLoadingScreen() {
+    const loading = document.querySelector(".loading");
+    loading.style.display = "flex";
+    setTimeout(() => {
+        loading.style.display = "none";
+    }, 1500);
+}
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
     const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
     const pathPrefixfile = this.location.pathname.includes('/pages/') ? '' : 'pages/';
-   fetch(`${pathPrefix}components/header.html`) // 🪴경로 알맞게 수정
+   fetch(`${pathPrefix}components/header.html`)
         .then(response => response.text())
         .then(data => {
             document.querySelector('.header').innerHTML = data;
@@ -220,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('파일 로딩 오류:', error);
         })
-    fetch(`${pathPrefix}components/footer.html`) // 🪴경로 알맞게 수정
+    fetch(`${pathPrefix}components/footer.html`)
         .then(response => response.text())
         .then(data => {
             document.querySelector('.footer').innerHTML = data;
