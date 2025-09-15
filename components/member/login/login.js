@@ -158,7 +158,7 @@ async function loginAccess(fields) {
             localStorage.setItem("refresh", data.refresh);
             localStorage.setItem("user", JSON.stringify(data.user));
             const alert = new MiniAlert({
-                title:'title',
+                title:'로그인 성공 모달',
                 message:'로그인이 완료되었습니다!<br> 메인페이지로 이동합니다.',
                 buttons : [],
                 link:['예'],
