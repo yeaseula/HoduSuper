@@ -1,9 +1,6 @@
 // =====================================================
 // 장바구니 메인 UI 관리 모듈
 // =====================================================
-import MiniAlert from "../../components/MiniAlert.js";
-
-import MiniAlert from "../../components/MiniAlert.js";
 
 // 장바구니 API 통신 함수들
 import {
