@@ -131,7 +131,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const container = document.createElement(ele.element);
                     container.classList.add(ele.className);
                     container.innerHTML = `
-                        <img src="${pathPrefix}assets/images/${ele.className}-icon.svg">
+                        <img src="${pathPrefix}assets/images/${ele.className}-icon.svg" class="origin-icon">
+                        <img src="${pathPrefix}assets/images/${ele.className}-color-icon.svg" class="color-icon">
                         <span>${ele.descript}</span>
                     `
 
@@ -155,19 +156,49 @@ document.addEventListener('DOMContentLoaded', function () {
                             container.setAttribute('href',ele.link)
                         }
                         if(ele.className == 'user-mypage') {
-                            li.addEventListener('click',(e)=>{MenuToggle(e,ele)})
+                            li.classList.add('active');
+
+                            if (li.closest('.menu-dropdown')) return;
+
+                            const div = document.createElement('div');
+                            div.classList.add('menu-dropdown');
+                            div.innerHTML=`
+                                <div class="menu-dropdown-inner">
+                                    <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
+                                    <ul>
+                                        <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
+                                        <li><button class="logout-btn">로그아웃</button></li>
+                                    </ul>
+                                </div>
+                            `
+                            li.addEventListener('click',(e)=>{MenuToggle(e,ele,div)})
                         }
                     } else if(user.user_type == 'SELLER') {
                         if(ele.className == 'user-mypage') {
-                            li.addEventListener('click',(e)=>{MenuToggle(e,ele)})
+                            li.classList.add('active');
+
+                            if (li.closest('.menu-dropdown')) return;
+
+                            const div = document.createElement('div');
+                            div.classList.add('menu-dropdown');
+                            div.innerHTML=`
+                                <div class="menu-dropdown-inner">
+                                    <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
+                                    <ul>
+                                        <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
+                                        <li><button class="logout-btn">로그아웃</button></li>
+                                    </ul>
+                                </div>
+                            `
+                            li.addEventListener('click',(e)=>{MenuToggle(e,ele,div)})
                         }
                     }
                 })
 
                 function HoverEffect(e,ele) {
                     e.preventDefault();
-                    const target = $(`.${ele.className}`).querySelector('img')
-                    target.setAttribute('src',`${pathPrefix}assets/images/${ele.className}-color-icon.svg`)
+                    $(`.${ele.className}`).querySelector('.color-icon').style.display = 'inline-block';
+                    $(`.${ele.className}`).querySelector('.origin-icon').style.display = 'none'
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
                     span.style.color=`#21bf48`
                 }
@@ -176,8 +207,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const li = $(`.${ele.className}`).closest('li');
                     if (li.classList.contains('active')) return;
 
-                    const target = $(`.${ele.className}`).querySelector('img')
-                    target.setAttribute('src',`${pathPrefix}assets/images/${ele.className}-icon.svg`)
+                    $(`.${ele.className}`).querySelector('.color-icon').style.display = 'none';
+                    $(`.${ele.className}`).querySelector('.origin-icon').style.display = 'inline-block'
                     const span = $(`.${ele.className}`).closest('li').querySelector('span');
                     span.style.color=`rgba(118, 118, 118, 1)`
                 }
@@ -192,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         customContent : null,
                     })
                 }
-                function MenuToggle(e,ele) {
+                function MenuToggle(e,ele,div) {
                     const li = e.currentTarget;
                     li.classList.add('active');
 
@@ -204,17 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         existing.remove();
                         return;
                     }
-                    const div = document.createElement('div');
-                    div.classList.add('menu-dropdown');
-                    div.innerHTML=`
-                        <div class="menu-dropdown-inner">
-                            <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
-                            <ul>
-                                <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
-                                <li><button class="logout-btn">로그아웃</button></li>
-                            </ul>
-                        </div>
-                    `
+
                     $(`.${ele.className}`).append(div);
 
                     const buttons = document.querySelector('.logout-btn');
@@ -243,12 +264,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     el.setAttribute('src', pathPrefix + el.getAttribute('src'));
                 }
             });
-            // 🪴선택자 알맞게 수정
-
-            // 🪴toggle 관련 기능
-            // 왜 여기에 붙이냐면 비동기로 footer.html을 불러오고 있기때문에
-            // 바깥에서 해당 기능 호출하면 아직 DOM이 로드되지 않아 오류 발생합니다
-            // 푸터 반응형 메뉴 토글 기능 - 작은 화면에서 메뉴 접기/펼치기
             const toggleBtn = document.querySelector(".footer-menu-toggle");
             const footerMenu = document.querySelector(".footer-menu");
 
