@@ -38,6 +38,7 @@ html {
 body {
   font-size: 1.6rem;
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
+  overflow: hidden;
 }
 
 /* >>>>>>>>>>>> CSS 리팩토리용 유틸리티 클래스 >>>>>>>>>>>>> */
