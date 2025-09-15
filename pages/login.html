@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO 기본 -->
     <title>로그인</title>
-    <meta name="description" content="팀프로젝트로 제작한 오픈쇼핑몰 호두슈퍼입니다." />
-    <meta name="keywords" content="호두슈퍼,팀프로젝트,러닝메이트" />
-    <meta name="author" content="러닝메이트" />
+    <meta name="description" content="팀프로젝트로 제작한 오픈쇼핑몰 호두슈퍼입니다.">
+    <meta name="keywords" content="호두슈퍼,팀프로젝트,러닝메이트">
+    <meta name="author" content="러닝메이트">
 
     <!-- Open Graph (SNS 공유용) -->
-    <meta property="og:title" content="HODUSUPER" />
-    <meta property="og:description" content="2차 팀프로젝트 호두슈퍼 - 러닝메이트" />
-    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HODUSUPER">
+    <meta property="og:description" content="2차 팀프로젝트 호두슈퍼 - 러닝메이트">
+    <meta property="og:type" content="website">
     <meta property="og:image" content="https://yeaseula.github.io/HoduSuper/assets/images/og-image.jpg">
     <meta property="og:url" content="https://yeaseula.github.io/HoduSuper/">
     <link rel="icon" href="https://yeaseula.github.io/HoduSuper/assets/images/favicon.png" type="image/x-icon">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../components/MiniAlert.css">
     <link rel="stylesheet" href="../components/member/login/login.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
-    <script type="module" src="../components/member/login/login.js" defer></script>
+    <script type="module" src="../components/member/login/login.js"></script>
 </head>
 <body>
     <div class="wide-container">
@@ -32,14 +32,14 @@
             <img src="../components/member/img/member-logo.svg" class="member-logo" alt="호두슈퍼 로고">
             <div class="login-form-container">
                 <ul class="tab-list login">
-                    <input type="hidden" name="user-type-field" value="buyer">
+                    <li><input type="hidden" name="user-type-field" value="buyer"></li>
                     <li data-target="buyer" class="active"><button type="button" class="fw-m">구매회원 로그인</button></li>
                     <li data-target="seller"><button type="button" class="fw-m">판매회원 로그인</button></li>
                 </ul>
                 <div class="tab-container">
                     <div class="buyer-box container on">
                         <h3 class="sr-only">구매회원 로그인 폼</h3>
-                        <form action="">
+                        <form action="#">
                             <div class="login-login-field">
                                 <label>
                                     <input type="text" name="buyer-login-id" class="buyer-login-id" placeholder="아이디">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="seller-box container">
                         <h3 class="sr-only">판매회원 로그인 폼</h3>
-                        <form action="">
+                        <form action="#">
                             <div class="login-login-field">
                                 <label>
                                     <input type="text" name="seller-login-id" class="seller-login-id" placeholder="아이디">
