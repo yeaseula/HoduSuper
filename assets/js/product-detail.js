@@ -1,6 +1,11 @@
 //js파일 최상단
 const $ = (node) => document.querySelector(node);
 
+// <1> - addCartItem 함수 가져오기 (장바구니 로직 구현 순서는 <n>로 넘버링하겠습니다.)
+import { addCartItem } from "./cart-api.js";
+// MiniAlert 컴포넌트 import 추가
+import MiniAlert from "../../components/MiniAlert.js";
+
 // 1. 페이지 로드 시 실행되는 함수
 document.addEventListener("DOMContentLoaded", async () => {
   await initProductDetail();
@@ -10,8 +15,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function initProductDetail() {
   // 2-1) URL에서 상품 ID 가져오기(api.js에서 정의한 함수 사용)
   const productId = getUrlParameter("id");
+
   // 2-2) 상품 정보 가져오기(api.js에서 정의한 함수 사용)
   const productDetail = await getProductDetail(productId);
+
   // 2-3) 상품 정보 화면에 표시
   const productInfo = displayProductInfo(productDetail);
 }
@@ -59,6 +66,9 @@ async function displayProductInfo(productDetail) {
     } else {
       setupQuantityControls(productDetail);
     }
+
+    // <3> 장바구니 버튼 이벤트 설정
+    setupCartButton(productDetail);
 
     // 3-4) 상품 정보 탭 내용 생성 -> 9번 코드 참고
     const productInfoContent = $("#product-info-content");
@@ -481,5 +491,91 @@ function activateTab(currentTab) {
   const targetBtn = $(`[data-target="tab-${currentTab + 1}"]`);
   if (targetBtn) {
     targetBtn.classList.add("active");
+  }
+}
+
+// <2> - 장바구니 버튼 클릭 이벤트 함수
+// [장바구니] 버튼에 클릭 이벤트 추가
+function setupCartButton(productDetail) {
+  // .add-cart-btn 클래스를 가진 버튼 찾기
+  const addCartBtn = $(".add-cart-btn");
+
+  if (addCartBtn) {
+    // 버튼이 존재하면 클릭 이벤트 리스너 추가하기
+    addCartBtn.addEventListener("click", async () => {
+      try {
+        // 수량 입력하는 요소 가져오기(- + 사이에 있는 것)
+        const quantityInput = $("#quantity-display");
+        // parseInt로 문자열 -> 숫자로 변환하고, 값 없으면 기본값으로 1 사용
+        const quantity = parseInt(quantityInput.value) || 1;
+
+        // 장바구니에 상품을 추가하는 API 호출하기
+        await addCartItem(productDetail.id, quantity);
+
+        // 이미 알림창이 표시되어 있는지 확인(이 로직 없으면 알림창이 계속 쌓임)
+        const existingAlert = document.querySelector(".alert");
+        if (!existingAlert) {
+          // 성공 시, 알림창 표시하기
+          const successAlert = {
+            title: "장바구니 추가",
+            message: `<p> 상품이 장바구니에 추가되었습니다. </br> 장바구니로 이동하시겠습니까?</p>`,
+            buttons: ["아니오"],
+            link: ["예"], // 링크 버튼 추가
+            linkHref: ["../pages/cart.html"], // 링크 주소 추가
+            closeBackdrop: true,
+            customContent: null,
+          };
+
+          new MiniAlert(successAlert);
+
+          // 확인 버튼에 클릭 이벤트 추가하기
+          setTimeout(() => {
+            const confirmBtn = document.querySelector(".alert-btn");
+            if (confirmBtn) {
+              confirmBtn.addEventListener("click", () => {
+                document.querySelector(".alert-backdrop")?.remove();
+              });
+            }
+          }, 100);
+
+          // [아니오] 버튼에 스타일링 하기(흰색 배경에 회색 텍스트)
+          setTimeout(() => {
+            const alertBtns = document.querySelectorAll(".alert-btn");
+            alertBtns.forEach((btn) => {
+              if (btn.textContent === "아니오") {
+                btn.classList.add("btn-cancel");
+              }
+            });
+          }, 100);
+        }
+      } catch (err) {
+        // 이미 알림창이 표시되어 있는지 확인(이 로직 없으면 알림창이 계속 쌓임)
+        const existingAlert = document.querySelector(".alert");
+        if (!existingAlert) {
+          // 에러 시, 알림창 표시하기
+          const errorAlert = {
+            title: "오류",
+            message: "장바구니 추가에 실패했습니다.",
+            buttons: ["확인"],
+            link: null,
+            linkHref: null,
+            closeBackdrop: true,
+            customContent: null,
+          };
+
+          new MiniAlert(errorAlert);
+
+          // 확인 버튼에 클릭 이벤트 추가하기
+          setTimeout(() => {
+            const confirmBtn = document.querySelector(".alert-btn");
+            if (confirmBtn) {
+              confirmBtn.addEventListener("click", () => {
+                document.querySelector(".alert-backdrop")?.remove();
+              });
+            }
+          }, 100);
+        }
+      }
+    });
   }
 }
