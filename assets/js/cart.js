@@ -467,11 +467,11 @@ const handleQuantityChange = debounce(async (itemId, newQty) => {
   // 재고 체크 추가
   const checkResult = cart.checkStock(item.id, validQty, 0);
   if (!checkResult.isValid) {
-    // input 필드를 이전 값으로 되돌리기
+    // input 필드를 최대 재고 수량으로 변경
     const productEl = dom.cartContainer.querySelector(`[data-id="${itemId}"]`);
     const input = productEl?.querySelector(".quantity-input");
     if (input) {
-      input.value = oldQty; // 이전 값으로 복원
+      input.value = item.stock; // 최대 재고 수량으로 설정
     }
 
     // 재고 부족 알림창 표시
@@ -531,8 +531,14 @@ const handleQuantityChange = debounce(async (itemId, newQty) => {
       }
     }, 100);
 
-    cart.updateItemQuantity(itemId, oldQty); // 상태 롤백
-    updateQuantityUI(productEl, item); // UI 롤백
+    // input 필드를 최대 재고 수량으로 변경
+    const input = productEl?.querySelector(".quantity-input");
+    if (input) {
+      input.value = item.stock; // 최대 재고 수량으로 설정
+    }
+
+    cart.updateItemQuantity(itemId, item.stock); // 상태를 최대 재고 수량으로 변경
+    updateQuantityUI(productEl, item); // UI 업데이트
   }
 }, 300); // 300ms 디바운스: 사용자가 빠르게 연속 클릭해도 마지막 값만 서버 전송
 
