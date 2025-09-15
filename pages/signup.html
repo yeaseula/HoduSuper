@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../assets/css/fonts.css">
     <link rel="stylesheet" href="../components/member/signup/signup.css">
     <link rel="stylesheet" href="../components/MiniAlert.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <script type="module" src="../components/member/signup/signup.js"></script>
 </head>
 <body>
@@ -31,7 +31,7 @@
             <img src="../components/member/img/member-logo.svg" class="member-logo" alt="호두슈퍼 로고">
             <div class="signup-form-container">
                 <ul class="tab-list">
-                    <li><input type="hidden" name="user-type-field" value="buyer"></li>
+                    <li class="hidden-input"><input type="hidden" name="user-type-field" value="buyer"></li>
                     <li data-target="buyer" class="active"><button type="button" class="fw-m">구매회원가입</button></li>
                     <li data-target="seller"><button type="button" class="fw-m">판매회원가입</button></li>
                 </ul>
@@ -47,11 +47,11 @@
                 </div>
                 <div class="signup-agreement">
                     <label for="agreement">
-                        <input type="checkbox" name="agreement" id="agreement" />
-                        <p>
-                            호두샵의 <a href="#">이용약관</a> 및 <a href="#">개인정보처리방침</a>에 대한 내용을 확인하였고 동의합니다.
-                        </p>
+                        <input type="checkbox" name="agreement" id="agreement">
                     </label>
+                    <p>
+                        호두샵의 <a href="#">이용약관</a> 및 <a href="#">개인정보처리방침</a>에 대한 내용을 확인하였고 동의합니다.
+                    </p>
                 </div>
                 <button type="button" class="join-btn common-btn">가입하기</button>
             </div>

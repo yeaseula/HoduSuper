@@ -25,6 +25,13 @@ li {
     list-style: none;
     cursor: pointer;
 }
+.hidden-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+}
 li.active {
     background-color: #fff;
     color: var(--text-color);
@@ -48,6 +55,9 @@ li button {
 }
 .container form > div:not(:last-of-type) {
     margin-bottom: 20px;
+}
+.buyer-pass2-container {
+    margin-bottom: 50px !important;
 }
 .field-name {
     font-size: 16px;
@@ -165,7 +175,7 @@ button:disabled {
     width: calc(100% - 70px);
     margin: 35px auto 0;
 }
-.signup-agreement label {
+.signup-agreement {
     display: flex;
     gap: 10px;
 }

@@ -23,6 +23,13 @@ li {
     list-style: none;
     cursor: pointer;
 }
+.hidden-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+}
 li.active {
     background-color: #fff;
     color: var(--text-color);
