@@ -335,7 +335,7 @@ function createProductHTML(item) {
           </div>
         </div>
       </div>
-  <div>
+  <div class="quantity-container-wrap">
       <div class="quantity-container">
         <button class="quantity-btn decrease">
           <img src="${CONSTANTS.IMAGES.MINUS}" alt="감소">
