@@ -510,6 +510,10 @@ function setupCartButton(productDetail) {
     // 버튼이 존재하면 클릭 이벤트 리스너 추가하기
     addCartBtn.addEventListener("click", async () => {
       try {
+        // 로그인 체크 추가(cart.js에서 정의한 함수 사용)
+        if (!checkUserLogin()) {
+          return; // 로그인 안되면 함수 중단
+        }
         // 수량 입력하는 요소 가져오기(- + 사이에 있는 것)
         const quantityInput = $("#quantity-display");
         // parseInt로 문자열 -> 숫자로 변환하고, 값 없으면 기본값으로 1 사용

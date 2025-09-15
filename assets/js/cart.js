@@ -697,6 +697,10 @@ async function handleAddToCart(product) {
  * 체크박스, 수량증감버튼, 삭제버튼, 개별주문버튼
  */
 function setupCartItemClickEvents() {
+  if (!dom.cartContainer) {
+    return; // 함수 중단
+  }
+
   dom.cartContainer.addEventListener("click", (e) => {
     const productEl = e.target.closest(".cart-product"); // 클릭된 요소의 상위 상품 요소 찾기
     if (!productEl) return; // 상품 영역 외부 클릭 시 무시
@@ -725,6 +729,10 @@ function setupCartItemClickEvents() {
  * 동적으로 생성되는 수량 입력 필드에 대한 일괄 처리
  */
 function setupQuantityInputEvents() {
+  if (!dom.cartContainer) {
+    return; // 함수 중단
+  }
+
   dom.cartContainer.addEventListener("input", (e) => {
     if (!e.target.classList.contains("quantity-input")) return; // 수량 입력 필드가 아닌 경우 무시
 
@@ -768,6 +776,25 @@ function setupAddToCartEvents() {
   });
 }
 
+// 장바구니 버튼 클릭 시 로그인 체크 함수
+function checkUserLogin() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const pathPrefixfile = location.pathname.includes("/pages/") ? "" : "pages/";
+
+  if (!user) {
+    const alert = new MiniAlert({
+      title: "장바구니 이동 알림 모달",
+      message: "로그인이 필요합니다.<br> 로그인 하러 갈까요?",
+      buttons: [],
+      link: ["예"],
+      linkHref: [`${pathPrefixfile}login.html`],
+      closeBackdrop: true,
+      customContent: null,
+    });
+    return false; // 로그인 안됨
+  }
+  return true; // 로그인 됨
+}
 /**
  * 모든 이벤트 리스너 일괄 설정 함수
  * 페이지 로드 완료 후 모든 이벤트 리스너를 한 번에 설정
@@ -831,3 +858,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderCart(); // 데이터 기반 초기 UI 렌더링
   setupAllEventListeners(); // 모든 이벤트 리스너 설정
 });
+
+// 전역 함수로 등록하여 다른 파일에서 사용 가능하게 만들기
+window.checkUserLogin = checkUserLogin;
