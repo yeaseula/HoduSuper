@@ -10,12 +10,12 @@ export function createQuantityInput(initial = 1) {
   decreaseBtn.setAttribute("type", "button");
   decreaseBtn.innerHTML = `<img src="../images/icon-minus-line.svg" alt="" aria-hidden="true">`;
 
-  // 수량 입력 필드 (1-99 범위 제한)
+  // 수량 입력 필드 (1-110 범위 제한) *딥러닝 무릎담요의 최대 수량이 110개라 max값 수정
   const input = document.createElement("input");
   input.type = "number";
   input.value = initial;
   input.min = 1;
-  input.max = 99;
+  input.max = 110;
   input.classList.add("quantity-input");
 
   // 수량 증가 버튼
@@ -29,9 +29,9 @@ export function createQuantityInput(initial = 1) {
     input.value = Math.max(parseInt(input.value) - 1, 1);
   });
 
-  // 증가 버튼 이벤트: 최대값 99까지만 증가
+  // 증가 버튼 이벤트: 최대값 110까지만 증가
   increaseBtn.addEventListener("click", () => {
-    input.value = Math.min(parseInt(input.value) + 1, 99);
+    input.value = Math.min(parseInt(input.value) + 1, 110);
   });
 
   // DOM 요소 조립
@@ -109,7 +109,6 @@ export const alerts = {
         className: "btn-confirm",
         onClick: (container) => {
           const input = container.querySelector(".quantity-input");
-          console.log("선택한 수량:", input.value);
         },
       },
     ],
