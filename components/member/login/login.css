@@ -15,7 +15,6 @@ li {
     flex: 1;
     display: inline-block;
     background-color: #fafafa;
-    color: #212121;
     padding: 20px 12px;
     text-align: center;
     border: 1px solid #e0e0e0;
@@ -30,6 +29,7 @@ li.active {
     border-bottom: unset;
 }
 li button {
+    color: #212121;
     background-color: unset;
     border: unset;
     font-size: 1.8rem;
