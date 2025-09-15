@@ -26,6 +26,16 @@
 - **프로젝트 기간**: 2025년 9월 8일 ~ 2025년 9월 15일(8일)
 - **프로젝트 형태**: 팀 프로젝트
 - **배포 주소**: https://yeaseula.github.io/HoduSuper/
+- **테스트 계정**
+```
+<일반회원>
+id: buyer22345
+pass: asdfasdf12
+
+<판매회원>
+id: seller119
+pass: asdfasdf12
+```
 
 ## 프로젝트 시연
 
@@ -138,7 +148,7 @@
 
 ## 개발일정
 
-// 머메이드 삽입하기
+![개발 일정 gantt chart](./assets/images/gantt-chart.png)
 
 ## 주요 기능
 
