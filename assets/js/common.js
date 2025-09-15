@@ -243,12 +243,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     el.setAttribute('src', pathPrefix + el.getAttribute('src'));
                 }
             });
-            // 🪴선택자 알맞게 수정
-
-            // 🪴toggle 관련 기능
-            // 왜 여기에 붙이냐면 비동기로 footer.html을 불러오고 있기때문에
-            // 바깥에서 해당 기능 호출하면 아직 DOM이 로드되지 않아 오류 발생합니다
-            // 푸터 반응형 메뉴 토글 기능 - 작은 화면에서 메뉴 접기/펼치기
             const toggleBtn = document.querySelector(".footer-menu-toggle");
             const footerMenu = document.querySelector(".footer-menu");
 
