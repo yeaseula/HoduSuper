@@ -157,20 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                         if(ele.className == 'user-mypage') {
                             li.classList.add('active');
-
                             if (li.closest('.menu-dropdown')) return;
-
-                            const div = document.createElement('div');
-                            div.classList.add('menu-dropdown');
-                            div.innerHTML=`
-                                <div class="menu-dropdown-inner">
-                                    <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
-                                    <ul>
-                                        <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
-                                        <li><button class="logout-btn">로그아웃</button></li>
-                                    </ul>
-                                </div>
-                            `
+                            const div = createDropdown(pathPrefix, pathPrefixfile);
                             li.addEventListener('click',(e)=>{MenuToggle(e,ele,div)})
                         }
                     } else if(user.user_type == 'SELLER') {
@@ -178,23 +166,25 @@ document.addEventListener('DOMContentLoaded', function () {
                             li.classList.add('active');
 
                             if (li.closest('.menu-dropdown')) return;
-
-                            const div = document.createElement('div');
-                            div.classList.add('menu-dropdown');
-                            div.innerHTML=`
-                                <div class="menu-dropdown-inner">
-                                    <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
-                                    <ul>
-                                        <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
-                                        <li><button class="logout-btn">로그아웃</button></li>
-                                    </ul>
-                                </div>
-                            `
+                            const div = createDropdown(pathPrefix, pathPrefixfile);
                             li.addEventListener('click',(e)=>{MenuToggle(e,ele,div)})
                         }
                     }
                 })
-
+                function createDropdown(pathPrefix, pathPrefixfile) {
+                    const div = document.createElement('div');
+                    div.classList.add('menu-dropdown');
+                    div.innerHTML = `
+                        <div class="menu-dropdown-inner">
+                            <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
+                            <ul>
+                                <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
+                                <li><button class="logout-btn">로그아웃</button></li>
+                            </ul>
+                        </div>
+                    `;
+                    return div;
+                }
                 function HoverEffect(e,ele) {
                     e.preventDefault();
                     $(`.${ele.className}`).querySelector('.color-icon').style.display = 'inline-block';
