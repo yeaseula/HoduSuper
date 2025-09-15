@@ -543,6 +543,7 @@ function setupCartButton(productDetail) {
             const alertBtns = document.querySelectorAll(".alert-btn");
             alertBtns.forEach((btn) => {
               if (btn.textContent === "아니오") {
+                btn.classList.remove("alert-btn");
                 btn.classList.add("btn-cancel");
               }
             });
