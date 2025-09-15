@@ -1,5 +1,21 @@
 import MiniAlert from '../../components/MiniAlert.js';
 
+window.addEventListener("load", () => {
+    if (!sessionStorage.getItem("visited")) {
+        showLoadingScreen();
+        sessionStorage.setItem("visited", "true"); // 세션 단위로 방문 기록 저장
+    }
+});
+
+function showLoadingScreen() {
+    const loading = document.querySelector(".loading");
+    loading.style.display = "flex";
+
+    // 예시: 로딩 1.5초 후 숨기기
+    setTimeout(() => {
+        loading.style.display = "none";
+    }, 1500);
+}
 document.addEventListener('DOMContentLoaded', function () {
     const $ = (node) => document.querySelector(node);
     const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
