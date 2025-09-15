@@ -3,6 +3,8 @@
 // =====================================================
 import MiniAlert from "../../components/MiniAlert.js";
 
+import MiniAlert from "../../components/MiniAlert.js";
+
 // 장바구니 API 통신 함수들
 import {
   getCartItems, // 장바구니 목록 조회
@@ -172,6 +174,16 @@ class CartManager {
     return this.items.filter((item) => item.isChecked);
   }
 
+  getShippingFee() {
+    return this.items.reduce((sum, item) => {
+      // 체크된 상품만 계산
+      if (!item.isChecked) return sum;
+      // 무료배송 처리
+      const fee = item.shipping_fee || 0;
+      return sum + fee;
+    }, 0);
+  }
+
   // 체크된 아이템들의 총 가격 계산
   getTotalPrice() {
     return this.items.reduce((sum, item) => {
@@ -265,8 +277,13 @@ function updateAllCheckboxUI() {
  */
 function updateTotalPriceUI() {
   const total = cart.getTotalPrice();
+  const shipping = cart.getShippingFee(); // 새로 추가한 배송비
+  const final = total + shipping;
+
   if (dom.totalPriceElem) dom.totalPriceElem.textContent = formatPrice(total);
-  if (dom.finalPriceElem) dom.finalPriceElem.textContent = formatPrice(total);
+  const shipElem = document.querySelector(".ship-price .order-price");
+  if (shipElem) shipElem.textContent = formatPrice(shipping);
+  if (dom.finalPriceElem) dom.finalPriceElem.textContent = formatPrice(final);
 }
 
 /**
@@ -305,7 +322,6 @@ function createProductHTML(item) {
       : "배송방법: 매장픽업";
 
   return `
-    <div class="cart-product-left">
       <button class="check-box" aria-label="상품 선택"></button>
 
       <!-- 상품 기본 정보 영역 -->
@@ -313,15 +329,16 @@ function createProductHTML(item) {
         <img src="${item.image}" alt="${item.name}">
         <div class="cart-product-text">
           <div class="cart-product-dec">
+          <p>${item.seller.name}</p>
             <h3>${item.name}</h3>
-            <p class="strong">${formatPrice(item.price)}원</p>
-            <p>${shippingText}</p>
+            <p class="total-price">${formatPrice(item.price)}원</p>
+            <p>${item.shipping_method} / ${
+    item.shipping_fee ? formatPrice(item.shipping_fee) + "원" : "무료배송"
+  }</p>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="cart-product-right">
+  <div>
       <div class="quantity-container">
         <button class="quantity-btn decrease">
           <img src="${CONSTANTS.IMAGES.MINUS}" alt="감소">
@@ -332,7 +349,7 @@ function createProductHTML(item) {
           <img src="${CONSTANTS.IMAGES.PLUS}" alt="증가">
         </button>
       </div>
-
+  </div>
       <!-- 주문 정보 및 액션 -->
       <div class="cart-product-order">
         <p>${formatPrice(item.price * item.quantity)}원</p>
@@ -341,7 +358,7 @@ function createProductHTML(item) {
 
       <!-- 상품 삭제 버튼 -->
       <button class="close-btn" aria-label="상품 삭제"></button>
-    </div>
+
   `;
 }
 
@@ -540,7 +557,7 @@ const handleQuantityChange = debounce(async (itemId, newQty) => {
     cart.updateItemQuantity(itemId, item.stock); // 상태를 최대 재고 수량으로 변경
     updateQuantityUI(productEl, item); // UI 업데이트
   }
-}, 300); // 300ms 디바운스: 사용자가 빠르게 연속 클릭해도 마지막 값만 서버 전송
+}, 200); // 300ms 디바운스: 사용자가 빠르게 연속 클릭해도 마지막 값만 서버 전송
 
 /**
  * 수량 감소 버튼
@@ -679,6 +696,7 @@ async function handleAddToCart(product) {
       price: product.price, // 단가
       seller: product.seller, // 판매자 정보
       shipping_method: product.shipping_method, // 배송 방법
+      shipping_fee: product.shipping_fee, // 배송비
       quantity: 1, // 기본 수량
       isChecked: true, // 기본적으로 체크된 상태
     };
@@ -839,7 +857,7 @@ async function loadCartData() {
       price: i.product.price, // 단가
       seller: i.product.seller, // 판매자 정보
       shipping_method: i.product.shipping_method, // 배송 방법
-      stock: i.product.stock, // 상품 재고 수량
+      shipping_fee: i.product.shipping_fee || 0, // 배송비
       quantity: i.quantity, // 서버에 저장된 수량
       isChecked: true, // 기본적으로 모든 아이템 체크 상태
     }));
