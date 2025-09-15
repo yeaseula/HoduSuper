@@ -158,7 +158,6 @@ header {
 }
 /* 모바일 검색 컨테이너 - 화면 상단에서 슬라이드 다운 */
 .mobile-search-container {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -172,7 +171,6 @@ header {
 }
 /* 모바일 검색 컨테이너 활성화 상태 - 화면에 표시 */
 .mobile-search-container.active {
-  display: block;
   transform: translateY(0);
 }
 .mobile-search-close {
