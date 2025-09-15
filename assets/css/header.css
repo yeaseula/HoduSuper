@@ -66,6 +66,9 @@ header {
   border: unset;
   transition: transform 0.2s ease-in-out;
 }
+.color-icon {
+  display: none;
+}
 .header-user-list .seller-center {
   flex-direction: row;
   background-color: var(--main-500);
