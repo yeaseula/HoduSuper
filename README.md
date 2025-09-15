@@ -16,7 +16,7 @@
 - [핵심 구현 사항](#핵심-구현-사항)
 - [API 연동](#api-연동)
 - [개발 과정](#개발-과정)
-- [에러와 에러 해결](#에러와-에러-해결)
+- [트러블 슈팅](#트러블-슈팅)
 - [개발하며 느낀점](#개발하며-느낀점)
 
 ## 프로젝트 소개
@@ -29,11 +29,11 @@
 - **테스트 계정**
 ```
 <일반회원>
-id: buyer22345
+id: buyer11245
 pass: asdfasdf12
 
 <판매회원>
-id: seller119
+id: seller1191
 pass: asdfasdf12
 ```
 
@@ -424,9 +424,144 @@ if (!response.ok) {
 - 브라우저 호환성 테스트
 - 사용자 경험 개선
 
-## 에러와 에러 해결
+## 트러블 슈팅
 
-<!-- 에러와 해결 과정 내용 추가 예정 -->
+### **1.이미지 경로 문제**
+
+- 문제: `index.html`과 서브페이지의 경로 차이로 인해 컴포넌트 내부 이미지가 노출되지 않음
+- 해결: 경로를 변수화하여 상황에 따라 다르게 적용
+
+```jsx
+const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
+const pathPrefixfile = location.pathname.includes('/pages/') ? '' : 'pages/';
+```
+
+### **2.로그인 상태별 헤더 버튼 처리**
+
+- 문제: 로그인 여부에 따라 헤더 버튼 구성이 달라야 함
+- 해결: 헤더 정보를 객체로 관리하고, 유저 상태에 따라 DOM을 동적으로 조립
+
+```jsx
+const menulist = {
+  cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
+  cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link: `${pathPrefixfile}cart.html` },
+  login: { element: 'a', className: 'user-login', descript: '로그인', link: `${pathPrefixfile}login.html` },
+  mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
+  sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
+};
+```
+
+### **3.회원가입 유형별 필드 노출 및 검증**
+
+- 문제: 일반회원/판매회원에 따라 다른 필드가 필요하고, 값 검증 시 동적으로 경고 문구가 노출되어야 함
+- 해결: 회원가입 폼을 클래스로 설계해 유지보수성을 높이고, 상태관리 객체로 실시간 검사
+
+```jsx
+const joinState = {
+  userType: targetInput.value || 'buyer',
+  isIdChecked: false,
+  isPassMatch: false,
+  isAllField: false,
+  isAgree: false,
+  isSellerNumber: false,
+};
+```
+
+### **4.상품 상세페이지 탭 디자인 부족**
+
+- 문제: 상세페이지 탭 UI가 미완성
+- 해결: JSON 형태로 데이터를 관리하고 화면에 동적으로 반영
+
+### 5. 모바일 디자인 미흡
+
+- 문제: 모바일 환경 대응 부족
+- 해결: 다양한 쇼핑몰 앱 디자인을 참고하여 반영
+
+### 6. FIFO
+
+- 문제: 첫 방문 시 메인 페이지의 FIFO 현상이 두드러짐
+- 해결: 첫 방문 여부를 session storage에 값을 저장해두고 판단→첫 방문 시 loading 이미지를 약 1초가량 노출, 가장 무거운 메인 페이지에 한해 link preload 태그 활용
+
+```jsx
+    <link rel="preload" href="./assets/css/reset.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/common.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/fonts.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/header.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/main.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/footer.css" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="./assets/css/reset.css">
+      <link rel="stylesheet" href="./assets/css/common.css">
+      <link rel="stylesheet" href="./assets/css/fonts.css">
+      <link rel="stylesheet" href="./assets/css/header.css">
+      <link rel="stylesheet" href="./assets/css/main.css">
+      <link rel="stylesheet" href="./assets/css/footer.css">
+    </noscript>
+```
+
+### 7. **복잡한 재고 관리 로직 구현**
+
+- **문제**: 상품 상세에서 장바구니 추가 시 기존 장바구니 수량과 새로 추가할 수량의 합이 재고를 초과하는 경우 처리
+- **해결**: checkStock() 함수를 구현하여 현재 장바구니 수량 + 추가 수량이 재고를 초과하는지 체크하고, 초과 시 MiniAlert를 통한 알림창 표시 및 최대 재고 수량으로 자동 조정
+
+### 8. **스크롤 기반 탭 활성화 구현**
+
+- **문제**: tab-contents.js에 상품별로 다른 객체 데이터가 저장되어 있어 각 상품마다 탭 콘텐츠의 높이와 구조가 달라 스크롤 위치 감지가 어려움
+- **해결**: getBoundingClientRect() 메서드를 활용하여 각 탭 섹션의 실시간 화면상 위치를 동적으로 감지하고, 스크롤 위치에 따라 적절한 탭에 active 클래스를 적용. 탭 클릭 시에는 scrollIntoView() 메서드로 해당 섹션으로 부드럽게 스크롤 이동하도록 구현
+
+### 9. DOM 요소 캐싱
+
+```jsx
+// ===== DOM 요소 캐싱 섹션 =====
+// 자주 사용되는 DOM 요소들을 미리 선택하여 성능 최적화
+// 페이지 로드 시 한 번만 선택하고 재사용
+const dom = {
+  cartContainer: document.querySelector(".cart-products-content"), // 장바구니 상품 목록 컨테이너
+  orderSection: document.querySelector(".cart-order-content"), // 주문 요약 섹션
+  totalOrderBtn: document.querySelector(".total-order-btn"), // 전체 주문하기 버튼
+  totalPriceElem: document.querySelector(".total-price .order-price"), // 총 상품금액 표시 요소
+  finalPriceElem: document.querySelector(".final-price .order-price"), // 최종 결제금액 표시 요소
+  allCheckBox: document.querySelector(".cart-list .check-box"), // 전체 선택 체크박스
+  addToCartButtons: document.querySelectorAll(".add-to-cart-btn"), // 장바구니 담기 버튼들 (상품 페이지용)
+};
+
+```
+
+- **문제**: 웹페이지에 자주 접근하는 요소들일 경우 성능부담, 똑같은 DOM 코드가 여러번 반복되어 코드가 길어지고 가독성 저하
+- **해결**: 자주 사용되는 HTML요소를 자바스크립트 변수에 미리 할당하여 성능 최적화(페이지 로드 시 한번만 실행, 변수에 저장)
+
+### 10. 이벤트 위임
+
+```jsx
+// ===== 이벤트 리스너 설정 섹션 =====
+// 동적으로 생성된 DOM 요소들에 대한 이벤트 위임 및 바인딩
+// 이벤트 위임을 활용하여 동적 요소들도 자동으로 이벤트 처리
+
+function setupCartItemClickEvents() {
+  dom.cartContainer.addEventListener("click", (e) => {
+    const productEl = e.target.closest(".cart-product"); // 클릭된 요소의 상위 상품 요소 찾기
+    if (!productEl) return; // 상품 영역 외부 클릭 시 무시
+
+    const itemId = productEl.dataset.id; // data-id로 상품 식별
+
+    // 클릭된 요소를 분석하여 적절한 핸들러 호출
+    if (e.target.closest(".check-box")) {
+      handleItemCheckboxClick(itemId, e.target.closest(".check-box"));
+    } else if (e.target.closest(".quantity-btn.decrease")) {
+      handleQuantityDecrease(itemId);
+    } else if (e.target.closest(".quantity-btn.increase")) {
+      handleQuantityIncrease(itemId);
+    } else if (e.target.closest(".close-btn")) {
+      handleItemRemove(itemId);
+    } else if (e.target.closest(".individual-order-btn")) {
+      handleIndividualOrder(itemId);
+    }
+  });
+}
+```
+
+- **문제**:  새로운 장바구니 상품이 동적으로 추가되거나 삭제 될 때마다 새로 추가된 요소에 이벤트를 수동으로 다시 바인딩, 개별적으로 이벤트 등록으로 인한 전체 코드 길이가 길어져 가독성 저하
+- **해결**: 부모요소의 클릭 이벤트를 등록하여 이벤트 버블링 활용, 부모요소까지 전달
 
 ## 개발하며 느낀점
 
