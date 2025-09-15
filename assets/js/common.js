@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
 
 function showLoadingScreen() {
     const loading = document.querySelector(".loading");
+    if(!loading) return
     setTimeout(() => {
         loading.style.display = "none";
     }, 800);
