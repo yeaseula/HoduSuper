@@ -89,6 +89,9 @@ body {
 .of-cover {
   object-fit: cover;
 }
+.of-contain {
+  object-fit: contain;
+}
 
 /* ========== Flexbox ========== */
 .flex-col {
