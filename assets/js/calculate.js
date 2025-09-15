@@ -8,7 +8,7 @@ export function createQuantityInput(initial = 1) {
   const decreaseBtn = document.createElement("button");
   decreaseBtn.classList.add("quantity-btn", "decrease");
   decreaseBtn.setAttribute("type", "button");
-  decreaseBtn.innerHTML = `<img src="../images/icon-minus-line.svg" alt="" aria-hidden="true">`;
+  decreaseBtn.innerHTML = `<img src="../assets/images/icon-minus-line.svg" alt="" aria-hidden="true">`;
 
   // 수량 입력 필드 (1-110 범위 제한) *딥러닝 무릎담요의 최대 수량이 110개라 max값 수정
   const input = document.createElement("input");
@@ -22,7 +22,7 @@ export function createQuantityInput(initial = 1) {
   const increaseBtn = document.createElement("button");
   increaseBtn.classList.add("quantity-btn", "increase");
   increaseBtn.setAttribute("type", "button");
-  increaseBtn.innerHTML = `<img src="../images/icon-plus-line.svg" alt="" aria-hidden="true">`;
+  increaseBtn.innerHTML = `<img src="../assets/images/icon-plus-line.svg" alt="" aria-hidden="true">`;
 
   // 감소 버튼 이벤트: 최소값 1까지만 감소
   decreaseBtn.addEventListener("click", () => {
