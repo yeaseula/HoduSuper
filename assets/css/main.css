@@ -8,6 +8,7 @@
   --swiper-navigation-size: 1.6rem;
   --swiper-theme-color: #000;
   color: #000;
+  cursor: pointer;
 }
 .swiper {
   width: 100%;
@@ -27,10 +28,7 @@
 }
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(28rem, 1fr)
-  );
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
   gap: 7rem;
 }
 .product-card {
@@ -43,7 +41,7 @@
   overflow: hidden;
 }
 .product-card:hover img {
-  transform: scale3d(1.1,1.1,1.1);
+  transform: scale3d(1.1, 1.1, 1.1);
 }
 .product-card img {
   width: 100%;
@@ -122,20 +120,14 @@
     margin: 5rem 0;
   }
   .products-grid {
-    grid-template-columns: repeat(
-      3,
-      minmax(2rem, 1fr)
-    );
+    grid-template-columns: repeat(3, minmax(2rem, 1fr));
     gap: 1.5rem;
     row-gap: 5rem;
   }
 }
 @media (max-width: 600px) {
   .products-grid {
-    grid-template-columns: repeat(
-      2,
-      minmax(2rem, 1fr)
-    );
+    grid-template-columns: repeat(2, minmax(2rem, 1fr));
     row-gap: 3rem;
   }
   .product-card-text {
