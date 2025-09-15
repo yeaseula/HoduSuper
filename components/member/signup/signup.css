@@ -211,6 +211,9 @@ button:disabled {
     input[type="text"],input[type="password"],input[type="number"],select {
         height: 45px;
     }
+    select {
+        background-position: 98% 11px;
+    }
     div[class*="pass"] > div::after {
         top: 9px;
     }
