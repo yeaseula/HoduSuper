@@ -257,7 +257,11 @@ body {
   outline: 0.2rem solid #21bf48;
   outline-offset: 0.2rem;
 }
-
+button {
+  appearance: none;
+  border: none;
+  color: var(--text-color);
+}
 .common-btn {
   background-color: var(--main-500);
   border-radius: 0.5rem;
@@ -330,8 +334,4 @@ body {
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
-}
-
-button {
-  color: var(--text-color);
 }
