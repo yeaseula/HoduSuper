@@ -27,6 +27,7 @@
 - **프로젝트 형태**: 팀 프로젝트
 - **배포 주소**: https://yeaseula.github.io/HoduSuper/
 - **테스트 계정**
+
 ```
 <일반회원>
 id: buyer11245
@@ -39,21 +40,17 @@ pass: asdfasdf12
 
 ## 프로젝트 시연
 
-### 메인 화면 및 상품 목록
+### 메인 화면
 
-![메인 화면 시연](https://via.placeholder.com/800x450/21bf48/ffffff?text=메인+화면+및+상품+목록+시연)
+![메인 홈페이지](./assets/gif/main-homepage.gif)
 
 ### 상품 상세 및 장바구니 기능
 
-![상품 상세 및 장바구니 시연](https://via.placeholder.com/800x450/21bf48/ffffff?text=상품+상세+및+장바구니+시연)
+![상품 상세 및 장바구니 기능](./assets/gif/product-cart.gif)
 
 ### 회원가입 및 로그인
 
-![회원가입 및 로그인 시연](https://via.placeholder.com/800x450/21bf48/ffffff?text=회원가입+및+로그인+시연)
-
-### 모바일 반응형 디자인
-
-![모바일 반응형 시연](https://via.placeholder.com/400x800/21bf48/ffffff?text=모바일+반응형+시연)
+![회원가입 및 로그인](./assets/gif/join-login.gif)
 
 ## 팀 소개
 
@@ -292,50 +289,64 @@ const getProducts = async () => {
 ### 2. 장바구니 상태 관리
 
 ```javascript
-// 장바구니 상태 관리 클래스
+// UI/이벤트/렌더링까지 포함
 class CartManager {
   constructor() {
-    this.items = [];
-    this.selectedItems = new Set();
-    this.loadCartItems();
+    this.items = []; // 장바구니 아이템 배열
   }
 
-  // 장바구니 아이템 추가
-  async addItem(productId, quantity = 1) {
-    const existingItem = this.items.find(
-      (item) => item.product_id === productId
-    );
+  setItems(items) { this.items = items; }
+  getItems() { return this.items; }
+  findById(id) { return this.items.find((item) => item.id === Number(id)); }
 
-    if (existingItem) {
-      // 기존 아이템 수량 업데이트
-      await this.updateQuantity(productId, existingItem.quantity + quantity);
-    } else {
-      // 새 아이템 추가
-      await this.addNewItem(productId, quantity);
-    }
-  }
+  checkStock(productId, newQuantity, currentQuantity = 0) { ... }
+  addItem(item) { ... }
+  removeItem(id) { ... }
+  updateItemQuantity(id, quantity) { ... }
+  updateItemCheck(id, isChecked) { ... }
+  checkAllItems(isChecked) { ... }
+  getCheckedItems() { ... }
+  getShippingFee() { ... }
+  getTotalPrice() { ... }
+  areAllChecked() { ... }
+  isEmpty() { ... }
 }
 ```
 
 ### 3. 실시간 가격 계산
 
 ```javascript
-// 가격 계산 유틸리티
-const calculateTotal = (items) => {
-  const productTotal = items.reduce((sum, item) => {
-    return sum + item.price * item.quantity;
-  }, 0);
+  // 체크된 아이템들만 필터링 (주문 대상 아이템)
+  getCheckedItems() {
+    return this.items.filter((item) => item.isChecked);
+  }
 
-  const shippingFee = productTotal >= 30000 ? 0 : 3000;
-  const discount = 0; // 할인 로직
+  getShippingFee() {
+    return this.items.reduce((sum, item) => {
+      // 체크된 상품만 계산
+      if (!item.isChecked) return sum;
+      const fee = item.shipping_fee || 0;
+      return sum + fee;
+    }, 0);
+  }
 
-  return {
-    productTotal,
-    shippingFee,
-    discount,
-    finalTotal: productTotal + shippingFee - discount,
-  };
-};
+  // 체크된 아이템들의 총 가격 계산
+  getTotalPrice() {
+    return this.items.reduce((sum, item) => {
+      return item.isChecked ? sum + item.price * item.quantity : sum;
+    }, 0);
+  }
+
+  function updateTotalPriceUI() {
+  const total = cart.getTotalPrice();
+  const shipping = cart.getShippingFee(); // 새로 추가한 배송비
+  const final = total + shipping;
+
+  if (dom.totalPriceElem) dom.totalPriceElem.textContent = formatPrice(total);
+  const shipElem = document.querySelector(".ship-price .order-price");
+  if (shipElem) shipElem.textContent = formatPrice(shipping);
+  if (dom.finalPriceElem) dom.finalPriceElem.textContent = formatPrice(final);
+}
 ```
 
 ### 4. 사용자 인증 관리
@@ -432,8 +443,8 @@ if (!response.ok) {
 - 해결: 경로를 변수화하여 상황에 따라 다르게 적용
 
 ```jsx
-const pathPrefix = location.pathname.includes('/pages/') ? '../' : '';
-const pathPrefixfile = location.pathname.includes('/pages/') ? '' : 'pages/';
+const pathPrefix = location.pathname.includes("/pages/") ? "../" : "";
+const pathPrefixfile = location.pathname.includes("/pages/") ? "" : "pages/";
 ```
 
 ### **2.로그인 상태별 헤더 버튼 처리**
@@ -443,11 +454,29 @@ const pathPrefixfile = location.pathname.includes('/pages/') ? '' : 'pages/';
 
 ```jsx
 const menulist = {
-  cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
-  cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link: `${pathPrefixfile}cart.html` },
-  login: { element: 'a', className: 'user-login', descript: '로그인', link: `${pathPrefixfile}login.html` },
-  mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
-  sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
+  cart: { element: "button", className: "user-cart", descript: "장바구니" },
+  cartLogin: {
+    element: "a",
+    className: "user-cart",
+    descript: "장바구니",
+    link: `${pathPrefixfile}cart.html`,
+  },
+  login: {
+    element: "a",
+    className: "user-login",
+    descript: "로그인",
+    link: `${pathPrefixfile}login.html`,
+  },
+  mypage: {
+    element: "button",
+    className: "user-mypage",
+    descript: "마이페이지",
+  },
+  sellerCenter: {
+    element: "a",
+    className: "seller-center",
+    descript: "판매자 센터",
+  },
 };
 ```
 
@@ -458,7 +487,7 @@ const menulist = {
 
 ```jsx
 const joinState = {
-  userType: targetInput.value || 'buyer',
+  userType: targetInput.value || "buyer",
   isIdChecked: false,
   isPassMatch: false,
   isAllField: false,
@@ -524,7 +553,6 @@ const dom = {
   allCheckBox: document.querySelector(".cart-list .check-box"), // 전체 선택 체크박스
   addToCartButtons: document.querySelectorAll(".add-to-cart-btn"), // 장바구니 담기 버튼들 (상품 페이지용)
 };
-
 ```
 
 - **문제**: 웹페이지에 자주 접근하는 요소들일 경우 성능부담, 똑같은 DOM 코드가 여러번 반복되어 코드가 길어지고 가독성 저하
@@ -560,7 +588,7 @@ function setupCartItemClickEvents() {
 }
 ```
 
-- **문제**:  새로운 장바구니 상품이 동적으로 추가되거나 삭제 될 때마다 새로 추가된 요소에 이벤트를 수동으로 다시 바인딩, 개별적으로 이벤트 등록으로 인한 전체 코드 길이가 길어져 가독성 저하
+- **문제**: 새로운 장바구니 상품이 동적으로 추가되거나 삭제 될 때마다 새로 추가된 요소에 이벤트를 수동으로 다시 바인딩, 개별적으로 이벤트 등록으로 인한 전체 코드 길이가 길어져 가독성 저하
 - **해결**: 부모요소의 클릭 이벤트를 등록하여 이벤트 버블링 활용, 부모요소까지 전달
 
 ## 개발하며 느낀점
