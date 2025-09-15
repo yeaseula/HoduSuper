@@ -89,25 +89,13 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(()=>{
             const user = JSON.parse(localStorage.getItem("user"));
 
-            // const headerContent = document.querySelector('.header-content');
-            // function userWellcome(user) {
-            //     if(!user) return;
-
-            //     const span = document.createElement('span');
-            //     span.classList.add('user-message');
-            //     span.innerHTML = `${user.name}님, 환영합니다!`
-
-            //     headerContent.append(span)
-            // }
-            // userWellcome(user)
-
             function createMenu(user) {
                 const menulist = {
                     cart: { element: 'button', className: 'user-cart', descript: '장바구니' },
                     cartLogin: { element: 'a', className: 'user-cart', descript: '장바구니', link:`${pathPrefixfile}cart.html` },
                     login: { element: 'a', className: 'user-login', descript: '로그인', link:`${pathPrefixfile}login.html` },
                     mypage: { element: 'button', className: 'user-mypage', descript: '마이페이지' },
-                    sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터' },
+                    sellerCenter: { element: 'a', className: 'seller-center', descript: '판매자 센터', link:`${pathPrefixfile}login.html` },
                 }
 
                 const { cart,cartLogin,login,mypage,sellerCenter } = menulist;
@@ -211,12 +199,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="menu-dropdown-inner">
                             <img src="${pathPrefix}assets/images/menu-dropdown-flag.png">
                             <ul>
-                                <li><a href="#">마이페이지</a></li>
-                                <li><button>로그아웃</button></li>
+                                <li><a href="${pathPrefixfile}404-page.html">마이페이지</a></li>
+                                <li><button class="logout-btn">로그아웃</button></li>
                             </ul>
                         </div>
                     `
-                    $(`.${ele.className}`).append(div)
+                    $(`.${ele.className}`).append(div);
+
+                    const buttons = document.querySelector('.logout-btn');
+                    buttons.addEventListener('click',logout)
+                }
+                function logout() {
+                    localStorage.removeItem("access");
+                    localStorage.removeItem("user");
+                    location.reload();
                 }
             }
             createMenu(user)
