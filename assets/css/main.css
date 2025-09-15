@@ -48,7 +48,7 @@
 .product-card img {
   width: 100%;
   aspect-ratio: 1;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: var(--border-radius-m);
   vertical-align: bottom;
   transition: all 0.3s;
