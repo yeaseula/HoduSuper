@@ -123,7 +123,7 @@ const getUrlParameter = (name) => {
 
 // 3. 이미지가 깨졌을 때 기본 이미지로 바꿔주기
 const handleImageError = (imgElement) => {
-  imgElement.src = "./assets/images/logo-l.png";
+  imgElement.src = "./assets/images/img-icon.png";
   imgElement.alt = "기본 호두 로고";
 };
 
@@ -131,8 +131,8 @@ const handleImageError = (imgElement) => {
 
 // 404 페이지로 이동하는 함수
 const redirectTo404 = () => {
-  const repoBase = location.pathname.startsWith('/HoduSuper/')
-    ? '/HoduSuper/'
-    : '/';
-  window.location.href =`${repoBase}pages/404-page.html`;
+  const repoBase = location.pathname.startsWith("/HoduSuper/")
+    ? "/HoduSuper/"
+    : "/";
+  window.location.href = `${repoBase}pages/404-page.html`;
 };

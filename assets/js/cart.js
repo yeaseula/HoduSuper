@@ -1,6 +1,7 @@
 // =====================================================
 // 장바구니 메인 UI 관리 모듈
 // =====================================================
+import MiniAlert from "../../components/MiniAlert.js";
 
 // 장바구니 API 통신 함수들
 import {
@@ -16,7 +17,7 @@ import { alerts } from "./calculate.js";
 const CONSTANTS = {
   // 수량 제한 설정
   MIN_QTY: 1, // 최소 주문 수량
-  MAX_QTY: 99, // 최대 주문 수량 (UI 제한)
+  MAX_QTY: 999, // 최대 주문 수량 (UI 제한)
 
   // 배송 방법 열거형 (서버 API와 일치해야 함)
   SHIPPING: {
@@ -72,13 +73,68 @@ class CartManager {
     return this.items.find((item) => item.id === Number(id));
   }
 
+  // ----- ### 핵심 재고 체크 함수 생성 ### -----
+  // ----- 상품 ID로 재고 정보를 찾아서 수량 체크 후 결과 반환
+
+  // productId: 상품 ID, newQuantity: 새로 추가할 수량, currentQuantity: 현재 수량(기본값 0)
+  checkStock(productId, newQuantity, currentQuantity = 0) {
+    // 1. 해당 상품의 재고 정보 찾기
+    // this.items(장바구니에 있는 모든 상품들)에서 상품 id가 일치하는 상품 찾아서 객체로 반환
+    const product = this.items.find((item) => item.id === productId);
+
+    // 2. 상품을 찾지 못한 경우에 처리
+    // 상품을 찾지 못한 경우 재고 부족 메시지 반환(-> checkResult)
+    if (!product) {
+      return { isValid: false, message: "상품을 찾을 수 없습니다." };
+    }
+
+    // 3. 총 수량 계산(현재 수량 + 새로 추가할 수량)
+    const totalQuantity = currentQuantity + newQuantity;
+
+    // 4. 재고 체크(총 수량이 재고보다 큰지 확인)
+    if (totalQuantity > product.stock) {
+      return {
+        isValid: false,
+        message: `재고가 부족합니다. <br> 최대 ${product.stock}개까지 구매 가능합니다.`,
+      };
+    }
+
+    return { isValid: true, message: "수량 추가 가능" };
+  }
   // 새 아이템 추가 (동일 상품이 있으면 수량 합산)
   addItem(item) {
+    // 1. 장바구니에 같은 상품이 이미 있는지 확인
     const existing = this.items.find((i) => i.productId === item.productId);
+
     if (existing) {
-      existing.quantity += item.quantity; // 기존 상품 수량 증가
+      // 2. 위에서 만든 checkStock 함수 호출
+      // item.productId: 상품 ID, item.quantity: 새로 추가할 수량, existing.quantity: 현재 장바구니에 있는 수량
+      const checkResult = this.checkStock(
+        item.productId,
+        item.quantity,
+        existing.quantity
+      );
+
+      // 3. 재고 체크 결과 확인
+      // 3-1. 재고 부족시 에러 발생
+      if (!checkResult.isValid) {
+        throw new Error(checkResult.message);
+      }
+      // 3-2. 재고 충분하면 수량 증가
+      existing.quantity += item.quantity;
     } else {
+      // 3-3. 새상품인 경우
+      // 재고 체크 함수 호출(현재 수량 0 - 새 상품이니까 장바구니에 이미 담긴 값 없음)
+      const checkResult = this.checkStock(item.productId, item.quantity, 0);
+
+      // 3-4. 재고 체크 결과 확인
+      // 재고 부족시 에러 발생
+      if (!checkResult.isValid) {
+        throw new Error(checkResult.message);
+      }
+      // 3-5. 재고 충분하면 새 상품 추가
       this.items.push(item); // 새 상품 추가
+      // this.items: 장바구니 배열, push(): 배열 끝에 새 요소 추가, item: 새상품 정보
     }
   }
 
@@ -154,7 +210,7 @@ function debounce(fn, delay = 300) {
 /**
  * 수량 유효성 검증
  * 역할: 사용자 입력값을 규칙에 맞게 정함
- * 규칙: 1 이상 99 이하, 숫자가 아닌 경우 1로 설정
+ * 규칙: 1 이상 110 이하, 숫자가 아닌 경우 1로 설정
  */
 function validateQuantity(value) {
   if (isNaN(value) || value < CONSTANTS.MIN_QTY) return CONSTANTS.MIN_QTY;
@@ -289,7 +345,6 @@ function createProductHTML(item) {
   `;
 }
 
-
 /* 장바구니 상품 DOM 요소 생성 함수 */
 function createProductElement(item) {
   const article = document.createElement("article");
@@ -409,6 +464,42 @@ const handleQuantityChange = debounce(async (itemId, newQty) => {
   const oldQty = item.quantity; // 이전 값 저장
   const validQty = validateQuantity(newQty);
 
+  // 재고 체크 추가
+  const checkResult = cart.checkStock(item.id, validQty, 0);
+  if (!checkResult.isValid) {
+    // input 필드를 이전 값으로 되돌리기
+    const productEl = dom.cartContainer.querySelector(`[data-id="${itemId}"]`);
+    const input = productEl?.querySelector(".quantity-input");
+    if (input) {
+      input.value = oldQty; // 이전 값으로 복원
+    }
+
+    // 재고 부족 알림창 표시
+    const errorAlert = {
+      title: "알림",
+      message: checkResult.message,
+      buttons: ["확인"],
+      link: null,
+      linkHref: null,
+      closeBackdrop: true,
+      customContent: null,
+    };
+
+    new MiniAlert(errorAlert);
+
+    // 확인 버튼에 클릭 이벤트 추가
+    setTimeout(() => {
+      const confirmBtn = document.querySelector(".alert-btn");
+      if (confirmBtn) {
+        confirmBtn.addEventListener("click", () => {
+          document.querySelector(".alert-backdrop")?.remove();
+        });
+      }
+    }, 100);
+
+    return; // 함수 실행 중단
+  }
+
   cart.updateItemQuantity(itemId, validQty); // 로컬 상태 변경
   const productEl = dom.cartContainer.querySelector(`[data-id="${itemId}"]`);
   updateQuantityUI(productEl, item); // UI 즉시 반영
@@ -416,8 +507,30 @@ const handleQuantityChange = debounce(async (itemId, newQty) => {
   try {
     await updateCartItem(itemId, validQty); // API 호출
   } catch (err) {
-    console.error(err);
-    new MiniAlert(alerts.error); // 사용자에게 에러 알림
+    // console.error(err); // 콘솔 에러 메시지 숨김
+    // 서버 에러 시 재고 부족 알림 표시
+    const serverErrorAlert = {
+      title: "재고 부족",
+      message: `구매 가능 수량을 초과하였습니다.<br>최대 구매 가능 수량: ${item.stock}개`,
+      buttons: ["확인"],
+      link: null,
+      linkHref: null,
+      closeBackdrop: true,
+      customContent: null,
+    };
+
+    new MiniAlert(serverErrorAlert);
+
+    // 확인 버튼에 클릭 이벤트 추가하기
+    setTimeout(() => {
+      const confirmBtn = document.querySelector(".alert-btn");
+      if (confirmBtn) {
+        confirmBtn.addEventListener("click", () => {
+          document.querySelector(".alert-backdrop")?.remove();
+        });
+      }
+    }, 100);
+
     cart.updateItemQuantity(itemId, oldQty); // 상태 롤백
     updateQuantityUI(productEl, item); // UI 롤백
   }
@@ -438,12 +551,12 @@ function handleQuantityDecrease(itemId) {
 /**
  * 수량 증가 버튼
  * 역할: + 클릭 시 현재 수량에서 1 증가
- * 제한: 최대 수량(99) 이상으로는 증가하지 않음 (validateQuantity에서 처리)
+ * 제한: 최대 수량(110) 이상으로는 증가하지 않음 (validateQuantity에서 처리)
  */
 function handleQuantityIncrease(itemId) {
   const item = cart.findById(itemId);
   if (item) {
-    handleQuantityChange(itemId, item.quantity + 1); // 현재 수량 +1
+    handleQuantityChange(itemId, item.quantity + 1);
   }
 }
 
@@ -453,7 +566,11 @@ function handleQuantityIncrease(itemId) {
  * 입력 검증: 문자열 → 정수 변환 후 validateQuantity로 범위 확인
  */
 function handleQuantityInput(itemId, inputValue) {
-  handleQuantityChange(itemId, parseInt(inputValue)); // 문자열을 정수로 변환
+  const item = cart.findById(itemId);
+  if (item) {
+    const newQuantity = parseInt(inputValue);
+    handleQuantityChange(itemId, newQuantity);
+  }
 }
 
 // ===== 삭제 이벤트 =====
@@ -565,8 +682,7 @@ async function handleAddToCart(product) {
     renderCart(); // 전체 UI 재렌더링
     new MiniAlert(alerts.add); // 성공 알림
   } catch (err) {
-    // 에러 처리: 로깅 및 사용자 알림
-    console.error(err);
+    // 에러 처리: 사용자 알림
     new MiniAlert(alerts.error); // 실패 알림
   }
 }
@@ -690,6 +806,7 @@ async function loadCartData() {
       price: i.product.price, // 단가
       seller: i.product.seller, // 판매자 정보
       shipping_method: i.product.shipping_method, // 배송 방법
+      stock: i.product.stock, // 상품 재고 수량
       quantity: i.quantity, // 서버에 저장된 수량
       isChecked: true, // 기본적으로 모든 아이템 체크 상태
     }));
@@ -697,8 +814,7 @@ async function loadCartData() {
     // 처리된 데이터를 전역 상태에 설정
     cart.setItems(items);
   } catch (err) {
-    // 네트워크 오류 또는 인증 오류 시 에러 로깅 및 빈 상태로 초기화
-    console.error("장바구니 데이터 로드 실패:", err);
+    // 네트워크 오류 또는 인증 오류 시 빈 상태로 초기화
     cart.setItems([]); // 에러 시 빈 장바구니로 설정
   }
 }

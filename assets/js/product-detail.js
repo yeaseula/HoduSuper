@@ -5,6 +5,8 @@ const $ = (node) => document.querySelector(node);
 import { addCartItem } from "./cart-api.js";
 // MiniAlert 컴포넌트 import 추가
 import MiniAlert from "../../components/MiniAlert.js";
+// getCartItems 함수 가져오기
+import { getCartItems } from "./cart-api.js"; // 기존 함수 import
 
 // 1. 페이지 로드 시 실행되는 함수
 document.addEventListener("DOMContentLoaded", async () => {
@@ -59,6 +61,10 @@ async function displayProductInfo(productDetail) {
     // 3-2)메타 설명도 동적 업데이트 처리(SEO를 위해)
     const metaDescription = $('meta[name="description"]');
     metaDescription.content = `HODU 오픈마켓에서 ${productDetail.info}를(을) 만나보세요. 개발자 필수템입니다.`;
+
+    // 재고 기반 수량 제한 코드 추가
+    const productInput = $("#quantity-display");
+    productInput.max = productDetail.stock; // 실제 재고로 제한
 
     // 3-3) 재고 0인 경우 처리(품절 상품)
     if (productDetail.stock === 0) {
@@ -508,6 +514,49 @@ function setupCartButton(productDetail) {
         const quantityInput = $("#quantity-display");
         // parseInt로 문자열 -> 숫자로 변환하고, 값 없으면 기본값으로 1 사용
         const quantity = parseInt(quantityInput.value) || 1;
+
+        // <4> 재고 체크 코드 추가
+        // <4-1> 장바구니 전체 데이터 가져오기(cart-api.js에서 정의한 함수 사용)
+        const cartData = await getCartItems();
+
+        // <4-2> 해당 상품 찾기
+        const cartItem = cartData.results.find((item) => {
+          return item.product?.id === productDetail.id;
+        });
+
+        // <4-3> 총 수량 계산(현재 장바구니 수량 + 추가할 수량)
+        const currentCartQuantity = cartItem ? cartItem.quantity : 0;
+
+        // <4-4> 총 수량 계산
+        const totalQuantity = currentCartQuantity + quantity;
+
+        // <4-3> 재고 체크
+        if (totalQuantity > productDetail.stock) {
+          // 재고 부족하면 알림창 표시
+          const outOfStockAlert = {
+            title: "재고 부족",
+            message: `재고가 부족합니다.<br>현재 장바구니 수량: ${currentCartQuantity}개<br>최대 구매 가능 수량: ${productDetail.stock}개`,
+            buttons: ["확인"],
+            link: null,
+            linkHref: null,
+            closeBackdrop: true,
+            customContent: null,
+          };
+
+          new MiniAlert(outOfStockAlert);
+
+          // 확인 버튼에 클릭 이벤트 추가하기
+          setTimeout(() => {
+            const confirmBtn = document.querySelector(".alert-btn");
+            if (confirmBtn) {
+              confirmBtn.addEventListener("click", () => {
+                document.querySelector(".alert-backdrop")?.remove();
+              });
+            }
+          }, 100);
+
+          return; // 함수 실행 중단(장바구니에 추가하지 않음)
+        }
 
         // 장바구니에 상품을 추가하는 API 호출하기
         await addCartItem(productDetail.id, quantity);
