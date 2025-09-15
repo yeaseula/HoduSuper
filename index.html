@@ -19,18 +19,6 @@
 
     <!-- favicon 나중에 만듭시다 -->
     <!-- <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"> -->
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/common.css" />
-    <link rel="stylesheet" href="./assets/css/fonts.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/header.css">
-    <link rel="stylesheet" href="./assets/css/footer.css">
-    <link rel="stylesheet" href="./components/MiniAlert.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <script type="module" src="./assets/js/common.js"></script>
-    <script src="./assets/js/api.js" defer></script>
-    <script src="./assets/js/product-list.js" defer></script>
     <style>
       .loading {
         position: fixed;
@@ -68,12 +56,36 @@
         font-weight: 500;
       }
     </style>
+
+    <!-- CSS preload -->
+    <link rel="preload" href="./assets/css/reset.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/common.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/fonts.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/header.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/main.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/footer.css" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="./assets/css/reset.css">
+      <link rel="stylesheet" href="./assets/css/common.css">
+      <link rel="stylesheet" href="./assets/css/fonts.css">
+      <link rel="stylesheet" href="./assets/css/header.css">
+      <link rel="stylesheet" href="./assets/css/main.css">
+      <link rel="stylesheet" href="./assets/css/footer.css">
+    </noscript>
+    <link rel="stylesheet" href="./components/MiniAlert.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script type="module" src="./assets/js/common.js"></script>
+    <script src="./assets/js/api.js" defer></script>
+    <script src="./assets/js/product-list.js" defer></script>
+
   </head>
   <body>
-    <div class="loading" style="display: none;">
+    <section class="loading" style="display: none;">
+      <h2 class="sr-only">화면 로딩 표시입니다</h2>
       <div class="spinner"></div>
       <p>로딩 중...</p>
-    </div>
+    </section>
     <div class="header"></div>
     <!-- ===== 메인 콘텐츠 영역 ===== -->
     <main class="main">
