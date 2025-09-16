@@ -491,6 +491,12 @@
 
 /* ===== 반응형 ===== */
 
+@media (max-width: 850px) {
+  .tab-navigation {
+    top: 67px;
+  }
+}
+
 /* 모바일 768px 이하에서만 세로 레이아웃 적용 */
 @media (max-width: 768px) {
   .product-detail {
@@ -554,8 +560,6 @@
   }
 
   .tab-navigation {
-    width: calc(100% - 28px);
-    margin-left: -15px;
     top: 50px;
     display: grid;
     border-top: 1px solid var(--gray-500);
@@ -563,6 +567,7 @@
     gap: 0.1rem;
   }
 }
+
 
 /* 접근성: 사용자 선호 모션 줄이기(사용자가 애니메이션 줄이기를 원할 경우, 사용) */
 @media (prefers-reduced-motion: reduce) {
