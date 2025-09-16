@@ -18,6 +18,15 @@
   background-position: center;
   background-size: cover;
 }
+.swiper-button-prev {
+  left: 30px !important;
+}
+.swiper-button-next {
+  right: 30px !important;
+}
+.swiper-pagination {
+  bottom: 25px !important;
+}
 .swiper-slide img {
   display: block;
   width: 100%;

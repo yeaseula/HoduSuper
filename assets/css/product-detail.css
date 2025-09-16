@@ -554,7 +554,7 @@
   }
 
   .tab-navigation {
-    width: 100vw;
+    width: calc(100% - 28px);
     margin-left: -15px;
     top: 50px;
     display: grid;
